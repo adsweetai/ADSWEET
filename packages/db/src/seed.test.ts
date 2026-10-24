@@ -49,7 +49,7 @@ describe("cijfers uit C3", () => {
     expect(t.purchases).toBe(3);
   });
 
-  it("Lisa: A1 heeft CTR 1,4% en frequentie 2,8; de campagne 36.800 vertoningen en 412 klikken", async () => {
+  it("Lisa: A1 heeft CTR 1,4% en frequentie 2,8; de campagne 36.800 vertoningen, 412 linkklikken, bereik 13.100", async () => {
     const [a1] = await one<{ ctr: number; freq: number }>(
       null,
       `select round(sum(link_clicks)::numeric / sum(impressions) * 100, 1)::float as ctr, round(sum(impressions)::numeric / sum(reach), 1)::float as freq
@@ -57,13 +57,15 @@ describe("cijfers uit C3", () => {
       [ORG_IDS.lisa],
     );
     expect(a1).toEqual({ ctr: 1.4, freq: 2.8 });
-    const [c] = await one<{ impressions: number; clicks: number }>(
+    const [c] = await one<{ impressions: number; clicks: number; reach: number; ctr: number }>(
       null,
-      `select sum(impressions)::int as impressions, sum(clicks)::int as clicks from insights_daily i join campaigns c on c.id = i.campaign_id
+      `select sum(impressions)::int as impressions, sum(link_clicks)::int as clicks, sum(reach)::int as reach,
+              round(sum(clicks)::numeric / sum(impressions) * 100, 2)::float as ctr
+         from insights_daily i join campaigns c on c.id = i.campaign_id
         where c.organization_id = $1 and c.kind = 'vast'`,
       [ORG_IDS.lisa],
     );
-    expect(c).toEqual({ impressions: 36800, clicks: 412 });
+    expect(c).toEqual({ impressions: 36800, clicks: 412, reach: 13100, ctr: 1.9 });
   });
 
   it("Lisa: Black Friday €180, 9 verkopen, €522", async () => {

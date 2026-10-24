@@ -342,16 +342,14 @@ export async function readAndSaveWebsite(site: string): Promise<{ ok: true; foun
       ? found.images.map((u) => decodeURIComponent(u.split("/").pop()?.split("?")[0] ?? "beeld").slice(0, 120))
       : Array.from({ length: found.imageCount }, (_, i) => `website-beeld-${i + 1}.jpg`);
     if (names.length)
-      await db
-        .from("media")
-        .insert(
-          names.map((name) => ({
-            organization_id: ctx.org.id,
-            name,
-            kind: /\.(mp4|mov|webm)$/i.test(name) ? ("video" as const) : ("foto" as const),
-            source: "website" as const,
-          })),
-        );
+      await db.from("media").insert(
+        names.map((name) => ({
+          organization_id: ctx.org.id,
+          name,
+          kind: /\.(mp4|mov|webm)$/i.test(name) ? ("video" as const) : ("foto" as const),
+          source: "website" as const,
+        })),
+      );
   }
   return { ok: true, found: rest };
 }
