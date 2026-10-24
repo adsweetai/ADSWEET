@@ -25,6 +25,10 @@ pnpm dlx supabase db reset                     # schema (supabase/migrations) + 
 pnpm dev
 ```
 
+**Een nieuw Supabase-project (online).** Plak `supabase/setup.sql` in Supabase › SQL Editor en klik op Run: tabellen,
+rechten, opslag, de playbookversie en de founding-code, zonder voorbeelddata. Na een nieuwe migratie:
+`pnpm --filter @adsweet/db gen:setup`. Op Vercel: Root Directory `apps/app`; de dagelijkse taak staat in `apps/app/vercel.json`.
+
 De voorbeelddata komt uit `packages/db/src/fixtures`. Na een wijziging: `pnpm --filter @adsweet/db gen:seed`.
 
 **Mails.** De 12 mails staan in `packages/mails`. Zonder `RESEND_API_KEY` gaan ze naar een postvak: in de demo zie je

@@ -73,7 +73,7 @@ export function sqlValue(col: string, v: unknown): string {
   return `${q(JSON.stringify(v))}::jsonb`;
 }
 
-function insertRows(table: string, rows: Record<string, unknown>[]): string {
+export function insertRows(table: string, rows: Record<string, unknown>[]): string {
   if (!rows.length) return "";
   // Groepeer per kolomset, zodat elke insert dezelfde kolommen heeft.
   const groups = new Map<string, Record<string, unknown>[]>();
