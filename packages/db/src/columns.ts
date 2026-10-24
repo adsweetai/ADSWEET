@@ -57,4 +57,6 @@ export const TABLES: readonly TableName[] = [
   "partners",
   "calls",
   "waitlist",
+  "preview_links",
+  "preview_feedback",
 ];

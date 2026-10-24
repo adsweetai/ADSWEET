@@ -505,6 +505,25 @@ export interface WaitlistEntry {
   created_at: IsoDateTime;
 }
 
+export interface PreviewLink {
+  id: Uuid;
+  organization_id: Uuid;
+  campaign_id: Uuid;
+  code: string;
+  created_by: Uuid | null;
+  created_at: IsoDateTime;
+}
+
+export interface PreviewFeedback {
+  id: Uuid;
+  link_id: Uuid;
+  organization_id: Uuid;
+  ad_id: Uuid;
+  status: "goedgekeurd" | "opmerking";
+  note: string | null;
+  created_at: IsoDateTime;
+}
+
 export interface Tables {
   organizations: Organization;
   profiles: Profile;
@@ -540,6 +559,8 @@ export interface Tables {
   partners: Partner;
   calls: Call;
   waitlist: WaitlistEntry;
+  preview_links: PreviewLink;
+  preview_feedback: PreviewFeedback;
 }
 
 export type TableName = keyof Tables;

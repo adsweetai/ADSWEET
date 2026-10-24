@@ -57,6 +57,8 @@ const ORDER: TableName[] = [
   "partners",
   "calls",
   "waitlist",
+  "preview_links",
+  "preview_feedback",
 ];
 
 const q = (s: string) => `'${s.replace(/'/g, "''")}'`;

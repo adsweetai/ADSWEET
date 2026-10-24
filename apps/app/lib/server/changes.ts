@@ -1,6 +1,6 @@
 import "server-only";
 import { getTranslations } from "next-intl/server";
-import { must, type AdExtras, type Db, type Json, type LogEntry, type Recommendation } from "@adsweet/db";
+import { must, type AdExtras, type CampaignStatus, type Db, type Json, type LogEntry, type Recommendation } from "@adsweet/db";
 import { formatEuro, formatPercent } from "@adsweet/ui";
 import { addDays, nowIso, today } from "@/lib/clock";
 import { getDb } from "./auth";
@@ -9,12 +9,14 @@ import { assertCanEdit, getContext, type AppContext } from "./context";
 // Wijzigingen die de klant met één klik doet. AdSweet voert ze uit op de klik van de klant (nooit zelf),
 // zet ze in het logboek en houdt bij hoe ze terug kunnen. In fase 13 gaat elke wijziging ook naar Meta.
 
-type Undo =
+export type Undo =
   | { kind: "ad_status"; ad_id: string; value: "actief" | "uit"; rec_id?: string }
   | { kind: "budget"; campaign_id: string; value: number | null; rec_id?: string }
-  | { kind: "extra"; ad_id: string; extra: keyof AdExtras; value: boolean; rec_id?: string };
+  | { kind: "extra"; ad_id: string; extra: keyof AdExtras; value: boolean; rec_id?: string }
+  | { kind: "campaign_status"; campaign_id: string; value: CampaignStatus; rec_id?: string };
 
-async function log(
+/** Schrijft een wijziging van de gebruiker in het logboek. */
+export async function writeLog(
   db: Db,
   ctx: AppContext,
   row: { what: string; from_to?: string | null; kind: LogEntry["kind"]; campaign_id?: string | null; undo?: Undo | null },
@@ -62,7 +64,7 @@ export async function applyRecommendation(id: string): Promise<ApplyResult> {
 
   if (rec.type === "verliezer" && rec.ad_id) {
     const ad = must(await db.from("ads").update({ status: "uit" }).eq("id", rec.ad_id).select().single());
-    entry = await log(db, ctx, {
+    entry = await writeLog(db, ctx, {
       kind: "advertentie",
       campaign_id: ad.campaign_id,
       what: t("adOff", { ad: ad.name }),
@@ -74,7 +76,7 @@ export async function applyRecommendation(id: string): Promise<ApplyResult> {
     const from = Number(p.budget_from);
     const to = Number(p.budget_to);
     await db.from("campaigns").update({ daily_budget: to }).eq("id", rec.campaign_id);
-    entry = await log(db, ctx, {
+    entry = await writeLog(db, ctx, {
       kind: "budget",
       campaign_id: rec.campaign_id,
       what: t("budgetUp"),
@@ -88,7 +90,7 @@ export async function applyRecommendation(id: string): Promise<ApplyResult> {
       .from("ads")
       .update({ extras: { ...ad.extras, [extra]: false } })
       .eq("id", ad.id);
-    entry = await log(db, ctx, {
+    entry = await writeLog(db, ctx, {
       kind: "extra",
       campaign_id: ad.campaign_id,
       what: t("musicOff", { ad: ad.name }),
@@ -102,7 +104,7 @@ export async function applyRecommendation(id: string): Promise<ApplyResult> {
     if (camp?.daily_budget) {
       const to = Math.round(camp.daily_budget * (1 + step) * 100) / 100;
       await db.from("campaigns").update({ daily_budget: to }).eq("id", camp.id);
-      entry = await log(db, ctx, {
+      entry = await writeLog(db, ctx, {
         kind: "budget",
         campaign_id: camp.id,
         what: t("budgetAccount", { account, step: formatPercent(step) }),
@@ -111,7 +113,7 @@ export async function applyRecommendation(id: string): Promise<ApplyResult> {
       });
     } else {
       // Het huidige budget is nog niet gekend ([budget]); de wijziging komt in het logboek als plaatshouder.
-      entry = await log(db, ctx, {
+      entry = await writeLog(db, ctx, {
         kind: "budget",
         campaign_id: camp?.id ?? null,
         what: t("budgetAccount", { account, step: formatPercent(step) }),
@@ -162,6 +164,7 @@ export async function undoLogEntry(logId: string): Promise<{ ok: boolean; what?:
   const u = entry.undo as unknown as Undo;
   if (u.kind === "ad_status") await db.from("ads").update({ status: u.value }).eq("id", u.ad_id);
   if (u.kind === "budget" && u.value !== null) await db.from("campaigns").update({ daily_budget: u.value }).eq("id", u.campaign_id);
+  if (u.kind === "campaign_status") await db.from("campaigns").update({ status: u.value }).eq("id", u.campaign_id);
   if (u.kind === "extra") {
     const ad = must(await db.from("ads").select().eq("id", u.ad_id).single());
     await db
@@ -178,4 +181,36 @@ export async function undoLogEntry(logId: string): Promise<{ ok: boolean; what?:
     }
   }
   return { ok: true, what: entry.what };
+}
+
+/**
+ * Zet een advertentie af of terug aan, op de klik van de klant (nooit zelf). Staat er een voorstel "verliezer" open voor
+ * die advertentie, dan is dat daarmee afgehandeld, net zoals op Vandaag.
+ */
+export async function setAdStatus(adId: string, value: "actief" | "uit"): Promise<{ ok: boolean; logId?: string; name?: string }> {
+  const ctx = await getContext();
+  assertCanEdit(ctx);
+  const db = await getDb();
+  const t = await getTranslations("logbook.entries");
+  const ad = must(await db.from("ads").select().eq("id", adId).maybeSingle());
+  if (!ad || ad.organization_id !== ctx.org.id) return { ok: false };
+  if (ad.status === value) return { ok: true, name: ad.name };
+  const before = ad.status === "uit" ? "uit" : "actief";
+  await db.from("ads").update({ status: value }).eq("id", ad.id);
+  const rec =
+    value === "uit"
+      ? must(await db.from("recommendations").select().eq("ad_id", ad.id).eq("type", "verliezer").in("status", ["open", "later"]).maybeSingle())
+      : null;
+  if (rec) {
+    await db.from("recommendations").update({ status: "gedaan", decided_by: ctx.user.id, decided_at: nowIso() }).eq("id", rec.id);
+    await setFollowUps(db, rec, "wacht", "open");
+  }
+  const entry = await writeLog(db, ctx, {
+    kind: "advertentie",
+    campaign_id: ad.campaign_id,
+    what: value === "uit" ? t("adOff", { ad: ad.name }) : t("adOn", { ad: ad.name }),
+    from_to: value === "uit" ? t("activeOff") : t("offActive"),
+    undo: { kind: "ad_status", ad_id: ad.id, value: before, rec_id: rec?.id },
+  });
+  return { ok: true, logId: entry.id, name: ad.name };
 }

@@ -632,6 +632,7 @@
 
 /* Tabellen */
 .as-tablewrap {
+  position: relative;
   overflow-x: auto;
   overflow-y: hidden;
   border: 1px solid var(--line);

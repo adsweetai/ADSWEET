@@ -33,6 +33,16 @@ export const userId = (key: DemoUserKey) => seedId(`user:${key}`);
 
 type Seed = SeedData & SeedTables;
 
+/** Naamgeving en UTM's: de korte naam van de zaak komt vooraan in elke campagnenaam. */
+const NAMING = (short: string) => ({
+  short,
+  campaign: "{zaak} · {soort} · {doel} · {maand}",
+  ad_set: "AS{n} · {datum} · {reden}",
+  ad: "{code} · {fase} · {soort} · {naam}",
+  utm_source: "meta",
+  utm_medium: "paid_social",
+});
+
 const EXTRAS_OFF: AdExtras = {
   muziek: false,
   tekst_op_beeld: false,
@@ -229,11 +239,7 @@ export function buildLisa(seed: Seed, opts: ScenarioOptions) {
     onboarding_step: 11,
     onboarding_done: true,
     tuning_step: 1,
-    naming: {
-      campaign: "{zaak} · {soort} · {doel} · {maand}",
-      ad_set: "AS{n} · {datum} · {reden}",
-      ad: "{code} · {fase} · {soort} · {naam}",
-    },
+    naming: NAMING("Noor"),
     created_at: at("2026-11-16", "09:12"),
     ...orgBase(opts),
   });
@@ -330,6 +336,33 @@ export function buildLisa(seed: Seed, opts: ScenarioOptions) {
     description: "Levering in België",
     cta: s.phase === "bottom" ? "Nu kopen" : "Meer informatie",
   }));
+
+  // Beelden (bibliotheek): van de website, opgeladen of gemaakt in Studio.
+  const MEDIA: [string, string, "foto" | "video", "website" | "upload" | "studio", string | null][] = [
+    ["m1", "kaars-wordt-aangestoken.mp4", "video", "website", "A1"],
+    ["m2", "sfeerbeeld-woonkamer.jpg", "foto", "website", "A4"],
+    ["m3", "zo-gieten-we-ze.mp4", "video", "upload", "A2"],
+    ["m4", "geschenkdoos.jpg", "foto", "upload", "A3"],
+    ["m5", "klantreview.jpg", "foto", "studio", "A5"],
+    ["m6", "studio-kerstdoos.jpg", "foto", "studio", null],
+    ["m7", "studio-kaars-close-up.jpg", "foto", "studio", null],
+    ["m8", "atelier-tafel.jpg", "foto", "website", null],
+  ];
+  MEDIA.forEach(([key, name, kind, source, code], i) => {
+    const id = seedId(`${k}:media:${key}`);
+    const adId = code ? seedId(`${k}:ad:${code}`) : null;
+    seed.media.push({
+      id,
+      organization_id: orgId,
+      name,
+      kind,
+      source,
+      used_in: adId ? [adId] : [],
+      created_at: at(`2026-11-${String(10 + i).padStart(2, "0")}`, "12:00"),
+    });
+    const ad = adId ? seed.ads.find((x) => x.id === adId) : null;
+    if (ad) ad.media_id = id;
+  });
 
   const days = dateRange(LAST7_FROM, 7);
   for (const spec of LISA_ADS) {
@@ -665,6 +698,7 @@ export function buildTom(seed: Seed, opts: ScenarioOptions) {
     onboarding_step: 11,
     onboarding_done: true,
     tuning_step: 1,
+    naming: NAMING("Peeters"),
     created_at: at("2026-11-15", "08:30"),
     ...orgBase(opts),
   });
@@ -894,6 +928,7 @@ export function buildSarah(seed: Seed, opts: ScenarioOptions) {
     onboarding_step: 11,
     onboarding_done: true,
     tuning_step: 1,
+    naming: NAMING("Mila"),
     created_at: at("2026-12-06", "19:02"),
     ...orgBase(opts),
   });
@@ -1196,6 +1231,7 @@ export function buildBram(seed: Seed, opts: ScenarioOptions) {
     onboarding_step: 11,
     onboarding_done: true,
     tuning_step: 1,
+    naming: NAMING("Veld & Vuur"),
     created_at: at("2026-10-01", "09:00"),
   });
   addOwner(seed, opts, orgId);
@@ -1250,6 +1286,7 @@ function buildBramClient(seed: Seed, opts: ScenarioOptions, acc: BramAccount) {
     onboarding_step: 11,
     onboarding_done: true,
     tuning_step: 1,
+    naming: NAMING(acc.name),
     created_at: at("2026-10-01", "09:00"),
     ...orgBase(opts),
   });
@@ -1287,6 +1324,7 @@ export function buildEva(seed: Seed) {
     onboarding_step: 11,
     onboarding_done: true,
     tuning_step: 1,
+    naming: NAMING("Kompas"),
     created_at: at("2026-09-01", "09:00"),
   });
   addOwner(seed, { key: k, owner: "eva" }, orgId);
