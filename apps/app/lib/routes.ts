@@ -37,6 +37,7 @@ const TABLE: [RegExp, RouteInfo][] = [
   [/^\/meldingen/, R("meldingen", "MVP", "vandaag")],
   [/^\/logboek/, R("logboek", "V1", "vandaag")],
   [/^\/campagnes\/nieuw/, R("campagneNieuw", "MVP", "campagnes")],
+  [/^\/campagnes\/[^/]+\/delen/, R("previewLink", "V1", "campagnes")],
   [/^\/campagnes\/[^/]+/, R("campagne", "MVP", "campagnes", true)],
   [/^\/campagnes/, R("campagnes", "MVP", "campagnes", true)],
   [/^\/advertenties\/toevoegen/, R("advertentiesToevoegen", "MVP", "campagnes")],

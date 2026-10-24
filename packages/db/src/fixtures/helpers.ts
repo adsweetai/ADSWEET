@@ -53,6 +53,8 @@ export function emptySeed(): SeedData & SeedTables {
     partners: [],
     calls: [],
     waitlist: [],
+    preview_links: [],
+    preview_feedback: [],
   };
 }
 
