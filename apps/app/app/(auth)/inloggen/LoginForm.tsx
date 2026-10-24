@@ -4,22 +4,13 @@ import { useActionState, useState } from "react";
 import { useTranslations } from "next-intl";
 import { requestLoginLink, type LoginState } from "./actions";
 
-export function LoginForm({
-  next,
-  linkInvalid,
-  demoEmails,
-}: {
-  next?: string;
-  linkInvalid?: boolean;
-  demoEmails: string[];
-}) {
+export function LoginForm({ next, linkInvalid, demoEmails }: { next?: string; linkInvalid?: boolean; demoEmails: string[] }) {
   const t = useTranslations("auth");
   const [open, setOpen] = useState(linkInvalid ?? false);
   const [fbNote, setFbNote] = useState(false);
   const [email, setEmail] = useState("");
   const [state, action, pending] = useActionState<LoginState, FormData>(requestLoginLink, {});
-  const error =
-    state.error === "ongeldig" ? t("mailInvalid") : state.error === "fout" ? t("mailError") : null;
+  const error = state.error === "ongeldig" ? t("mailInvalid") : state.error === "fout" ? t("mailError") : null;
 
   return (
     <>

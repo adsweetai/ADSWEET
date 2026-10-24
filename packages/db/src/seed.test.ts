@@ -22,10 +22,7 @@ describe("seed.sql", () => {
   });
 
   it("maakt profielen voor alle gebruikers", async () => {
-    const rows = await one<{ first_name: string }>(
-      null,
-      "select first_name from profiles order by first_name",
-    );
+    const rows = await one<{ first_name: string }>(null, "select first_name from profiles order by first_name");
     expect(rows.map((r) => r.first_name)).toEqual(["AdSweet", "Bram", "Eva", "Lisa", "Sarah", "Tom"]);
   });
 });
@@ -109,19 +106,14 @@ describe("rechten (RLS)", () => {
   });
 
   it("Tom ziet de campagnes van Lisa niet", async () => {
-    const rows = await one<{ id: string }>("tom", "select id from campaigns where organization_id = $1", [
-      ORG_IDS.lisa,
-    ]);
+    const rows = await one<{ id: string }>("tom", "select id from campaigns where organization_id = $1", [ORG_IDS.lisa]);
     expect(rows).toHaveLength(0);
     const own = await one<{ name: string }>("tom", "select name from campaigns");
     expect(own.map((r) => r.name)).toEqual(["Peeters · Vast · Aanvragen · nov26"]);
   });
 
   it("Eva ziet haar bureau en de 6 klanten", async () => {
-    const rows = await one<{ name: string; agency_parent_id: string | null }>(
-      "eva",
-      "select name, agency_parent_id from organizations order by name",
-    );
+    const rows = await one<{ name: string; agency_parent_id: string | null }>("eva", "select name, agency_parent_id from organizations order by name");
     expect(rows).toHaveLength(7);
     expect(rows.filter((r) => r.agency_parent_id === ORG_IDS.eva)).toHaveLength(6);
     expect(rows.find((r) => r.agency_parent_id === null)?.name).toBe("Bureau Kompas");
@@ -135,10 +127,9 @@ describe("rechten (RLS)", () => {
   it("een eigenaar kan een voorstel afhandelen, een andere klant niet", async () => {
     const decide = (who: "lisa" | "tom") =>
       asUser(db, userId(who), async (tx) => {
-        const r = await tx.query(
-          "update recommendations set status = 'later' where organization_id = $1 and type = 'video_beter' returning id",
-          [ORG_IDS.lisa],
-        );
+        const r = await tx.query("update recommendations set status = 'later' where organization_id = $1 and type = 'video_beter' returning id", [
+          ORG_IDS.lisa,
+        ]);
         await tx.rollback();
         return r.rows.length;
       });
@@ -149,21 +140,10 @@ describe("rechten (RLS)", () => {
   it("een lezer kan kijken maar niets wijzigen", async () => {
     const lezer = "00000000-0000-4000-8000-00000000000a";
     await db.query("insert into auth.users (id, email) values ($1, 'lezer@ateliernoor.voorbeeld')", [lezer]);
-    await db.query("insert into members (user_id, organization_id, role) values ($1, $2, 'lezer')", [
-      lezer,
-      ORG_IDS.lisa,
-    ]);
-    const seen = await asUser(
-      db,
-      lezer,
-      async (tx) => (await tx.query("select id from campaigns")).rows.length,
-    );
+    await db.query("insert into members (user_id, organization_id, role) values ($1, $2, 'lezer')", [lezer, ORG_IDS.lisa]);
+    const seen = await asUser(db, lezer, async (tx) => (await tx.query("select id from campaigns")).rows.length);
     expect(seen).toBe(3);
-    const changed = await asUser(
-      db,
-      lezer,
-      async (tx) => (await tx.query("update campaigns set daily_budget = 99 returning id")).rows.length,
-    );
+    const changed = await asUser(db, lezer, async (tx) => (await tx.query("update campaigns set daily_budget = 99 returning id")).rows.length);
     expect(changed).toBe(0);
   });
 
@@ -178,17 +158,9 @@ describe("rechten (RLS)", () => {
   });
 
   it("alleen het AdSweet-team ziet een playbook in concept", async () => {
-    await db.query(
-      "insert into playbook_versions (version, status, rules) values ('1.1', 'concept', '{}'::jsonb)",
-    );
-    const lisa = await one<{ version: string }>(
-      "lisa",
-      "select version from playbook_versions order by version",
-    );
-    const team = await one<{ version: string }>(
-      "beheer",
-      "select version from playbook_versions order by version",
-    );
+    await db.query("insert into playbook_versions (version, status, rules) values ('1.1', 'concept', '{}'::jsonb)");
+    const lisa = await one<{ version: string }>("lisa", "select version from playbook_versions order by version");
+    const team = await one<{ version: string }>("beheer", "select version from playbook_versions order by version");
     expect(lisa.map((r) => r.version)).toEqual(["1.0"]);
     expect(team.map((r) => r.version)).toEqual(["1.0", "1.1"]);
   });

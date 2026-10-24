@@ -67,8 +67,7 @@ export function sqlValue(col: string, v: unknown): string {
   if (typeof v === "number") return Number.isFinite(v) ? String(v) : "null";
   if (typeof v === "string") return q(v);
   if (JSONB.has(col)) return `${q(JSON.stringify(v))}::jsonb`;
-  if (Array.isArray(v))
-    return q(`{${v.map((x) => `"${String(x).replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`).join(",")}}`);
+  if (Array.isArray(v)) return q(`{${v.map((x) => `"${String(x).replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`).join(",")}}`);
   return `${q(JSON.stringify(v))}::jsonb`;
 }
 

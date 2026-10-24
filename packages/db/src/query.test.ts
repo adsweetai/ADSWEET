@@ -9,19 +9,11 @@ beforeAll(async () => {
 });
 afterAll(() => pg.close());
 
-const as = (who: Parameters<typeof userId>[0] | null) =>
-  createDb(pgliteExecutor(pg, who ? userId(who) : null));
+const as = (who: Parameters<typeof userId>[0] | null) => createDb(pgliteExecutor(pg, who ? userId(who) : null));
 
 describe("querybouwer op PGlite", () => {
   it("selecteert met filters, volgorde en limiet", async () => {
-    const ads = must(
-      await as("lisa")
-        .from("ads")
-        .select("code, name")
-        .eq("organization_id", ORG_IDS.lisa)
-        .order("code")
-        .limit(2),
-    );
+    const ads = must(await as("lisa").from("ads").select("code, name").eq("organization_id", ORG_IDS.lisa).order("code").limit(2));
     expect(ads).toEqual([
       { code: "A1", name: "Kaars wordt aangestoken" },
       { code: "A2", name: "Zo gieten we ze" },
@@ -36,17 +28,9 @@ describe("querybouwer op PGlite", () => {
   });
 
   it("past RLS toe bij het wijzigen", async () => {
-    const lisa = await as("lisa")
-      .from("campaigns")
-      .update({ daily_budget: 48 })
-      .eq("name", "Noor · Vast · Verkopen · nov26")
-      .select();
+    const lisa = await as("lisa").from("campaigns").update({ daily_budget: 48 }).eq("name", "Noor · Vast · Verkopen · nov26").select();
     expect(must(lisa)).toHaveLength(1);
-    const tom = await as("tom")
-      .from("campaigns")
-      .update({ daily_budget: 1 })
-      .eq("organization_id", ORG_IDS.lisa)
-      .select();
+    const tom = await as("tom").from("campaigns").update({ daily_budget: 1 }).eq("organization_id", ORG_IDS.lisa).select();
     expect(must(tom)).toHaveLength(0);
   });
 
@@ -71,11 +55,7 @@ describe("querybouwer op PGlite", () => {
 
   it("upsert werkt op de primaire sleutel", async () => {
     const db = as("lisa");
-    must(
-      await db
-        .from("autopilot_settings")
-        .upsert({ organization_id: ORG_IDS.lisa, mode: "grenzen" }, { onConflict: "organization_id" }),
-    );
+    must(await db.from("autopilot_settings").upsert({ organization_id: ORG_IDS.lisa, mode: "grenzen" }, { onConflict: "organization_id" }));
     const s = must(await db.from("autopilot_settings").select().eq("organization_id", ORG_IDS.lisa).single());
     expect(s.mode).toBe("grenzen");
   });

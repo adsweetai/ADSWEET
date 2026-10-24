@@ -4,16 +4,7 @@
 
 import { seedId } from "../ids";
 import type { AdExtras, FunnelPhase, Targeting } from "../types";
-import {
-  at,
-  dateRange,
-  emptySeed,
-  spreadInt,
-  spreadMoney,
-  type SeedData,
-  type SeedTables,
-  type SeedUser,
-} from "./helpers";
+import { at, dateRange, emptySeed, spreadInt, spreadMoney, type SeedData, type SeedTables, type SeedUser } from "./helpers";
 
 export const DEMO_TODAY = "2026-12-07";
 export const LAST7_FROM = "2026-11-30";
@@ -298,11 +289,7 @@ export function buildLisa(seed: Seed, opts: ScenarioOptions) {
     locked: true,
     status: "actief",
   });
-  const lisaTexts = [
-    "Elke kaars gieten we met de hand, in kleine reeksen.",
-    "Zacht licht voor lange avonden.",
-    "Handgemaakte kaarsen uit ons atelier.",
-  ];
+  const lisaTexts = ["Elke kaars gieten we met de hand, in kleine reeksen.", "Zacht licht voor lange avonden.", "Handgemaakte kaarsen uit ons atelier."];
   addAds(seed, k, orgId, campId, adSetId, "2026-11-17", LISA_ADS, (s) => ({
     texts: lisaTexts,
     headline: "Handgemaakte kaarsen",
@@ -318,17 +305,12 @@ export function buildLisa(seed: Seed, opts: ScenarioOptions) {
         ? // A1: CTR 1,4% en frequentie 2,8 (C3). Alleen de verhoudingen zijn gekend.
           { impressions: spreadInt(10000, 7), reach: spreadInt(3572, 7), link_clicks: spreadInt(140, 7) }
         : {};
-    addDaily(
-      seed,
-      { organization_id: orgId, campaign_id: campId, ad_id: seedId(`${k}:ad:${spec.code}`) },
-      days,
-      {
-        spend: spreadMoney(d.spend, 7),
-        purchases: d.purchases,
-        revenue: d.purchases.map((p) => p * LISA.aov),
-        ...extra,
-      },
-    );
+    addDaily(seed, { organization_id: orgId, campaign_id: campId, ad_id: seedId(`${k}:ad:${spec.code}`) }, days, {
+      spend: spreadMoney(d.spend, 7),
+      purchases: d.purchases,
+      revenue: d.purchases.map((p) => p * LISA.aov),
+      ...extra,
+    });
   }
   // Vertoningen en klikken op campagneniveau (Inzichten: 36,8k vertoningen, 412 klikken). Rest na A1.
   addDaily(seed, { organization_id: orgId, campaign_id: campId, ad_id: null }, days, {
@@ -492,8 +474,7 @@ export function buildLisa(seed: Seed, opts: ScenarioOptions) {
   );
 
   // Logboek (C3)
-  const log = (n: string, row: Record<string, unknown>) =>
-    seed.log_entries.push({ id: seedId(`${k}:log:${n}`), organization_id: orgId, ...row });
+  const log = (n: string, row: Record<string, unknown>) => seed.log_entries.push({ id: seedId(`${k}:log:${n}`), organization_id: orgId, ...row });
   log("audit", {
     at: AUDIT_AT,
     actor: "adsweet",
@@ -537,8 +518,7 @@ export function buildLisa(seed: Seed, opts: ScenarioOptions) {
   });
 
   // Meldingen
-  const note = (n: string, row: Record<string, unknown>) =>
-    seed.notifications.push({ id: seedId(`${k}:note:${n}`), organization_id: orgId, ...row });
+  const note = (n: string, row: Record<string, unknown>) => seed.notifications.push({ id: seedId(`${k}:note:${n}`), organization_id: orgId, ...row });
   note("music", {
     type: "buiten_app",
     severity: "warn",
@@ -818,8 +798,7 @@ export function buildTom(seed: Seed, opts: ScenarioOptions) {
     },
   );
 
-  const log = (n: string, row: Record<string, unknown>) =>
-    seed.log_entries.push({ id: seedId(`${k}:log:${n}`), organization_id: orgId, ...row });
+  const log = (n: string, row: Record<string, unknown>) => seed.log_entries.push({ id: seedId(`${k}:log:${n}`), organization_id: orgId, ...row });
   log("audit", {
     at: AUDIT_AT,
     actor: "adsweet",

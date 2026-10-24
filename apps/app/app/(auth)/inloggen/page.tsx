@@ -11,13 +11,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t("loginLink") };
 }
 
-export default async function LoginPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ next?: string; fout?: string }>;
-}) {
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ next?: string; fout?: string }> }) {
   const sp = await searchParams;
-  if (await currentUser())
-    redirect(sp.next?.startsWith("/") && !sp.next.startsWith("//") ? sp.next : "/vandaag");
+  if (await currentUser()) redirect(sp.next?.startsWith("/") && !sp.next.startsWith("//") ? sp.next : "/vandaag");
   return <LoginForm next={sp.next} linkInvalid={sp.fout === "link"} demoEmails={isDemo ? DEMO_LOGINS : []} />;
 }
