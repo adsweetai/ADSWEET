@@ -38,6 +38,8 @@ export interface Organization {
   onboarding_done: boolean;
   tuning_step: number;
   naming: Json;
+  /** Onboardingpaneel: { done: number[], skipped: number[] } */
+  tuning: Json;
   created_at: IsoDateTime;
 }
 
@@ -118,6 +120,12 @@ export interface BusinessProfile {
   contact: Json;
   payer: string | null;
   beneficiary: string | null;
+  bestsellers: string | null;
+  moments: string[];
+  say_yes: string | null;
+  say_no: string | null;
+  /** Wat AdSweet op de website vond (naam, kleuren, beelden …), om te tonen en na te kijken. */
+  found: Json;
   updated_at: IsoDateTime;
 }
 

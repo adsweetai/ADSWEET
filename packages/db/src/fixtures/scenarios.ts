@@ -1357,6 +1357,20 @@ export function buildSeed(): Seed {
   buildEva(seed);
   addUser(seed, "beheer");
   seed.adsweet_admins.push({ user_id: userId("beheer") });
+
+  // Demo: Lisa nodigt een teamlid uit (Inloggen.dc.html#uitnodiging). Werkt met de link /uitnodiging/demo-noor-teamlid.
+  seed.invitations.push({
+    id: seedId("lisa:invitation:team"),
+    organization_id: ORG_IDS.lisa,
+    email: "teamlid@ateliernoor.voorbeeld",
+    role: "beheerder",
+    token: "demo-noor-teamlid",
+    invited_by: userId("lisa"),
+    expires_at: at("2026-12-21", "23:59"),
+    created_at: at("2026-12-07", "08:30"),
+  });
+  // Founding members: −30% zolang ze klant blijven, voor de eerste 50 (docs/regels.md).
+  seed.discount_codes.push({ id: seedId("discount:founding"), code: "FOUNDING50", kind: "founding", percent_off: 30, max_uses: 50, uses: 1 });
   return seed;
 }
 

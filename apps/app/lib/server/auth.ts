@@ -116,6 +116,67 @@ export async function completeLogin(params: URLSearchParams): Promise<{ ok: bool
   return { ok: !error, next };
 }
 
+/** Demo: start een sessie voor een gebruiker (na "Doorgaan met Facebook" in de demo of een uitnodiging). */
+export async function startDemoSession(uid: string) {
+  if (!isDemo) throw new Error("Alleen in de demomodus.");
+  (await cookies()).set(DEMO_SESSION_COOKIE, signDemoToken({ uid, kind: "sessie", exp: Date.now() + SESSION_DAYS * 86_400_000 }), {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production" && env.appUrl.startsWith("https"),
+    path: "/",
+    maxAge: SESSION_DAYS * 86_400,
+  });
+}
+
+/**
+ * Demo: maakt een gebruiker aan zoals Supabase Auth dat doet na Facebook of een uitnodiging. De trigger
+ * handle_new_user maakt het profiel. Geeft de id terug (of de bestaande, als het adres al bestaat).
+ */
+export async function createDemoUser(email: string, firstName: string, provider: "facebook" | "email"): Promise<string> {
+  if (!isDemo) throw new Error("Alleen in de demomodus.");
+  const db = await demoDatabase();
+  const found = await db.query<{ id: string }>("select id from auth.users where lower(email) = lower($1)", [email]);
+  if (found.rows[0]) return found.rows[0].id;
+  const meta = JSON.stringify({ first_name: firstName, full_name: firstName });
+  const app = JSON.stringify({ provider, providers: [provider] });
+  const res = await db.query<{ id: string }>(
+    `insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
+     values ('00000000-0000-0000-0000-000000000000', gen_random_uuid(), 'authenticated', 'authenticated', $1, '', now(), $2::jsonb, $3::jsonb, now(), now()) returning id`,
+    [email.toLowerCase(), app, meta],
+  );
+  return res.rows[0].id;
+}
+
+/** Supabase: de url om met Facebook in te loggen (Supabase Auth, provider facebook). */
+export async function facebookSignInUrl(next: string): Promise<string | null> {
+  if (isDemo) return null;
+  const sb = await supabaseForRequest();
+  const { data, error } = await sb.auth.signInWithOAuth({
+    provider: "facebook",
+    options: { redirectTo: `${env.appUrl}/auth/callback?next=${encodeURIComponent(safeNext(next))}`, scopes: "email,public_profile" },
+  });
+  return error ? null : data.url;
+}
+
+/**
+ * Een uitgenodigd teamlid krijgt een link per mail. Met Supabase maakt de link het account aan als het nog niet
+ * bestaat; in de demo maken we het hier aan.
+ */
+export async function sendInviteLink(email: string, next: string): Promise<boolean> {
+  const clean = email.trim().toLowerCase();
+  if (isDemo) {
+    const first = clean.split("@")[0].split(/[._-]/)[0];
+    await createDemoUser(clean, first.slice(0, 1).toUpperCase() + first.slice(1), "email");
+    return (await sendLoginLink(clean, next)).ok;
+  }
+  const sb = await supabaseForRequest();
+  const { error } = await sb.auth.signInWithOtp({
+    email: clean,
+    options: { shouldCreateUser: true, emailRedirectTo: `${env.appUrl}/auth/callback?next=${encodeURIComponent(safeNext(next))}` },
+  });
+  return !error;
+}
+
 export async function signOut(): Promise<void> {
   const store = await cookies();
   if (isDemo) {

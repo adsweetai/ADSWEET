@@ -46,7 +46,8 @@ export const getContext = cache(async (): Promise<AppContext> => {
     db.from("organizations").select().order("created_at").then(must),
     demoOverrides(),
   ]);
-  if (!memberships.length || !orgs.length) redirect("/inloggen");
+  // Een nieuwe klant zonder organisatie begint de onboarding (die maakt de organisatie aan).
+  if (!memberships.length || !orgs.length) redirect("/onboarding/start");
 
   const direct = orgs.filter((o) => memberships.some((m) => m.organization_id === o.id));
   const agency = direct.find((o) => o.plan === "agency" && !o.agency_parent_id) ?? null;
