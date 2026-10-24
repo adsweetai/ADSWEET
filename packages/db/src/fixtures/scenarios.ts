@@ -174,6 +174,12 @@ function addDaily(
     reach?: number[];
     clicks?: number[];
     link_clicks?: number[];
+    lpv?: number[];
+    view_content?: number[];
+    add_to_cart?: number[];
+    checkout?: number[];
+    video_3s?: number[];
+    video_thruplay?: number[];
   },
 ) {
   dates.forEach((date, i) => {
@@ -188,6 +194,12 @@ function addDaily(
       reach: values.reach ? values.reach[i] : null,
       clicks: values.clicks ? values.clicks[i] : null,
       link_clicks: values.link_clicks ? values.link_clicks[i] : null,
+      lpv: values.lpv ? values.lpv[i] : null,
+      view_content: values.view_content ? values.view_content[i] : null,
+      add_to_cart: values.add_to_cart ? values.add_to_cart[i] : null,
+      checkout: values.checkout ? values.checkout[i] : null,
+      video_3s: values.video_3s ? values.video_3s[i] : null,
+      video_thruplay: values.video_thruplay ? values.video_thruplay[i] : null,
     });
   });
 }
@@ -297,6 +309,16 @@ export function buildLisa(seed: Seed, opts: ScenarioOptions) {
     pixel_ok: true,
   });
   seed.autopilot_settings.push({ organization_id: orgId, mode: "vraag", limits: {} });
+  // Regel uit het prototype: "Als kost per verkoop hoger is dan €30, 2 dagen na elkaar, dan stuur me een melding."
+  seed.rules.push({
+    id: seedId(`${k}:rule:cpa`),
+    organization_id: orgId,
+    metric: "kost_per_verkoop",
+    comparator: "hoger",
+    value: 30,
+    window: "2_dagen",
+    action: "melding",
+  });
 
   // Vaste campagne
   const campId = seedId(`${k}:camp:vast`);
@@ -379,11 +401,21 @@ export function buildLisa(seed: Seed, opts: ScenarioOptions) {
       ...extra,
     });
   }
-  // Vertoningen en klikken op campagneniveau (Inzichten: 36,8k vertoningen, 412 klikken). Rest na A1.
+  // Cijfers op campagneniveau uit het prototype ("Alle cijfers uit Meta", voorbeeld): 36,8k vertoningen, 13.100 bereik,
+  // 412 linkklikken (1,12%), 1,90% CTR (alle klikken), 331 landingpaginaweergaven, 298 productweergaven, 41 in winkelmand,
+  // 19 afrekeningen, hook rate 24,6% en hold rate 7,9%. Wat A1 al heeft (10.000 vertoningen, 3.572 bereik, 140 klikken) gaat eraf.
   addDaily(seed, { organization_id: orgId, campaign_id: campId, ad_id: null }, days, {
     spend: Array(7).fill(0),
     impressions: spreadInt(36800 - 10000, 7),
-    clicks: spreadInt(412, 7),
+    reach: spreadInt(13100 - 3572, 7),
+    clicks: spreadInt(Math.round(36800 * 0.019), 7),
+    link_clicks: spreadInt(412 - 140, 7),
+    lpv: spreadInt(331, 7),
+    view_content: spreadInt(298, 7),
+    add_to_cart: spreadInt(41, 7),
+    checkout: spreadInt(19, 7),
+    video_3s: spreadInt(Math.round(36800 * 0.246), 7),
+    video_thruplay: spreadInt(Math.round(36800 * 0.079), 7),
   });
 
   // Black Friday, afgelopen: €180, 9 verkopen, €522 (27 tot en met 30 november)

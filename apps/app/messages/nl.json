@@ -1851,5 +1851,303 @@
     "actie": "Actie nodig",
     "retryNote": "Opnieuw proberen opent het venster van Meta nog eens.",
     "relinkNote": "Opnieuw koppelen opent het venster van Meta nog eens."
+  },
+  "insights": {
+    "tabsLabel": "Onderdelen van Inzichten",
+    "tabs": {
+      "overzicht": "Overzicht",
+      "advertenties": "Advertenties",
+      "doelgroepen": "Doelgroepen",
+      "benchmarks": "Benchmarks",
+      "rapporten": "Rapporten"
+    },
+    "askLater": "",
+    "gate": "Met Pro zie je al je cijfers uit Meta live, tot op het niveau van je creatives.",
+    "toReport": "Naar je weekrapport",
+    "allFromMeta": "Alle cijfers uit Meta.",
+    "noData": "Nog geen cijfers in deze periode.",
+    "period": {
+      "gisteren": "Gisteren",
+      "7d": "Laatste 7 dagen",
+      "30d": "Laatste 30 dagen",
+      "start": "Sinds de start",
+      "zelf": "Zelf gekozen periode"
+    },
+    "spend": "Uitgegeven",
+    "revenue": "Omzet",
+    "roas": "ROAS",
+    "cpa": "Kost per verkoop",
+    "leads": "Aanvragen",
+    "cpl": "Kost per aanvraag",
+    "breakEven": "break-even {v}",
+    "breakEvenShort": "break-even {v}",
+    "maxIs": "maximaal {v}",
+    "goalIs": "doel {v}",
+    "traffic": "Verkeer en landing",
+    "trafficSub": "bovenaan de funnel",
+    "linkClicks": "Linkklikken",
+    "cpc": "Kost per klik",
+    "lpv": "Landingpaginaweergaven",
+    "costPerLpv": "Kost per weergave",
+    "landingRate": "Landingsratio",
+    "landingRateSub": "van wie klikt, laadt je pagina",
+    "funnel": "Conversiefunnel",
+    "funnelSub": "van bekijken tot kopen",
+    "funnelSubLeads": "van bekijken tot aanvragen",
+    "funnelView": "Productweergaven",
+    "funnelCart": "In winkelmand",
+    "funnelCheckout": "Afrekenen",
+    "funnelSales": "Verkopen",
+    "funnelLpv": "Landingpaginaweergaven",
+    "funnelLeads": "Aanvragen",
+    "cost": {
+      "perView": "{v} per weergave",
+      "perCart": "{v} per winkelmand",
+      "perCheckout": "{v} per afrekening",
+      "perSale": "{v} per verkoop",
+      "perLead": "{v} per aanvraag"
+    },
+    "wentOn": "{v} ging verder",
+    "creatives": "Creatives",
+    "creativesSub": "hoe goed je advertenties aandacht houden",
+    "hookRate": "Hook rate",
+    "hookRateSub": "bekijkt de eerste 3 seconden",
+    "holdRate": "Hold rate",
+    "linkCtr": "Link-CTR",
+    "ctrAll": "CTR (alles)",
+    "cpcLink": "CPC (link)",
+    "delivery": "Account en levering",
+    "deliverySub": "hoe vaak en aan hoeveel mensen",
+    "cpm": "CPM",
+    "frequency": "Frequentie",
+    "frequencySub": "boven 2,5: let op vermoeidheid",
+    "reach": "Bereik",
+    "impressions": "Vertoningen",
+    "thumbStop": "Thumb-stop",
+    "campaigns": "Campagnes",
+    "campCols": ["Campagne", "Status", "Uitgegeven", "Omzet", "ROAS", "Vertoningen", "Klikken", "CTR", "CPC", "Resultaten"],
+    "trends": "Trends per dag",
+    "range": "{from} tot en met {to}",
+    "trendAria": "{k} per dag, met uitgegeven als staven",
+    "video": "Video",
+    "photo": "Foto",
+    "formatSales": "{spend} → {rev} · ROAS {roas}",
+    "formatLeads": "{spend} · {n, plural, one {# aanvraag} other {# aanvragen}}",
+    "adCols": {
+      "ad": "Advertentie",
+      "spend": "Uitgegeven",
+      "score": "Score",
+      "label": "Label"
+    },
+    "noCampaign": "Nog geen lopende campagne.",
+    "creativeTitle": "Creative-analyse (V1)",
+    "creativeNote": "Per hook, formaat en boodschap volgt in V1. Hierboven al: video tegenover foto.",
+    "audiences": "Welke regio, leeftijd en plaatsing het best en het slechtst loopt.",
+    "benchNote": "Voorbeeld · Belgische cijfers voor webshops · [bron benchmarks]",
+    "weekReport": "Weekrapport · elke maandag",
+    "weekReportSub": "Elke maandag in de app en per mail",
+    "sched": {
+      "week": "Weekrapport per mail",
+      "weekSub": "Elke maandag om 07:00",
+      "month": "Maandrapport naar Slack",
+      "monthSub": "Eerste werkdag van de maand",
+      "white": "White-label klantrapporten",
+      "whiteSub": "Met je eigen logo en kleuren"
+    },
+    "on": "Aan",
+    "off": "Uit",
+    "setup": "Instellen",
+    "pdf": "Exporteer als PDF",
+    "customLater": "Later: eigen meetwaarden met externe data."
+  },
+  "studio": {
+    "credits": "Credits",
+    "creditsTrial": "Nog {left} van je {total} credits in je proefperiode",
+    "creditsMonth": "Nog {left} van je {total} credits deze maand",
+    "creditsOut": "Je credits van deze maand zijn op.",
+    "costs": "AI-beeld 10 · tekstset 1 · hooks 2 · videoscript 3 credits (plaatshouders)",
+    "outNote": "Je credits van deze maand zijn op. Ze vullen aan op [datum].",
+    "seeScale": "Bekijk Scale",
+    "from": "Vertrekt van:",
+    "ctxBusiness": "Zaak: {name}",
+    "ctxPhase": "Fase die je mist: [fase]",
+    "ctxTone": "Toon: {tone}",
+    "cost": "{n, plural, one {# credit} other {# credits}}",
+    "makers": {
+      "beeld": {
+        "t": "Beelden",
+        "d": "In alle formaten van Meta: 4:5, 1:1 en 9:16.",
+        "btn": "Maak een beeld"
+      },
+      "tekst": {
+        "t": "Teksten",
+        "d": "Primaire tekst, kop en beschrijving, in jouw toon.",
+        "btn": "Schrijf teksten"
+      },
+      "hooks": {
+        "t": "Hooks en invalshoeken",
+        "d": "Ook uit reviews die je plakt of oplaadt.",
+        "btn": "Zoek hooks"
+      },
+      "script": {
+        "t": "Videoscript",
+        "d": "Shot per shot, voor je gsm.",
+        "btn": "Schrijf een script"
+      },
+      "video": {
+        "t": "Beeld naar video",
+        "d": "Een korte video uit je beelden.",
+        "btn": "Later"
+      }
+    },
+    "busy": {
+      "beeld": "We maken je beelden.",
+      "tekst": "We schrijven je teksten.",
+      "hooks": "We zoeken invalshoeken.",
+      "script": "We schrijven je script."
+    },
+    "resTitle": {
+      "beeld": "Je beelden",
+      "tekst": "Je teksten",
+      "hooks": "Je hooks",
+      "script": "Je script"
+    },
+    "tooFew": "Dit kost {cost} credits en je hebt er nog {left}.",
+    "afterTrial": "Na je proefperiode heb je er 300 per maand.",
+    "error": "Dat lukte niet. Probeer het opnieuw.",
+    "use": "Gebruik in een advertentie",
+    "again": "Nog eens",
+    "save": "Bewaar",
+    "savedImage": "Bewaard bij je beelden.",
+    "savedText": "Bewaard.",
+    "reviews": "Reviews van klanten, voor hooks en invalshoeken",
+    "reviewsPh": "Plak hier reviews of laad een bestand op.",
+    "predict": "Prestatievoorspelling vóór je live gaat",
+    "placeholder": {
+      "beeld": ["[AI-beeld 4:5 · volgt met AI]", "[AI-beeld 9:16 · volgt met AI]", "[AI-beeld 1:1 · volgt met AI]"],
+      "tekst": ["[tekstvariant 1 · volgt met AI]", "[tekstvariant 2 · volgt met AI]", "[tekstvariant 3 · volgt met AI]"],
+      "hooks": ["[hook 1 · volgt met AI]", "[hook 2 · volgt met AI]", "[hook 3 · volgt met AI]"],
+      "script": ["[videoscript, shot per shot · volgt met AI]"]
+    }
+  },
+  "competitors": {
+    "addLabel": "Voeg een concurrent toe",
+    "addPh": "Naam of Facebook-pagina",
+    "add": "Voeg toe",
+    "added": "Concurrent toegevoegd. Morgen zie je hun advertenties.",
+    "source": "Uit de openbare advertentiebibliotheek van Meta. Voorbeeld met verzonnen namen.",
+    "rows": ["Lopende advertenties", "Soorten", "Langst lopend", "Terugkerend aanbod"],
+    "placeholders": ["[aantal]", "[foto's en video's]", "[dagen]", "[aanbod]"],
+    "notesTitle": "Wat valt op",
+    "notesLater": "[wat opvalt bij je concurrenten, volgt zodra hun advertenties binnen zijn]",
+    "own": "Maak er een eigen versie van",
+    "noCopy": "Kopiëren doen we niet.",
+    "strategist": "Creative-strateeg",
+    "strategistLater": "[per doelgroep en per fase de boodschap die past, volgt met AI]",
+    "hook": "Hook: “{h}”",
+    "inspirationTitle": "Inspiratie",
+    "inspiration": [
+      ["video", "top"],
+      ["review", "middle"],
+      ["aanbod", "bottom"],
+      ["atelier", "top"]
+    ]
+  },
+  "autopilot": {
+    "title": "Autopilot",
+    "default": "Standaard",
+    "modes": {
+      "uit": {
+        "t": "Uit",
+        "s": "AdSweet doet niets zelf."
+      },
+      "vraag": {
+        "t": "Vraag het mij eerst",
+        "s": "Elke actie verschijnt op Vandaag en wacht op jouw klik."
+      },
+      "grenzen": {
+        "t": "Doe het binnen mijn grenzen",
+        "s": "Jij kiest wat AdSweet zelf mag doen, en tot waar."
+      }
+    },
+    "limits": {
+      "budgetUp": {
+        "t": "Budget van een winnende campagne verhogen",
+        "s": "Hoogstens [x]% per keer, tot hoogstens €[y] per dag."
+      },
+      "budgetDown": {
+        "t": "Budget verlagen als de ROAS zakt",
+        "s": "Als de ROAS onder [z] zakt."
+      },
+      "extras": {
+        "t": "Extra's van Meta terug uitzetten",
+        "s": "Als ze buiten de app aangingen."
+      },
+      "off": {
+        "t": "Een advertentie afzetten",
+        "s": "Dit doet AdSweet nooit zelf. Jij beslist."
+      }
+    },
+    "logNote": "Elke actie van de autopilot staat in het <log>logboek</log> en kan terug.",
+    "logMode": "Autopilot gewijzigd",
+    "rules": "Regels",
+    "fixed": ["Verliezer bij 3 keer je doel zonder resultaat", "Nieuwe advertenties in een nieuwe ad set"],
+    "fixedTag": "Playbook · vast",
+    "remove": "Verwijder",
+    "newRule": "Nieuwe regel",
+    "if": "Als",
+    "then": ", dan",
+    "metric": "Meetwaarde",
+    "comparison": "Vergelijking",
+    "value": "Waarde",
+    "window": "Periode",
+    "action": "Actie",
+    "metrics": {
+      "kost_per_verkoop": "kost per verkoop",
+      "kost_per_aanvraag": "kost per aanvraag",
+      "roas": "ROAS",
+      "uitgaven_per_dag": "uitgaven per dag",
+      "ctr": "CTR"
+    },
+    "comparators": {
+      "hoger": "hoger is dan",
+      "lager": "lager is dan"
+    },
+    "windows": {
+      "2_dagen": "2 dagen na elkaar",
+      "1_dag": "1 dag",
+      "3_dagen": "3 dagen na elkaar"
+    },
+    "actions": {
+      "melding": "stuur me een melding",
+      "budget": "pas het budget aan",
+      "starten": "start of stop een campagne op een tijdstip",
+      "stoppen": "stop een campagne op een tijdstip",
+      "voorstel_afzetten": "stel voor om de advertentie af te zetten"
+    },
+    "ruleText": "Als {metric} {comparator} {value}, {window}, dan {action}.",
+    "neverOff": "Automatisch afzetten bestaat niet. AdSweet kan het wel voorstellen.",
+    "save": "Bewaar de regel",
+    "saved": "Regel bewaard.",
+    "templatesTitle": "Sjablonen",
+    "templateAdded": "Sjabloon toegevoegd.",
+    "templates": {
+      "kosten": {
+        "t": "Kosten plots hoog",
+        "rule": "Als kost per verkoop hoger is dan [2 keer je gemiddelde], 1 dag, dan stuur me een melding."
+      },
+      "vermoeidheid": {
+        "t": "Creative-vermoeidheid",
+        "rule": "Als CTR lager is dan [70% van de eerste week], 3 dagen na elkaar, dan stuur me een melding."
+      },
+      "budget": {
+        "t": "Budget op",
+        "rule": "Als uitgaven per dag hoger is dan [je budget], 1 dag, dan stuur me een melding."
+      },
+      "moment": {
+        "t": "Speciaal moment automatisch",
+        "rule": "Start de campagne Feestdagen op 8 december om 06:00 en stop ze op 24 december om 23:59."
+      }
+    }
   }
 }

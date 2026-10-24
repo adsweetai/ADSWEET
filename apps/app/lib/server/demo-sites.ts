@@ -34,6 +34,13 @@ export interface DemoSite {
   /** Voorgevulde cijfers (C3): Lisa €58 en 40%, Sarah €15 met klantwaarde €360, 50% en 1 op 4. */
   numbers: { aov: string; margin: string; cpl: string; clv: string; lmargin: string; chance: string };
   toneSamples: Record<string, string>;
+  /** Voorbeeldresultaten van Studio (App.dc.html, pvSmart). */
+  studio?: { context: string[]; beeld: string[]; tekst: string[]; hooks: string[]; script: string[] };
+  /** Creative-strateeg en wat opvalt bij concurrenten (voorbeeld met verzonnen namen). */
+  competitors?: {
+    notes: string[];
+    personas: { name: string; initial: string; color: "roos" | "tarwe" | "salie"; text: string; phases: [string, string, string][] }[];
+  };
   sayYes: string;
   sayNo: string;
 }
@@ -172,6 +179,71 @@ export const DEMO_SITES: Record<string, DemoSite> = {
     },
     sayYes: "handgemaakt, atelier, geschenk",
     sayNo: "goedkoop, uitverkoop, wauw",
+    studio: {
+      context: ["Product: geschenkdoos", "Fase die je mist: bottom of funnel", "Toon: warm, ambachtelijk, rustig"],
+      beeld: [
+        "AI-beeld 4:5 · de geschenkdoos op een houten tafel, zacht licht, zonder tekst",
+        "AI-beeld 9:16 · dezelfde doos van boven, voor Stories",
+        "AI-beeld 1:1 · drie kaarsen naast de doos",
+      ],
+      tekst: [
+        "Een geschenk dat blijft branden. Elke doos stellen we met de hand samen.",
+        "Drie kaarsen, één doos, klaar om te geven.",
+        "Geef iets dat elke avond een beetje gezelliger maakt.",
+      ],
+      hooks: ["Een cadeau dat niet in de kast belandt.", "Geef licht, geen gadget.", "Wat geef je iemand die alles al heeft?"],
+      script: [
+        [
+          "Video, 15 seconden, bottom of funnel",
+          "0 tot 2 s: de doos gaat open, de kaars brandt al.",
+          "2 tot 8 s: handen nemen de kaars eruit, close-up van het label.",
+          "8 tot 13 s: de doos op tafel, met de prijs in beeld.",
+          "13 tot 15 s: “Bestel voor [datum], op tijd onder de boom.”",
+        ].join("\n"),
+      ],
+    },
+    competitors: {
+      notes: [
+        "Concurrent A toont vooral hoe het product gemaakt wordt, in video.",
+        "Twee van de drie werken met gratis verzending vanaf een bedrag.",
+        "Wat lang loopt, toont het product in gebruik, niet op een witte achtergrond.",
+      ],
+      personas: [
+        {
+          name: "De cadeaugever",
+          initial: "G",
+          color: "roos",
+          text: "Zoekt een geschenk dat persoonlijk aanvoelt, vooral in december.",
+          phases: [
+            ["top", "Een cadeau dat niet in de kast belandt.", "Wat geef je iemand die alles al heeft?"],
+            ["middle", "Handgemaakt, mooi verpakt, op tijd geleverd.", "Zo stellen we je doos samen."],
+            ["bottom", "Bestel nu, het ligt op tijd onder de boom.", "Nog 10 dagen om te bestellen."],
+          ],
+        },
+        {
+          name: "De sfeermaker",
+          initial: "S",
+          color: "tarwe",
+          text: "Koopt voor zichzelf, voor rustige avonden thuis.",
+          phases: [
+            ["top", "Licht dat bij je thuis past.", "Zo begint een rustige avond."],
+            ["middle", "Zachte geuren, lange brandtijd.", "Waarom handgegoten anders brandt."],
+            ["bottom", "Je favoriete geur, opnieuw in huis.", "Bestel je vaste kaars."],
+          ],
+        },
+        {
+          name: "De bewuste koper",
+          initial: "B",
+          color: "salie",
+          text: "Wil weten waar en hoe iets gemaakt wordt.",
+          phases: [
+            ["top", "Elke kaars gieten we met de hand.", "Dit is ons atelier."],
+            ["middle", "Wat erin zit, en wat niet.", "Zo gieten we ze."],
+            ["bottom", "Lokaal gemaakt, in België geleverd.", "Kies je kaars."],
+          ],
+        },
+      ],
+    },
   },
 };
 
