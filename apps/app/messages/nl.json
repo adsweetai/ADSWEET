@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "title": "AdSweet",
+    "description": "Meer klanten uit Facebook en Instagram. Hit the sweet spot."
+  },
+  "start": {
+    "eyebrow": "Fase 0",
+    "title": "AdSweet",
+    "accent": "Hit the sweet spot.",
+    "text": "De basis staat klaar: de juiste letter, de juiste kleuren, in licht en nacht.",
+    "theme": "Thema",
+    "themeAuto": "Toestel",
+    "themeLight": "Licht",
+    "themeDark": "Nacht"
+  }
+}

@@ -14,12 +14,17 @@ export const costPer = (spend: number, results: number) => (results > 0 ? spend 
 export const leadMax = (clv: number, margin: number, closeRate: number) => clv * margin * closeRate;
 
 export type Label = "winnaar" | "geen" | "verliezer" | "vroeg" | "rapport";
-export function labelAd(a: { spend: number; results: number; revenue?: number }, goal: { kind: "sales"; aov: number; margin: number } | { kind: "leads"; target: number } | { kind: "none" }, minSpendToJudge = 15): Label {
+export function labelAd(
+  a: { spend: number; results: number; revenue?: number },
+  goal: { kind: "sales"; aov: number; margin: number } | { kind: "leads"; target: number } | { kind: "none" },
+  minSpendToJudge = 15,
+): Label {
   if (goal.kind === "none") return "rapport";
   const target = goal.kind === "sales" ? maxCostPerSale(goal.aov, goal.margin) : goal.target;
   if (a.results === 0 && a.spend >= PLAYBOOK.loserMultiple * target) return "verliezer";
   if (a.spend < minSpendToJudge) return "vroeg";
-  if (goal.kind === "sales") return roas(a.revenue ?? 0, a.spend) >= breakEvenRoas(goal.margin) ? "winnaar" : "geen";
+  if (goal.kind === "sales")
+    return roas(a.revenue ?? 0, a.spend) >= breakEvenRoas(goal.margin) ? "winnaar" : "geen";
   const c = costPer(a.spend, a.results);
   return c !== null && c <= target ? "winnaar" : "geen";
 }

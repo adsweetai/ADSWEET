@@ -5,3 +5,9 @@ dist
 .turbo
 .vercel
 supabase/.temp
+supabase/.branches
+next-env.d.ts
+*.tsbuildinfo
+playwright-report
+test-results
+.demo-storage
