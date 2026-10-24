@@ -12,6 +12,19 @@ pnpm db:reset                                  # schema + voorbeelddata (Lisa, T
 pnpm dev                                       # http://localhost:3000
 ```
 
+## Controleren
+
+```bash
+pnpm lint          # ESLint in alle pakketten
+pnpm typecheck     # TypeScript
+pnpm test          # Vitest (rekenregels, onderdelen)
+pnpm build         # productiebuild
+pnpm --filter app exec playwright install chromium   # eenmalig
+pnpm test:e2e      # Playwright-rooktest tegen de productiebuild (poort 3100)
+```
+
+Gebruik `PW_CHANNEL=chrome` (of `msedge`) om de rooktest in een geïnstalleerde browser te draaien.
+
 ## Structuur
 
 | Map | Wat |

@@ -2,18 +2,27 @@
   "name": "adsweet",
   "private": true,
   "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=20.11"
+  },
   "scripts": {
     "dev": "turbo dev --filter=app",
     "build": "turbo build",
     "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
     "test": "turbo test",
+    "test:e2e": "turbo test:e2e",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "db:reset": "supabase db reset",
-    "db:types": "supabase gen types typescript --local > packages/db/src/types.ts"
+    "db:types": "supabase gen types typescript --local > packages/db/src/types.generated.ts"
   },
   "devDependencies": {
-    "turbo": "^2.1.0",
-    "typescript": "^5.6.0",
-    "prettier": "^3.3.0",
-    "supabase": "^1.200.0"
+    "@eslint/js": "^9.39.0",
+    "eslint": "^9.39.0",
+    "prettier": "^3.6.0",
+    "turbo": "^2.5.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.0"
   }
 }

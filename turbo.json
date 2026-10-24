@@ -1,20 +1,21 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "envMode": "loose",
   "tasks": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        ".next/**",
-        "dist/**"
-      ]
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },
     "dev": {
       "cache": false,
       "persistent": true
     },
     "lint": {},
-    "test": {}
+    "typecheck": {},
+    "test": {},
+    "test:e2e": {
+      "dependsOn": ["build"],
+      "cache": false
+    }
   }
 }

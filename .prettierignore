@@ -1,0 +1,12 @@
+node_modules
+.next
+.turbo
+dist
+pnpm-lock.yaml
+design
+docs/brief-volledige-app.txt
+playwright-report
+test-results
+packages/db/seed.sql
+*.md
+packages/ui/src/tokens.source.css

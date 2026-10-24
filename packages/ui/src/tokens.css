@@ -1,26 +1,278 @@
-/* AdSweet tokens. Licht standaard, nacht via [data-theme="dark"]. */
-@font-face { font-family: "Host Grotesk"; font-weight: 300; font-display: swap; src: url("/fonts/host-grotesk-latin-300-normal.woff2") format("woff2"); }
-@font-face { font-family: "Host Grotesk"; font-weight: 400; font-display: swap; src: url("/fonts/host-grotesk-latin-400-normal.woff2") format("woff2"); }
-@font-face { font-family: "Host Grotesk"; font-weight: 500; font-display: swap; src: url("/fonts/host-grotesk-latin-500-normal.woff2") format("woff2"); }
-@font-face { font-family: "Host Grotesk"; font-weight: 600; font-display: swap; src: url("/fonts/host-grotesk-latin-600-normal.woff2") format("woff2"); }
-:root, [data-theme="light"] {
-  --ground:#EAE8E3; --surface:#F5F4F0; --surface-sunken:#E2E0DA; --ink:#151514; --ink-muted:#5F5C56; --ink-accent:#7A776F;
-  --line:#15151424; --line-strong:#7A776F; --robijn:#C7254E;
-  --ok:#2E6B45; --ok-tint:#DCEADF; --warn:#8A5410; --warn-tint:#F2E2C4; --act:#AE3A1F; --act-tint:#F5DCD3;
-  --tarwe:#E8D7AE; --staal:#B8C7D9; --lavendel:#CEC4EA; --salie:#BFD9C6; --klei:#E9C2AE; --roos:#EEC1D0;
-  --snoep-roos:#F28AB2; --snoep-citroen:#F5CF5C; --snoep-munt:#7FD3B0; --snoep-bes:#A99BF2; --snoep-hemel:#8FC2F2; --snoep-perzik:#F7A97A;
-  --shadow-float:0 12px 32px rgba(21,21,20,.12), 0 2px 6px rgba(21,21,20,.06);
-  --ease:cubic-bezier(.2,.7,.2,1); --font:"Host Grotesk","Helvetica Neue",Arial,sans-serif; color-scheme:light;
+/* AdSweet tokens (Raakpunt). Bron: tokens.source.css.
+   Licht is standaard. Nacht via [data-theme="dark"] op <html>; zonder keuze volgt de app het toestel.
+   Contrast: tekst minstens 4,5:1, ink-accent alleen in titels vanaf 32px, randen en focusring minstens 3:1. */
+
+@font-face {
+  font-family: "Host Grotesk";
+  font-weight: 300;
+  font-display: swap;
+  src: url("/fonts/host-grotesk-latin-300-normal.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+@font-face {
+  font-family: "Host Grotesk";
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/host-grotesk-latin-400-normal.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Host Grotesk";
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/host-grotesk-latin-500-normal.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Host Grotesk";
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/host-grotesk-latin-600-normal.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Host Grotesk";
+  font-weight: 300;
+  font-display: swap;
+  src: url("/fonts/host-grotesk-latin-ext-300-normal.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C0,
+    U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Host Grotesk";
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/host-grotesk-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C0,
+    U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Host Grotesk";
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/host-grotesk-latin-ext-500-normal.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C0,
+    U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Host Grotesk";
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/host-grotesk-latin-ext-600-normal.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+20A0-20AB, U+20AD-20C0,
+    U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root,
+[data-theme="light"] {
+  /* Merk */
+  --ground: #eae8e3;
+  --surface: #f5f4f0;
+  --surface-sunken: #e2e0da;
+  --ink: #151514;
+  --ink-muted: #5f5c56;
+  --ink-accent: #7a776f;
+  --line: #15151424;
+  --line-strong: #7a776f;
+  --robijn: #c7254e;
+
+  /* Status: altijd met icoon en woord */
+  --ok: #2e6b45;
+  --ok-tint: #dceadf;
+  --warn: #8a5410;
+  --warn-tint: #f2e2c4;
+  --act: #ae3a1f;
+  --act-tint: #f5dcd3;
+
+  /* Reekskleuren (grafieken, avatars). Tekst erop altijd --on-series */
+  --tarwe: #e8d7ae;
+  --staal: #b8c7d9;
+  --lavendel: #cec4ea;
+  --salie: #bfd9c6;
+  --klei: #e9c2ae;
+  --roos: #eec1d0;
+  --on-series: #151514;
+  --on-series-muted: #5f5c56;
+
+  /* Snoep-accenten: bolletjes, stapnummers, blokken. Nooit voor tekst */
+  --snoep-roos: #f28ab2;
+  --snoep-citroen: #f5cf5c;
+  --snoep-munt: #7fd3b0;
+  --snoep-bes: #a99bf2;
+  --snoep-hemel: #8fc2f2;
+  --snoep-perzik: #f7a97a;
+
+  /* Altijd-nacht (slotblokken, overlays) */
+  --night: #111110;
+  --night-ink: #f1efea;
+  --scrim: rgba(17, 17, 16, 0.55);
+
+  /* Letters */
+  --font: "Host Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fs-hero: clamp(40px, 6.6vw, 112px);
+  --lh-hero: 0.92;
+  --ls-hero: -0.045em;
+  --fs-section: clamp(32px, 4vw, 64px);
+  --lh-section: 1;
+  --ls-section: -0.035em;
+  --fs-page: 28px;
+  --ls-page: -0.03em;
+  --fs-greeting: clamp(32px, 3vw, 36px);
+  --fs-card: 20px;
+  --ls-card: -0.015em;
+  --fs-body-site: 17px;
+  --fs-body-app: 15px;
+  --lh-body: 1.5;
+  --ls-body: -0.01em;
+  --fs-eyebrow: 12px;
+  --ls-eyebrow: 0.12em;
+
+  /* Vorm */
+  --radius-field: 10px;
+  --radius-tile: 14px;
+  --radius-card: 16px;
+  --radius-block: 18px;
+  --radius-pill: 999px;
+  --btn-h-site: 46px;
+  --btn-h-app: 40px;
+  --field-h: 44px;
+  --shadow-float: 0 12px 32px rgba(21, 21, 20, 0.12), 0 2px 6px rgba(21, 21, 20, 0.06);
+  --sidebar-w: 248px;
+  --gutter-desktop: 48px;
+  --gutter-mobile: 20px;
+  --measure: 560px;
+  --measure-doc: 680px;
+
+  /* Beweging */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t-fast: 300ms;
+  --t-reveal: 600ms;
+  --t-stagger: 60ms;
+  --t-loader: 1200ms;
+  --t-breathe: 1600ms;
+
+  --show-light: block;
+  --show-dark: none;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #111110;
+    --surface: #1a1a19;
+    --surface-sunken: #0c0c0b;
+    --ink: #f1efea;
+    --ink-muted: #a8a49b;
+    --ink-accent: #9b978e;
+    --line: #f1efea24;
+    --line-strong: #6e6b65;
+    --robijn: #e0577a;
+    --ok: #86c79a;
+    --ok-tint: #1b2a20;
+    --warn: #e2b062;
+    --warn-tint: #2d2414;
+    --act: #f0937a;
+    --act-tint: #341c16;
+    --scrim: rgba(0, 0, 0, 0.6);
+    --shadow-float: 0 12px 32px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.3);
+    --show-light: none;
+    --show-dark: block;
+    color-scheme: dark;
+  }
+}
+
 [data-theme="dark"] {
-  --ground:#111110; --surface:#1A1A19; --surface-sunken:#0C0C0B; --ink:#F1EFEA; --ink-muted:#A8A49B; --ink-accent:#9B978E;
-  --line:#F1EFEA24; --line-strong:#6E6B65; --robijn:#E0577A;
-  --ok:#86C79A; --ok-tint:#1B2A20; --warn:#E2B062; --warn-tint:#2D2414; --act:#F0937A; --act-tint:#341C16;
-  --shadow-float:0 12px 32px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.3); color-scheme:dark;
+  --ground: #111110;
+  --surface: #1a1a19;
+  --surface-sunken: #0c0c0b;
+  --ink: #f1efea;
+  --ink-muted: #a8a49b;
+  --ink-accent: #9b978e;
+  --line: #f1efea24;
+  --line-strong: #6e6b65;
+  --robijn: #e0577a;
+  --ok: #86c79a;
+  --ok-tint: #1b2a20;
+  --warn: #e2b062;
+  --warn-tint: #2d2414;
+  --act: #f0937a;
+  --act-tint: #341c16;
+  --scrim: rgba(0, 0, 0, 0.6);
+  --shadow-float: 0 12px 32px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.3);
+  --show-light: none;
+  --show-dark: block;
+  color-scheme: dark;
 }
-*,*::before,*::after{box-sizing:border-box}
-html,body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.5;letter-spacing:-.01em;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
-a{color:var(--ink);text-decoration:none} a:hover{color:var(--ink-muted)}
-:focus-visible{outline:2px solid var(--robijn);outline-offset:4px}
-::highlight(as-term){text-decoration-line:underline;text-decoration-style:dotted;text-underline-offset:3px}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Basis */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs-body-app);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+a {
+  color: var(--ink);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--ink-muted);
+}
+:focus-visible {
+  outline: 2px solid var(--robijn);
+  outline-offset: 4px;
+}
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline-offset: 2px;
+}
+::highlight(as-term) {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
