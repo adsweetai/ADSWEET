@@ -1,0 +1,208 @@
+/* Klantenoverzicht (App.dc.html#klanten) */
+.kl {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  max-width: 1180px;
+}
+.kl-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 760px;
+}
+.kl-title {
+  margin: 0;
+  font-size: clamp(30px, 3.4vw, 44px);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+.kl-summary {
+  margin: 0;
+  font-size: 17px;
+}
+.kl-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  gap: 10px;
+}
+.kl-kpi {
+  padding: 16px 18px;
+  border-radius: 16px;
+  color: var(--on-series);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.kl-kpi > span:first-child {
+  font-size: 13px;
+}
+.kl-kpi b {
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.kl-kpi > span:last-child {
+  font-size: 12.5px;
+}
+.kl-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.kl-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.kl-bar__left {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.kl-bar h2,
+.kl-h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+.kl-table {
+  min-width: 980px;
+}
+.kl-table td {
+  vertical-align: middle;
+}
+.kl-client {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.kl-client b {
+  font-weight: 500;
+}
+.kl-todo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+.kl-todo b {
+  font-weight: 500;
+}
+.kl-todo__client {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+.kl-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink-muted);
+}
+.kl-dot--first {
+  background: var(--robijn);
+}
+.kl-todo__right {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.kl-tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 10px;
+}
+.kl-tool {
+  padding: 18px;
+  border-radius: 16px;
+  color: var(--on-series);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-bottom: 0;
+}
+.kl-tool:hover {
+  color: var(--on-series);
+}
+.kl-tool b {
+  font-weight: 500;
+  font-size: 16px;
+}
+.kl-tool__btn {
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+.kl-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: var(--scrim);
+}
+.kl-modal {
+  width: min(560px, 100%);
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow-float);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.kl-modal__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.kl-modal__head b {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.kl-modes {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.kl-modes legend {
+  padding: 0;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Rechten per klant (Team) */
+.rights-table td,
+.rights-table th {
+  text-align: left;
+}
+.rights-table select {
+  height: 34px;
+}

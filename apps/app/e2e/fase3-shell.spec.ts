@@ -64,7 +64,7 @@ test.describe("fase 3 · app-shell", () => {
   test("Eva wisselt naar een klant en terug", async ({ page }) => {
     await login(page, "eva", "/klanten");
     await page.getByRole("button", { name: /Bureau Kompas/ }).click();
-    await page.getByRole("button", { name: /Peeters Dakwerken/ }).click();
+    await page.getByRole("button", { name: /^Peeters Dakwerken/ }).click();
     await expect(page).toHaveURL(/\/vandaag$/);
     await expect(page.getByText("Bureau Kompas · klant:")).toBeVisible();
     await expect(page.getByText("Je doel is €20").first()).toBeVisible();

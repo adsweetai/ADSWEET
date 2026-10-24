@@ -12,6 +12,8 @@ insert into auth.users (instance_id, id, aud, role, email, encrypted_password, e
 insert into auth.identities (provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at) values ('19abad55-f5e7-5544-b396-0a4f77464d9a', '19abad55-f5e7-5544-b396-0a4f77464d9a', '{"sub":"19abad55-f5e7-5544-b396-0a4f77464d9a","email":"bram@veldenvuur.voorbeeld","email_verified":true}', 'email', now(), now(), now());
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at, confirmation_token, email_change, email_change_token_new, recovery_token) values ('00000000-0000-0000-0000-000000000000', '29cecf81-bdcf-5875-9504-56031f857fc7', 'authenticated', 'authenticated', 'eva@bureaukompas.voorbeeld', '', now(), '{"provider":"email","providers":["email"]}', '{"first_name":"Eva"}', now(), now(), '', '', '', '');
 insert into auth.identities (provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at) values ('29cecf81-bdcf-5875-9504-56031f857fc7', '29cecf81-bdcf-5875-9504-56031f857fc7', '{"sub":"29cecf81-bdcf-5875-9504-56031f857fc7","email":"eva@bureaukompas.voorbeeld","email_verified":true}', 'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at, confirmation_token, email_change, email_change_token_new, recovery_token) values ('00000000-0000-0000-0000-000000000000', '2f479cfe-9af0-501f-9a86-b4789da0250a', 'authenticated', 'authenticated', 'teamlid@bureaukompas.voorbeeld', '', now(), '{"provider":"email","providers":["email"]}', '{"first_name":"Teamlid"}', now(), now(), '', '', '', '');
+insert into auth.identities (provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at) values ('2f479cfe-9af0-501f-9a86-b4789da0250a', '2f479cfe-9af0-501f-9a86-b4789da0250a', '{"sub":"2f479cfe-9af0-501f-9a86-b4789da0250a","email":"teamlid@bureaukompas.voorbeeld","email_verified":true}', 'email', now(), now(), now());
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at, confirmation_token, email_change, email_change_token_new, recovery_token) values ('00000000-0000-0000-0000-000000000000', 'fe569d06-2960-5533-afc0-df01de96ec27', 'authenticated', 'authenticated', 'team@adsweet.voorbeeld', '', now(), '{"provider":"email","providers":["email"]}', '{"first_name":"AdSweet"}', now(), now(), '', '', '', '');
 insert into auth.identities (provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at) values ('fe569d06-2960-5533-afc0-df01de96ec27', 'fe569d06-2960-5533-afc0-df01de96ec27', '{"sub":"fe569d06-2960-5533-afc0-df01de96ec27","email":"team@adsweet.voorbeeld","email_verified":true}', 'email', now(), now(), now());
 update public.profiles set last_seen_at = '2026-12-06T09:00:00+01:00' where user_id = '501ce77b-52c3-527f-968e-c7d2bcb4244b';
@@ -47,6 +49,8 @@ insert into public.members (id, user_id, organization_id, role) values
   ('749d845d-6cd8-576e-8c02-30d688a6c97e', '3ad669f9-c749-5212-aef9-6b10ada48af0', '000cec3c-eaf4-5b93-be25-36e43ab61249', 'eigenaar'),
   ('1b7dbc24-4dd4-51c2-b04b-cebf17bb5ab8', '19abad55-f5e7-5544-b396-0a4f77464d9a', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'eigenaar'),
   ('45cb4735-996a-564d-b9d8-6a406fb48ce5', '29cecf81-bdcf-5875-9504-56031f857fc7', '2e277cb5-3269-577e-995e-045289da1567', 'eigenaar');
+insert into public.members (id, user_id, organization_id, role, ad_account_ids) values
+  ('473e987c-9955-5b96-97b8-7578cb941710', '2f479cfe-9af0-501f-9a86-b4789da0250a', '2e277cb5-3269-577e-995e-045289da1567', 'beheerder', null);
 
 -- invitations
 insert into public.invitations (id, organization_id, email, role, token, invited_by, expires_at, created_at) values
@@ -668,7 +672,10 @@ insert into public.user_tours (user_id, tour, seen_at) values
   ('19abad55-f5e7-5544-b396-0a4f77464d9a', 'wizard', '2026-11-20T09:00:00+01:00'),
   ('29cecf81-bdcf-5875-9504-56031f857fc7', 'app', '2026-11-20T09:00:00+01:00'),
   ('29cecf81-bdcf-5875-9504-56031f857fc7', 'campagne', '2026-11-20T09:00:00+01:00'),
-  ('29cecf81-bdcf-5875-9504-56031f857fc7', 'wizard', '2026-11-20T09:00:00+01:00');
+  ('29cecf81-bdcf-5875-9504-56031f857fc7', 'wizard', '2026-11-20T09:00:00+01:00'),
+  ('2f479cfe-9af0-501f-9a86-b4789da0250a', 'app', '2026-11-20T09:00:00+01:00'),
+  ('2f479cfe-9af0-501f-9a86-b4789da0250a', 'campagne', '2026-11-20T09:00:00+01:00'),
+  ('2f479cfe-9af0-501f-9a86-b4789da0250a', 'wizard', '2026-11-20T09:00:00+01:00');
 
 -- discount_codes
 insert into public.discount_codes (id, code, kind, percent_off, max_uses, uses) values

@@ -17,6 +17,8 @@ export const DEMO_USERS = {
   bram: { email: "bram@veldenvuur.voorbeeld", first_name: "Bram" },
   eva: { email: "eva@bureaukompas.voorbeeld", first_name: "Eva" },
   beheer: { email: "team@adsweet.voorbeeld", first_name: "AdSweet" },
+  // Een teamlid van Bureau Kompas, voor de rechten per klant. Geen verzonnen naam: "Teamlid".
+  kompasTeam: { email: "teamlid@bureaukompas.voorbeeld", first_name: "Teamlid" },
 } as const;
 
 export type DemoUserKey = keyof typeof DEMO_USERS;
@@ -1360,6 +1362,8 @@ export function buildEva(seed: Seed) {
     created_at: at("2026-09-01", "09:00"),
   });
   addOwner(seed, { key: k, owner: "eva" }, orgId);
+  addUser(seed, "kompasTeam");
+  seed.members.push({ id: seedId(`${k}:member:kompasTeam`), user_id: userId("kompasTeam"), organization_id: orgId, role: "beheerder", ad_account_ids: null });
   addExampleNotes(seed, k, orgId);
   seed.autopilot_settings.push({ organization_id: orgId, mode: "vraag", limits: {} });
 
@@ -1402,7 +1406,7 @@ export function buildSeed(): Seed {
     created_at: at("2026-12-07", "08:30"),
   });
   // De voorbeeldgebruikers kennen de app al: hun rondleidingen zijn gezien. Een nieuwe gebruiker krijgt ze de eerste keer.
-  for (const key of ["lisa", "tom", "sarah", "bram", "eva"] as const)
+  for (const key of ["lisa", "tom", "sarah", "bram", "eva", "kompasTeam"] as const)
     for (const tour of ["app", "campagne", "wizard"] as const) seed.user_tours.push({ user_id: userId(key), tour, seen_at: at("2026-11-20", "09:00") });
   // Founding members: −30% zolang ze klant blijven, voor de eerste 50 (docs/regels.md).
   seed.discount_codes.push({ id: seedId("discount:founding"), code: "FOUNDING50", kind: "founding", percent_off: 30, max_uses: 50, uses: 1 });
