@@ -8,7 +8,7 @@ const repoRoot = fileURLToPath(new URL("../../", import.meta.url));
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  transpilePackages: ["@adsweet/ui", "@adsweet/playbook", "@adsweet/db"],
+  transpilePackages: ["@adsweet/ui", "@adsweet/playbook", "@adsweet/db", "@adsweet/mails"],
   // PGlite laadt zijn WebAssembly zelf; niet bundelen.
   serverExternalPackages: ["@electric-sql/pglite"],
   outputFileTracingRoot: repoRoot,

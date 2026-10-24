@@ -45,6 +45,21 @@ double_confirm_changes = true
 otp_expiry = 900
 max_frequency = "30s"
 
+# De link om in te loggen: hetzelfde sjabloon als de andere mails (packages/mails, pnpm --filter @adsweet/mails gen:supabase).
+[auth.email.template.magic_link]
+subject = "Je link om in te loggen"
+content_path = "./supabase/templates/magic_link.html"
+
+# Mails van Supabase Auth via Resend (docs/koppelingen.md, 5). Lokaal blijft Inbucket; in productie aan.
+[auth.email.smtp]
+enabled = false
+host = "smtp.resend.com"
+port = 465
+user = "resend"
+pass = "env(RESEND_API_KEY)"
+admin_email = "hallo@adsweet.ai"
+sender_name = "AdSweet"
+
 # Doorgaan met Facebook. In productie de officiële knop van Meta gebruiken.
 [auth.external.facebook]
 enabled = false

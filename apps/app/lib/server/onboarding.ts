@@ -12,6 +12,7 @@ import { mediaUrl, slugify } from "./campaigns";
 import { writeLog } from "./changes";
 import { ORG_COOKIE, assertCanEdit, getContext, type AppContext } from "./context";
 import { demoSiteOf, type Brief } from "./demo-sites";
+import { sendMail } from "./mail";
 import { minDailyBudget } from "./playbook";
 import { recordReferral } from "./referral";
 import { readWebsite, type Found } from "./website";
@@ -750,6 +751,8 @@ export async function launchOnboardingCampaign() {
       campaign_id: c.id,
       what: t("logLive", { name: c.name, amount: formatEuro(c.daily_budget ?? 0), ads: ads.length }),
     });
+    // Mails.dc.html: Welkom, na de eerste campagne.
+    await sendMail("welkom", ctx.profile.email, { name: ctx.profile.first_name ?? "" });
   }
   await serviceDb().from("organizations").update({ onboarding_step: STEP_COUNT }).eq("id", ctx.org.id);
   return { ok: true as const };

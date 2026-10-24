@@ -11,6 +11,7 @@ import { writeLog } from "./changes";
 import { getContext, type AppContext } from "./context";
 import { creditsFor } from "./credits";
 import { demoPanelEnabled } from "./demo-state";
+import { sendMail } from "./mail";
 
 // Abonnement en facturen (App.dc.html#abonnement). Alleen de eigenaar beheert het. De betaling zelf loopt via de
 // betaalpartner (fase 13); hier staan het plan, de status, de facturen en het opzeggen, bewaard in Supabase.
@@ -254,6 +255,7 @@ export async function cancelSubscription(reason: string | null): Promise<{ ok: b
     .update({ subscription_status: "opgezegd", cancel_at: end, cancel_reason: reason && reasons.includes(reason) ? reason : null })
     .eq("id", o.id);
   await writeLog(await getDb(), ctx, { kind: "wijziging", what: t("cancelLog"), from_to: t("cancelLogSub", { date: until }) });
+  await sendMail("opgezegd", ctx.profile.email, { date: until });
   revalidatePath("/", "layout");
   return { ok: true, until };
 }

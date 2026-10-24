@@ -4,6 +4,8 @@ export const env = {
   supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
   supabaseAnonKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
   beheerUrl: (process.env.NEXT_PUBLIC_BEHEER_URL ?? "http://localhost:3001").replace(/\/$/, ""),
+  /** De app, voor de links in mails aan klanten. */
+  appUrl: (process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000").replace(/\/$/, ""),
 };
 
 /**

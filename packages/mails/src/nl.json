@@ -1,0 +1,131 @@
+{
+  "from": "AdSweet <hallo@adsweet.ai>",
+  "logoAlt": "adsweet",
+  "footer": {
+    "slogan": ["Hit the ", "sweet", " spot."],
+    "company": "AdSweet · adsweet.ai · [bedrijfsgegevens en ondernemingsnummer]",
+    "settings": "Meldingen aanpassen",
+    "unsubscribe": "Uitschrijven"
+  },
+  "mails": {
+    "welkom": {
+      "label": "Welkom",
+      "subject": "Welkom bij AdSweet, {name}",
+      "title": "Welkom bij AdSweet, {name}.",
+      "body": [
+        "Je account staat klaar en je eerste campagne is verstuurd. Meta keurt je advertenties eerst goed, daarna gaan ze lopen.",
+        "Morgenochtend om 06:00 staat je eerste overzicht klaar op Vandaag."
+      ],
+      "button": "Naar Vandaag"
+    },
+    "login": {
+      "label": "Link om in te loggen",
+      "subject": "Je link om in te loggen",
+      "title": "Je link om in te loggen",
+      "body": ["Klik op de knop om in te loggen bij AdSweet. De link werkt 15 minuten."],
+      "button": "Log in",
+      "small": "Vroeg je geen link aan? Dan mag je deze mail negeren."
+    },
+    "uitnodiging": {
+      "label": "Uitnodiging teamlid",
+      "subject": "{inviter} nodigt je uit voor {org}",
+      "title": "{inviter} nodigt je uit voor {org} op AdSweet.",
+      "roles": {
+        "eigenaar": "Je rol is Eigenaar: je kan alles, ook het abonnement.",
+        "beheerder": "Je rol is Beheerder: je kan alles behalve het abonnement.",
+        "lezer": "Je rol is Lezer: je kan alles bekijken, maar niets wijzigen."
+      },
+      "button": "Neem de uitnodiging aan"
+    },
+    "proefBijnaOm": {
+      "label": "Proefperiode bijna om",
+      "subject": "Nog {days} dagen gratis",
+      "title": "Nog {days} dagen gratis, {name}.",
+      "body": [
+        "Op {date} betaal je {price} + {vat} btw = {total} per maand voor {plan}{founding}.",
+        "Wil je van plan wisselen of stoppen? Dat kan tot die dag, met één klik."
+      ],
+      "founding": ", met je founding-korting",
+      "button": "Plan beheren"
+    },
+    "proefOmgezet": {
+      "label": "Proefperiode omgezet",
+      "subject": "Je abonnement loopt",
+      "title": "Je abonnement loopt.",
+      "body": ["Je proefperiode is voorbij. Je zit op {plan} voor {price} per maand excl. btw. Je factuur staat in de app."],
+      "button": "Bekijk je abonnement"
+    },
+    "factuur": {
+      "label": "Factuur",
+      "subject": "Je factuur van {date}",
+      "title": "Je factuur van {date}",
+      "body": ["{plan}{founding}: {price} + {vat} btw = {total}.", "Betaald met {method}."],
+      "founding": ", founding member",
+      "button": "Download de factuur",
+      "small": "Facturen voor Belgische bedrijven komen ook via Peppol."
+    },
+    "betalingMislukt": {
+      "label": "Betaling mislukt",
+      "subject": "Je betaling is mislukt",
+      "title": "Je betaling is mislukt.",
+      "body": [
+        "We konden {total} niet afschrijven. Pas je betaalmethode aan, dan proberen we het opnieuw.",
+        "Je advertenties bij Meta lopen gewoon door. Die betaal je rechtstreeks aan Meta."
+      ],
+      "button": "Pas je betaalmethode aan"
+    },
+    "weekrapport": {
+      "label": "Weekrapport",
+      "subject": "Je week in het kort",
+      "title": "{name}, je week in het kort.",
+      "leads": "Je gaf {spend} uit en kreeg {n} aanvragen, {cpl} per aanvraag.",
+      "leadsTarget": " Je doel is {target}.",
+      "leadsPrev": " Vorige week waren het {pn} aanvragen aan {pcpl}.",
+      "sales": "Je gaf {spend} uit en verkocht {n} keer voor {revenue}: ROAS {roas}.",
+      "salesTarget": " Je break-even is {target}.",
+      "salesPrev": " Vorige week was je ROAS {proas}.",
+      "none": "Je gaf {spend} uit.",
+      "best": "Beste advertentie: ‘{best}’.",
+      "worst": " Slechtste: ‘{worst}’, {worstSpend} zonder {noun}.",
+      "nouns": { "leads": "aanvraag", "sales": "verkoop" },
+      "tile": {
+        "spend": "Uitgegeven",
+        "leads": "Aanvragen",
+        "sales": "Verkopen",
+        "cpl": "Kost per aanvraag",
+        "roas": "ROAS"
+      },
+      "button": "Bekijk je weekrapport"
+    },
+    "actieNodig": {
+      "label": "Melding Actie nodig",
+      "subject": "Actie nodig: {subject}",
+      "title": "{name}, {title}",
+      "button": "Bekijk op Vandaag"
+    },
+    "kwartaalcall": {
+      "label": "Kwartaalcall bevestigd",
+      "subject": "Je kwartaalcall staat vast",
+      "title": "Je kwartaalcall staat vast.",
+      "body": ["Op {date} om {time} overloopt PJ 20 minuten je advertenties met je."],
+      "button": "Zet in je agenda"
+    },
+    "doorverwijzing": {
+      "label": "Doorverwijzing gelukt",
+      "subject": "Je krijgt een maand gratis",
+      "title": "Je krijgt een maand gratis.",
+      "body": ["{name} meldde zich aan via je link. Jullie krijgen allebei een maand gratis. Die van jou gaat in op {date}."],
+      "button": "Bekijk je doorverwijzingen"
+    },
+    "opgezegd": {
+      "label": "Opgezegd",
+      "subject": "Je abonnement is opgezegd",
+      "title": "Je abonnement is opgezegd.",
+      "body": [
+        "Je abonnement loopt tot {date}. Daarna kan je nog 30 dagen je gegevens downloaden.",
+        "Je advertenties bij Meta blijven bestaan in je eigen advertentieaccount."
+      ],
+      "button": "Download je gegevens"
+    }
+  }
+}

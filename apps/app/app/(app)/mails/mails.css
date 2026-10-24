@@ -1,0 +1,107 @@
+/* Mails (Mails.dc.html), alleen in de demo */
+.ml-mails {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1180px;
+}
+.ml-mails__note {
+  margin: 0;
+  color: var(--ink-muted);
+  max-width: 760px;
+}
+.ml-mails__grid {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.ml-mails__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+}
+.ml-mails__list button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+}
+.ml-mails__list button span {
+  font-size: 12px;
+  opacity: 0.7;
+}
+.ml-mails__list button[aria-current="true"] {
+  background: var(--ink);
+  color: var(--ground);
+}
+.ml-mails__preview {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.ml-mails__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+.ml-mails__meta b {
+  font-weight: 500;
+  color: var(--ink);
+}
+.ml-mails__frame {
+  width: 100%;
+  height: 760px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--ground);
+}
+.ml-mails__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.ml-mails__sent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ml-mails__sent h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+@media (max-width: 899px) {
+  .ml-mails__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ml-mails__list {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  .ml-mails__list button {
+    flex: none;
+    white-space: nowrap;
+  }
+}
+.ml-mails__sent th,
+.ml-mails__sent td {
+  text-align: left;
+}

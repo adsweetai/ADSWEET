@@ -1,0 +1,21 @@
+{
+  "name": "@adsweet/mails",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint src scripts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "send:test": "tsx scripts/send-test.ts",
+    "gen:supabase": "tsx scripts/supabase-templates.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.0",
+    "tsx": "^4.20.0",
+    "vitest": "^3.2.4"
+  }
+}
