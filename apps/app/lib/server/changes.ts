@@ -19,7 +19,7 @@ export type Undo =
 export async function writeLog(
   db: Db,
   ctx: AppContext,
-  row: { what: string; from_to?: string | null; kind: LogEntry["kind"]; campaign_id?: string | null; undo?: Undo | null },
+  row: { what: string; from_to?: string | null; kind: LogEntry["kind"]; campaign_id?: string | null; undo?: Undo | null; actor?: "user" | "assistant" },
 ) {
   return must(
     await db
@@ -28,7 +28,7 @@ export async function writeLog(
         organization_id: ctx.org.id,
         campaign_id: row.campaign_id ?? null,
         at: nowIso(),
-        actor: "user",
+        actor: row.actor ?? "user",
         actor_name: ctx.profile.first_name ?? ctx.user.email,
         user_id: ctx.user.id,
         kind: row.kind,

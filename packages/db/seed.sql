@@ -652,6 +652,24 @@ insert into public.credits_ledger (id, organization_id, delta, reason, created_a
   ('09b716e3-effc-5455-a0d1-b55b23fb4b0f', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 600, 'maand', '2026-12-01T00:00:00+01:00'),
   ('5b68aa72-6f09-5cd2-906c-afe8fbb19322', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', -210, 'ai_gebruik', '2026-12-06T18:00:00+01:00');
 
+-- user_tours
+insert into public.user_tours (user_id, tour, seen_at) values
+  ('501ce77b-52c3-527f-968e-c7d2bcb4244b', 'app', '2026-11-20T09:00:00+01:00'),
+  ('501ce77b-52c3-527f-968e-c7d2bcb4244b', 'campagne', '2026-11-20T09:00:00+01:00'),
+  ('501ce77b-52c3-527f-968e-c7d2bcb4244b', 'wizard', '2026-11-20T09:00:00+01:00'),
+  ('2a25612d-15c5-598c-9ebb-3811c5d90cea', 'app', '2026-11-20T09:00:00+01:00'),
+  ('2a25612d-15c5-598c-9ebb-3811c5d90cea', 'campagne', '2026-11-20T09:00:00+01:00'),
+  ('2a25612d-15c5-598c-9ebb-3811c5d90cea', 'wizard', '2026-11-20T09:00:00+01:00'),
+  ('3ad669f9-c749-5212-aef9-6b10ada48af0', 'app', '2026-11-20T09:00:00+01:00'),
+  ('3ad669f9-c749-5212-aef9-6b10ada48af0', 'campagne', '2026-11-20T09:00:00+01:00'),
+  ('3ad669f9-c749-5212-aef9-6b10ada48af0', 'wizard', '2026-11-20T09:00:00+01:00'),
+  ('19abad55-f5e7-5544-b396-0a4f77464d9a', 'app', '2026-11-20T09:00:00+01:00'),
+  ('19abad55-f5e7-5544-b396-0a4f77464d9a', 'campagne', '2026-11-20T09:00:00+01:00'),
+  ('19abad55-f5e7-5544-b396-0a4f77464d9a', 'wizard', '2026-11-20T09:00:00+01:00'),
+  ('29cecf81-bdcf-5875-9504-56031f857fc7', 'app', '2026-11-20T09:00:00+01:00'),
+  ('29cecf81-bdcf-5875-9504-56031f857fc7', 'campagne', '2026-11-20T09:00:00+01:00'),
+  ('29cecf81-bdcf-5875-9504-56031f857fc7', 'wizard', '2026-11-20T09:00:00+01:00');
+
 -- discount_codes
 insert into public.discount_codes (id, code, kind, percent_off, max_uses, uses) values
   ('0f1c7dbe-1352-567a-92dd-1403f593eeac', 'FOUNDING50', 'founding', 30, 50, 1);

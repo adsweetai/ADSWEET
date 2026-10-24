@@ -44,7 +44,7 @@ export default async function CampaignPage({
       <Link href="/campagnes" className="cp-back">
         {t("back")}
       </Link>
-      <header className="cp-head">
+      <header data-tour="c-head" className="cp-head">
         <div className="cp-head__text">
           <h2 className="cp-title">{vm.name}</h2>
           <span className="cp-meta">
@@ -73,11 +73,13 @@ export default async function CampaignPage({
         ) : null}
       </header>
 
-      <RouteTabs label={t("tabsLabel")} value={tab} items={TABS.map((tb) => ({ value: tb, label: t(`tabs.${tb}`), href: href(tb) }))} />
+      <div data-tour="c-tabs">
+        <RouteTabs label={t("tabsLabel")} value={tab} items={TABS.map((tb) => ({ value: tb, label: t(`tabs.${tb}`), href: href(tb) }))} />
+      </div>
 
       {tab === "overzicht" ? (
         <>
-          <div className="cp-tile">
+          <div data-tour="c-tile" className="cp-tile">
             {vm.tile.map((b, i) => (
               <span key={b.label} style={{ display: "contents" }}>
                 {i > 0 ? (
@@ -93,7 +95,7 @@ export default async function CampaignPage({
             ))}
           </div>
           <div className="cp-grid">
-            <section className="cp-section">
+            <section data-tour="c-tree" className="cp-section">
               <h3 className="cp-h3">{t("structure")}</h3>
               <div className="cp-box">
                 <span className="cp-tree__root">
@@ -107,7 +109,7 @@ export default async function CampaignPage({
                         <b>{s.name}</b>
                         {s.learning ? <span className="as-tag">{t("learning")}</span> : null}
                         {s.locked ? (
-                          <span className="cp-lock" title={t("locked")}>
+                          <span data-tour="c-lock" className="cp-lock" title={t("locked")}>
                             <Icon name="lock" size={15} />
                             {t("locked")}
                           </span>
@@ -122,12 +124,12 @@ export default async function CampaignPage({
                   ))}
                 </div>
               </div>
-              <div className="cp-section">
+              <div data-tour="c-funnel" className="cp-section">
                 <span className="cp-small">{t("funnel")}</span>
                 <FunnelBar counts={vm.funnel} format={(n) => t("funnelAds", { n })} missing={t("funnelMissing")} label={t("funnel")} />
               </div>
             </section>
-            <aside className="cp-section">
+            <aside data-tour="c-budget" className="cp-section">
               <h3 className="cp-h3">{t("budget")}</h3>
               <div className="cp-box cp-budget">
                 <span className="cp-small">{t("now")}</span>
