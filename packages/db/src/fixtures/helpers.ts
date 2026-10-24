@@ -7,6 +7,7 @@ export interface SeedUser {
   email: string;
   first_name: string;
   full_name: string | null;
+  last_seen_at?: string | null;
 }
 
 export type SeedTables = { [T in TableName]: SeedRow<T>[] };

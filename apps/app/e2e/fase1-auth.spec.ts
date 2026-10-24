@@ -33,7 +33,7 @@ test.describe("fase 1 · inloggen met e-mail", () => {
   test("Lisa logt in, ziet haar eigen organisatie en logt uit", async ({ page }) => {
     await login(page, "lisa");
     await expect(page.getByRole("heading", { name: "Goeiemorgen, Lisa" })).toBeVisible();
-    await expect(page.getByTestId("org-name")).toHaveText("Atelier Noor");
+    await expect(page.getByRole("button", { name: /Atelier Noor/ })).toBeVisible();
     await page.getByRole("button", { name: /^Lisa Pro/ }).click();
     await page.getByRole("button", { name: "Uitloggen" }).click();
     await expect(page).toHaveURL(/\/inloggen$/);
@@ -41,14 +41,13 @@ test.describe("fase 1 · inloggen met e-mail", () => {
 
   test("Tom ziet Peeters Dakwerken, niet Atelier Noor", async ({ page }) => {
     await login(page, "tom");
-    await expect(page.getByTestId("org-name")).toHaveText("Peeters Dakwerken");
+    await expect(page.getByRole("button", { name: /Peeters Dakwerken/ })).toBeVisible();
     await expect(page.getByText("Atelier Noor")).toHaveCount(0);
   });
 
   test("Eva ziet Bureau Kompas met 6 klanten", async ({ page }) => {
-    await login(page, "eva");
-    await expect(page.getByTestId("org-name")).toHaveText("Bureau Kompas");
-    await expect(page.getByRole("region", { name: "Je organisatie" }).getByText(/6 klanten/)).toBeVisible();
+    await login(page, "eva", "/klanten");
+    await expect(page.getByRole("button", { name: /Bureau Kompas.*Agency · 6 klanten/ })).toBeVisible();
   });
 
   test("een ongeldige link stuurt terug naar inloggen", async ({ page }) => {

@@ -109,6 +109,9 @@ export function seedToSql(seed: SeedData & SeedTables): string {
       `insert into auth.identities (provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at) values (${q(u.id)}, ${q(u.id)}, ${q(JSON.stringify({ sub: u.id, email: u.email, email_verified: true }))}, 'email', now(), now(), now());`,
     );
   }
+  for (const u of seed.users) {
+    if (u.last_seen_at) parts.push(`update public.profiles set last_seen_at = ${q(u.last_seen_at)} where user_id = ${q(u.id)};`);
+  }
   for (const table of ORDER) {
     const rows = (seed[table] ?? []) as Record<string, unknown>[];
     const sql = insertRows(table, rows);

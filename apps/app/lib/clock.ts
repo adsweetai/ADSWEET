@@ -24,3 +24,12 @@ export function addDays(iso: string, n: number): string {
 export function daysBetween(a: string, b: string): number {
   return Math.round((Date.parse(`${b}T12:00:00Z`) - Date.parse(`${a}T12:00:00Z`)) / 86_400_000);
 }
+
+/** Tijdstip voor nieuwe rijen. In de demomodus de demodatum met de huidige tijd in Brussel. */
+export function nowIso(): string {
+  if (!process.env.APP_TODAY && !isDemo) return new Date().toISOString();
+  const time = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Brussels", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false }).format(
+    new Date(),
+  );
+  return new Date(`${today()}T${time}+01:00`).toISOString();
+}

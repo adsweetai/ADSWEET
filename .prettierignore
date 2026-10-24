@@ -10,3 +10,4 @@ test-results
 packages/db/seed.sql
 *.md
 packages/ui/src/tokens.source.css
+**/*.css

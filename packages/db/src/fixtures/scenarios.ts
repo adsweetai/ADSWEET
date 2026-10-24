@@ -21,6 +21,14 @@ export const DEMO_USERS = {
 
 export type DemoUserKey = keyof typeof DEMO_USERS;
 
+// Vorige bezoek: Lisa kwam gisteren, zo toont Vandaag "Sweet! 3 nieuwe verkopen sinds gisteren."
+const LAST_SEEN: Partial<Record<DemoUserKey, string>> = {
+  lisa: "2026-12-06T09:00:00+01:00",
+  tom: "2026-12-07T05:30:00+01:00",
+  bram: "2026-12-07T05:30:00+01:00",
+  eva: "2026-12-07T05:30:00+01:00",
+};
+
 export const userId = (key: DemoUserKey) => seedId(`user:${key}`);
 
 type Seed = SeedData & SeedTables;
@@ -55,7 +63,7 @@ interface ScenarioOptions {
 function addUser(seed: Seed, key: DemoUserKey) {
   if (seed.users.some((u) => u.id === userId(key))) return;
   const u = DEMO_USERS[key];
-  const user: SeedUser = { id: userId(key), email: u.email, first_name: u.first_name, full_name: null };
+  const user: SeedUser = { id: userId(key), email: u.email, first_name: u.first_name, full_name: null, last_seen_at: LAST_SEEN[key] ?? null };
   seed.users.push(user);
 }
 
@@ -220,7 +228,7 @@ export function buildLisa(seed: Seed, opts: ScenarioOptions) {
     color: "roos",
     onboarding_step: 11,
     onboarding_done: true,
-    tuning_step: 8,
+    tuning_step: 1,
     naming: {
       campaign: "{zaak} · {soort} · {doel} · {maand}",
       ad_set: "AS{n} · {datum} · {reden}",
@@ -656,7 +664,7 @@ export function buildTom(seed: Seed, opts: ScenarioOptions) {
     color: "staal",
     onboarding_step: 11,
     onboarding_done: true,
-    tuning_step: 8,
+    tuning_step: 1,
     created_at: at("2026-11-15", "08:30"),
     ...orgBase(opts),
   });
@@ -1061,6 +1069,7 @@ export const BRAM_ACCOUNTS = [
     sales: 2,
     revenue: 90,
     status: "act" as const,
+    note: "de nieuwe productlijn",
   },
 ];
 
@@ -1139,6 +1148,7 @@ function addBramAccount(seed: Seed, k: string, orgId: string, acc: BramAccount, 
         roas: round2(roas),
         break_even: round2(be),
         margin: acc.margin,
+        note: acc.note ?? null,
       },
     });
   if (acc.status === "warn")
@@ -1185,7 +1195,7 @@ export function buildBram(seed: Seed, opts: ScenarioOptions) {
     color: "roos",
     onboarding_step: 11,
     onboarding_done: true,
-    tuning_step: 8,
+    tuning_step: 1,
     created_at: at("2026-10-01", "09:00"),
   });
   addOwner(seed, opts, orgId);
@@ -1239,7 +1249,7 @@ function buildBramClient(seed: Seed, opts: ScenarioOptions, acc: BramAccount) {
     color: "roos",
     onboarding_step: 11,
     onboarding_done: true,
-    tuning_step: 8,
+    tuning_step: 1,
     created_at: at("2026-10-01", "09:00"),
     ...orgBase(opts),
   });
@@ -1276,7 +1286,7 @@ export function buildEva(seed: Seed) {
     color: "lavendel",
     onboarding_step: 11,
     onboarding_done: true,
-    tuning_step: 8,
+    tuning_step: 1,
     created_at: at("2026-09-01", "09:00"),
   });
   addOwner(seed, { key: k, owner: "eva" }, orgId);

@@ -30,7 +30,7 @@ export interface AppContext {
   /** Werk je nu in een klant van je bureau? */
   inClient: boolean;
   adAccounts: AdAccount[];
-  /** Het gekozen advertentieaccount; null = alle accounts (vanaf Scale). */
+  /** Het gekozen advertentieaccount (standaard het eerste). */
   account: AdAccount | null;
   demo: DemoOverrides;
 }
@@ -62,8 +62,7 @@ export const getContext = cache(async (): Promise<AppContext> => {
 
   const adAccounts = must(await db.from("ad_accounts").select().eq("organization_id", org.id).order("sort"));
   const wantedAcc = store.get(ACCOUNT_COOKIE)?.value;
-  const multi = hasPlan(plan, "scale") && adAccounts.length > 1;
-  const account = adAccounts.find((a) => a.id === wantedAcc) ?? (multi && wantedAcc !== "eerste" ? null : (adAccounts[0] ?? null));
+  const account = adAccounts.find((a) => a.id === wantedAcc) ?? adAccounts[0] ?? null;
 
   return { user, profile, org, plan, role, canEdit: role !== "lezer", orgs, memberships, agency, clients, inClient, adAccounts, account, demo };
 });
