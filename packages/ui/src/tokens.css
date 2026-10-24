@@ -1,0 +1,26 @@
+/* AdSweet tokens. Licht standaard, nacht via [data-theme="dark"]. */
+@font-face { font-family: "Host Grotesk"; font-weight: 300; font-display: swap; src: url("/fonts/host-grotesk-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "Host Grotesk"; font-weight: 400; font-display: swap; src: url("/fonts/host-grotesk-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Host Grotesk"; font-weight: 500; font-display: swap; src: url("/fonts/host-grotesk-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Host Grotesk"; font-weight: 600; font-display: swap; src: url("/fonts/host-grotesk-latin-600-normal.woff2") format("woff2"); }
+:root, [data-theme="light"] {
+  --ground:#EAE8E3; --surface:#F5F4F0; --surface-sunken:#E2E0DA; --ink:#151514; --ink-muted:#5F5C56; --ink-accent:#7A776F;
+  --line:#15151424; --line-strong:#7A776F; --robijn:#C7254E;
+  --ok:#2E6B45; --ok-tint:#DCEADF; --warn:#8A5410; --warn-tint:#F2E2C4; --act:#AE3A1F; --act-tint:#F5DCD3;
+  --tarwe:#E8D7AE; --staal:#B8C7D9; --lavendel:#CEC4EA; --salie:#BFD9C6; --klei:#E9C2AE; --roos:#EEC1D0;
+  --snoep-roos:#F28AB2; --snoep-citroen:#F5CF5C; --snoep-munt:#7FD3B0; --snoep-bes:#A99BF2; --snoep-hemel:#8FC2F2; --snoep-perzik:#F7A97A;
+  --shadow-float:0 12px 32px rgba(21,21,20,.12), 0 2px 6px rgba(21,21,20,.06);
+  --ease:cubic-bezier(.2,.7,.2,1); --font:"Host Grotesk","Helvetica Neue",Arial,sans-serif; color-scheme:light;
+}
+[data-theme="dark"] {
+  --ground:#111110; --surface:#1A1A19; --surface-sunken:#0C0C0B; --ink:#F1EFEA; --ink-muted:#A8A49B; --ink-accent:#9B978E;
+  --line:#F1EFEA24; --line-strong:#6E6B65; --robijn:#E0577A;
+  --ok:#86C79A; --ok-tint:#1B2A20; --warn:#E2B062; --warn-tint:#2D2414; --act:#F0937A; --act-tint:#341C16;
+  --shadow-float:0 12px 32px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.3); color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.5;letter-spacing:-.01em;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+a{color:var(--ink);text-decoration:none} a:hover{color:var(--ink-muted)}
+:focus-visible{outline:2px solid var(--robijn);outline-offset:4px}
+::highlight(as-term){text-decoration-line:underline;text-decoration-style:dotted;text-underline-offset:3px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}

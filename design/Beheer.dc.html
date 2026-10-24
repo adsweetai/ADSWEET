@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AdSweet · Beheer</title>
+<style>
+@font-face { font-family: "Host Grotesk"; font-weight: 400; font-display: swap; src: url("fonts/host-grotesk-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Host Grotesk"; font-weight: 500; font-display: swap; src: url("fonts/host-grotesk-latin-500-normal.woff2") format("woff2"); }
+:root, [data-theme="light"] { --ground: #EAE8E3; --surface: #F5F4F0; --surface-sunken: #E2E0DA; --ink: #151514; --ink-muted: #5F5C56; --line: #15151424; --line-strong: #7A776F; --robijn: #C7254E; --tarwe: #E8D7AE; --staal: #B8C7D9; --lavendel: #CEC4EA; --salie: #BFD9C6; --klei: #E9C2AE; --roos: #EEC1D0; --snoep-roos: #F28AB2; --snoep-citroen: #F5CF5C; --snoep-munt: #7FD3B0; --snoep-bes: #A99BF2; --snoep-hemel: #8FC2F2; --snoep-perzik: #F7A97A; --ok: #2E6B45; --ok-tint: #DCEADF; --warn: #8A5410; --warn-tint: #F2E2C4; --act: #AE3A1F; --act-tint: #F5DCD3; --shadow-float: 0 12px 32px rgba(21,21,20,.12); --font: "Host Grotesk", "Helvetica Neue", Arial, sans-serif; --show-light: block; --show-dark: none; color-scheme: light; }
+[data-theme="dark"] { --ground: #111110; --surface: #1A1A19; --surface-sunken: #0C0C0B; --ink: #F1EFEA; --ink-muted: #A8A49B; --line: #F1EFEA24; --line-strong: #6E6B65; --robijn: #E0577A; --ok: #86C79A; --ok-tint: #1B2A20; --warn: #E2B062; --warn-tint: #2D2414; --act: #F0937A; --act-tint: #341C16; --shadow-float: 0 12px 32px rgba(0,0,0,.45); --show-light: none; --show-dark: block; color-scheme: dark; }
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.5; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: var(--ink); text-decoration: none; }
+a:hover { color: var(--ink-muted); }
+:focus-visible { outline: 2px solid var(--robijn); outline-offset: 4px; }
+</style>
+</helmet>
+<div data-theme="{{ theme }}" data-screen-label="Beheer · {{ cur.t }}" style="min-height:100vh; background:var(--ground); color:var(--ink); display:grid; grid-template-columns:{{ cols }};">
+  <aside style="padding:22px 14px; background:var(--surface); border-right:1px solid var(--line); display:flex; flex-direction:{{ dir }}; gap:2px; overflow-x:auto; position:{{ pos }}; top:0; height:{{ asideH }};">
+    <span style="flex:none; display:flex; align-items:center; gap:10px; padding:0 10px 18px;"><img src="assets/adsweet-logo.svg" alt="adsweet" style="display:var(--show-light); height:19px; width:auto;"><img src="assets/adsweet-logo-licht.svg" alt="adsweet" style="display:var(--show-dark); height:19px; width:auto;"><span style="height:22px; padding:0 9px; display:inline-flex; align-items:center; border:1px solid var(--line-strong); border-radius:999px; font-size:12px; font-weight:500;">Beheer</span></span>
+    <sc-for list="{{ nav }}" as="n" hint-placeholder-count="11"><button type="button" aria-current="{{ n.cur }}" onClick="{{ n.pick }}" style="flex:none; display:flex; align-items:center; height:38px; padding:0 12px; border:0; border-radius:10px; background:{{ n.bg }}; color:{{ n.fg }}; font-size:14.5px; font-weight:500; text-align:left; cursor:pointer; white-space:nowrap;">{{ n.t }}</button></sc-for>
+    <button type="button" onClick="{{ toggleTheme }}" style="flex:none; margin-top:12px; height:32px; padding:0 12px; border:1px dashed var(--line-strong); border-radius:999px; background:transparent; color:var(--ink-muted); font-size:12.5px; font-weight:500; cursor:pointer;">Demo: {{ themeLabel }}</button>
+  </aside>
+  <main style="min-width:0; padding:clamp(20px, 3vw, 40px) clamp(16px, 3vw, 40px) 120px; display:flex; flex-direction:column; gap:22px; max-width:1240px;">
+    <header style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:12px;">
+      <div style="display:flex; flex-direction:column; gap:6px;"><h1 style="margin:0; font-size:30px; font-weight:500; letter-spacing:-.03em;">{{ cur.t }}</h1><span style="color:var(--ink-muted); max-width:640px;">{{ cur.intro }}</span></div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px;"><sc-for list="{{ cur.actions }}" as="a" hint-placeholder-count="1"><button type="button" onClick="{{ a.go }}" style="height:40px; padding:0 18px; border:1px solid {{ a.bd }}; border-radius:999px; background:{{ a.bg }}; color:{{ a.fg }}; font-size:14px; font-weight:500; cursor:pointer;">{{ a.t }}</button></sc-for></div>
+    </header>
+    <sc-if value="{{ cur.hasChips }}" hint-placeholder-val="{{ false }}"><div style="display:flex; flex-wrap:wrap; gap:6px;"><sc-for list="{{ cur.chips }}" as="c" hint-placeholder-count="3"><button type="button" aria-pressed="{{ c.aria }}" onClick="{{ c.pick }}" style="height:32px; padding:0 12px; border-radius:999px; border:1px solid {{ c.bd }}; background:{{ c.bg }}; color:{{ c.fg }}; font-size:13px; font-weight:500; cursor:pointer;">{{ c.t }}</button></sc-for></div></sc-if>
+    <sc-for list="{{ cur.blocks }}" as="b" hint-placeholder-count="2">
+      <section style="display:flex; flex-direction:column; gap:10px;">
+        <sc-if value="{{ b.hasTitle }}" hint-placeholder-val="{{ true }}"><h2 style="margin:0; font-size:18px; font-weight:500;">{{ b.title }}</h2></sc-if>
+        <sc-if value="{{ b.isTable }}" hint-placeholder-val="{{ true }}">
+          <div style="overflow-x:auto; border:1px solid var(--line); border-radius:14px; background:var(--surface);">
+            <table style="width:100%; min-width:{{ b.minW }}; border-collapse:collapse; font-size:14px;">
+              <thead><tr style="background:var(--surface-sunken); color:var(--ink-muted); font-size:12.5px; text-align:left;"><sc-for list="{{ b.cols }}" as="c" hint-placeholder-count="4"><th style="font-weight:500; padding:10px 14px;">{{ c }}</th></sc-for></tr></thead>
+              <tbody><sc-for list="{{ b.rows }}" as="r" hint-placeholder-count="4"><tr style="border-top:1px solid var(--line);"><sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="4"><td style="padding:11px 14px; color:{{ c.fg }}; font-weight:{{ c.fw }};"><sc-if value="{{ c.isInput }}" hint-placeholder-val="{{ false }}"><input type="text" value="{{ c.v }}" aria-label="{{ c.label }}" style="width:100%; min-width:140px; height:34px; padding:0 10px; border-radius:8px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink);"></sc-if><sc-if value="{{ c.isBadge }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex; align-items:center; height:22px; padding:0 9px; border-radius:999px; background:{{ c.bbg }}; color:{{ c.bfg }}; font-size:12px; font-weight:500; white-space:nowrap;">{{ c.v }}</span></sc-if><sc-if value="{{ c.isText }}" hint-placeholder-val="{{ true }}">{{ c.v }}</sc-if></td></sc-for></tr></sc-for></tbody>
+            </table>
+          </div>
+        </sc-if>
+        <sc-if value="{{ b.isNote }}" hint-placeholder-val="{{ false }}"><p style="margin:0; padding:14px 16px; border:1px solid var(--line); border-radius:12px; background:var(--surface); font-size:14px;">{{ b.text }}</p></sc-if>
+      </section>
+    </sc-for>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const S = (t, k) => ({ v: t, isBadge: true, bbg: `var(--${k}-tint)`, bfg: `var(--${k})` });
+const I = (v, label) => ({ v, isInput: true, label: label || 'Waarde' });
+const SECTIONS = {
+  playbook: ['Playbook', 'Alle regels als gegevens. Elke waarde is bewerkbaar zonder code. Je bewerkt het concept van versie 1.3.', [
+    ['Startstructuur · Meta', ['Regel', 'Waarde', 'Toelichting'], [['Campagnes bij de start', I('1'), 'met het doel dat bij de zaak past'], ['Ad sets', I('1'), 'budget op campagneniveau'], ['Advertenties', I('5'), "standaard 3 foto's en 2 video's"]]],
+    ['Budgetten', ['Regel', 'Waarde', 'Toelichting'], [['Minimum per dag', I('€10'), ''], ['Minimum per dag, webshop', I('€30'), '']]],
+    ['Winnaars, verliezers en schalen', ['Regel', 'Waarde', 'Toelichting'], [['Verliezer bij', I('3 × doel zonder resultaat'), 'nooit automatisch afzetten'], ['Schaalstap', I('[schaalstappen PJ]'), 'prototype: +20%'], ['Nieuwe ad set elke', I('[x weken, PJ]'), 'prototype: 2 weken'], ['Funnelverdeling', I('[standaardverdeling PJ]'), 'prototype: 2 top, 2 middle, 1 bottom'], ['Plaatsingen', I('[plaatsingen PJ]'), 'prototype: automatisch']]],
+    ['Waarschuwingen', ['Regel', 'Tekst'], [['Budget onder het minimum', I('Met minder dan €10 per dag (€30 voor een webshop) krijgt Meta te weinig resultaten binnen …')], ['Budget per ad set', I('Met budget op campagneniveau stuurt Meta het geld zelf …')], ["Extra's van Meta aan", I('Dan past Meta je advertentie zelf aan …')], ['Minder dan 5 advertenties', I('Met minder advertenties heeft Meta minder om uit te kiezen …')]]],
+    ['Google Ads', null, null, '[Google-playbook PJ] · Nog leeg. Dezelfde secties als Meta zodra het playbook klaar is.'],
+  ]],
+  versies: ['Versies', 'Concept en gepubliceerd, met de geschiedenis. Vergelijk twee versies of zet een oude terug.', [
+    [null, ['Versie', 'Status', 'Datum', 'Notitie'], [['1.3', S('Concept', 'warn'), '[datum]', 'Schaalstap en funnelverdeling van PJ'], ['1.2', S('Gepubliceerd', 'ok'), '[datum]', 'Webshop-minimum naar €30 per dag'], ['1.1', 'Vervangen', '[datum]', 'Teksten van de waarschuwingen'], ['1.0', 'Vervangen', '[datum]', 'Eerste versie']]],
+    [null, null, null, 'Vergelijk 1.2 met 1.3: 2 waarden gewijzigd, 0 regels toegevoegd.'],
+  ], [['Publiceer versie 1.3', true], ['Vergelijk', false], ['Zet terug', false]]],
+  strategieen: ['Strategieën', 'De keuzekaarten van de campagnewizard, per sector en doel.', [[null, ['Strategie', 'Sectoren', 'Doelen', 'Status'], [['Vaste campagne', 'alle', 'verkopen, aanvragen', S('Actief', 'ok')], ['Solden', 'webshop, lokale zaak', 'verkopen', S('Actief', 'ok')], ['Black Friday', 'webshop', 'verkopen', S('Actief', 'ok')], ['Feestdagen', 'webshop, lokale zaak', 'verkopen', S('Actief', 'ok')], ['Evenement of opening', 'lokale zaak, zelfstandige', 'evenement, bereik', S('Actief', 'ok')], ['Nieuw product', 'webshop', 'verkopen', S('Actief', 'ok')], ['Catalogus', 'webshop', 'verkopen', S('Later', 'warn')]]]]],
+  teksten: ['Teksten en vertalingen', 'Alle sleutels in NL, FR en EN.', [[null, ['Sleutel', 'NL', 'FR', 'EN'], 'TEXTS']], null, true],
+  academy: ['Academy', 'Lessen schrijven, ordenen en publiceren.', [[null, ['Traject', 'Les', 'Status', 'Leestijd'], [['01 De basis', 'Hoe Meta-advertenties werken', S('Concept, PJ keurt goed', 'warn'), '4 min'], ['01 De basis', 'De leerfase', S('Concept, PJ keurt goed', 'warn'), '4 min'], ['02 Het playbook', '1 campagne, 1 ad set, 5 advertenties', S('Concept, PJ keurt goed', 'warn'), '3 min'], ['03 Content die werkt', 'Video maken met je gsm', S('Te schrijven', 'act'), '–']]]], [['Nieuwe les', true]]],
+  klanten: ['Klanten', 'Founding members: [x] van 50.', [[null, ['Bedrijf', 'Plan', 'Periode', 'Proefdag', 'Founding', 'Betaalt per maand', 'Laatste bezoek', 'Koppelingen'], [['Atelier Noor', 'Pro', 'maandelijks', '22 van 30', 'ja', '€136,50 vanaf 16 december', 'vandaag', S('In orde', 'ok')], ['Peeters Dakwerken', 'Starter', 'maandelijks', '23 van 30', 'nee', '€99 vanaf 15 december', 'vandaag', S('Betaalprobleem', 'act')], ['Salon Mila', 'Pro', 'maandelijks', '1 van 30', 'nee', '€195 vanaf 6 januari', 'vandaag', S('Pixel meet niet', 'warn')], ['Bram · 3 webshops', 'Scale', 'maandelijks', '–', 'nee', '€299', 'vandaag', S('In orde', 'ok')]]], [null, null, null, 'Detail per klant: meldingen, logboek, AI-kosten en de status van de koppelingen. Klik op een bedrijf in de echte omgeving.']], null, false, 1100],
+  aikosten: ['AI-kosten', 'Gebruik van credits per account, de kost in euro per model en de marge per plan.', [[null, ['Account', 'Credits gebruikt', 'Kost', 'Model'], [['Atelier Noor', '32 van 50', '[kost in euro]', '[model]'], ['Salon Mila', '0 van 50', '€0', '–'], ['Bram · 3 webshops', '[credits]', '[kost in euro]', '[model]']]], ['Marge per plan', ['Plan', 'Prijs', 'Credits', 'Kost AI', 'Marge'], [['Pro', '€195', '300', '[kost]', '[marge]'], ['Scale', '€299', '600', '[kost]', '[marge]'], ['Agency', 'vanaf €499', '1.500', '[kost]', '[marge]']]]]],
+  codes: ['Kortingscodes', 'Founding members, doorverwijzingen en partners.', [[null, ['Code', 'Soort', 'Korting', 'Gebruikt'], [['[founding-code]', 'Founding member', '30%, zolang klant', '[x] van 50'], ['[doorverwijscode]', 'Doorverwijzing', '1 maand gratis, voor beiden', '[aantal]'], ['[partnercode]', 'Partner', '30% commissie, 12 maanden', '[aantal]']]]], [['Nieuwe code', true]]],
+  partners: ['Partners', 'Aanmeldingen, klanten en commissies.', [[null, ['Partner', 'Status', 'Klanten', 'Commissie per maand'], [['[webbureau]', S('Aanvraag', 'warn'), '0', '€0'], ['[freelancer]', S('Actief', 'ok'), '[aantal]', '[bedrag]']]], [null, null, null, 'Voorbeeld: een klant op Pro betaalt €195 per maand, de partner krijgt €58,50 per maand, €702 over 12 maanden.']]],
+  calls: ['Calls', 'Agenda van onboardinggesprekken en kwartaalcalls.', [[null, ['Wanneer', 'Klant', 'Soort', 'Met'], [['[datum, uur]', 'Atelier Noor', 'Onboardinggesprek, eerste 50', 'PJ'], ['[datum, uur]', 'Salon Mila', 'Onboardinggesprek, eerste 50', 'PJ'], ['[datum, uur]', 'Bram · 3 webshops', 'Kwartaalcall', 'PJ']]]]],
+  systeem: ['Systeemstatus', 'Koppelingen, API-limieten en geplande taken.', [[null, ['Onderdeel', 'Status', 'Laatste run', 'Toelichting'], [['Koppeling Meta', S('In orde', 'ok'), '–', 'API-limiet: [gebruik]'], ['Koppeling Google', S('In orde', 'ok'), '–', 'API-limiet: [gebruik]'], ['Dagelijkse audit', S('In orde', 'ok'), 'maandag 7 december 06:00', 'alle accounts'], ['Autopilot', S('In orde', 'ok'), 'maandag 7 december 06:05', 'binnen de grenzen van elke klant'], ['Meldingen', S('In orde', 'ok'), 'maandag 7 december 06:10', 'app en mail'], ['Weekrapporten', S('In orde', 'ok'), 'maandag 7 december 07:00', 'per mail']]]]],
+};
+const ORDER = ['playbook', 'versies', 'strategieen', 'teksten', 'academy', 'klanten', 'aikosten', 'codes', 'partners', 'calls', 'systeem'];
+const TEXTS = [['home.hero.title', 'Meer klanten uit Facebook en Instagram.', 'Plus de clients grâce à Facebook et Instagram.', 'More customers from Facebook and Instagram.'], ['home.hero.accent', 'Hit the sweet spot.', 'Hit the sweet spot.', 'Hit the sweet spot.'], ['vandaag.greeting', 'Goeiemorgen, {naam}', 'Bonjour, {naam}', 'Good morning, {naam}'], ['vandaag.next_audit', 'De volgende audit is morgen om 06:00.', 'Le prochain audit est demain à 06:00.', 'The next audit is tomorrow at 06:00.'], ['studio.title', 'Studio', '', ''], ['autopilot.mode.ask', 'Vraag het mij eerst', '', 'Ask me first'], ['warning.title', 'Pas op, dit raden we niet aan.', 'Attention, nous ne le conseillons pas.', "Careful, we don't recommend this."]];
+class Component extends DCLogic {
+  state = { sec: 'playbook', theme: 'light', w: window.innerWidth, missing: false };
+  componentDidMount() { this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); }
+  renderVals() {
+    const s = this.state, set = (o) => this.setState(o), wide = s.w >= 960;
+    const [t, intro, blocks, actions, chips, minW] = SECTIONS[s.sec];
+    const cell = (c) => (typeof c === 'object' ? Object.assign({ isText: false, isInput: false, isBadge: false, fg: 'var(--ink)', fw: 400 }, c) : { v: c, isText: true, isInput: false, isBadge: false, fg: c === '' || /^\[/.test(c) ? 'var(--ink-muted)' : 'var(--ink)', fw: 400 });
+    const texts = TEXTS.filter((r) => !s.missing || r.some((x) => x === '')).map((r) => r.map((x, i) => (i && x === '' ? S('Ontbreekt', 'act') : x)));
+    return {
+      theme: s.theme, themeLabel: s.theme === 'dark' ? 'licht' : 'nacht', toggleTheme: () => set({ theme: s.theme === 'dark' ? 'light' : 'dark' }),
+      cols: wide ? '240px minmax(0, 1fr)' : 'minmax(0, 1fr)', dir: wide ? 'column' : 'row', pos: wide ? 'sticky' : 'static', asideH: wide ? '100vh' : 'auto',
+      nav: ORDER.map((k) => ({ t: SECTIONS[k][0], cur: k === s.sec ? 'page' : 'false', bg: k === s.sec ? 'var(--ink)' : 'transparent', fg: k === s.sec ? 'var(--ground)' : 'var(--ink)', pick: () => set({ sec: k }) })),
+      cur: {
+        t, intro, hasChips: !!chips, chips: [['Alle sleutels', false], ['Alleen ontbrekende vertalingen', true]].map(([tt, v]) => ({ t: tt, aria: String(s.missing === v), bg: s.missing === v ? 'var(--ink)' : 'transparent', fg: s.missing === v ? 'var(--ground)' : 'var(--ink)', bd: s.missing === v ? 'var(--ink)' : 'var(--line-strong)', pick: () => set({ missing: v }) })),
+        actions: (actions || [['Bewaar het concept', true]]).map(([tt, primary]) => ({ t: tt, bg: primary ? 'var(--ink)' : 'transparent', fg: primary ? 'var(--ground)' : 'var(--ink)', bd: primary ? 'var(--ink)' : 'var(--line-strong)', go: () => {} })),
+        blocks: blocks.map(([title, cols, rows, note]) => ({ title: title || '', hasTitle: !!title, isTable: !!cols, isNote: !!note, text: note || '', minW: (minW || 640) + 'px', cols: cols || [], rows: (rows === 'TEXTS' ? texts : rows || []).map((r) => ({ cells: r.map(cell) })) })),
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

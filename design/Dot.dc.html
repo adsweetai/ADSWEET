@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AdSweet · Dot, je assistent</title>
+<style>
+@font-face { font-family: "Host Grotesk"; font-weight: 300; font-display: swap; src: url("fonts/host-grotesk-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "Host Grotesk"; font-weight: 400; font-display: swap; src: url("fonts/host-grotesk-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Host Grotesk"; font-weight: 500; font-display: swap; src: url("fonts/host-grotesk-latin-500-normal.woff2") format("woff2"); }
+:root { --ground: #EAE8E3; --surface: #F5F4F0; --ink: #151514; --ink-muted: #5F5C56; --ink-accent: #7A776F; --line: #15151424; --line-strong: #7A776F; --robijn: #C7254E; --lavendel: #CEC4EA; --salie: #BFD9C6; --tarwe: #E8D7AE; --roos: #EEC1D0; --staal: #B8C7D9; --snoep-roos: #F28AB2; --snoep-citroen: #F5CF5C; --snoep-munt: #7FD3B0; --font: "Host Grotesk", "Helvetica Neue", Arial, sans-serif; }
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font); font-size: 16px; line-height: 1.5; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; letter-spacing: inherit; }
+a { color: var(--ink); text-decoration: none; }
+a:hover { color: var(--ink-muted); }
+:focus-visible { outline: 2px solid var(--robijn); outline-offset: 4px; }
+</style>
+<script src="dot.js"></script>
+</helmet>
+<div data-screen-label="Dot" style="max-width:1280px; margin:0 auto; padding:36px clamp(20px, 3.4vw, 48px) 120px; display:flex; flex-direction:column; gap:clamp(56px, 7vw, 96px);">
+  <img src="assets/adsweet-logo.svg" alt="adsweet" style="height:19px; width:auto; align-self:flex-start;">
+
+  <section aria-labelledby="h-intro" style="display:flex; flex-direction:column; gap:24px;">
+    <div data-theme="{{ introTheme }}" style="position:relative; overflow:hidden; border-radius:40px; background:{{ introBg }}; padding:clamp(28px, 5vw, 64px) clamp(20px, 4vw, 56px); display:grid; place-items:center; min-height:clamp(300px, 38vw, 460px);">
+      <x-import component-from-global-scope="dot-intro" from="./dot.js" height="{{ introH }}" theme="{{ introTheme }}" play="{{ playKey }}" text="{{ introText }}" hint-size="100%,300px"></x-import>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 20px;">
+      <span style="display:flex; flex-direction:column; gap:2px;"><b id="h-intro" style="font-size:18px; font-weight:500;">De dot uit het logo komt tot leven</b><span style="font-size:14px; color:var(--ink-muted);">Voor het laadscherm, de eerste keer in de app en de start van de rondleiding. 7 seconden.</span></span>
+      <div style="display:flex; flex-wrap:wrap; gap:8px;">
+        <button type="button" onClick="{{ replay }}" style="height:40px; padding:0 18px; border:0; border-radius:999px; background:var(--ink); color:var(--ground); font-size:14px; font-weight:500; cursor:pointer; white-space:nowrap;">Speel opnieuw af</button>
+        <button type="button" onClick="{{ toggleIntroTheme }}" style="height:40px; padding:0 18px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer; white-space:nowrap;">{{ introThemeLabel }}</button>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap:32px clamp(32px, 5vw, 72px); align-items:center;">
+    <div style="position:relative; width:100%; height:clamp(300px, 36vw, 420px); border-radius:40px; background:var(--lavendel); display:grid; place-items:center; overflow:hidden;">
+      <span aria-hidden="true" style="position:absolute; left:12%; top:16%; width:14px; height:14px; border-radius:50%; background:var(--snoep-citroen);"></span>
+      <span aria-hidden="true" style="position:absolute; right:14%; top:22%; width:11px; height:11px; border-radius:3px; transform:rotate(25deg); background:var(--snoep-munt);"></span>
+      <span aria-hidden="true" style="position:absolute; right:20%; bottom:16%; width:12px; height:12px; border-radius:50%; background:var(--snoep-roos);"></span>
+      <dot-karakter size="230" mood="{{ hero }}" label="Dot, de assistent van AdSweet"></dot-karakter>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:20px;">
+      <h1 style="margin:0; font-size:clamp(48px, 7vw, 104px); font-weight:500; line-height:.92; letter-spacing:-.045em;">Dit is Dot.<span style="display:block; font-weight:300; color:var(--ink-accent); letter-spacing:-.035em;">Je <span style="color:var(--robijn);">sweet</span> spot.</span></h1>
+      <p style="margin:0; max-width:520px; font-size:18px; color:var(--ink-muted);">Dot is het robijnrode puntje uit het logo, tot leven gekomen. Dot kent je zaak, je cijfers en het playbook, leidt je rond in de app en zegt wat je best doet. Klikken doe jij.</p>
+      <div role="group" aria-label="Stemming" style="display:flex; flex-wrap:wrap; gap:6px;"><sc-for list="{{ moods }}" as="m" hint-placeholder-count="6"><button type="button" aria-pressed="{{ m.aria }}" onClick="{{ m.pick }}" style="height:36px; padding:0 14px; border-radius:999px; border:1px solid {{ m.bd }}; background:{{ m.bg }}; color:{{ m.fg }}; font-size:14px; font-weight:500; cursor:pointer; white-space:nowrap; flex:none;">{{ m.t }}</button></sc-for></div>
+    </div>
+  </section>
+
+  <section style="display:flex; flex-direction:column; gap:20px;">
+    <h2 style="margin:0; font-size:clamp(30px, 3.6vw, 52px); font-weight:500; letter-spacing:-.035em; line-height:1;">Waarom Dot</h2>
+    <ul style="list-style:none; margin:0; padding:0; border-top:1px solid var(--line);">
+      <sc-for list="{{ why }}" as="w" hint-placeholder-count="3"><li style="display:grid; grid-template-columns:44px minmax(0, 1fr); gap:16px; align-items:center; padding:18px 0; border-bottom:1px solid var(--line);"><span style="width:40px; height:40px; border-radius:50%; background:{{ w.c }}; display:grid; place-items:center; font-weight:500;">{{ w.n }}</span><span style="font-size:clamp(18px, 1.6vw, 22px); font-weight:500; letter-spacing:-.015em;">{{ w.t }}</span></li></sc-for>
+    </ul>
+  </section>
+
+  <section style="display:flex; flex-direction:column; gap:20px;">
+    <h2 style="margin:0; font-size:clamp(30px, 3.6vw, 52px); font-weight:500; letter-spacing:-.035em; line-height:1;">Zes stemmingen</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap:12px;">
+      <sc-for list="{{ cards }}" as="c" hint-placeholder-count="6">
+        <article style="display:flex; flex-direction:column; gap:12px; padding:20px; border-radius:24px; background:{{ c.bg }};">
+          <div style="height:120px; display:grid; place-items:center;"><dot-karakter size="104" mood="{{ c.id }}"></dot-karakter></div>
+          <b style="font-size:18px; font-weight:500;">{{ c.t }}</b>
+          <span style="font-size:14px;">{{ c.when }}</span>
+          <sc-if value="{{ c.hasSay }}" hint-placeholder-val="{{ true }}"><span style="align-self:flex-start; padding:10px 14px; background:#F5F4F0; border-radius:16px 16px 16px 4px; font-size:14px;">{{ c.say }}</span></sc-if>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap:32px 64px;">
+    <div style="display:flex; flex-direction:column; gap:14px;">
+      <h2 style="margin:0; font-size:clamp(28px, 3vw, 44px); font-weight:500; letter-spacing:-.035em;">Hoe Dot praat</h2>
+      <ul style="list-style:none; margin:0; padding:0; border-top:1px solid var(--line);"><sc-for list="{{ voice }}" as="v" hint-placeholder-count="5"><li style="padding:13px 0; border-bottom:1px solid var(--line);">{{ v }}</li></sc-for></ul>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:14px;">
+      <h2 style="margin:0; font-size:clamp(28px, 3vw, 44px); font-weight:500; letter-spacing:-.035em;">Waar je Dot ziet</h2>
+      <ul style="list-style:none; margin:0; padding:0; border-top:1px solid var(--line);"><sc-for list="{{ where }}" as="w" hint-placeholder-count="4"><li style="border-bottom:1px solid var(--line);"><a href="{{ w.href }}" style="display:flex; justify-content:space-between; gap:12px; padding:13px 0;"><span>{{ w.t }}</span><span style="color:var(--ink-muted); font-size:14px;">{{ w.s }}</span></a></li></sc-for></ul>
+      <div style="display:flex; align-items:flex-end; gap:24px; padding:24px; border-radius:24px; background:#111110; color:#F1EFEA;"><sc-for list="{{ sizes }}" as="z" hint-placeholder-count="3"><figure style="margin:0; display:flex; flex-direction:column; align-items:center; gap:8px;"><dot-karakter size="{{ z.s }}" mood="rust"></dot-karakter><figcaption style="font-size:12.5px; color:#A8A49B;">{{ z.t }}</figcaption></figure></sc-for></div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const MOODS = [
+  ['rust', 'In rust', 'Rechtsonder in de app, zwevend en knipperend.', '', 'var(--surface)'],
+  ['praat', 'Praat', 'Met één zin in een ballon, hoogstens één keer per dag uit zichzelf.', 'Lisa, ik heb 5 dingen voor vandaag.', 'var(--staal)'],
+  ['denkt', 'Denkt na', 'Terwijl Dot je cijfers bekijkt of je website leest.', 'Even kijken in je cijfers.', 'var(--tarwe)'],
+  ['blij', 'Blij', 'Als iets gelukt is.', 'Gedaan. Je eerste verbetering staat live.', 'var(--salie)'],
+  ['knipoog', 'Knipoog', 'Bij een tip uit het playbook.', "Kleine tip: video's doen het bij jou beter dan foto's.", 'var(--roos)'],
+  ['viert', 'Viert', 'Bij een Sweetmoment, met een beetje confetti.', 'Sweet! 3 nieuwe verkopen sinds gisteren.', 'var(--lavendel)'],
+];
+class Component extends DCLogic {
+  state = { hero: 'praat', play: 1, dark: false, w: window.innerWidth };
+  componentDidMount() { this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); }
+  renderVals() {
+    const s = this.state;
+    const avail = Math.min(1280, s.w) - 2 * Math.max(20, Math.min(48, s.w * 0.034)) - 2 * Math.max(20, Math.min(56, s.w * 0.04));
+    return {
+      hero: s.hero, playKey: String(s.play), replay: () => this.setState({ play: s.play + 1 }),
+      introH: String(Math.max(40, Math.min(130, Math.floor(avail / 7.2)))), introText: 'Hoi, ik ben Dot.',
+      introTheme: s.dark ? 'dark' : 'light', introBg: s.dark ? '#111110' : '#F5F4F0', introThemeLabel: s.dark ? 'Toon in licht' : 'Toon in nacht',
+      toggleIntroTheme: () => this.setState({ dark: !s.dark, play: s.play + 1 }),
+      moods: MOODS.map(([id, t]) => ({ t, aria: String(s.hero === id), bg: s.hero === id ? 'var(--ink)' : 'transparent', fg: s.hero === id ? 'var(--ground)' : 'var(--ink)', bd: s.hero === id ? 'var(--ink)' : 'var(--line-strong)', pick: () => this.setState({ hero: id }) })),
+      why: [['Het puntje uit het logo: de sweet spot zelf, het punt waar je advertentie raak is.', 'var(--snoep-roos)'], ['Een punt zet je waar het telt. Dot zet je budget op de juiste plek.', 'var(--snoep-citroen)'], ['Drie letters. Blijft hangen en werkt in het Nederlands, het Frans en het Engels.', 'var(--snoep-munt)']].map(([t, c], i) => ({ t, c, n: String(i + 1) })),
+      cards: MOODS.map(([id, t, when, say, bg]) => ({ id, t, when, say, hasSay: !!say, bg })),
+      voice: ['Spreekt je aan met je voornaam, niet in elke zin.', 'Zegt wat het ziet, wat het zou doen en waarom.', 'Warm en rustig. Nooit drukker dan nodig.', 'Eerlijk als iets niet kan: “Dat kan ik niet zien in je account.”', 'Doet nooit iets zonder jouw klik, en zet nooit zelf een advertentie af.'],
+      where: [['In de app', 'rechtsonder, op elk scherm', 'App.dc.html'], ['In de rondleiding', 'legt elk stuk uit', 'App.dc.html#hulp'], ['In de onboarding', 'leert je zaak kennen', 'Onboardingpaneel.dc.html'], ['In het componentenoverzicht', 'sectie 12', 'Componentenoverzicht.dc.html']].map(([t, sub, href]) => ({ t, s: sub, href })),
+      sizes: [['24', 'knop · 24'], ['54', 'gsm · 54'], ['64', 'computer · 64']].map(([sz, t]) => ({ s: sz, t })),
+    };
+  }
+}
+</script>
+</body>
+</html>

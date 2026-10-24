@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+@font-face { font-family: "Host Grotesk"; font-weight: 400; font-display: swap; src: url("fonts/host-grotesk-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Host Grotesk"; font-weight: 500; font-display: swap; src: url("fonts/host-grotesk-latin-500-normal.woff2") format("woff2"); }
+:root, [data-theme="light"] { --ground: #EAE8E3; --surface: #F5F4F0; --surface-sunken: #E2E0DA; --ink: #151514; --ink-muted: #5F5C56; --line: #15151424; --line-strong: #7A776F; --robijn: #C7254E; --tarwe: #E8D7AE; --staal: #B8C7D9; --lavendel: #CEC4EA; --salie: #BFD9C6; --klei: #E9C2AE; --roos: #EEC1D0; --snoep-roos: #F28AB2; --snoep-citroen: #F5CF5C; --snoep-munt: #7FD3B0; --snoep-bes: #A99BF2; --snoep-hemel: #8FC2F2; --snoep-perzik: #F7A97A; --shadow-float: 0 12px 32px rgba(21,21,20,.12), 0 2px 6px rgba(21,21,20,.06); --font: "Host Grotesk", "Helvetica Neue", Arial, sans-serif; }
+[data-theme="dark"] { --ground: #111110; --surface: #1A1A19; --surface-sunken: #0C0C0B; --ink: #F1EFEA; --ink-muted: #A8A49B; --line: #F1EFEA24; --line-strong: #6E6B65; --robijn: #E0577A; --shadow-float: 0 12px 32px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.3); }
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+button { font: inherit; letter-spacing: inherit; }
+:focus-visible { outline: 2px solid var(--robijn); outline-offset: 4px; }
+</style>
+</helmet>
+<div data-theme="{{ standaloneTheme }}" style="{{ wrapStyle }}">
+  <sc-if value="{{ standalone }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width:420px; display:flex; flex-direction:column; gap:6px; color:var(--ink); font-size:14px;">
+      <b style="font-weight:500; font-size:18px;">Demopaneel</b>
+      <span style="color:var(--ink-muted);">Dit paneel staat rechtsonder op elk scherm van de website, inloggen, de app en het beheer. Wat je hier kiest, wordt bewaard en geldt overal. Open bijvoorbeeld <a href="App.dc.html" style="color:var(--ink); font-weight:500; border-bottom:1px solid var(--line-strong);">de app</a> of <a href="Website.dc.html" style="color:var(--ink); font-weight:500; border-bottom:1px solid var(--line-strong);">de website</a>.</span>
+    </div>
+  </sc-if>
+  <div style="position:{{ pos }}; right:{{ right }}; bottom:{{ bottom }}; z-index:55; display:flex; flex-direction:column; align-items:flex-end; gap:10px; font-family:var(--font, 'Host Grotesk', sans-serif); font-size:13px;">
+    <sc-if value="{{ open }}" hint-placeholder-val="{{ true }}">
+      <div role="dialog" aria-label="Demopaneel" style="width:min(340px, calc(100vw - 32px)); max-height:min(620px, calc(100vh - 96px)); overflow:auto; padding:16px 18px 18px; background:var(--surface); color:var(--ink); border:1px dashed var(--line-strong); border-radius:14px; box-shadow:var(--shadow-float); display:flex; flex-direction:column; gap:14px;">
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px;">
+          <span style="font-weight:500;">Demo</span>
+          <span style="font-size:12px; color:var(--ink-muted);">hoort niet bij het product</span>
+        </div>
+        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="6">
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <span style="font-size:12px; color:var(--ink-muted);">{{ g.title }}</span>
+            <div style="display:flex; flex-wrap:wrap; gap:4px;">
+              <sc-for list="{{ g.opts }}" as="o" hint-placeholder-count="3">
+                <button type="button" aria-pressed="{{ o.aria }}" onClick="{{ o.pick }}" style="height:28px; padding:0 10px; border-radius:999px; border:1px solid {{ o.bd }}; background:{{ o.bg }}; color:{{ o.fg }}; font-size:12.5px; font-weight:500; cursor:pointer;">{{ o.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+        <span style="padding-top:10px; border-top:1px solid var(--line); font-size:12px; color:var(--ink-muted);">Demodatum: maandag 7 december 2026</span>
+      </div>
+    </sc-if>
+    <button type="button" aria-expanded="{{ openAria }}" onClick="{{ toggle }}" style="height:30px; padding:0 12px; border-radius:999px; border:1px dashed var(--line-strong); background:var(--surface-sunken); color:var(--ink-muted); font-size:12.5px; font-weight:500; cursor:pointer;">Demo</button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 420, &quot;height&quot;: 720}, &quot;values&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;object&quot;}, &quot;onChange&quot;: {&quot;editor&quot;: null, &quot;tsType&quot;: &quot;(patch: object) =&gt; void&quot;}, &quot;bottom&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;16px&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;right&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;16px&quot;, &quot;tsType&quot;: &quot;string&quot;}}">
+const KEY = 'adsweet-demo';
+const DEF = { theme: 'auto', lang: 'nl', labels: false, scenario: 'lisa', plan: 'pro', staat: 'normaal' };
+const PLAN_VOOR = { lisa: 'pro', tom: 'starter', sarah: 'pro', bram: 'scale', agency: 'agency' };
+const GROUPS = [
+  ['scenario', 'Scenario', [['lisa', 'Lisa · webshop'], ['tom', 'Tom · dakwerken'], ['sarah', 'Sarah · nieuw'], ['bram', 'Bram · 3 webshops'], ['agency', 'Eva · bureau, 6 klanten']]],
+  ['plan', 'Plan', [['starter', 'Starter'], ['pro', 'Pro'], ['scale', 'Scale'], ['agency', 'Agency']]],
+  ['staat', 'Staat', [['normaal', 'Normaal'], ['proef', 'Proefperiode bijna om'], ['credits', 'Credits op'], ['betaal', 'Betaalprobleem bij Meta'], ['koppeling', 'Koppeling verlopen'], ['testfase', 'Testfase']]],
+  ['theme', 'Thema', [['auto', 'Toestel'], ['light', 'Licht'], ['dark', 'Nacht']]],
+  ['lang', 'Taal', [['nl', 'NL'], ['fr', 'FR'], ['en', 'EN']]],
+  ['labels', 'Toon labels', [[false, 'Uit'], [true, 'Aan']]],
+];
+function load() { try { return Object.assign({}, DEF, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) { return Object.assign({}, DEF); } }
+class Component extends DCLogic {
+  state = { open: !this.props.values, own: load() };
+  renderVals() {
+    const standalone = !this.props.values;
+    const v = standalone ? this.state.own : this.props.values;
+    const change = standalone
+      ? (p) => { const own = Object.assign({}, this.state.own, p); try { localStorage.setItem(KEY, JSON.stringify(own)); } catch (e) {} this.setState({ own }); }
+      : (this.props.onChange || (() => {}));
+    const groups = GROUPS.map(([key, title, opts]) => ({
+      title,
+      opts: opts.map(([val, label]) => {
+        const on = v[key] === val;
+        return {
+          label, aria: String(on),
+          bg: on ? 'var(--ink)' : 'transparent', fg: on ? 'var(--ground)' : 'var(--ink)', bd: on ? 'var(--ink)' : 'var(--line-strong)',
+          pick: () => change(key === 'scenario' ? { scenario: val, plan: PLAN_VOOR[val] } : { [key]: val }),
+        };
+      }),
+    }));
+    const dark = standalone && (v.theme === 'dark' || (v.theme === 'auto' && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches));
+    return {
+      standalone, standaloneTheme: standalone ? (dark ? 'dark' : 'light') : undefined,
+      wrapStyle: standalone ? 'min-height:100vh; padding:32px; background:var(--ground); display:flex; flex-direction:column; gap:24px; font-family:var(--font);' : 'display:contents;',
+      pos: standalone ? 'static' : 'fixed',
+      open: this.state.open, openAria: String(this.state.open),
+      toggle: () => this.setState(s => ({ open: !s.open })),
+      groups, bottom: this.props.bottom || '16px', right: this.props.right || '16px',
+    };
+  }
+}
+</script>
+</body>
+</html>

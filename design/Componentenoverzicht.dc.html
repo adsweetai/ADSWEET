@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AdSweet · Componentenoverzicht</title>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icon/app-icon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/icon/app-icon-16.png">
+<link rel="apple-touch-icon" href="assets/icon/app-icon-180.png">
+<meta property="og:image" content="assets/og-image.png">
+<style>
+@font-face { font-family: "Host Grotesk"; font-weight: 300; font-display: swap; src: url("fonts/host-grotesk-latin-300-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Host Grotesk"; font-weight: 400; font-display: swap; src: url("fonts/host-grotesk-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Host Grotesk"; font-weight: 500; font-display: swap; src: url("fonts/host-grotesk-latin-500-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Host Grotesk"; font-weight: 600; font-display: swap; src: url("fonts/host-grotesk-latin-600-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Host Grotesk"; font-weight: 300; font-display: swap; src: url("fonts/host-grotesk-latin-ext-300-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: "Host Grotesk"; font-weight: 400; font-display: swap; src: url("fonts/host-grotesk-latin-ext-400-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: "Host Grotesk"; font-weight: 500; font-display: swap; src: url("fonts/host-grotesk-latin-ext-500-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: "Host Grotesk"; font-weight: 600; font-display: swap; src: url("fonts/host-grotesk-latin-ext-600-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+:root, [data-theme="light"] {
+  --ground: #EAE8E3; --surface: #F5F4F0; --surface-sunken: #E2E0DA; --ink: #151514; --ink-muted: #5F5C56; --ink-accent: #7A776F;
+  --line: #15151424; --line-strong: #7A776F; --robijn: #C7254E;
+  --ok: #2E6B45; --ok-tint: #DCEADF; --warn: #8A5410; --warn-tint: #F2E2C4; --act: #AE3A1F; --act-tint: #F5DCD3;
+  --tarwe: #E8D7AE; --staal: #B8C7D9; --lavendel: #CEC4EA; --salie: #BFD9C6; --klei: #E9C2AE; --roos: #EEC1D0; --snoep-roos: #F28AB2; --snoep-citroen: #F5CF5C; --snoep-munt: #7FD3B0; --snoep-bes: #A99BF2; --snoep-hemel: #8FC2F2; --snoep-perzik: #F7A97A;
+  --shadow-float: 0 12px 32px rgba(21,21,20,.12), 0 2px 6px rgba(21,21,20,.06);
+  --font: "Host Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --show-light: block; --show-dark: none; color-scheme: light;
+}
+[data-theme="dark"] {
+  --ground: #111110; --surface: #1A1A19; --surface-sunken: #0C0C0B; --ink: #F1EFEA; --ink-muted: #A8A49B; --ink-accent: #9B978E;
+  --line: #F1EFEA24; --line-strong: #6E6B65; --robijn: #E0577A;
+  --ok: #86C79A; --ok-tint: #1B2A20; --warn: #E2B062; --warn-tint: #2D2414; --act: #F0937A; --act-tint: #341C16;
+  --shadow-float: 0 12px 32px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.3);
+  --show-light: none; --show-dark: block; color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.5; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+button, input, select, textarea { font: inherit; letter-spacing: inherit; color: inherit; }
+a { color: var(--ink); text-decoration: none; }
+a:hover { color: var(--ink-muted); }
+:focus-visible { outline: 2px solid var(--robijn); outline-offset: 4px; }
+input:focus-visible, select:focus-visible { outline-offset: 2px; }
+@keyframes as-l1 { 0%, 100% { transform: translateY(-5px) scaleX(1); opacity: 1; } 50% { transform: translateY(0) scaleX(.1); opacity: 0; } }
+@keyframes as-l2 { 0%, 100% { transform: scaleX(1); opacity: 1; } 50% { transform: scaleX(.1); opacity: 0; } }
+@keyframes as-l3 { 0%, 100% { transform: translateY(5px) scaleX(1); opacity: 1; } 50% { transform: translateY(0) scaleX(.1); opacity: 0; } }
+@keyframes as-dot { 0%, 20%, 80%, 100% { transform: scale(0); } 50% { transform: scale(1); } }
+@keyframes as-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+@keyframes as-pulse { 0% { transform: scale(1); } 40% { transform: scale(1.9); } 100% { transform: scale(1); } }
+@keyframes as-reveal { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+<script src="dot.js"></script>
+</helmet>
+
+<div style="min-height:100vh; background:var(--ground); color:var(--ink);">
+
+  <header data-theme="{{ chromeTheme }}" style="position:sticky; top:0; z-index:30; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px 24px; padding:16px clamp(20px, 3.4vw, 48px); background:var(--ground); color:var(--ink); border-bottom:1px solid var(--line);">
+    <div style="display:flex; align-items:center; gap:20px; min-width:0;">
+      <img src="assets/adsweet-logo.svg" alt="adsweet" style="display:var(--show-light); height:19px; width:auto;">
+      <img src="assets/adsweet-logo-licht.svg" alt="adsweet" style="display:var(--show-dark); height:19px; width:auto;">
+      <span style="font-size:13px; color:var(--ink-muted);">Componentenoverzicht · Golf 1, merk en designsysteem</span>
+    </div>
+    <div role="group" aria-label="Thema" style="display:flex; gap:2px; padding:3px; border:1px solid var(--line-strong); border-radius:999px;">
+      <sc-for list="{{ modes }}" as="m" hint-placeholder-count="3">
+        <button type="button" aria-pressed="{{ m.pressed }}" onClick="{{ m.pick }}" style="height:30px; padding:0 14px; border:0; border-radius:999px; background:{{ m.bg }}; color:{{ m.fg }}; font-size:13px; font-weight:500; cursor:pointer; transition:background 300ms cubic-bezier(.2,.7,.2,1), color 300ms cubic-bezier(.2,.7,.2,1);">{{ m.label }}</button>
+      </sc-for>
+    </div>
+  </header>
+
+  <main style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 600px), 1fr));">
+    <sc-for list="{{ themes }}" as="th" hint-placeholder-count="2">
+      <div data-theme="{{ th.id }}" data-screen-label="Componenten {{ th.label }}" style="min-width:0; display:flex; flex-direction:column; gap:72px; padding:48px clamp(20px, 3vw, 44px) 140px; background:var(--ground); color:var(--ink);">
+
+        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding-bottom:20px; border-bottom:1px solid var(--line);">
+          <h2 style="margin:0; font-size:44px; font-weight:500; letter-spacing:-.035em; line-height:1;">{{ th.label }}</h2>
+          <span style="font-size:13px; color:var(--ink-muted);">ground {{ th.hex }}</span>
+        </div>
+
+        <!-- 01 Logo -->
+        <section style="display:flex; flex-direction:column; gap:16px;">
+          <p style="display:flex; align-items:center; gap:12px; margin:0; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-muted);"><span aria-hidden="true" style="display:inline-flex; align-items:center; gap:4px; flex:none;"><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-roos);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-citroen);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-munt);"></span></span>01 · Logo en naam</p>
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:28px; display:flex; flex-direction:column; gap:24px;">
+            <div style="display:flex; flex-wrap:wrap; align-items:center; gap:32px;">
+              <div style="padding:40px; border:1px dashed var(--line-strong); border-radius:2px;">
+                <div style="outline:1px solid var(--line);">
+                  <img src="assets/adsweet-logo.svg" alt="adsweet" style="display:var(--show-light); height:56px; width:auto;">
+                  <img src="assets/adsweet-logo-licht.svg" alt="adsweet" style="display:var(--show-dark); height:56px; width:auto;">
+                </div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:18px;">
+                <div style="display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+                  <img src="assets/adsweet-logo.svg" alt="adsweet" style="display:var(--show-light); height:19px; width:auto;">
+                  <img src="assets/adsweet-logo-licht.svg" alt="adsweet" style="display:var(--show-dark); height:19px; width:auto;">
+                  <span style="font-size:13px; color:var(--ink-muted);">Computer · 19px</span>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:flex-start; gap:6px;">
+                  <img src="assets/adsweet-logo.svg" alt="adsweet" style="display:var(--show-light); height:17px; width:auto;">
+                  <img src="assets/adsweet-logo-licht.svg" alt="adsweet" style="display:var(--show-dark); height:17px; width:auto;">
+                  <span style="font-size:13px; color:var(--ink-muted);">Gsm · 17px</span>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column;">
+              <div style="display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-top:1px solid var(--line);"><span>Vrije ruimte rondom: minstens de hoogte van de a.</span><span style="font-size:13px; color:var(--ink-muted); white-space:nowrap;">gestippeld</span></div>
+              <div style="display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-top:1px solid var(--line);"><span>In lopende tekst schrijf je AdSweet. Geen ® of ™.</span><span style="font-size:13px; color:var(--ink-muted); white-space:nowrap;">tekst</span></div>
+              <div style="display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-top:1px solid var(--line);"><span>Nacht gebruikt adsweet-woordmerk-licht.svg. Nooit natypen.</span><span style="font-size:13px; color:var(--ink-muted); white-space:nowrap;">bestand</span></div>
+            </div>
+          </div>
+
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:28px; display:flex; flex-direction:column; gap:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;">
+              <h3 style="margin:0; font-size:20px; font-weight:500; letter-spacing:-.015em;">App-icoon en favicon</h3>
+              <span style="font-size:13px; color:var(--ink-muted);">vierkante uitsnede van het nachtbeeld, parel in het midden</span>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; align-items:flex-end; gap:24px;">
+              <figure style="margin:0; display:flex; flex-direction:column; gap:8px;"><img src="assets/icon/app-icon-1024.png" alt="App-icoon 1024" style="width:112px; height:112px; border-radius:25px; display:block;"><figcaption style="font-size:12.5px; color:var(--ink-muted);">1024</figcaption></figure>
+              <figure style="margin:0; display:flex; flex-direction:column; gap:8px;"><img src="assets/icon/app-icon-512.png" alt="App-icoon 512" style="width:80px; height:80px; border-radius:18px; display:block;"><figcaption style="font-size:12.5px; color:var(--ink-muted);">512</figcaption></figure>
+              <figure style="margin:0; display:flex; flex-direction:column; gap:8px;"><img src="assets/icon/app-icon-180.png" alt="App-icoon 180" style="width:60px; height:60px; border-radius:13px; display:block;"><figcaption style="font-size:12.5px; color:var(--ink-muted);">180</figcaption></figure>
+              <figure style="margin:0; display:flex; flex-direction:column; gap:8px;"><img src="assets/icon/app-icon-32.png" alt="Favicon 32" style="width:32px; height:32px; border-radius:6px; display:block;"><figcaption style="font-size:12.5px; color:var(--ink-muted);">32</figcaption></figure>
+              <figure style="margin:0; display:flex; flex-direction:column; gap:8px;"><img src="assets/icon/app-icon-16.png" alt="Favicon 16" style="width:16px; height:16px; border-radius:3px; display:block;"><figcaption style="font-size:12.5px; color:var(--ink-muted);">16</figcaption></figure>
+            </div>
+            <p style="margin:0; font-size:13px; color:var(--ink-muted); max-width:560px;">Nu gemaakt uit het kleine voorbeeldbeeld. Zodra adsweet-sculptuur-nacht.jpg in assets staat, maken we ze opnieuw op volle scherpte.</p>
+          </div>
+
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:28px; display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;">
+              <h3 style="margin:0; font-size:20px; font-weight:500; letter-spacing:-.015em;">Open Graph-beeld</h3>
+              <span style="font-size:13px; color:var(--ink-muted);">1200 × 630</span>
+            </div>
+            <img src="assets/og-image.png" alt="Open Graph-beeld: sculptuur, woordmerk linksboven, Hit the sweet spot. linksonder" style="display:block; width:100%; height:auto; aspect-ratio:1200/630; border-radius:10px; border:1px solid var(--line);">
+          </div>
+        </section>
+
+        <!-- 02 Kleuren -->
+        <section style="display:flex; flex-direction:column; gap:16px;">
+          <p style="display:flex; align-items:center; gap:12px; margin:0; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-muted);"><span aria-hidden="true" style="display:inline-flex; align-items:center; gap:4px; flex:none;"><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-roos);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-citroen);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-munt);"></span></span>02 · Kleuren</p>
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:28px; display:flex; flex-direction:column; gap:20px;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:12px;">
+              <sc-for list="{{ swatches }}" as="s" hint-placeholder-count="8">
+                <div style="border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--surface);">
+                  <div style="height:56px; background:{{ s.v }}; border-bottom:1px solid var(--line);"></div>
+                  <div style="padding:10px 12px 12px; display:flex; flex-direction:column; gap:2px;">
+                    <b style="font-weight:500;">{{ s.n }}</b>
+                    <span style="font-size:12.5px; color:var(--ink-muted);">{{ s.l }} · {{ s.d }}</span>
+                    <span style="font-size:12.5px; color:var(--ink-muted);">{{ s.u }}</span>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px 16px; padding-top:16px; border-top:1px solid var(--line);">
+              <span style="display:flex; align-items:center; gap:10px;"><span style="width:8px; height:8px; border-radius:50%; background:var(--robijn); flex:none;"></span>robijn #C7254E · #E0577A</span>
+              <span style="font-size:13px; color:var(--ink-muted);">alleen als punt van 6 tot 8px, focusring en de parel</span>
+            </div>
+          </div>
+
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:28px; display:flex; flex-direction:column; gap:4px;">
+            <h3 style="margin:0 0 12px; font-size:20px; font-weight:500; letter-spacing:-.015em;">Status, altijd met icoon en woord</h3>
+            <sc-for list="{{ statuses }}" as="st" hint-placeholder-count="3">
+              <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px 16px; padding:12px 0; border-top:1px solid var(--line);">
+                <span style="display:inline-flex; align-items:center; gap:6px; height:26px; padding:0 10px 0 8px; border-radius:999px; background:{{ st.bg }}; color:{{ st.fg }}; font-size:13px; font-weight:500; white-space:nowrap;">{{ st.icon }}{{ st.t }}</span>
+                <span style="font-size:12.5px; color:var(--ink-muted);">licht {{ st.l }} · nacht {{ st.d }}</span>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:28px; display:flex; flex-direction:column; gap:20px;">
+            <h3 style="margin:0; font-size:20px; font-weight:500; letter-spacing:-.015em;">Reekskleuren, tekst erop altijd #151514</h3>
+            <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:12px;">
+              <sc-for list="{{ series }}" as="r" hint-placeholder-count="6">
+                <div style="border-radius:12px; padding:14px; background:{{ r.v }}; color:#151514; display:flex; flex-direction:column; gap:2px; min-height:92px;">
+                  <b style="font-weight:500;">{{ r.n }}</b>
+                  <span style="font-size:12.5px;">{{ r.hex }}</span>
+                  <span style="font-size:12.5px;">{{ r.u }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex; flex-direction:column;">
+              <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px 16px; padding:12px 0; border-top:1px solid var(--line);">
+                <span style="font-size:13px; color:var(--ink-muted);">Funnel</span>
+                <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                  <span style="height:24px; padding:0 10px; display:inline-flex; align-items:center; border-radius:999px; background:var(--staal); color:#151514; font-size:12.5px; font-weight:500;">Top</span>
+                  <span style="height:24px; padding:0 10px; display:inline-flex; align-items:center; border-radius:999px; background:var(--salie); color:#151514; font-size:12.5px; font-weight:500;">Middle</span>
+                  <span style="height:24px; padding:0 10px; display:inline-flex; align-items:center; border-radius:999px; background:var(--klei); color:#151514; font-size:12.5px; font-weight:500;">Bottom</span>
+                </div>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px 16px; padding:12px 0; border-top:1px solid var(--line);">
+                <span style="font-size:13px; color:var(--ink-muted);">Soort zaak</span>
+                <div style="display:flex; gap:14px; flex-wrap:wrap;">
+                  <sc-for list="{{ kinds }}" as="k" hint-placeholder-count="4">
+                    <span style="display:inline-flex; align-items:center; gap:8px; font-size:13px;"><span style="width:26px; height:26px; border-radius:50%; background:{{ k.v }}; color:#151514; display:grid; place-items:center; font-size:12px; font-weight:500;">{{ k.i }}</span>{{ k.t }}</span>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px 16px; padding:12px 0; border-top:1px solid var(--line);">
+                <span style="font-size:13px; color:var(--ink-muted);">Kanalen in grafieken</span>
+                <div style="display:flex; gap:16px; flex-wrap:wrap; font-size:13px;">
+                  <span style="display:inline-flex; align-items:center; gap:8px;"><span style="width:22px; border-top:2px solid var(--ink);"></span>Meta</span>
+                  <span style="display:inline-flex; align-items:center; gap:8px;"><span style="width:22px; border-top:2px dashed var(--ink-muted);"></span>Google Ads</span>
+                  <span style="display:inline-flex; align-items:center; gap:8px;"><span style="width:22px; border-top:2px solid var(--staal);"></span>Shopify</span>
+                  <span style="display:inline-flex; align-items:center; gap:8px;"><span style="width:22px; border-top:2px solid var(--salie);"></span>Google Analytics</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; border-top:1px solid var(--line);">
+            <div style="padding:12px 0; border-bottom:1px solid var(--line);">Robijn is het raakpunt: hoogstens één punt per scherm. De assistent, de focusring en de sculptuur tellen niet mee.</div>
+            <div style="padding:12px 0; border-bottom:1px solid var(--line);">"Pas op, dit raden we niet aan" gebruikt Actie nodig, nooit robijn.</div>
+            <div style="padding:12px 0; border-bottom:1px solid var(--line);">Geen verlopen, geen gloed, geen glas. Wat opvalt, valt op door grootte, gewicht en ruimte.</div>
+          </div>
+        </section>
+
+        <!-- 03 Letters -->
+        <section style="display:flex; flex-direction:column; gap:16px;">
+          <p style="display:flex; align-items:center; gap:12px; margin:0; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-muted);"><span aria-hidden="true" style="display:inline-flex; align-items:center; gap:4px; flex:none;"><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-roos);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-citroen);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-munt);"></span></span>03 · Letters · Host Grotesk 300 400 500 600</p>
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:28px; display:flex; flex-direction:column;">
+            <p style="margin:0 0 8px; font-size:12.5px; color:var(--ink-muted);">Hero · clamp(40px, 6.6vw, 112px) · 500 · 0,92 · -0,045em</p>
+            <p style="margin:0 0 24px; font-size:60px; font-weight:500; line-height:.92; letter-spacing:-.045em; text-wrap:balance;">Meer klanten uit Facebook en Instagram.<span style="display:block; font-weight:300; color:var(--ink-accent); letter-spacing:-.035em;">Hit the <span style="color:var(--robijn);">sweet</span> spot.</span></p>
+            <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:14px 0; border-top:1px solid var(--line);"><span style="font-size:40px; font-weight:500; line-height:1; letter-spacing:-.035em;">Sectietitel</span><small style="font-size:12.5px; color:var(--ink-muted); white-space:nowrap;">clamp(32, 4vw, 64) · 500</small></div>
+            <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:14px 0; border-top:1px solid var(--line);"><span style="font-size:34px; font-weight:500; line-height:1.1; letter-spacing:-.03em;">Goeiemorgen, Lisa</span><small style="font-size:12.5px; color:var(--ink-muted); white-space:nowrap;">begroeting · 32 tot 36</small></div>
+            <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:14px 0; border-top:1px solid var(--line);"><span style="font-size:30px; font-weight:500; line-height:1.1; letter-spacing:-.03em;">Campagnes</span><small style="font-size:12.5px; color:var(--ink-muted); white-space:nowrap;">paginatitel app · 28 tot 32</small></div>
+            <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:14px 0; border-top:1px solid var(--line);"><span style="font-size:20px; font-weight:500; letter-spacing:-.015em;">Kaarttitel</span><small style="font-size:12.5px; color:var(--ink-muted); white-space:nowrap;">18 tot 22 · 500</small></div>
+            <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:14px 0; border-top:1px solid var(--line);"><span style="font-size:17px;">Lopende tekst op de website, 17px.</span><small style="font-size:12.5px; color:var(--ink-muted); white-space:nowrap;">400 · 1,5</small></div>
+            <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:14px 0; border-top:1px solid var(--line);"><span>Lopende tekst in de app, 15px.</span><small style="font-size:12.5px; color:var(--ink-muted); white-space:nowrap;">400 · 1,5</small></div>
+            <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:14px 0; border-top:1px solid var(--line);"><span style="display:flex; align-items:center; gap:12px; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-muted);"><span aria-hidden="true" style="display:inline-flex; align-items:center; gap:4px; flex:none;"><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-roos);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-citroen);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-munt);"></span></span>Eyebrow</span><small style="font-size:12.5px; color:var(--ink-muted); white-space:nowrap;">12 · hoofdletters · 0,12em</small></div>
+            <div style="display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px 16px; padding:14px 0 0; border-top:1px solid var(--line);"><span style="font-variant-numeric:tabular-nums;">€1.234,56 · €195 · 40% · 2,5 · maandag 7 december · 06:00</span><small style="font-size:12.5px; color:var(--ink-muted); white-space:nowrap;">tabular-nums</small></div>
+          </div>
+        </section>
+
+        <!-- 04 Knoppen en velden -->
+        <section style="display:flex; flex-direction:column; gap:16px;">
+          <p style="display:flex; align-items:center; gap:12px; margin:0; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-muted);"><span aria-hidden="true" style="display:inline-flex; align-items:center; gap:4px; flex:none;"><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-roos);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-citroen);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-munt);"></span></span>04 · Knoppen, velden en keuzes</p>
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:28px; display:flex; flex-direction:column; gap:22px;">
+            <div style="display:flex; flex-wrap:wrap; align-items:center; gap:14px 18px;">
+              <button type="button" style="display:inline-flex; align-items:center; gap:10px; height:46px; padding:0 22px; border:0; border-radius:999px; background:var(--ink); color:var(--ground); font-size:14.5px; font-weight:500; cursor:pointer; transition:gap 300ms cubic-bezier(.2,.7,.2,1), padding 300ms cubic-bezier(.2,.7,.2,1);" style-hover="gap:13px; padding-right:19px;">Gratis starten<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+              <button type="button" style="display:inline-flex; align-items:center; gap:10px; height:40px; padding:0 18px; border:0; border-radius:999px; background:var(--ink); color:var(--ground); font-size:14px; font-weight:500; cursor:pointer; transition:gap 300ms cubic-bezier(.2,.7,.2,1), padding 300ms cubic-bezier(.2,.7,.2,1);" style-hover="gap:13px; padding-right:15px;">Keur goed<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+              <button type="button" style="display:inline-flex; align-items:center; height:40px; padding:0 18px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer; transition:border-color 300ms cubic-bezier(.2,.7,.2,1);" style-hover="border-color:var(--ink);">Pas aan</button>
+              <button type="button" style="display:inline-flex; align-items:center; gap:8px; padding:4px 3px 4px 0; border:0; border-bottom:1px solid var(--line-strong); background:none; color:var(--ink); font-size:14.5px; font-weight:500; cursor:pointer; transition:gap 300ms cubic-bezier(.2,.7,.2,1), padding 300ms cubic-bezier(.2,.7,.2,1);" style-hover="gap:11px; padding-right:0;">Doe de gratis audit<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+            </div>
+            <p style="margin:0; font-size:13px; color:var(--ink-muted);">Primair 46px op de website, 40px in de app. Het pijltje schuift bij hover 3px op. Tab met het toetsenbord voor de focusring: 2px robijn, 4px afstand.</p>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px; padding-top:20px; border-top:1px solid var(--line);">
+              <label style="display:flex; flex-direction:column; gap:6px;">
+                <span style="font-size:13px; font-weight:500;">Je website</span>
+                <input type="text" placeholder="jouwzaak.be" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;">
+              </label>
+              <label style="display:flex; flex-direction:column; gap:6px;">
+                <span style="font-size:13px; font-weight:500;">Gemiddelde orderwaarde</span>
+                <span style="position:relative; display:block;">
+                  <span style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--ink-muted);">€</span>
+                  <input type="text" inputmode="decimal" value="58" style="width:100%; height:44px; padding:0 14px 0 30px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px; font-variant-numeric:tabular-nums;">
+                </span>
+              </label>
+              <label style="display:flex; flex-direction:column; gap:6px;">
+                <span style="font-size:13px; font-weight:500;">Taal van de app</span>
+                <select style="height:44px; padding:0 12px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;">
+                  <option>Nederlands</option>
+                  <option>Français</option>
+                  <option>English</option>
+                </select>
+              </label>
+            </div>
+
+            <div style="display:flex; flex-direction:column; padding-top:8px; border-top:1px solid var(--line);">
+              <sc-for list="{{ switches }}" as="w" hint-placeholder-count="3">
+                <div style="display:flex; flex-direction:column; gap:10px; padding:14px 0; border-bottom:1px solid var(--line);">
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:16px;">
+                    <div style="display:flex; flex-direction:column;">
+                      <span style="font-weight:500;">{{ w.label }}</span>
+                      <span style="font-size:13px; color:var(--ink-muted);">{{ w.sub }}</span>
+                    </div>
+                    <button type="button" role="switch" aria-checked="{{ w.aria }}" aria-label="{{ w.label }}" onClick="{{ w.toggle }}" style="position:relative; flex:none; width:40px; height:24px; padding:0; border-radius:999px; border:1px solid {{ w.trackBd }}; background:{{ w.trackBg }}; cursor:pointer; transition:background 300ms cubic-bezier(.2,.7,.2,1), border-color 300ms cubic-bezier(.2,.7,.2,1);">
+                      <span style="position:absolute; top:3px; left:{{ w.knobX }}; width:16px; height:16px; border-radius:50%; background:{{ w.knobBg }}; transition:left 300ms cubic-bezier(.2,.7,.2,1), background 300ms cubic-bezier(.2,.7,.2,1);"></span>
+                    </button>
+                  </div>
+                  <sc-if value="{{ w.showWarn }}" hint-placeholder-val="{{ false }}">
+                    <div role="alert" style="display:flex; gap:12px; padding:14px 16px; border:1px solid var(--act); background:var(--act-tint); border-radius:12px;">
+                      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:var(--act); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>
+                      <div style="display:flex; flex-direction:column; gap:8px; min-width:0;">
+                        <b style="font-weight:500; color:var(--act);">Pas op, dit raden we niet aan.</b>
+                        <span style="font-size:14px; color:var(--ink);">{{ w.warn }}</span>
+                        <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px 18px;">
+                          <a href="#" style="font-size:14px; font-weight:500; border-bottom:1px solid var(--line-strong);">Waarom?</a>
+                          <button type="button" onClick="{{ w.accept }}" style="height:34px; padding:0 14px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:13.5px; font-weight:500; cursor:pointer;">Toch doorgaan</button>
+                        </div>
+                      </div>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <span style="font-size:13px; font-weight:500;">Keuzekaarten · Wat wil je bereiken?</span>
+              <div role="radiogroup" aria-label="Wat wil je bereiken?" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:10px;">
+                <sc-for list="{{ choices }}" as="c" hint-placeholder-count="4">
+                  <button type="button" role="radio" aria-checked="{{ c.aria }}" onClick="{{ c.pick }}" style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:16px; text-align:left; border-radius:14px; border:1px solid var(--line); box-shadow:{{ c.ring }}; background:var(--surface); color:var(--ink); cursor:pointer; transition:box-shadow 300ms cubic-bezier(.2,.7,.2,1);">
+                    <span style="display:flex; flex-direction:column; gap:2px;">
+                      <span style="font-size:16px; font-weight:500; letter-spacing:-.01em;">{{ c.t }}</span>
+                      <span style="font-size:13px; color:var(--ink-muted);">{{ c.s }}</span>
+                    </span>
+                    <span style="flex:none; width:20px; height:20px; border-radius:50%; border:1px solid {{ c.dotBd }}; background:{{ c.dotBg }}; display:grid; place-items:center; color:var(--ground);">{{ c.check }}</span>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
+            <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:14px;">
+              <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px;">
+                <span style="font-size:13px; font-weight:500;">Stappenbalk</span>
+                <span style="font-size:12.5px; color:var(--ink-muted);">{{ minLeft }}</span>
+              </div>
+              <ol style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px;">
+                <sc-for list="{{ steps }}" as="p" hint-placeholder-count="11">
+                  <li>
+                    <button type="button" onClick="{{ p.pick }}" aria-current="{{ p.aria }}" style="width:100%; display:flex; align-items:center; gap:12px; padding:5px 0; border:0; background:none; color:{{ p.fg }}; font-size:14px; font-weight:{{ p.fw }}; text-align:left; cursor:pointer;">
+                      <span style="flex:none; width:22px; height:22px; border-radius:50%; border:1px solid {{ p.bd }}; background:{{ p.bg }}; color:{{ p.nfg }}; display:grid; place-items:center; font-size:11.5px; font-weight:500;">{{ p.mark }}</span>
+                      <span>{{ p.t }}</span>
+                    </button>
+                  </li>
+                </sc-for>
+              </ol>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:16px;">
+              <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:24px 24px 20px; display:flex; flex-direction:column; gap:16px;">
+                <span style="font-size:13px; font-weight:500;">Tabs</span>
+                <div role="tablist" style="display:flex; gap:22px; border-bottom:1px solid var(--line); overflow-x:auto;">
+                  <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+                    <button type="button" role="tab" aria-selected="{{ t.aria }}" onClick="{{ t.pick }}" style="flex:none; padding:0 0 10px; margin-bottom:-1px; border:0; border-bottom:1.5px solid {{ t.bd }}; background:none; color:{{ t.fg }}; font-size:14px; font-weight:500; cursor:pointer; transition:color 300ms cubic-bezier(.2,.7,.2,1), border-color 300ms cubic-bezier(.2,.7,.2,1);">{{ t.label }}</button>
+                  </sc-for>
+                </div>
+                <p style="margin:0; font-size:14px; color:var(--ink-muted); min-height:42px;">{{ tabText }}</p>
+              </div>
+              <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:8px 24px;">
+                <sc-for list="{{ faq }}" as="f" hint-placeholder-count="3">
+                  <div style="border-bottom:1px solid {{ f.bd }};">
+                    <button type="button" aria-expanded="{{ f.aria }}" onClick="{{ f.toggle }}" style="width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0; border:0; background:none; color:var(--ink); font-size:15px; font-weight:500; text-align:left; cursor:pointer;">
+                      <span>{{ f.q }}</span>
+                      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; flex:none; transform:rotate({{ f.rot }}); transition:transform 300ms cubic-bezier(.2,.7,.2,1);"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                    </button>
+                    <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+                      <p style="margin:0; padding:0 32px 16px 0; font-size:14.5px; color:var(--ink-muted);">{{ f.a }}</p>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; overflow:hidden;">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; padding:18px 24px;">
+              <span style="font-size:13px; font-weight:500;">Tabel met haarlijnen · Lisa, laatste 7 dagen</span>
+              <span style="font-size:11px; letter-spacing:.08em; text-transform:uppercase; padding:2px 8px; border:1px solid var(--line-strong); border-radius:999px; color:var(--ink-muted);">Voorbeeld</span>
+            </div>
+            <div style="overflow-x:auto;">
+              <table style="width:100%; min-width:720px; border-collapse:collapse; font-size:14px; font-variant-numeric:tabular-nums;">
+                <thead>
+                  <tr style="background:var(--surface-sunken); color:var(--ink-muted); font-size:12.5px; text-align:right;">
+                    <th style="text-align:left; font-weight:500; padding:10px 12px 10px 24px;">Advertentie</th>
+                    <th style="font-weight:500; padding:10px 12px;">Uitgegeven</th>
+                    <th style="font-weight:500; padding:10px 12px;">Verkopen</th>
+                    <th style="font-weight:500; padding:10px 12px;">Omzet</th>
+                    <th style="font-weight:500; padding:10px 12px;">ROAS</th>
+                    <th style="font-weight:500; padding:10px 12px;">Kost per verkoop</th>
+                    <th style="text-align:left; font-weight:500; padding:10px 24px 10px 12px;">Label</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <sc-for list="{{ rows }}" as="row" hint-placeholder-count="5">
+                    <tr style="border-top:1px solid var(--line); text-align:right;">
+                      <td style="text-align:left; padding:12px 12px 12px 24px;"><span style="display:block; font-weight:500;">{{ row.code }} · {{ row.name }}</span><span style="font-size:12.5px; color:var(--ink-muted);">{{ row.soort }} · {{ row.fase }}</span></td>
+                      <td style="padding:12px;">{{ row.spend }}</td>
+                      <td style="padding:12px;">{{ row.sales }}</td>
+                      <td style="padding:12px;">{{ row.rev }}</td>
+                      <td style="padding:12px;">{{ row.roas }}</td>
+                      <td style="padding:12px;">{{ row.cpa }}</td>
+                      <td style="text-align:left; padding:12px 24px 12px 12px;"><span style="display:inline-flex; align-items:center; gap:6px; height:24px; padding:0 9px 0 7px; border-radius:999px; background:{{ row.lbl.bg }}; color:{{ row.lbl.fg }}; font-size:12.5px; font-weight:500; white-space:nowrap;">{{ row.lbl.icon }}{{ row.lbl.t }}</span></td>
+                    </tr>
+                  </sc-for>
+                  <tr style="border-top:1px solid var(--ink); text-align:right; font-weight:500;">
+                    <td style="text-align:left; padding:12px 12px 14px 24px;">Totaal</td>
+                    <td style="padding:12px;">€280</td>
+                    <td style="padding:12px;">11</td>
+                    <td style="padding:12px;">€638</td>
+                    <td style="padding:12px;">2,28</td>
+                    <td style="padding:12px;">€25,45</td>
+                    <td style="padding:12px 24px 12px 12px;"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 05 Status en labels -->
+        <section style="display:flex; flex-direction:column; gap:16px;">
+          <p style="display:flex; align-items:center; gap:12px; margin:0; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-muted);"><span aria-hidden="true" style="display:inline-flex; align-items:center; gap:4px; flex:none;"><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-roos);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-citroen);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-munt);"></span></span>05 · Statusbadges en advertentielabels</p>
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:28px; display:flex; flex-direction:column; gap:20px;">
+            <div style="display:flex; flex-wrap:wrap; gap:8px;">
+              <sc-for list="{{ statuses }}" as="st" hint-placeholder-count="3">
+                <span style="display:inline-flex; align-items:center; gap:6px; height:26px; padding:0 10px 0 8px; border-radius:999px; background:{{ st.bg }}; color:{{ st.fg }}; font-size:13px; font-weight:500; white-space:nowrap;">{{ st.icon }}{{ st.t }}</span>
+              </sc-for>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; padding-top:20px; border-top:1px solid var(--line);">
+              <sc-for list="{{ labels }}" as="l" hint-placeholder-count="5">
+                <span style="display:inline-flex; align-items:center; gap:6px; height:26px; padding:0 10px 0 8px; border-radius:999px; background:{{ l.bg }}; color:{{ l.fg }}; font-size:13px; font-weight:500; white-space:nowrap;">{{ l.icon }}{{ l.t }}</span>
+              </sc-for>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px 28px; padding-top:20px; border-top:1px solid var(--line);">
+              <span style="display:inline-flex; align-items:center; gap:8px; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; font-weight:500;"><span style="width:7px; height:7px; border-radius:50%; background:var(--robijn); flex:none;"></span>Voorstel van AdSweet</span>
+              <span style="display:inline-flex; align-items:center; gap:8px; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; font-weight:500;"><span style="width:7px; height:7px; border-radius:50%; background:var(--ink-muted); flex:none;"></span>Voorstel van AdSweet</span>
+              <span style="font-size:13px; color:var(--ink-muted);">bovenste kaart robijn, de rest ink-muted</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 06 Advies -->
+        <section style="display:flex; flex-direction:column; gap:16px;">
+          <p style="display:flex; align-items:center; gap:12px; margin:0; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-muted);"><span aria-hidden="true" style="display:inline-flex; align-items:center; gap:4px; flex:none;"><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-roos);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-citroen);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-munt);"></span></span>06 · Waarschuwing, tip en uitleg</p>
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:28px; display:flex; flex-direction:column; gap:14px;">
+            <label style="display:flex; flex-direction:column; gap:6px; max-width:320px;">
+              <span style="font-size:13px; font-weight:500;">Budget per dag</span>
+              <span style="position:relative; display:block;">
+                <span style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--ink-muted);">€</span>
+                <input type="text" inputmode="numeric" value="{{ budget }}" onChange="{{ onBudget }}" aria-invalid="{{ budgetLow }}" style="width:100%; height:44px; padding:0 14px 0 30px; border-radius:10px; border:1px solid {{ budgetBd }}; background:var(--surface-sunken); color:var(--ink); font-size:15px; font-variant-numeric:tabular-nums;">
+              </span>
+              <span style="font-size:13px; color:{{ budgetHelpFg }};">{{ budgetHelp }}</span>
+            </label>
+            <sc-if value="{{ showBudgetWarn }}" hint-placeholder-val="{{ true }}">
+              <div role="alert" style="display:flex; gap:12px; padding:16px 18px; border:1px solid var(--act); background:var(--act-tint); border-radius:12px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:var(--act); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>
+                <div style="display:flex; flex-direction:column; gap:8px; min-width:0;">
+                  <b style="font-weight:500; color:var(--act);">Pas op, dit raden we niet aan.</b>
+                  <span style="font-size:14px; color:var(--ink);">Met minder dan €10 per dag (€30 voor een webshop) krijgt Meta te weinig resultaten binnen om te leren wie je klanten zijn. Je campagne blijft dan lang in de leerfase.</span>
+                  <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px 18px;">
+                    <a href="#" style="font-size:14px; font-weight:500; border-bottom:1px solid var(--line-strong);">Waarom?</a>
+                    <button type="button" onClick="{{ acceptBudget }}" style="height:34px; padding:0 14px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:13.5px; font-weight:500; cursor:pointer;">Toch doorgaan</button>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
+            <aside style="background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:8px;">
+              <span style="display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:500; color:var(--ink-muted);"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg>Tip uit het playbook</span>
+              <p style="margin:0; font-size:14.5px;">Laat je budget de eerste week met rust. Elke grote wijziging start de leerfase opnieuw.</p>
+              <a href="#" style="align-self:flex-start; font-size:13.5px; font-weight:500; border-bottom:1px solid var(--line-strong);">Meer in de Academy</a>
+            </aside>
+
+            <div style="background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:10px;">
+              <span style="font-size:12.5px; font-weight:500; color:var(--ink-muted);">Vakwoord met uitleg · hover of tik</span>
+              <p style="margin:0; font-size:14.5px; position:relative;">Je campagne haalde een
+                <span tabindex="0" role="button" aria-describedby="uitleg-roas" onMouseEnter="{{ th.termOn }}" onMouseLeave="{{ th.termOff }}" onFocus="{{ th.termOn }}" onBlur="{{ th.termOff }}" onClick="{{ th.termOn }}" style="border-bottom:1px dotted var(--ink-muted); cursor:help;">ROAS</span>
+                van 2,28.
+                <sc-if value="{{ th.termOpen }}" hint-placeholder-val="{{ false }}">
+                  <span id="uitleg-roas" role="tooltip" style="position:absolute; z-index:5; left:0; top:calc(100% + 8px); width:min(300px, 100%); display:flex; flex-direction:column; gap:6px; padding:14px 16px; background:var(--surface); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow-float); font-size:13.5px;">
+                    <b style="font-weight:500; font-size:15px;">ROAS</b>
+                    <span>Omzet gedeeld door wat je advertenties kostten.</span>
+                    <span><b style="font-weight:500;">In jouw cijfers:</b> je gaf €280 uit en verkocht voor €638. 638 / 280 = 2,28.</span>
+                    <a href="#" style="align-self:flex-start; font-weight:500; border-bottom:1px solid var(--line-strong);">Les: je cijfers</a>
+                  </span>
+                </sc-if>
+              </p>
+              <div style="display:flex; flex-direction:column; gap:6px; margin-top:6px; padding:14px 16px; border:1px solid var(--line); border-radius:12px; font-size:13.5px;">
+                <b style="font-weight:500; font-size:15px;">Break-even ROAS</b>
+                <span>De ROAS waarboven je geld verdient aan je advertenties: 1 gedeeld door je marge.</span>
+                <span><b style="font-weight:500;">In jouw cijfers:</b> 40% marge, dus 1 / 0,40 = 2,5.</span>
+                <a href="#" style="align-self:flex-start; font-weight:500; border-bottom:1px solid var(--line-strong);">Les: break-even</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 07 Actiekaarten -->
+        <section style="display:flex; flex-direction:column; gap:16px;">
+          <p style="display:flex; align-items:center; gap:12px; margin:0; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-muted);"><span aria-hidden="true" style="display:inline-flex; align-items:center; gap:4px; flex:none;"><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-roos);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-citroen);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-munt);"></span></span>07 · Actiekaarten, de kern van Vandaag</p>
+
+          <sc-if value="{{ a4Open }}" hint-placeholder-val="{{ true }}">
+            <article style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:16px;">
+              <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+                <span style="display:inline-flex; align-items:center; gap:8px; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; font-weight:500;"><span style="width:7px; height:7px; border-radius:50%; background:{{ topDot }}; flex:none;"></span>Voorstel van AdSweet</span>
+                <span style="display:inline-flex; align-items:center; gap:6px; height:26px; padding:0 10px 0 8px; border-radius:999px; background:var(--act-tint); color:var(--act); font-size:13px; font-weight:500;"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>Actie nodig</span>
+              </div>
+              <h3 style="margin:0; font-size:21px; font-weight:500; letter-spacing:-.015em; line-height:1.25; text-wrap:pretty;">Lisa, ‘Sfeerbeeld woonkamer’ gaf €72 uit zonder verkoop.</h3>
+              <div style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+                <div style="padding:12px 12px 12px 0;"><span style="display:block; font-size:12.5px; color:var(--ink-muted);">Uitgegeven</span><span style="font-size:20px; font-weight:500;">€72</span></div>
+                <div style="padding:12px; border-left:1px solid var(--line);"><span style="display:block; font-size:12.5px; color:var(--ink-muted);">Verkopen</span><span style="font-size:20px; font-weight:500;">0</span></div>
+                <div style="padding:12px; border-left:1px solid var(--line);"><span style="display:block; font-size:12.5px; color:var(--ink-muted);">Grens, 3 × €23,20</span><span style="font-size:20px; font-weight:500;">€69,60</span></div>
+              </div>
+              <p style="margin:0;">Kijk, we zien dat deze ad het niet goed doet. Misschien moet je hem stilaan afzetten.</p>
+              <p style="margin:0; font-size:14px; color:var(--ink-muted);">Je maximale <span style="border-bottom:1px dotted var(--ink-muted);">kost per verkoop</span> is €23,20. Drie keer dat is €69,60, en die grens is voorbij.</p>
+              <sc-if value="{{ whyOpen }}" hint-placeholder-val="{{ false }}">
+                <div style="padding:14px 16px; border:1px solid var(--line); border-radius:12px; font-size:14px; display:flex; flex-direction:column; gap:4px;">
+                  <span>Orderwaarde €58 × marge 40% = €23,20 per verkoop.</span>
+                  <span>3 × €23,20 = €69,60. Deze advertentie gaf €72 uit, zonder één verkoop.</span>
+                  <a href="#" style="align-self:flex-start; margin-top:4px; font-weight:500; border-bottom:1px solid var(--line-strong);">Les: winnaars schalen en verliezers afzetten</a>
+                </div>
+              </sc-if>
+              <p style="margin:0; display:flex; gap:8px; font-size:13.5px; color:var(--ink-muted);"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none; margin-top:2px;"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg><span>Tip uit het playbook: laat een advertentie niet langer lopen dan 3 keer je doel zonder resultaat.</span></p>
+              <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px 16px;">
+                <button type="button" onClick="{{ a4Off }}" style="display:inline-flex; align-items:center; gap:10px; height:40px; padding:0 18px; border:0; border-radius:999px; background:var(--ink); color:var(--ground); font-size:14px; font-weight:500; cursor:pointer; transition:gap 300ms cubic-bezier(.2,.7,.2,1), padding 300ms cubic-bezier(.2,.7,.2,1);" style-hover="gap:13px; padding-right:15px;">Zet hem af<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+                <button type="button" aria-expanded="{{ whyAria }}" onClick="{{ toggleWhy }}" style="display:inline-flex; align-items:center; height:40px; padding:0 18px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer;" style-hover="border-color:var(--ink);">Waarom?</button>
+                <button type="button" onClick="{{ a4Later }}" style="padding:4px 0; border:0; border-bottom:1px solid var(--line-strong); background:none; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer;">Later</button>
+              </div>
+            </article>
+          </sc-if>
+
+          <sc-if value="{{ a4IsOff }}" hint-placeholder-val="{{ false }}">
+            <article style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:16px;">
+              <span style="display:inline-flex; align-items:center; gap:8px; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; font-weight:500;"><span style="width:7px; height:7px; border-radius:50%; background:{{ topDot }}; flex:none;"></span>Voorstel van AdSweet</span>
+              <h3 style="margin:0; font-size:21px; font-weight:500; letter-spacing:-.015em; line-height:1.25; text-wrap:pretty;">Zonder deze advertentie zit je campagne op een ROAS van 3,07, boven je break-even van 2,5. Verhoog je budget van €40 naar €48 per dag?</h3>
+              <p style="margin:0; font-size:14px; color:var(--ink-muted);">€208 uitgegeven, €638 omzet. Een winnaar schaal je via het budget van de campagne, met [schaalstappen PJ], hier +20%.</p>
+              <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px 16px;">
+                <button type="button" onClick="{{ a4Raise }}" style="display:inline-flex; align-items:center; gap:10px; height:40px; padding:0 18px; border:0; border-radius:999px; background:var(--ink); color:var(--ground); font-size:14px; font-weight:500; cursor:pointer; transition:gap 300ms cubic-bezier(.2,.7,.2,1), padding 300ms cubic-bezier(.2,.7,.2,1);" style-hover="gap:13px; padding-right:15px;">Verhoog naar €48<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+                <button type="button" style="display:inline-flex; align-items:center; height:40px; padding:0 18px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer;" style-hover="border-color:var(--ink);">Waarom?</button>
+                <button type="button" onClick="{{ a4Later }}" style="padding:4px 0; border:0; border-bottom:1px solid var(--line-strong); background:none; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer;">Later</button>
+              </div>
+            </article>
+          </sc-if>
+
+          <sc-if value="{{ a4IsDone }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; padding:18px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+              <span style="color:var(--ink-muted);">{{ a4DoneText }}</span>
+              <button type="button" onClick="{{ a4Reset }}" style="padding:4px 0; border:0; border-bottom:1px solid var(--line-strong); background:none; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer;">Speel de demo opnieuw</button>
+            </div>
+          </sc-if>
+
+          <article style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+              <span style="display:inline-flex; align-items:center; gap:8px; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; font-weight:500;"><span style="width:7px; height:7px; border-radius:50%; background:var(--ink-muted); flex:none;"></span>Voorstel van AdSweet</span>
+              <span style="display:inline-flex; align-items:center; gap:6px; height:26px; padding:0 10px 0 8px; border-radius:999px; background:var(--warn-tint); color:var(--warn); font-size:13px; font-weight:500;"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>Let op</span>
+            </div>
+            <h3 style="margin:0; font-size:21px; font-weight:500; letter-spacing:-.015em; line-height:1.25; text-wrap:pretty;">Bij ‘Zo gieten we ze’ werd muziek aangezet in Ads Manager.</h3>
+            <div style="display:flex; gap:12px; padding:16px 18px; border:1px solid var(--act); background:var(--act-tint); border-radius:12px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:var(--act); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>
+              <div style="display:flex; flex-direction:column; gap:6px; min-width:0;">
+                <b style="font-weight:500; color:var(--act);">Pas op, dit raden we niet aan.</b>
+                <span style="font-size:14px; color:var(--ink);">Dan past Meta je advertentie zelf aan: muziek, tekst op je beeld, een uitgerekt beeld. Je advertentie ziet er dan niet meer uit zoals jij hem goedkeurde.</span>
+                <a href="#" style="align-self:flex-start; font-size:14px; font-weight:500; border-bottom:1px solid var(--line-strong);">Waarom?</a>
+              </div>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px 16px;">
+              <button type="button" style="display:inline-flex; align-items:center; gap:10px; height:40px; padding:0 18px; border:0; border-radius:999px; background:var(--ink); color:var(--ground); font-size:14px; font-weight:500; cursor:pointer; transition:gap 300ms cubic-bezier(.2,.7,.2,1), padding 300ms cubic-bezier(.2,.7,.2,1);" style-hover="gap:13px; padding-right:15px;">Terug uitzetten<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+              <button type="button" style="display:inline-flex; align-items:center; height:40px; padding:0 18px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer;" style-hover="border-color:var(--ink);">Zo laten</button>
+            </div>
+          </article>
+          <p style="margin:0; font-size:13px; color:var(--ink-muted);">Alleen de bovenste kaart krijgt een robijn punt. Staat er een Sweetmoment op het scherm, dan krijgt dat het robijn en zijn alle punten ink-muted.</p>
+        </section>
+
+        <!-- 08 Cijfers -->
+        <section style="display:flex; flex-direction:column; gap:16px;">
+          <p style="display:flex; align-items:center; gap:12px; margin:0; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-muted);"><span aria-hidden="true" style="display:inline-flex; align-items:center; gap:4px; flex:none;"><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-roos);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-citroen);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-munt);"></span></span>08 · EuroTegel, advertentiekaart en funnelbalk</p>
+
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div style="display:flex; align-items:stretch; flex-wrap:wrap; gap:8px;">
+              <div style="flex:1 1 110px; min-width:0; padding:16px; border:1px solid var(--line); border-radius:12px; background:var(--surface);"><span style="display:block; font-size:12.5px; color:var(--ink-muted);">Uitgegeven</span><span style="font-size:28px; letter-spacing:-.03em; color:var(--ink-muted);">€280</span></div>
+              <span style="align-self:center; color:var(--ink-muted); display:flex;"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round;"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span>
+              <div style="flex:1 1 110px; min-width:0; padding:16px; border:1px solid var(--line); border-radius:12px; background:var(--surface);"><span style="display:block; font-size:12.5px; color:var(--ink-muted);">Verkopen</span><span style="font-size:28px; letter-spacing:-.03em; color:var(--ink-muted);">11</span></div>
+              <span style="align-self:center; color:var(--ink-muted); display:flex;"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round;"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span>
+              <div style="flex:1 1 110px; min-width:0; padding:16px; border:1px solid var(--line); border-radius:12px; background:var(--surface);"><span style="display:block; font-size:12.5px; color:var(--ink-muted);">Omzet</span><span style="font-size:28px; letter-spacing:-.03em; color:var(--ink-muted);">€638</span></div>
+              <span style="align-self:center; color:var(--ink-muted); display:flex;"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round;"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span>
+              <div style="flex:1 1 110px; min-width:0; padding:16px; border:1px solid var(--ink); border-radius:12px; background:var(--surface);"><span style="display:block; font-size:12.5px; color:var(--ink-muted);"><span style="border-bottom:1px dotted var(--ink-muted);">ROAS</span></span><span style="font-size:28px; font-weight:500; letter-spacing:-.03em; color:var(--ink);">2,28</span></div>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px 16px;">
+              <span style="display:flex; align-items:center; gap:10px; font-size:13px; color:var(--ink-muted);">Lisa · laatste 7 dagen <span style="font-size:11px; letter-spacing:.08em; text-transform:uppercase; padding:2px 8px; border:1px solid var(--line-strong); border-radius:999px;">Voorbeeld</span></span>
+              <span style="display:flex; align-items:center; gap:10px; font-size:14px;">Je break-even is 2,5<span style="display:inline-flex; align-items:center; gap:6px; height:26px; padding:0 10px 0 8px; border-radius:999px; background:var(--warn-tint); color:var(--warn); font-size:13px; font-weight:500;"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>Let op</span></span>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:12px; padding-top:8px;">
+            <div style="display:flex; align-items:stretch; flex-wrap:wrap; gap:8px;">
+              <div style="flex:1 1 130px; min-width:0; padding:16px; border:1px solid var(--line); border-radius:12px; background:var(--surface);"><span style="display:block; font-size:12.5px; color:var(--ink-muted);">Uitgegeven</span><span style="font-size:28px; letter-spacing:-.03em; color:var(--ink-muted);">€105</span></div>
+              <span style="align-self:center; color:var(--ink-muted); display:flex;"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round;"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span>
+              <div style="flex:1 1 130px; min-width:0; padding:16px; border:1px solid var(--line); border-radius:12px; background:var(--surface);"><span style="display:block; font-size:12.5px; color:var(--ink-muted);">Aanvragen</span><span style="font-size:28px; letter-spacing:-.03em; color:var(--ink-muted);">5</span></div>
+              <span style="align-self:center; color:var(--ink-muted); display:flex;"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round;"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span>
+              <div style="flex:1 1 130px; min-width:0; padding:16px; border:1px solid var(--ink); border-radius:12px; background:var(--surface);"><span style="display:block; font-size:12.5px; color:var(--ink-muted);"><span style="border-bottom:1px dotted var(--ink-muted);">Kost per aanvraag</span></span><span style="font-size:28px; font-weight:500; letter-spacing:-.03em; color:var(--ink);">€21,00</span></div>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px 16px;">
+              <span style="display:flex; align-items:center; gap:10px; font-size:13px; color:var(--ink-muted);">Tom · laatste 7 dagen <span style="font-size:11px; letter-spacing:.08em; text-transform:uppercase; padding:2px 8px; border:1px solid var(--line-strong); border-radius:999px;">Voorbeeld</span></span>
+              <span style="display:flex; align-items:center; gap:10px; font-size:14px;">Je doel is €20<span style="display:inline-flex; align-items:center; gap:6px; height:26px; padding:0 10px 0 8px; border-radius:999px; background:var(--warn-tint); color:var(--warn); font-size:13px; font-weight:500;"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>Let op</span></span>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px; padding-top:8px;">
+            <sc-for list="{{ adCards }}" as="ad" hint-placeholder-count="2">
+              <div style="display:flex; gap:14px; padding:14px; background:var(--surface); border:1px solid var(--line); border-radius:16px; min-width:0;">
+                <div aria-hidden="true" style="flex:none; width:64px; aspect-ratio:4/5; border-radius:8px; border:1px solid var(--line); background:repeating-linear-gradient(135deg, var(--surface-sunken) 0 6px, var(--surface) 6px 12px); display:grid; place-items:center; color:var(--ink-muted);">{{ ad.icon }}</div>
+                <div style="display:flex; flex-direction:column; gap:8px; min-width:0; flex:1;">
+                  <span style="font-weight:500; line-height:1.3;">{{ ad.name }}</span>
+                  <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                    <span style="height:22px; padding:0 8px; display:inline-flex; align-items:center; border-radius:999px; background:{{ ad.faseBg }}; color:#151514; font-size:12px; font-weight:500;">{{ ad.fase }}</span>
+                    <span style="display:inline-flex; align-items:center; gap:5px; height:22px; padding:0 8px 0 6px; border-radius:999px; background:{{ ad.lbl.bg }}; color:{{ ad.lbl.fg }}; font-size:12px; font-weight:500; white-space:nowrap;">{{ ad.lbl.icon }}{{ ad.lbl.t }}</span>
+                  </div>
+                  <div style="display:flex; gap:16px; font-size:13.5px;">
+                    <span><span style="color:var(--ink-muted);">{{ ad.k1 }}</span> {{ ad.v1 }}</span>
+                    <span><span style="color:var(--ink-muted);">{{ ad.k2 }}</span> {{ ad.v2 }}</span>
+                  </div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px;">
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <span style="font-size:13px; color:var(--ink-muted);">Funnelbalk · Lisa</span>
+              <div style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:6px;">
+                <div style="padding:10px 12px; border-radius:10px; background:var(--staal); color:#151514;"><span style="display:block; font-size:12px;">Top</span><b style="font-weight:500;">2 ads</b></div>
+                <div style="padding:10px 12px; border-radius:10px; background:var(--salie); color:#151514;"><span style="display:block; font-size:12px;">Middle</span><b style="font-weight:500;">2 ads</b></div>
+                <div style="padding:10px 12px; border-radius:10px; background:var(--klei); color:#151514;"><span style="display:block; font-size:12px;">Bottom</span><b style="font-weight:500;">1 ad</b></div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <span style="font-size:13px; color:var(--ink-muted);">Funnelbalk · fase ontbreekt</span>
+              <div style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:6px;">
+                <div style="padding:10px 12px; border-radius:10px; background:var(--staal); color:#151514;"><span style="display:block; font-size:12px;">Top</span><b style="font-weight:500;">3 ads</b></div>
+                <div style="padding:10px 12px; border-radius:10px; background:var(--salie); color:#151514;"><span style="display:block; font-size:12px;">Middle</span><b style="font-weight:500;">2 ads</b></div>
+                <div style="padding:9px 11px; border-radius:10px; border:1px dashed var(--line-strong); color:var(--ink-muted);"><span style="display:block; font-size:12px;">Bottom</span><b style="font-weight:500;">Ontbreekt</b></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 09 Preview-kaders -->
+        <section style="display:flex; flex-direction:column; gap:16px;">
+          <p style="display:flex; align-items:center; gap:12px; margin:0; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-muted);"><span aria-hidden="true" style="display:inline-flex; align-items:center; gap:4px; flex:none;"><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-roos);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-citroen);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-munt);"></span></span>09 · Preview-kaders per plaatsing</p>
+          <div style="display:flex; flex-wrap:wrap; align-items:flex-start; gap:16px;">
+            <figure style="margin:0; display:flex; flex-direction:column; gap:8px; width:230px; flex:none;">
+              <div style="background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px; display:flex; flex-direction:column; gap:10px;">
+                <div style="display:flex; align-items:center; gap:8px;"><span style="width:26px; height:26px; border-radius:50%; background:var(--roos); color:#151514; display:grid; place-items:center; font-size:11.5px; font-weight:500;">N</span><span style="font-size:13px; font-weight:500;">Atelier Noor</span></div>
+                <p style="margin:0; font-size:12.5px; line-height:1.4;">Elke kaars gieten we met de hand, in kleine reeksen.</p>
+                <div style="aspect-ratio:4/5; border-radius:8px; border:1px solid var(--line); background:repeating-linear-gradient(135deg, var(--surface-sunken) 0 6px, var(--surface) 6px 12px); display:grid; place-items:center; font-size:11.5px; color:var(--ink-muted); text-align:center; padding:12px;">video 4:5 · kaars wordt aangestoken</div>
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;"><span style="font-size:13px; font-weight:500;">Handgemaakte kaarsen</span><span style="height:28px; padding:0 12px; display:inline-flex; align-items:center; border:1px solid var(--line-strong); border-radius:999px; font-size:12.5px; font-weight:500; white-space:nowrap;">Nu kopen</span></div>
+              </div>
+              <figcaption style="font-size:12.5px; color:var(--ink-muted);">Feed · 4:5</figcaption>
+            </figure>
+            <figure style="margin:0; display:flex; flex-direction:column; gap:8px; width:170px; flex:none;">
+              <div style="position:relative; aspect-ratio:9/16; background:repeating-linear-gradient(135deg, var(--surface-sunken) 0 6px, var(--surface) 6px 12px); border:1px solid var(--line); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; justify-content:space-between; padding:12px;">
+                <div style="display:flex; align-items:center; gap:8px;"><span style="width:22px; height:22px; border-radius:50%; background:var(--roos); color:#151514; display:grid; place-items:center; font-size:10.5px; font-weight:500;">N</span><span style="font-size:12px; font-weight:500;">Atelier Noor</span></div>
+                <span style="font-size:11.5px; color:var(--ink-muted); text-align:center;">video 9:16</span>
+                <span style="align-self:center; height:28px; padding:0 14px; display:inline-flex; align-items:center; background:var(--surface); border:1px solid var(--line-strong); border-radius:999px; font-size:12.5px; font-weight:500;">Nu kopen</span>
+              </div>
+              <figcaption style="font-size:12.5px; color:var(--ink-muted);">Stories · 9:16</figcaption>
+            </figure>
+            <figure style="margin:0; display:flex; flex-direction:column; gap:8px; width:170px; flex:none;">
+              <div style="position:relative; aspect-ratio:9/16; background:repeating-linear-gradient(135deg, var(--surface-sunken) 0 6px, var(--surface) 6px 12px); border:1px solid var(--line); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end; gap:8px; padding:12px;">
+                <span style="position:absolute; inset:0; display:grid; place-items:center; font-size:11.5px; color:var(--ink-muted);">video 9:16</span>
+                <div style="position:relative; display:flex; flex-direction:column; gap:6px; padding:10px; background:var(--surface); border:1px solid var(--line); border-radius:10px;">
+                  <span style="font-size:12px; font-weight:500;">Atelier Noor</span>
+                  <span style="font-size:11.5px; line-height:1.35;">Elke kaars gieten we met de hand.</span>
+                  <span style="align-self:flex-start; height:26px; padding:0 12px; display:inline-flex; align-items:center; border:1px solid var(--line-strong); border-radius:999px; font-size:12px; font-weight:500;">Nu kopen</span>
+                </div>
+              </div>
+              <figcaption style="font-size:12.5px; color:var(--ink-muted);">Reels · 9:16</figcaption>
+            </figure>
+          </div>
+          <p style="margin:0; font-size:13px; color:var(--ink-muted);">Neutraal kader in surface: paginanaam als tekst, het beeld, de tekst en de call-to-action als pil. Geen iconen of knoppen van Meta.</p>
+        </section>
+
+        <!-- 10 Meters -->
+        <section style="display:flex; flex-direction:column; gap:16px;">
+          <p style="display:flex; align-items:center; gap:12px; margin:0; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-muted);"><span aria-hidden="true" style="display:inline-flex; align-items:center; gap:4px; flex:none;"><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-roos);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-citroen);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-munt);"></span></span>10 · Meters en balken</p>
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;"><span style="font-weight:500;">Nog 18 van je 50 credits in je proefperiode</span><span style="font-size:12.5px; color:var(--ink-muted);">32 gebruikt</span></div>
+            <div role="meter" aria-valuemin="0" aria-valuemax="50" aria-valuenow="18" aria-label="Credits over" style="height:6px; border-radius:999px; background:var(--surface-sunken); overflow:hidden;"><div style="width:64%; height:100%; background:var(--ink); border-radius:999px;"></div></div>
+            <span style="font-size:13px; color:var(--ink-muted);">3 AI-beelden aan 10 credits en 2 tekstsets aan 1 credit.</span>
+          </div>
+
+          <div style="border:1px solid var(--line); border-radius:16px; overflow:hidden;">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px 16px; padding:10px 16px; background:var(--surface); border-bottom:1px solid var(--line); font-size:13.5px;">
+              <span>Nog 8 dagen gratis. Je eerste betaling is op 16 december.</span>
+              <a href="#" style="font-weight:500; border-bottom:1px solid var(--line-strong);">Plan beheren</a>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px 16px; padding:10px 16px; background:var(--warn-tint); color:var(--warn); font-size:13.5px;">
+              <span style="display:flex; align-items:center; gap:8px;"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>Let op: nog 3 dagen gratis. Je eerste betaling is op 16 december.</span>
+              <a href="#" style="color:var(--warn); font-weight:500; border-bottom:1px solid currentColor;">Plan beheren</a>
+            </div>
+            <div style="padding:8px 16px; font-size:12.5px; color:var(--ink-muted);">Proefperiodebalk: normaal, en vanaf dag 27 in Let op.</div>
+          </div>
+
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;"><span style="font-weight:500;">Stap {{ step }} van 11</span><span style="font-size:12.5px; color:var(--ink-muted);">{{ minLeft }}</span></div>
+            <div role="progressbar" aria-valuemin="1" aria-valuemax="11" aria-valuenow="{{ step }}" aria-label="Voortgang onboarding" style="height:4px; border-radius:999px; background:var(--surface-sunken); overflow:hidden;"><div style="width:{{ stepPct }}; height:100%; background:var(--ink); border-radius:999px; transition:width 300ms cubic-bezier(.2,.7,.2,1);"></div></div>
+            <span style="font-size:13px; color:var(--ink-muted);">Voortgang van de onboarding. Klik in de stappenbalk hierboven om te wisselen.</span>
+          </div>
+        </section>
+
+        <!-- 11 Meldingen en staten -->
+        <section style="display:flex; flex-direction:column; gap:16px;">
+          <p style="display:flex; align-items:center; gap:12px; margin:0; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-muted);"><span aria-hidden="true" style="display:inline-flex; align-items:center; gap:4px; flex:none;"><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-roos);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-citroen);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-munt);"></span></span>11 · Melding, staten, plan en Sweetmoment</p>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; padding:16px 20px; background:var(--surface); border:1px solid var(--line); border-radius:16px;">
+            <span style="font-size:14px;">Melding met “Ongedaan maken”, zwevend onderaan.</span>
+            <button type="button" onClick="{{ showToast }}" style="display:inline-flex; align-items:center; height:40px; padding:0 18px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer;" style-hover="border-color:var(--ink);">Toon de melding</button>
+          </div>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
+            <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:28px 24px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px;">
+              <img src="assets/sculptuur-voorbeeld-licht.jpg" alt="" style="display:var(--show-light); width:150px; height:auto; -webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 50%, #000 55%, transparent 100%); mask-image:radial-gradient(ellipse 50% 50% at 50% 50%, #000 55%, transparent 100%);">
+              <img src="assets/sculptuur-voorbeeld-nacht.jpg" alt="" style="display:var(--show-dark); width:150px; height:auto; -webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 50%, #000 55%, transparent 100%); mask-image:radial-gradient(ellipse 50% 50% at 50% 50%, #000 55%, transparent 100%);">
+              <p style="margin:0; color:var(--ink-muted); max-width:260px;">Je hebt nog geen campagnes. Je eerste staat klaar in een paar minuten.</p>
+              <button type="button" style="display:inline-flex; align-items:center; gap:10px; height:40px; padding:0 18px; border:0; border-radius:999px; background:var(--ink); color:var(--ground); font-size:14px; font-weight:500; cursor:pointer;">Start je eerste campagne</button>
+              <span style="font-size:12.5px; color:var(--ink-muted);">Lege staat</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:16px;">
+              <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:22px 24px; display:flex; flex-direction:column; gap:10px;">
+                <span style="align-self:flex-start; display:inline-flex; align-items:center; gap:6px; height:26px; padding:0 10px 0 8px; border-radius:999px; background:var(--act-tint); color:var(--act); font-size:13px; font-weight:500;"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>Actie nodig</span>
+                <span style="font-weight:500;">We konden je cijfers van Meta niet ophalen.</span>
+                <span style="font-size:14px; color:var(--ink-muted);">Meta antwoordt even niet. Je advertenties lopen gewoon door.</span>
+                <button type="button" style="align-self:flex-start; display:inline-flex; align-items:center; height:40px; padding:0 18px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer;" style-hover="border-color:var(--ink);">Opnieuw proberen</button>
+                <span style="font-size:12.5px; color:var(--ink-muted);">Foutstaat</span>
+              </div>
+              <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:22px 24px; display:flex; flex-direction:column; gap:10px;">
+                <div role="status" style="display:flex; align-items:center; gap:12px;">{{ loader }}<span>{{ loaderText }}</span></div>
+                <span style="font-size:12.5px; color:var(--ink-muted);">Laadstaat · drie lijnen naar één punt, 1,2 s</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="position:relative; min-height:280px; background:var(--surface); border:1px solid var(--line); border-radius:16px; overflow:hidden;">
+            <div aria-hidden="true" style="opacity:.3; pointer-events:none; padding:24px; display:flex; flex-direction:column; gap:16px;">
+              <span style="font-size:30px; font-weight:500; letter-spacing:-.03em;">Studio</span>
+              <div style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:12px;">
+                <div style="aspect-ratio:4/5; border-radius:10px; background:repeating-linear-gradient(135deg, var(--surface-sunken) 0 6px, var(--surface) 6px 12px);"></div>
+                <div style="aspect-ratio:4/5; border-radius:10px; background:repeating-linear-gradient(135deg, var(--surface-sunken) 0 6px, var(--surface) 6px 12px);"></div>
+                <div style="aspect-ratio:4/5; border-radius:10px; background:repeating-linear-gradient(135deg, var(--surface-sunken) 0 6px, var(--surface) 6px 12px);"></div>
+              </div>
+            </div>
+            <div style="position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); width:min(340px, calc(100% - 40px)); padding:22px; background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow-float); display:flex; flex-direction:column; gap:10px;">
+              <span style="display:flex; align-items:center; gap:8px; color:var(--ink-muted); font-size:12.5px; font-weight:500;"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>Pro</span>
+              <b style="font-size:20px; font-weight:500; letter-spacing:-.015em;">Dit zit in Pro.</b>
+              <span style="font-size:14px; color:var(--ink-muted);">Met Pro maakt AdSweet zelf beelden, teksten en videoscripts voor de fase die je mist.</span>
+              <button type="button" style="align-self:flex-start; margin-top:4px; display:inline-flex; align-items:center; gap:10px; height:40px; padding:0 18px; border:0; border-radius:999px; background:var(--ink); color:var(--ground); font-size:14px; font-weight:500; cursor:pointer; transition:gap 300ms cubic-bezier(.2,.7,.2,1), padding 300ms cubic-bezier(.2,.7,.2,1);" style-hover="gap:13px; padding-right:15px;">Bekijk de plannen<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+            </div>
+          </div>
+
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:14px;">
+            <div style="display:flex; align-items:center; gap:10px;">{{ sweetDot }}<span style="font-size:16px; font-weight:500;">Sweet! 3 nieuwe verkopen sinds gisteren.</span></div>
+            <div style="display:flex; align-items:baseline; gap:10px;"><span style="font-size:56px; font-weight:500; letter-spacing:-.04em; line-height:1;">{{ sweetVal }}</span><span style="color:var(--ink-muted);">verkopen, laatste 7 dagen</span></div>
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+              <span style="font-size:12.5px; color:var(--ink-muted);">Sweetmoment · het getal telt op, het punt pulseert één keer. Verder niets.</span>
+              <button type="button" onClick="{{ replaySweet }}" style="padding:4px 0; border:0; border-bottom:1px solid var(--line-strong); background:none; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer;">Speel opnieuw af</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 12 Dot -->
+        <section style="display:flex; flex-direction:column; gap:16px;">
+          <p style="display:flex; align-items:center; gap:12px; margin:0; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-muted);"><span aria-hidden="true" style="display:inline-flex; align-items:center; gap:4px; flex:none;"><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-roos);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-citroen);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-munt);"></span></span><span>12 · {{ naam }}, de assistent</span></p>
+          <div style="position:relative; height:260px; background:var(--ground); border:1px solid var(--line); border-radius:16px; overflow:hidden;">
+            <div style="position:absolute; left:24px; top:22px; display:flex; flex-direction:column; gap:8px; max-width:calc(100% - 48px);">
+              <span style="font-size:13px; color:var(--ink-muted);">Dot, het karakter van AdSweet. 64px op de computer, 54px op de gsm. Alle stemmingen staan in Dot.dc.html.</span>
+              <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                <button type="button" onClick="{{ parelTalk }}" style="height:32px; padding:0 12px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:13px; font-weight:500; cursor:pointer;">Iets te zeggen</button>
+                <button type="button" onClick="{{ parelThink }}" style="height:32px; padding:0 12px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:13px; font-weight:500; cursor:pointer;">Denkt na</button>
+                <button type="button" onClick="{{ parelRest }}" style="height:32px; padding:0 12px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:13px; font-weight:500; cursor:pointer;">Rust</button>
+              </div>
+            </div>
+            <sc-if value="{{ parelSays }}" hint-placeholder-val="{{ true }}">
+              <div role="status" style="position:absolute; right:24px; bottom:92px; max-width:min(280px, calc(100% - 48px)); padding:14px 16px; background:var(--surface); border:1px solid var(--line); border-radius:16px 16px 4px 16px; box-shadow:var(--shadow-float); display:flex; flex-direction:column; gap:8px;">
+                <span style="font-size:14.5px;">Lisa, ik heb 5 dingen voor vandaag.</span>
+                <a href="#" style="align-self:flex-start; font-size:13.5px; font-weight:500; border-bottom:1px solid var(--line-strong);">Bekijk ze</a>
+              </div>
+            </sc-if>
+            <sc-if value="{{ parelThinks }}" hint-placeholder-val="{{ false }}">
+              <div role="status" style="position:absolute; right:24px; bottom:92px; padding:12px 16px; background:var(--surface); border:1px solid var(--line); border-radius:16px 16px 4px 16px; box-shadow:var(--shadow-float); display:flex; align-items:center; gap:12px; font-size:14px;">{{ loader }}<span>Even kijken in je cijfers.</span></div>
+            </sc-if>
+            <div style="position:absolute; right:24px; bottom:24px; display:flex; align-items:flex-end; gap:16px;">
+              <button type="button" aria-label="Open {{ naam }}" style="padding:0; border:0; background:none; border-radius:50%; cursor:pointer; box-shadow:var(--shadow-float);">{{ parel56 }}</button>
+            </div>
+            <div style="position:absolute; left:24px; bottom:24px; display:flex; align-items:flex-end; gap:20px;">
+              <figure style="margin:0; display:flex; flex-direction:column; align-items:center; gap:6px;">{{ parel48 }}<figcaption style="font-size:12px; color:var(--ink-muted);">gsm 48</figcaption></figure>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; border-top:1px solid var(--line);">
+            <div style="padding:12px 0; border-bottom:1px solid var(--line);">Het robijnrode puntje uit het logo, tot leven gekomen: het zweeft, knippert en veert.</div>
+            <div style="padding:12px 0; border-bottom:1px solid var(--line);">Iets te zeggen: {{ naam }} praat en er verschijnt één zin. Uit zichzelf hoogstens één keer per dag.</div>
+            <div style="padding:12px 0; border-bottom:1px solid var(--line);">Nadenken: de lader. De naam staat in één variabele, werknaam {{ naam }}.</div>
+          </div>
+        </section>
+
+        <!-- 13 Beweging -->
+        <section style="display:flex; flex-direction:column; gap:16px;">
+          <p style="display:flex; align-items:center; gap:12px; margin:0; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-muted);"><span aria-hidden="true" style="display:inline-flex; align-items:center; gap:4px; flex:none;"><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-roos);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-citroen);"></span><span style="width:7px; height:7px; border-radius:50%; background:var(--snoep-munt);"></span></span>13 · Beweging</p>
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:18px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+              <span style="font-size:13px; color:var(--ink-muted);">Binnenkomen: 12px omhoog, 600 ms, 60 ms na elkaar. Getallen tellen op in 600 ms.</span>
+              <button type="button" onClick="{{ replayReveal }}" style="padding:4px 0; border:0; border-bottom:1px solid var(--line-strong); background:none; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer;">Speel af</button>
+            </div>
+            {{ reveal }}
+          </div>
+          <div style="display:flex; flex-direction:column; border-top:1px solid var(--line); font-size:14px;">
+            <div style="display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-bottom:1px solid var(--line);"><span>Overgangen</span><span style="color:var(--ink-muted);">300 ms · cubic-bezier(.2,.7,.2,1)</span></div>
+            <div style="display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-bottom:1px solid var(--line);"><span>Lader</span><span style="color:var(--ink-muted);">1,2 s, altijd met een zin</span></div>
+            <div style="display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-bottom:1px solid var(--line);"><span>Dot ademt</span><span style="color:var(--ink-muted);">1,6 s, één keer</span></div>
+            <div style="display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-bottom:1px solid var(--line);"><span>prefers-reduced-motion</span><span style="color:var(--ink-muted);">alles meteen in eindtoestand</span></div>
+          </div>
+        </section>
+
+      </div>
+    </sc-for>
+  </main>
+
+  <sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+    <div data-theme="{{ chromeTheme }}" role="status" style="position:fixed; left:50%; bottom:24px; transform:translateX(-50%); z-index:50; display:flex; align-items:center; gap:16px; max-width:calc(100% - 40px); padding:10px 10px 10px 20px; background:var(--surface); color:var(--ink); border:1px solid var(--line); border-radius:999px; box-shadow:var(--shadow-float); font-size:14px;">
+      <span>{{ toastMsg }}</span>
+      <sc-if value="{{ toastUndoable }}" hint-placeholder-val="{{ true }}">
+        <button type="button" onClick="{{ toastUndo }}" style="flex:none; display:inline-flex; align-items:center; gap:6px; padding:4px 0; border:0; border-bottom:1px solid var(--line-strong); background:none; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer;"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><path d="M9 14 4 9l5-5"></path><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"></path></svg>Ongedaan maken</button>
+      </sc-if>
+      <button type="button" aria-label="Sluiten" onClick="{{ toastClose }}" style="flex:none; width:32px; height:32px; display:grid; place-items:center; border:0; border-radius:50%; background:transparent; color:var(--ink-muted); cursor:pointer;"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round;"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const NAAM = 'Dot';
+const EASE = 'cubic-bezier(.2,.7,.2,1)';
+const IC = {
+  check: [['path', { d: 'M20 6 9 17l-5-5' }]],
+  ok: [['circle', { cx: 12, cy: 12, r: 10 }], ['path', { d: 'm9 12 2 2 4-4' }]],
+  warn: [['path', { d: 'm21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3' }], ['path', { d: 'M12 9v4' }], ['path', { d: 'M12 17h.01' }]],
+  act: [['circle', { cx: 12, cy: 12, r: 10 }], ['path', { d: 'M12 8v4' }], ['path', { d: 'M12 16h.01' }]],
+  minus: [['circle', { cx: 12, cy: 12, r: 10 }], ['path', { d: 'M8 12h8' }]],
+  hourglass: [['path', { d: 'M5 22h14' }], ['path', { d: 'M5 2h14' }], ['path', { d: 'M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22' }], ['path', { d: 'M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2' }]],
+  chart: [['path', { d: 'M3 3v16a2 2 0 0 0 2 2h16' }], ['path', { d: 'M18 17V9' }], ['path', { d: 'M13 17V5' }], ['path', { d: 'M8 17v-3' }]],
+  video: [['path', { d: 'm16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5' }], ['rect', { x: 2, y: 6, width: 14, height: 12, rx: 2 }]],
+  image: [['rect', { x: 3, y: 3, width: 18, height: 18, rx: 2 }], ['circle', { cx: 9, cy: 9, r: 2 }], ['path', { d: 'm21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21' }]],
+};
+const h = React.createElement;
+function ic(name, size, sw) {
+  return h('svg', { width: size || 14, height: size || 14, viewBox: '0 0 24 24', 'aria-hidden': true,
+    style: { fill: 'none', stroke: 'currentColor', strokeWidth: sw || 1.5, strokeLinecap: 'round', strokeLinejoin: 'round', flex: 'none', display: 'block' } },
+    IC[name].map(([t, a], i) => h(t, Object.assign({ key: i }, a))));
+}
+const LBL = {
+  winnaar: ['Winnaar', 'check', 'var(--ok-tint)', 'var(--ok)'],
+  geen: ['Nog geen winnaar', 'minus', 'var(--surface-sunken)', 'var(--ink-muted)'],
+  verliezer: ['Verliezer', 'act', 'var(--act-tint)', 'var(--act)'],
+  vroeg: ['Te vroeg om te zeggen', 'hourglass', 'var(--surface-sunken)', 'var(--ink-muted)'],
+  rapport: ['Enkel rapportage', 'chart', 'var(--surface-sunken)', 'var(--ink-muted)'],
+};
+const lbl = (k, s) => { const [t, i, bg, fg] = LBL[k]; return { t, icon: ic(i, s || 13), bg, fg }; };
+const eur = (n, d) => '€' + Number(n).toLocaleString('nl-BE', { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 });
+const FASE = { Top: 'var(--staal)', Middle: 'var(--salie)', Bottom: 'var(--klei)' };
+const STEPS = ['Welkom', 'Je website', 'Je bedrijfsprofiel', 'Wat wil je bereiken?', 'Je cijfers', 'Koppelen', 'Je bestaande advertenties', 'Je strategie', 'Je eerste campagne', 'Je plan en je proefperiode', 'Live'];
+const WARN = {
+  cbo: 'Met budget op campagneniveau stuurt Meta het geld zelf naar wat het best loopt. Per ad set moet je dat telkens zelf verdelen.',
+  extra: 'Dan past Meta je advertentie zelf aan: muziek, tekst op je beeld, een uitgerekt beeld. Je advertentie ziet er dan niet meer uit zoals jij hem goedkeurde.',
+};
+
+class Component extends DCLogic {
+  state = {
+    mode: 'beide', acc: 0, sw: { cbo: true, muziek: false, tekst: false }, accepted: {}, choice: 'verkopen', tab: 'overzicht', step: 3,
+    a4: 'open', why: false, toast: null, sweetKey: 0, sweetVal: 11, parelKey: 0, parel: 'praat', term: null, revealKey: 0, countVal: 638,
+    budget: '20', budgetOk: false,
+  };
+  rafs = {};
+  componentDidMount() { this.t0 = setTimeout(() => this.replaySweet(), 500); }
+  componentWillUnmount() { clearTimeout(this.toastT); clearTimeout(this.t0); Object.values(this.rafs).forEach(cancelAnimationFrame); }
+  reduce() { return window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  count(key, from, to) {
+    cancelAnimationFrame(this.rafs[key]);
+    if (this.reduce()) return this.setState({ [key]: to });
+    const t0 = performance.now();
+    const step = (now) => {
+      const p = Math.min(1, (now - t0) / 600), e = 1 - Math.pow(1 - p, 3);
+      this.setState({ [key]: Math.round(from + (to - from) * e) });
+      if (p < 1) this.rafs[key] = requestAnimationFrame(step);
+    };
+    this.rafs[key] = requestAnimationFrame(step);
+  }
+  toast(msg, undo) {
+    clearTimeout(this.toastT);
+    this.setState({ toast: { msg, undo } });
+    this.toastT = setTimeout(() => this.setState({ toast: null }), 6000);
+  }
+  replaySweet() { this.setState(s => ({ sweetKey: s.sweetKey + 1 })); this.count('sweetVal', 8, 11); }
+  loader(key) {
+    const line = (anim, y) => h('span', { key: anim, style: { position: 'absolute', left: 2, right: 2, top: '50%', height: 1, marginTop: -0.5, background: 'var(--ink)', transform: `translateY(${y}px)`, animation: `${anim} 1.2s ${EASE} infinite` } });
+    return h('span', { key, 'aria-hidden': true, style: { position: 'relative', display: 'inline-block', width: 22, height: 14, flex: 'none' } }, [
+      line('as-l1', -5), line('as-l2', 0), line('as-l3', 5),
+      h('span', { key: 'd', style: { position: 'absolute', left: '50%', top: '50%', width: 6, height: 6, margin: '-3px 0 0 -3px', borderRadius: '50%', background: 'var(--robijn)', transform: 'scale(0)', animation: `as-dot 1.2s ${EASE} infinite` } }),
+    ]);
+  }
+  parelAvatar(size, breathe) {
+    return h('dot-karakter', { key: 'bon' + size, size: String(Math.round(size * 1.15)), mood: breathe ? 'praat' : 'rust' });
+  }
+  renderVals() {
+    const s = this.state, set = (o) => this.setState(o);
+    const mode = s.mode;
+    const themes = (mode === 'beide' ? ['light', 'dark'] : [mode]).map(id => ({
+      id, label: id === 'light' ? 'Licht' : 'Nacht', hex: id === 'light' ? '#EAE8E3' : '#111110',
+      termOpen: s.term === id, termOn: () => set({ term: id }), termOff: () => set({ term: null }),
+    }));
+    const modes = [['beide', 'Naast elkaar'], ['light', 'Licht'], ['dark', 'Nacht']].map(([id, label]) => ({
+      label, pressed: String(mode === id), bg: mode === id ? 'var(--ink)' : 'transparent', fg: mode === id ? 'var(--ground)' : 'var(--ink)', pick: () => set({ mode: id }),
+    }));
+    const swatches = [
+      ['ground', '#EAE8E3', '#111110', 'achtergrond'], ['surface', '#F5F4F0', '#1A1A19', 'kaarten, panelen, zijbalk'], ['surface-sunken', '#E2E0DA', '#0C0C0B', 'velden, tabelkoppen'],
+      ['ink', '#151514', '#F1EFEA', 'tekst, cijfers, primaire knop'], ['ink-muted', '#5F5C56', '#A8A49B', 'uitleg, metadata'], ['ink-accent', '#7A776F', '#9B978E', 'accent in titels vanaf 32px'],
+      ['line', '#15151424', '#F1EFEA24', 'haarlijnen'], ['line-strong', '#7A776F', '#6E6B65', 'randen van velden en tweede knop'],
+    ].map(([n, l, d, u]) => ({ n, l, d, u, v: `var(--${n})` }));
+    const statuses = [
+      ['In orde', 'ok', '#2E6B45 op #DCEADF', '#86C79A op #1B2A20'], ['Let op', 'warn', '#8A5410 op #F2E2C4', '#E2B062 op #2D2414'], ['Actie nodig', 'act', '#AE3A1F op #F5DCD3', '#F0937A op #341C16'],
+    ].map(([t, k, l, d]) => ({ t, l, d, icon: ic(k, 14), bg: `var(--${k}-tint)`, fg: `var(--${k})` }));
+    const series = [['tarwe', '#E8D7AE', 'lokale zaak'], ['staal', '#B8C7D9', 'top · dienstverlener · Shopify'], ['lavendel', '#CEC4EA', 'zelfstandige'], ['salie', '#BFD9C6', 'middle · Google Analytics'], ['klei', '#E9C2AE', 'bottom of funnel'], ['roos', '#EEC1D0', 'webshop']]
+      .map(([n, hex, u]) => ({ n, hex, u, v: `var(--${n})` }));
+    const kinds = [['Webshop', 'W', 'roos'], ['Dienstverlener', 'D', 'staal'], ['Lokale zaak', 'L', 'tarwe'], ['Zelfstandige', 'Z', 'lavendel']].map(([t, i, c]) => ({ t, i, v: `var(--${c})` }));
+    const labels = Object.keys(LBL).map(k => lbl(k, 14));
+
+    const switches = [['cbo', 'Budget op campagneniveau', 'Meta stuurt het geld naar wat het best loopt.'], ['muziek', 'Muziek', "Extra van Meta · staat standaard uit"], ['tekst', 'Tekst op je beeld', "Extra van Meta · staat standaard uit"]].map(([key, label, sub]) => {
+      const on = s.sw[key], deviates = key === 'cbo' ? !on : on;
+      return {
+        label, sub, aria: String(on),
+        trackBg: on ? 'var(--ink)' : 'var(--surface-sunken)', trackBd: deviates ? 'var(--act)' : on ? 'var(--ink)' : 'var(--line-strong)',
+        knobX: on ? '19px' : '3px', knobBg: on ? 'var(--ground)' : 'var(--ink-muted)',
+        showWarn: deviates && !s.accepted[key], warn: key === 'cbo' ? WARN.cbo : WARN.extra,
+        toggle: () => this.setState(st => ({ sw: Object.assign({}, st.sw, { [key]: !st.sw[key] }), accepted: Object.assign({}, st.accepted, { [key]: false }) })),
+        accept: () => this.setState(st => ({ accepted: Object.assign({}, st.accepted, { [key]: true }) })),
+      };
+    });
+    const choices = [['verkopen', 'Online verkopen', 'Je hebt een webshop.'], ['aanvragen', 'Aanvragen of afspraken', 'Een formulier, een offerte of een afspraak.'], ['zaak', 'Meer mensen in je zaak', 'Je hebt een lokale zaak.'], ['anders', 'Iets anders', 'Meer volgers, bereik of een evenement.']].map(([id, t, sub]) => {
+      const on = s.choice === id;
+      return { t, s: sub, aria: String(on), ring: on ? 'inset 0 0 0 1px var(--ink)' : 'none', dotBd: on ? 'var(--ink)' : 'var(--line-strong)', dotBg: on ? 'var(--ink)' : 'transparent', check: on ? ic('check', 12, 2) : null, pick: () => set({ choice: id }) };
+    });
+    const steps = STEPS.map((t, i) => {
+      const n = i + 1, done = n < s.step, cur = n === s.step;
+      return { t, aria: cur ? 'step' : 'false', fg: cur ? 'var(--ink)' : 'var(--ink-muted)', fw: cur ? 500 : 400,
+        bd: done || cur ? 'var(--ink)' : 'var(--line-strong)', bg: done ? 'var(--ink)' : 'transparent', nfg: done ? 'var(--ground)' : cur ? 'var(--ink)' : 'var(--ink-muted)',
+        mark: done ? ic('check', 12, 2) : String(n), pick: () => set({ step: n }) };
+    });
+    const minutes = Math.round(8 * (11 - s.step) / 10);
+    const TABS = [['overzicht', 'Overzicht', 'De EuroTegel, de structuur en het budget van deze campagne.'], ['advertenties', 'Advertenties', 'Alle advertenties met hun label, fase en cijfers.'], ['instellingen', 'Instellingen', "Doel, regio, talen, leeftijd, plaatsingen en de extra's van Meta."], ['logboek', 'Logboek', 'Elke wijziging aan deze campagne: wie, wat, van wat naar wat en wanneer.']];
+    const tabs = TABS.map(([id, label]) => ({ label, aria: String(s.tab === id), fg: s.tab === id ? 'var(--ink)' : 'var(--ink-muted)', bd: s.tab === id ? 'var(--ink)' : 'transparent', pick: () => set({ tab: id }) }));
+    const FAQ = [
+      ['Moet ik iets kennen van advertenties?', 'Nee. AdSweet stelt alles voor en legt elk woord uit. Jij keurt goed.'],
+      ['Betaal ik ook een percentage van mijn advertentiebudget?', 'Nee. Je betaalt je plan. Je advertentiebudget betaal je rechtstreeks aan Meta.'],
+      ['Zet AdSweet zelf advertenties af?', 'Nooit. Het zegt wat het ziet, jij klikt.'],
+    ];
+    const faq = FAQ.map(([q, a], i) => ({ q, a, open: s.acc === i, aria: String(s.acc === i), rot: s.acc === i ? '45deg' : '0deg', bd: i === FAQ.length - 1 ? 'transparent' : 'var(--line)', toggle: () => set({ acc: s.acc === i ? -1 : i }) }));
+    const rows = [
+      ['A1', 'Kaars wordt aangestoken', 'Video', 'Top', 82, 5, 290, '3,54', '€16,40', 'winnaar'],
+      ['A2', 'Zo gieten we ze', 'Video', 'Middle', 71, 4, 232, '3,27', '€17,75', 'winnaar'],
+      ['A3', 'Geschenkdoos', 'Foto', 'Bottom', 48, 2, 116, '2,42', '€24,00', 'geen'],
+      ['A4', 'Sfeerbeeld woonkamer', 'Foto', 'Top', 72, 0, 0, '0', 'geen', 'verliezer'],
+      ['A5', 'Klantreview', 'Foto', 'Middle', 7, 0, 0, '0', 'geen', 'vroeg'],
+    ].map(([code, name, soort, fase, sp, sa, rev, roas, cpa, l]) => ({ code, name, soort, fase, spend: eur(sp), sales: sa, rev: eur(rev), roas, cpa, lbl: lbl(l) }));
+    const adCards = [
+      { name: 'A1 · Kaars wordt aangestoken', icon: ic('video', 16), fase: 'Top', faseBg: FASE.Top, lbl: lbl('winnaar', 12), k1: 'ROAS', v1: '3,54', k2: 'Per verkoop', v2: '€16,40' },
+      { name: 'A4 · Sfeerbeeld woonkamer', icon: ic('image', 16), fase: 'Top', faseBg: FASE.Top, lbl: lbl('verliezer', 12), k1: 'Uitgegeven', v1: '€72', k2: 'Verkopen', v2: '0' },
+    ];
+
+    const budgetNum = parseFloat(String(s.budget).replace(',', '.')) || 0;
+    const budgetLow = budgetNum < 30;
+
+    const a4 = s.a4;
+    const a4DoneText = a4 === 'raised' ? 'Gedaan. Je budget staat op €48 per dag. Dit staat in je logboek.' : 'Verplaatst naar morgen.';
+    const reveal = h('div', { key: 'rv' + s.revealKey, style: { display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 10 } },
+      [['Uitgegeven', '€280'], ['Verkopen', '11'], ['Omzet', eur(s.countVal)]].map(([k, v], i) => h('div', { key: k, style: {
+        padding: 14, border: '1px solid var(--line)', borderRadius: 12, animation: `as-reveal 600ms ${EASE} ${i * 60}ms both` } }, [
+        h('span', { key: 'k', style: { display: 'block', fontSize: 12.5, color: 'var(--ink-muted)' } }, k),
+        h('span', { key: 'v', style: { fontSize: 24, fontWeight: 500, letterSpacing: '-.03em' } }, v),
+      ])));
+    const t = s.toast;
+    return {
+      naam: NAAM, themes, modes, chromeTheme: mode === 'dark' ? 'dark' : 'light',
+      swatches, statuses, series, kinds, labels, switches, choices, steps, tabs, faq, rows, adCards,
+      tabText: (TABS.find(x => x[0] === s.tab) || TABS[0])[2],
+      step: s.step, stepPct: Math.round(s.step / 11 * 100) + '%', minLeft: minutes > 0 ? `± ${minutes} minuten over` : 'Bijna klaar',
+      budget: s.budget, budgetLow: String(budgetLow), budgetBd: budgetLow ? 'var(--act)' : 'var(--line-strong)',
+      budgetHelp: budgetLow ? 'Onder het minimum van €30 per dag voor een webshop.' : 'AdSweet stelt €40 per dag voor.',
+      budgetHelpFg: budgetLow ? 'var(--act)' : 'var(--ink-muted)', showBudgetWarn: budgetLow && !s.budgetOk,
+      onBudget: (e) => set({ budget: e.target.value, budgetOk: false }), acceptBudget: () => set({ budgetOk: true }),
+      topDot: 'var(--robijn)',
+      a4Open: a4 === 'open', a4IsOff: a4 === 'off', a4IsDone: a4 === 'raised' || a4 === 'later', a4DoneText,
+      whyOpen: s.why, whyAria: String(s.why), toggleWhy: () => set({ why: !s.why }),
+      a4Off: () => { set({ a4: 'off', why: false }); this.toast('‘Sfeerbeeld woonkamer’ staat af. Dit staat in je logboek.', () => set({ a4: 'open' })); },
+      a4Raise: () => { set({ a4: 'raised' }); this.toast('Je budget staat op €48 per dag.', () => set({ a4: 'off' })); },
+      a4Later: () => { const prev = this.state.a4; set({ a4: 'later' }); this.toast('Verplaatst naar morgen.', () => set({ a4: prev })); },
+      a4Reset: () => set({ a4: 'open', why: false }),
+      showToast: () => this.toast('‘Sfeerbeeld woonkamer’ staat af. Dit staat in je logboek.', () => {}),
+      hasToast: !!t, toastMsg: t ? t.msg : '', toastUndoable: !!(t && t.undo),
+      toastUndo: () => { const u = this.state.toast && this.state.toast.undo; clearTimeout(this.toastT); set({ toast: null }); if (u) u(); },
+      toastClose: () => { clearTimeout(this.toastT); set({ toast: null }); },
+      loader: this.loader('ld'), loaderText: 'We lezen je website.',
+      sweetVal: s.sweetVal, replaySweet: () => this.replaySweet(),
+      sweetDot: h('span', { key: 'sw' + s.sweetKey, 'aria-hidden': true, style: { width: 8, height: 8, borderRadius: '50%', background: 'var(--robijn)', flex: 'none', animation: `as-pulse 900ms ${EASE} 1` } }),
+      parelSays: s.parel === 'praat', parelThinks: s.parel === 'denkt',
+      parel56: this.parelAvatar(56, s.parel === 'praat'), parel48: this.parelAvatar(48, false),
+      parelTalk: () => this.setState(st => ({ parel: 'praat', parelKey: st.parelKey + 1 })),
+      parelThink: () => set({ parel: 'denkt' }), parelRest: () => set({ parel: 'rust' }),
+      reveal, replayReveal: () => { this.setState(st => ({ revealKey: st.revealKey + 1 })); this.count('countVal', 0, 638); },
+    };
+  }
+}
+</script>
+</body>
+</html>

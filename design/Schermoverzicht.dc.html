@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AdSweet · Schermoverzicht en samenvatting</title>
+<style>
+@font-face { font-family: "Host Grotesk"; font-weight: 300; font-display: swap; src: url("fonts/host-grotesk-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "Host Grotesk"; font-weight: 400; font-display: swap; src: url("fonts/host-grotesk-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Host Grotesk"; font-weight: 500; font-display: swap; src: url("fonts/host-grotesk-latin-500-normal.woff2") format("woff2"); }
+:root { --ground: #EAE8E3; --surface: #F5F4F0; --surface-sunken: #E2E0DA; --ink: #151514; --ink-muted: #5F5C56; --ink-accent: #7A776F; --line: #15151424; --line-strong: #7A776F; --robijn: #C7254E; --tarwe: #E8D7AE; --staal: #B8C7D9; --lavendel: #CEC4EA; --salie: #BFD9C6; --klei: #E9C2AE; --roos: #EEC1D0; --snoep-roos: #F28AB2; --snoep-citroen: #F5CF5C; --snoep-munt: #7FD3B0; --snoep-bes: #A99BF2; --snoep-hemel: #8FC2F2; --snoep-perzik: #F7A97A; --font: "Host Grotesk", "Helvetica Neue", Arial, sans-serif; }
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.5; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; }
+a { color: var(--ink); text-decoration: none; }
+a:hover { color: var(--ink-muted); }
+:focus-visible { outline: 2px solid var(--robijn); outline-offset: 4px; }
+</style>
+<script src="dot.js"></script>
+</helmet>
+<div data-screen-label="Schermoverzicht" style="min-height:100vh; max-width:1440px; margin:0 auto; padding:40px clamp(20px, 3.4vw, 48px) 120px; display:flex; flex-direction:column; gap:40px;">
+  <header style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px; padding-bottom:24px; border-bottom:1px solid var(--line);">
+    <div style="display:flex; flex-direction:column; gap:14px;"><img src="assets/adsweet-logo.svg" alt="adsweet" style="height:19px; width:auto; align-self:flex-start;"><h1 style="margin:0; font-size:clamp(36px, 4.4vw, 64px); font-weight:500; line-height:1; letter-spacing:-.04em;">Schermoverzicht<span style="display:block; font-weight:300; color:var(--ink-accent); letter-spacing:-.035em;">en samenvatting.</span></h1></div>
+    <div role="group" aria-label="Filter op label" style="display:flex; flex-wrap:wrap; gap:6px;"><sc-for list="{{ filters }}" as="f" hint-placeholder-count="4"><button type="button" aria-pressed="{{ f.aria }}" onClick="{{ f.pick }}" style="height:34px; padding:0 14px; border-radius:999px; border:1px solid {{ f.bd }}; background:{{ f.bg }}; color:{{ f.fg }}; font-size:13.5px; font-weight:500; cursor:pointer;">{{ f.t }} <span style="opacity:.7;">{{ f.n }}</span></button></sc-for></div>
+  </header>
+  <sc-for list="{{ groups }}" as="g" hint-placeholder-count="8">
+    <section style="display:flex; flex-direction:column; gap:12px;">
+      <h2 style="margin:0; display:flex; align-items:baseline; gap:12px; font-size:22px; font-weight:500; letter-spacing:-.02em;"><span style="font-size:13px; color:var(--ink-muted);">Golf {{ g.n }}</span>{{ g.t }}</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap:8px;">
+        <sc-for list="{{ g.screens }}" as="s" hint-placeholder-count="6">
+          <a href="{{ s.href }}" style="display:flex; gap:12px; padding:10px; border:1px solid var(--line); border-radius:12px; background:var(--surface);" style-hover="border-color:var(--ink);">
+            <span aria-hidden="true" style="flex:none; width:52px; height:40px; border-radius:7px; background:{{ s.c }}; color:#151514; display:grid; place-items:center; font-size:12px; font-weight:500;">{{ s.i }}</span>
+            <span style="flex:1; min-width:0; display:flex; flex-direction:column; gap:3px;"><b style="font-weight:500; font-size:14px; line-height:1.3;">{{ s.t }}</b><span style="display:flex; flex-wrap:wrap; gap:4px 8px; font-size:12px; color:var(--ink-muted);"><span style="padding:0 6px; border:1px dashed var(--line-strong); border-radius:999px;">{{ s.l }}</span><span>{{ s.p }}</span></span></span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+  </sc-for>
+
+  <section aria-labelledby="h-sum" style="display:flex; flex-direction:column; gap:24px; padding-top:32px; border-top:1px solid var(--line);">
+    <h2 id="h-sum" style="margin:0; font-size:clamp(30px, 3.4vw, 48px); font-weight:500; letter-spacing:-.035em;">Samenvatting</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap:28px 48px;">
+      <sc-for list="{{ summary }}" as="b" hint-placeholder-count="4">
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <h3 style="margin:0; font-size:18px; font-weight:500;">{{ b.t }}</h3>
+          <ul style="list-style:none; margin:0; padding:0; border-top:1px solid var(--line);"><sc-for list="{{ b.items }}" as="it" hint-placeholder-count="5"><li style="padding:9px 0; border-bottom:1px solid var(--line); font-size:14.5px;">{{ it }}</li></sc-for></ul>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const W = 'Website.dc.html', L = 'Inloggen.dc.html', A = 'App.dc.html';
+const G = [
+  ['1', 'Merk en designsysteem', 'var(--lavendel)', [['Componentenoverzicht', 'Componentenoverzicht.dc.html', 'MVP', 'licht en nacht'], ['Dot, het karakter', 'Dot.dc.html', 'MVP', 'stemmingen en stem']]],
+  ['2', 'De website', 'var(--tarwe)', [['Home met Raakpunt-hero', W + '#home', 'MVP', 'NL · FR · EN'], ['Hoe het werkt', W + '#hoe-het-werkt', 'MVP', ''], ['Prijzen', W + '#prijzen', 'MVP', ''], ['Gratis audit', W + '#gratis-audit', 'MVP', ''], ['Academy publiek', W + '#academy', 'MVP', ''], ['Les publiek', W + '#les', 'MVP', ''], ['Begrippenlijst', W + '#begrippen', 'MVP', ''], ['Partners', W + '#partners', 'MVP', ''], ['Done With You', W + '#done-with-you', 'MVP', 'Fully Booked'], ['Gesprek Agency', W + '#gesprek', 'MVP', ''], ['Privacybeleid', W + '#privacy', 'MVP', ''], ['Voorwaarden', W + '#voorwaarden', 'MVP', ''], ['Cookiebeleid', W + '#cookies', 'MVP', ''], ['Verwerkersovereenkomst', W + '#verwerkersovereenkomst', 'MVP', ''], ['Je gegevens verwijderen', W + '#gegevens-verwijderen', 'MVP', 'nodig voor Meta'], ['404', W + '#bestaat-niet', 'MVP', ''], ['Onderhoud', W + '#onderhoud', 'MVP', ''], ['Zoekpagina-sjabloon', W + '#zoekpagina', 'Later', '']]],
+  ['3', 'Inloggen, onboarding en abonnement', 'var(--salie)', [['Account maken', L + '#account-maken', 'MVP', 'NL · FR · EN'], ['Inloggen', L + '#inloggen', 'MVP', 'NL · FR · EN'], ['Link per mail', L + '#mail-verstuurd', 'MVP', ''], ['Testfase', L + '#testfase', 'MVP', ''], ['Uitnodiging teamlid', L + '#uitnodiging', 'V1', ''], ['1 Welkom', L + '#onboarding-1', 'MVP', ''], ['2 Je website', L + '#onboarding-2', 'MVP', ''], ['3 Je bedrijfsprofiel', L + '#onboarding-3', 'MVP', ''], ['4 Wat wil je bereiken?', L + '#onboarding-4', 'MVP', ''], ['5 Je cijfers', L + '#onboarding-5', 'MVP', ''], ['6 Koppelen', L + '#onboarding-6', 'MVP', ''], ['7 Bestaande advertenties', L + '#onboarding-7', 'MVP', 'variant Al campagnes'], ['8 Je strategie', L + '#onboarding-8', 'MVP', ''], ['9 Je eerste campagne', L + '#onboarding-9', 'MVP', ''], ['10 Plan en proefperiode', L + '#onboarding-10', 'MVP', ''], ['11 Live', L + '#onboarding-11', 'MVP', '']]],
+  ['4', 'De app: het dagelijkse werk', 'var(--roos)', [['Vandaag', A + '#vandaag', 'MVP', 'alle plannen · NL · FR · EN'], ['Onboardingpaneel in de app', 'Onboardingpaneel.dc.html', 'MVP', 'website, brandguide, documenten'], ['Klanten (Agency)', A + '#klanten', 'MVP', 'Agency'], ['Meldingen', A + '#meldingen', 'MVP', 'alle plannen'], ['Logboek', A + '#logboek', 'V1', 'alle plannen'], ['Weekrapport', A + '#weekrapport', 'MVP', 'alle plannen']]],
+  ['5', 'De app: launchen en maken', 'var(--staal)', [['Campagnes', A + '#campagnes', 'MVP', 'alle plannen'], ['Campagnedetail', A + '#campagne', 'MVP', 'alle plannen'], ['Campagnewizard', A + '#campagne-nieuw', 'MVP', 'alle plannen'], ['Nieuwe advertenties toevoegen', A + '#advertenties-toevoegen', 'MVP', 'alle plannen'], ['Een advertentie maken', A + '#advertentie-maken', 'MVP', 'AI vanaf Pro'], ['Bulk launch', A + '#bulk', 'MVP', 'over accounts in Agency'], ['Advertenties en beelden', A + '#advertenties', 'MVP', 'alle plannen'], ['Testgrid', A + '#testgrid', 'V1', 'alle plannen'], ['Google Ads-variant', A + '#google', 'V1', '[Google-playbook PJ]'], ['Catalogus-advertenties', A + '#catalogus', 'Later', 'webshops'], ['Preview-link', A + '#preview-link', 'V1', 'alle plannen']]],
+  ['6', 'De app: slimmer werken', 'var(--klei)', [['Dot, de assistent', A + '#parel', 'V1', 'alle plannen'], ['Studio', A + '#studio', 'MVP', 'vanaf Pro'], ['Concurrenten en creative-strateeg', A + '#concurrenten', 'V1', 'vanaf Pro'], ['Inzichten', A + '#inzichten', 'MVP', 'live vanaf Pro'], ['Autopilot en regels', A + '#autopilot', 'V1', 'alle plannen']]],
+  ['7', 'Academy, hulp, instellingen en mails', 'var(--tarwe)', [['Academy in de app', A + '#academy', 'MVP', ''], ['Les met In jouw account', A + '#les', 'MVP', ''], ['Begrippenlijst', A + '#begrippen', 'MVP', ''], ['Certificaat', A + '#certificaat', 'V1', ''], ['Hulp', A + '#hulp', 'MVP', ''], ['Instellingen', A + '#instellingen', 'MVP', ''], ['Koppelingen', A + '#instellingen-koppelingen', 'MVP', ''], ['Advertentieaccounts', A + '#instellingen-accounts', 'V1', 'meer accounts vanaf Scale'], ['Abonnement en facturen', A + '#abonnement', 'MVP', ''], ['Team en rollen', A + '#team', 'V1', 'per plan'], ['Doorverwijzen', A + '#doorverwijzen', 'MVP', ''], ['Partnerportaal', A + '#partnerportaal', 'Later', 'partners'], ['Mails', 'Mails.dc.html', 'MVP', '12 mails']]],
+  ['8', 'Intern beheer', 'var(--lavendel)', [['Beheer', 'Beheer.dc.html', 'MVP', 'AdSweet-team'], ['Schermoverzicht', 'Schermoverzicht.dc.html', 'MVP', '']]],
+];
+const SUMMARY = [
+  ['Keuzes', ['Vijf bestanden: Website, Inloggen, App, Mails en Beheer, plus het Componentenoverzicht. Elk scherm heeft een eigen link (#…).', 'Het demopaneel staat op elk scherm rechtsonder, links van Dot. Thema, taal, scenario, plan en staat worden bewaard en gelden overal.', 'Thema volgt standaard het toestel. De licht/nacht-schakelaar wisselt de hele site, ook het sculptuurbeeld.', 'De Raakpunt-motor zit in raakpunt.js als web component, met alle vangnetten van het origineel.', 'De naam van de assistent staat in één variabele (NAAM in App), werknaam Dot.', '"Doorgaan met Facebook" is in het prototype een gewone AdSweet-knop. De echte app gebruikt de officiële knop van Meta.', 'Betalen gebeurt op de pagina van de betaalpartner: een neutrale tussenpagina, geen kaartvelden.']],
+  ['Plaatshouders', ['[bedrijfsgegevens en ondernemingsnummer], [privacy-adres], [termijn], [datum] en [adres]', '[schaalstappen PJ] (prototype +20%), [standaardverdeling PJ] (2 top, 2 middle, 1 bottom), [x weken, PJ] (elke 2 weken), [plaatsingen PJ] (automatisch)', '[Google-playbook PJ], [weging score], de kost in credits (10, 1, 2 en 3)', '[founding-code], Nog [x] plaatsen, [founding en jaarplan]', '[bron benchmarks], [partner automatisaties], [accountmanager], [antwoord volgens de release]', 'Het uur van de audit (06:00) en de herinnering op dag 27 (voorstel)', 'Cijfers die niet in C3 staan: [uit Meta] voor CTR, kost per klik en frequentie, [cijfers vorige week] van Lisa, [budget] van Bram, de aantallen bij Concurrenten, de AI-kost per model']],
+  ['Open punten', ['De licentie van de Sculpture Hero op 21st.dev. De vermelding van de maker staat klein in de hero en in de footer.', 'Merkonderzoek AdSweet bij BOIP en EUIPO.', 'De vier volle sculptuurbeelden ontbreken. Zet ze als adsweet-sculptuur-licht.jpg, -nacht.jpg, -gsm-licht.jpg en -gsm-nacht.jpg in assets: de hero gebruikt ze dan meteen. App-icoon, favicon en Open Graph komen nu uit de kleine voorbeelden.', 'Alle teksten van PJ: playbook, waarschuwingen, tips en de lessen (label "Concept, PJ keurt goed").']],
+  ['Afwijkingen van het document', ['Zolang de volle beelden ontbreken, toont de hero de voorlopige sculptuur die de motor zelf tekent.', 'FR en EN zijn volledig voor de home, inloggen, de onboarding en Vandaag. Elders staat Nederlands.', 'De grafiek in Inzichten toont uitgegeven en omzet per advertentie, omdat C3 geen cijfers per dag geeft.', 'De waarschuwing bij meer dan één ad set is een concepttekst; C2 geeft er geen.', '"Plan een gesprek" bij Agency leidt naar een kort formulier op de website.', 'De miniaturen in dit overzicht zijn tegels per golf, geen schermafdrukken.']],
+];
+class Component extends DCLogic {
+  state = { f: 'alle' };
+  renderVals() {
+    const s = this.state, all = G.flatMap((g) => g[3]);
+    const count = (l) => all.filter((x) => l === 'alle' || x[2] === l).length;
+    return {
+      filters: ['alle', 'MVP', 'V1', 'Later'].map((l) => ({ t: l === 'alle' ? 'Alles' : l, n: String(count(l)), aria: String(s.f === l), bg: s.f === l ? 'var(--ink)' : 'transparent', fg: s.f === l ? 'var(--ground)' : 'var(--ink)', bd: s.f === l ? 'var(--ink)' : 'var(--line-strong)', pick: () => this.setState({ f: l }) })),
+      groups: G.map(([n, t, c, list]) => ({ n, t, screens: list.filter((x) => s.f === 'alle' || x[2] === s.f).map(([tt, href, l, p]) => ({ t: tt, href, l, p, c, i: tt.replace(/^\d+\s/, '').slice(0, 2) })) })).filter((g) => g.screens.length),
+      summary: SUMMARY.map(([t, items]) => ({ t, items })),
+    };
+  }
+}
+</script>
+</body>
+</html>

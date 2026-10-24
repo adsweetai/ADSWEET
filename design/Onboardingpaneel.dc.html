@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AdSweet · Stem AdSweet af op je zaak</title>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icon/app-icon-32.png">
+<style>
+@font-face { font-family: "Host Grotesk"; font-weight: 300; font-display: swap; src: url("fonts/host-grotesk-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "Host Grotesk"; font-weight: 400; font-display: swap; src: url("fonts/host-grotesk-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Host Grotesk"; font-weight: 500; font-display: swap; src: url("fonts/host-grotesk-latin-500-normal.woff2") format("woff2"); }
+:root, [data-theme="light"] { --ground: #EAE8E3; --surface: #F5F4F0; --surface-sunken: #E2E0DA; --ink: #151514; --ink-muted: #5F5C56; --ink-accent: #7A776F; --line: #15151424; --line-strong: #7A776F; --robijn: #C7254E; --ok: #2E6B45; --ok-tint: #DCEADF; --act: #AE3A1F; --act-tint: #F5DCD3; --tarwe: #E8D7AE; --staal: #B8C7D9; --lavendel: #CEC4EA; --salie: #BFD9C6; --klei: #E9C2AE; --roos: #EEC1D0; --snoep-roos: #F28AB2; --snoep-citroen: #F5CF5C; --snoep-munt: #7FD3B0; --snoep-bes: #A99BF2; --snoep-hemel: #8FC2F2; --snoep-perzik: #F7A97A; --shadow-float: 0 12px 32px rgba(21,21,20,.12), 0 2px 6px rgba(21,21,20,.06); --font: "Host Grotesk", "Helvetica Neue", Arial, sans-serif; --show-light: block; --show-dark: none; color-scheme: light; }
+[data-theme="dark"] { --ground: #111110; --surface: #1A1A19; --surface-sunken: #0C0C0B; --ink: #F1EFEA; --ink-muted: #A8A49B; --ink-accent: #9B978E; --line: #F1EFEA24; --line-strong: #6E6B65; --robijn: #E0577A; --ok: #86C79A; --ok-tint: #1B2A20; --act: #F0937A; --act-tint: #341C16; --shadow-float: 0 12px 32px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.3); --show-light: none; --show-dark: block; color-scheme: dark; }
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.5; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+button, input, select, textarea { font: inherit; letter-spacing: inherit; color: inherit; }
+a { color: var(--ink); text-decoration: none; }
+a:hover { color: var(--ink-muted); }
+:focus-visible { outline: 2px solid var(--robijn); outline-offset: 4px; }
+input:focus-visible, textarea:focus-visible, select:focus-visible { outline-offset: 2px; }
+@keyframes as-l1 { 0%, 100% { transform: translateY(-5px) scaleX(1); opacity: 1; } 50% { transform: translateY(0) scaleX(.1); opacity: 0; } }
+@keyframes as-l2 { 0%, 100% { transform: scaleX(1); opacity: 1; } 50% { transform: scaleX(.1); opacity: 0; } }
+@keyframes as-l3 { 0%, 100% { transform: translateY(5px) scaleX(1); opacity: 1; } 50% { transform: translateY(0) scaleX(.1); opacity: 0; } }
+@keyframes as-dot { 0%, 20%, 80%, 100% { transform: scale(0); } 50% { transform: scale(1); } }
+@keyframes as-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+::highlight(as-term) { text-decoration-line: underline; text-decoration-style: dotted; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+</style>
+<script src="rondleiding.js"></script>
+<script src="dot.js"></script>
+</helmet>
+
+<div data-theme="{{ theme }}" data-screen-label="Onboardingpaneel · stap {{ stepN }}" style="min-height:100vh; background:var(--ground); color:var(--ink); display:grid; grid-template-columns:{{ cols }};">
+
+  <aside aria-label="Stappen" style="display:flex; flex-direction:column; gap:22px; padding:24px 20px; background:var(--surface); border-right:1px solid var(--line); position:{{ asidePos }}; top:0; height:{{ asideH }}; overflow-y:auto;">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+      <a href="App.dc.html" aria-label="AdSweet" style="display:flex;"><img src="assets/adsweet-logo.svg" alt="adsweet" style="display:var(--show-light); height:19px; width:auto;"><img src="assets/adsweet-logo-licht.svg" alt="adsweet" style="display:var(--show-dark); height:19px; width:auto;"></a>
+      <button type="button" onClick="{{ toggleTheme }}" style="height:30px; padding:0 12px; border:1px dashed var(--line-strong); border-radius:999px; background:transparent; color:var(--ink-muted); font-size:12.5px; font-weight:500; cursor:pointer;">Demo: {{ themeLabel }}</button>
+    </div>
+    <div data-theme="light" style="position:relative; overflow:hidden; display:flex; flex-direction:column; gap:10px; padding:18px; border-radius:20px; background:var(--lavendel); color:#151514;">
+      <span aria-hidden="true" style="position:absolute; right:16px; top:14px; display:flex; gap:5px;"><span style="width:9px; height:9px; border-radius:50%; background:var(--snoep-roos);"></span><span style="width:9px; height:9px; border-radius:3px; transform:rotate(20deg); background:var(--snoep-citroen);"></span><span style="width:9px; height:9px; border-radius:50%; background:var(--snoep-munt);"></span></span>
+      <b style="font-size:17px; font-weight:500; letter-spacing:-.015em; max-width:200px;">Stem AdSweet af op Atelier Noor</b>
+      <span style="font-size:13.5px;">{{ doneText }}</span>
+      <span role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ pctN }}" aria-label="Voortgang" style="height:6px; border-radius:999px; background:rgba(21,21,20,.12);"><span style="display:block; width:{{ pct }}; height:100%; border-radius:999px; background:#151514; transition:width 600ms cubic-bezier(.2,.7,.2,1);"></span></span>
+      <span style="font-size:12.5px;">{{ timeLeft }}</span>
+    </div>
+    <ol style="list-style:none; margin:0; padding:0; display:flex; flex-direction:{{ listDir }}; gap:2px; overflow-x:auto;">
+      <sc-for list="{{ steps }}" as="p" hint-placeholder-count="8">
+        <li style="flex:none;"><button type="button" onClick="{{ p.pick }}" aria-current="{{ p.aria }}" style="width:100%; display:flex; align-items:center; gap:12px; padding:8px 10px; border:0; border-radius:12px; background:{{ p.rowBg }}; color:var(--ink); text-align:left; cursor:pointer;">
+          <span style="flex:none; width:26px; height:26px; border-radius:50%; border:1px solid {{ p.bd }}; background:{{ p.bg }}; color:{{ p.nfg }}; display:grid; place-items:center; font-size:12px; font-weight:500;">{{ p.mark }}</span>
+          <span style="display:flex; flex-direction:column; min-width:0;"><span style="font-size:14px; font-weight:{{ p.fw }}; white-space:nowrap;">{{ p.t }}</span><span style="font-size:12px; color:var(--ink-muted); white-space:nowrap;">{{ p.sub }}</span></span>
+        </button></li>
+      </sc-for>
+    </ol>
+    <span style="margin-top:auto; font-size:12.5px; color:var(--ink-muted);">Alles wordt bewaard. Je kan stoppen en later verdergaan.</span>
+  </aside>
+
+  <main style="min-width:0; padding:clamp(24px, 4vw, 56px) clamp(20px, 4vw, 64px) 120px;">
+    <div style="max-width:820px; display:flex; flex-direction:column; gap:26px;">
+      <div style="display:flex; align-items:flex-end; gap:14px;"><dot-karakter size="76" mood="{{ bonMood }}" label="Dot"></dot-karakter><span role="status" aria-live="polite" style="max-width:460px; padding:12px 16px; background:var(--surface); border:1px solid var(--line); border-radius:18px 18px 18px 4px; box-shadow:var(--shadow-float); font-size:15px; line-height:1.45;">{{ bonSay }}</span></div>
+      <header style="display:flex; flex-direction:column; gap:10px;">
+        <span style="align-self:flex-start; height:28px; padding:0 12px; display:inline-flex; align-items:center; border-radius:999px; background:{{ cur.chip }}; color:#151514; font-size:13px; font-weight:500; transform:rotate(-2deg);">Stap {{ stepN }} van 8{{ cur.opt }}</span>
+        <h1 style="margin:0; font-size:clamp(32px, 4vw, 50px); font-weight:500; line-height:1.02; letter-spacing:-.035em; text-wrap:balance;">{{ cur.title }}</h1>
+        <p style="margin:0; max-width:620px; font-size:17px; color:var(--ink-muted);">{{ cur.lead }}</p>
+      </header>
+
+      <!-- 1 WEBSITE -->
+      <sc-if value="{{ s1 }}" hint-placeholder-val="{{ true }}">
+        <label style="display:flex; flex-direction:column; gap:8px;"><span style="font-size:13px; font-weight:500;">Je website</span><input type="text" value="{{ site }}" onInput="{{ setSite }}" placeholder="jouwzaak.be" style="height:60px; padding:0 18px; border-radius:14px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:20px;"></label>
+        <sc-if value="{{ readIdle }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ readSite }}" style="align-self:flex-start; height:46px; padding:0 22px; border:0; border-radius:999px; background:var(--ink); color:var(--ground); font-size:14.5px; font-weight:500; cursor:pointer;">Lees mijn website</button></sc-if>
+        <sc-if value="{{ readActive }}" hint-placeholder-val="{{ false }}">
+          <div role="status" aria-live="polite" style="display:flex; align-items:center; gap:12px; font-size:17px; font-weight:500;">{{ readIcon }}<span>{{ readLine }}</span></div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap:10px;">
+            <sc-for list="{{ found }}" as="f" hint-placeholder-count="3"><div style="padding:14px 16px; border:1px solid var(--line); border-radius:16px; background:var(--surface); display:flex; flex-direction:column; gap:4px; animation:as-in 600ms cubic-bezier(.2,.7,.2,1) both;"><span style="display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--ink-muted);"><span style="width:8px; height:8px; border-radius:50%; background:{{ f.c }};"></span>{{ f.k }}</span><b style="font-weight:500;">{{ f.v }}</b></div></sc-for>
+          </div>
+        </sc-if>
+      </sc-if>
+
+      <!-- 2 BRANDGUIDE -->
+      <sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
+        <label onDragOver="{{ prevent }}" onDrop="{{ dropBrand }}" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; min-height:170px; padding:24px; border:1.5px dashed var(--line-strong); border-radius:20px; background:var(--surface); text-align:center; cursor:pointer;">
+          <span data-theme="light" style="width:44px; height:44px; border-radius:14px; background:var(--snoep-citroen); color:#151514; display:grid; place-items:center;">{{ I.upload }}</span>
+          <b style="font-weight:500;">Sleep je brandguide hierheen</b><span style="font-size:13.5px; color:var(--ink-muted);">PDF, tot [x] MB · of kies van je computer</span>
+          <input type="file" accept=".pdf,image/*" onChange="{{ pickBrand }}" style="position:absolute; width:1px; height:1px; opacity:0;">
+        </label>
+        <sc-if value="{{ brand.has }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px; border:1px solid var(--line); border-radius:14px; background:var(--surface);"><span style="display:flex; align-items:center; gap:10px;">{{ I.file }}{{ brand.name }}</span><span style="display:inline-flex; align-items:center; gap:6px; color:var(--ok); font-size:13.5px; font-weight:500;">{{ I.ok }}Gelezen</span></div>
+        </sc-if>
+        <div style="display:flex; flex-direction:column; gap:14px; padding:20px; border:1px solid var(--line); border-radius:20px;">
+          <span style="font-weight:500;">{{ brand.head }}</span>
+          <div style="display:flex; flex-wrap:wrap; gap:12px;">
+            <sc-for list="{{ brand.colors }}" as="c" hint-placeholder-count="4"><label style="display:flex; align-items:center; gap:10px; padding:8px 12px 8px 8px; border:1px solid var(--line); border-radius:999px; background:var(--surface);"><span style="width:28px; height:28px; border-radius:50%; border:1px solid var(--line); background:{{ c.hex }};"></span><input type="text" value="{{ c.hex }}" aria-label="{{ c.name }}" onInput="{{ c.set }}" style="width:84px; height:28px; padding:0 6px; border:0; background:transparent; color:var(--ink); font-size:14px;"></label></sc-for>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap:12px;">
+            <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">Lettertype</span><input type="text" value="{{ brand.font }}" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+            <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">Logo</span><span style="position:relative; display:flex; align-items:center; gap:10px; height:44px; padding:0 14px; border-radius:10px; border:1px dashed var(--line-strong); font-size:14px; cursor:pointer;">{{ brand.logo }}<input type="file" accept="image/*,.svg" style="position:absolute; inset:0; opacity:0; cursor:pointer;"></span></label>
+          </div>
+          <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">Wat mag nooit in je advertenties?</span><textarea rows="2" placeholder="bijvoorbeeld: geen kortingen in rood, geen uitroeptekens" style="padding:10px 12px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px; resize:vertical;"></textarea></label>
+        </div>
+      </sc-if>
+
+      <!-- 3 DOCUMENTEN -->
+      <sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap:12px;">
+          <sc-for list="{{ docs }}" as="d" hint-placeholder-count="4">
+            <label data-theme="light" style="position:relative; display:flex; flex-direction:column; gap:8px; padding:18px; border-radius:20px; background:{{ d.bg }}; color:#151514; cursor:pointer; box-shadow:{{ d.ring }};">
+              <span style="display:flex; justify-content:space-between; gap:8px;"><b style="font-weight:500; font-size:16px;">{{ d.t }}</b><span style="font-size:12.5px;">{{ d.count }}</span></span>
+              <span style="font-size:13.5px;">{{ d.d }}</span>
+              <span style="margin-top:auto; align-self:flex-start; height:30px; padding:0 12px; display:inline-flex; align-items:center; border-radius:999px; background:#151514; color:#F1EFEA; font-size:13px; font-weight:500;">{{ d.btn }}</span>
+              <input type="file" multiple="" onChange="{{ d.pick }}" style="position:absolute; inset:0; opacity:0; cursor:pointer;">
+            </label>
+          </sc-for>
+        </div>
+        <sc-if value="{{ hasFiles }}" hint-placeholder-val="{{ false }}">
+          <ul style="list-style:none; margin:0; padding:0; border-top:1px solid var(--line);">
+            <sc-for list="{{ files }}" as="f" hint-placeholder-count="3"><li style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 16px; padding:12px 0; border-bottom:1px solid var(--line);"><span style="display:flex; align-items:center; gap:10px; min-width:0;">{{ I.file }}<span style="display:flex; flex-direction:column; min-width:0;"><b style="font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ f.n }}</b><span style="font-size:12.5px; color:var(--ink-muted);">{{ f.cat }} · {{ f.what }}</span></span></span><span style="display:flex; align-items:center; gap:14px;"><span style="display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:500; color:{{ f.fg }};">{{ f.icon }}{{ f.st }}</span><button type="button" onClick="{{ f.remove }}" style="padding:0; border:0; border-bottom:1px solid var(--line-strong); background:none; color:var(--ink); font-size:13px; cursor:pointer;">Haal weg</button></span></li></sc-for>
+          </ul>
+        </sc-if>
+        <button type="button" onClick="{{ sampleDocs }}" style="align-self:flex-start; height:30px; padding:0 12px; border:1px dashed var(--line-strong); border-radius:999px; background:transparent; color:var(--ink-muted); font-size:12.5px; font-weight:500; cursor:pointer;">Demo: voeg voorbeeldbestanden toe</button>
+        <p style="margin:0; font-size:13.5px; color:var(--ink-muted);">Je documenten blijven van jou. AdSweet gebruikt ze alleen om je advertenties voor te stellen. Je kan ze altijd weghalen in Instellingen.</p>
+      </sc-if>
+
+      <!-- 4 BEELDEN -->
+      <sc-if value="{{ s4 }}" hint-placeholder-val="{{ false }}">
+        <label style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; min-height:150px; padding:24px; border:1.5px dashed var(--line-strong); border-radius:20px; background:var(--surface); text-align:center; cursor:pointer;"><span data-theme="light" style="width:44px; height:44px; border-radius:14px; background:var(--snoep-hemel); color:#151514; display:grid; place-items:center;">{{ I.upload }}</span><b style="font-weight:500;">Sleep je foto's en video's hierheen</b><span style="font-size:13.5px; color:var(--ink-muted);">Video's van je gsm zijn perfect.</span><input type="file" multiple="" accept="image/*,video/*" onChange="{{ pickImgs }}" style="position:absolute; width:1px; height:1px; opacity:0;"></label>
+        <div style="display:flex; flex-wrap:wrap; gap:8px 18px; font-size:14px;"><sc-for list="{{ sources }}" as="src" hint-placeholder-count="4"><button type="button" onClick="{{ addImgs }}" style="display:inline-flex; align-items:center; gap:6px; padding:2px 0; border:0; border-bottom:1px solid var(--line-strong); background:none; color:var(--ink); font-weight:500; cursor:pointer;">{{ I.link }}Uit {{ src }}</button></sc-for></div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(96px, 1fr)); gap:8px;"><sc-for list="{{ imgs }}" as="im" hint-placeholder-count="6"><figure style="margin:0; display:flex; flex-direction:column; gap:4px;"><span style="aspect-ratio:4/5; border-radius:10px; border:1px solid var(--line); background:repeating-linear-gradient(135deg, var(--surface-sunken) 0 6px, var(--surface) 6px 12px); display:grid; place-items:end start; padding:6px;"><span style="height:20px; padding:0 7px; display:inline-flex; align-items:center; border-radius:999px; background:{{ im.c }}; color:#151514; font-size:11px; font-weight:500;">{{ im.k }}</span></span><figcaption style="font-size:12px; color:var(--ink-muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ im.n }}</figcaption></figure></sc-for></div>
+        <span style="font-size:14px;">{{ imgNote }}</span>
+      </sc-if>
+
+      <!-- 5 AANBOD -->
+      <sc-if value="{{ s5 }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap:14px;">
+          <sc-for list="{{ offerQs }}" as="q" hint-placeholder-count="4"><label style="display:flex; flex-direction:column; gap:6px; grid-column:{{ q.span }};"><span style="font-size:13px; font-weight:500;">{{ q.l }}</span><textarea rows="2" placeholder="{{ q.ph }}" style="padding:10px 12px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px; resize:vertical;" defaultValue="{{ q.v }}"></textarea></label></sc-for>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px;"><span style="font-size:13px; font-weight:500;">Drukke momenten in jouw jaar</span><div style="display:flex; flex-wrap:wrap; gap:8px;"><sc-for list="{{ moments }}" as="m" hint-placeholder-count="6"><button type="button" aria-pressed="{{ m.aria }}" onClick="{{ m.pick }}" style="height:36px; padding:0 14px; border-radius:999px; border:1px solid {{ m.bd }}; background:{{ m.bg }}; color:{{ m.fg }}; font-size:13.5px; font-weight:500; cursor:pointer;">{{ m.t }}</button></sc-for></div></div>
+      </sc-if>
+
+      <!-- 6 TOON -->
+      <sc-if value="{{ s6 }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:8px;"><span style="font-size:13px; font-weight:500;">Kies drie woorden voor je toon</span><div style="display:flex; flex-wrap:wrap; gap:8px;"><sc-for list="{{ tones }}" as="tn" hint-placeholder-count="10"><button type="button" aria-pressed="{{ tn.aria }}" onClick="{{ tn.pick }}" style="height:38px; padding:0 16px; border-radius:999px; border:1px solid {{ tn.bd }}; background:{{ tn.bg }}; color:{{ tn.fg }}; font-size:14px; font-weight:500; cursor:pointer;">{{ tn.t }}</button></sc-for></div><span style="font-size:13px; color:var(--ink-muted);">{{ toneCount }}</span></div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap:12px;">
+          <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">Je mag zeggen</span><input type="text" value="handgemaakt, atelier, geschenk" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+          <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">Liever niet</span><input type="text" value="goedkoop, uitverkoop, wauw" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+        </div>
+        <div data-theme="light" style="display:flex; flex-direction:column; gap:10px; padding:20px; border-radius:20px; background:var(--salie); color:#151514;">
+          <span style="font-size:12.5px; font-weight:500;">Zo klinkt je eerste advertentie</span>
+          <span style="font-size:19px; font-weight:500; line-height:1.4;">{{ toneSample }}</span>
+        </div>
+      </sc-if>
+
+      <!-- 7 DOELEN -->
+      <sc-if value="{{ s7 }}" hint-placeholder-val="{{ false }}">
+        <div role="radiogroup" aria-label="Wat wil je bereiken?" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap:10px;">
+          <sc-for list="{{ goals }}" as="g" hint-placeholder-count="4"><button type="button" role="radio" aria-checked="{{ g.aria }}" onClick="{{ g.pick }}" style="display:flex; flex-direction:column; gap:4px; padding:16px; text-align:left; border-radius:16px; border:1px solid var(--line); box-shadow:{{ g.ring }}; background:var(--surface); color:var(--ink); cursor:pointer;"><span style="width:10px; height:10px; border-radius:50%; background:{{ g.c }};"></span><span style="font-size:16px; font-weight:500;">{{ g.t }}</span><span style="font-size:13px; color:var(--ink-muted);">{{ g.s }}</span></button></sc-for>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:14px;">
+          <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">Gemiddelde orderwaarde (€)</span><input type="text" inputmode="decimal" value="{{ aov }}" onInput="{{ setAov }}" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+          <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">Brutomarge (%)</span><input type="text" inputmode="decimal" value="{{ margin }}" onInput="{{ setMargin }}" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+        </div>
+        <div role="status" style="padding:18px 20px; border:1px solid var(--ink); border-radius:16px; background:var(--surface); font-size:17px; font-weight:500; line-height:1.45;">{{ calc }}</div>
+      </sc-if>
+
+      <!-- 8 KLAAR -->
+      <sc-if value="{{ s8 }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap:10px;">
+          <sc-for list="{{ summary }}" as="x" hint-placeholder-count="6"><div data-theme="light" style="display:flex; flex-direction:column; gap:6px; padding:16px 18px; border-radius:18px; background:{{ x.bg }}; color:#151514;"><span style="display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:12.5px;">{{ x.k }}<span style="display:flex;">{{ x.icon }}</span></span><b style="font-weight:500; font-size:15.5px; line-height:1.35;">{{ x.v }}</b></div></sc-for>
+        </div>
+        <p style="margin:0; font-size:16px;">AdSweet kent je zaak nu. Je strategie, je eerste advertenties en je teksten vertrekken vanaf wat je hier gaf. Je past alles later aan in Instellingen.</p>
+      </sc-if>
+
+      <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; padding-top:24px; border-top:1px solid var(--line);">
+        <button type="button" onClick="{{ prev }}" style="height:46px; padding:0 20px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:14.5px; font-weight:500; cursor:pointer; visibility:{{ prevVis }};">Vorige</button>
+        <div style="display:flex; flex-wrap:wrap; align-items:center; gap:16px;">
+          <sc-if value="{{ cur.optional }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ skip }}" style="padding:4px 0; border:0; border-bottom:1px solid var(--line-strong); background:none; color:var(--ink); font-size:14.5px; font-weight:500; cursor:pointer;">Sla over</button></sc-if>
+          <button type="button" onClick="{{ next }}" style="display:inline-flex; align-items:center; gap:10px; height:46px; padding:0 22px; border:0; border-radius:999px; background:var(--ink); color:var(--ground); font-size:14.5px; font-weight:500; cursor:pointer; transition:gap 300ms cubic-bezier(.2,.7,.2,1), padding 300ms cubic-bezier(.2,.7,.2,1);" style-hover="gap:13px; padding-right:19px;">{{ nextLabel }}{{ I.arrow }}</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const EASE = 'cubic-bezier(.2,.7,.2,1)';
+const h = React.createElement;
+const ICP = {
+  upload: [['path', { d: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4' }], ['path', { d: 'm17 8-5-5-5 5' }], ['path', { d: 'M12 3v12' }]],
+  file: [['path', { d: 'M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z' }], ['path', { d: 'M14 2v4a2 2 0 0 0 2 2h4' }]],
+  ok: [['circle', { cx: 12, cy: 12, r: 10 }], ['path', { d: 'm9 12 2 2 4-4' }]],
+  check: [['path', { d: 'M20 6 9 17l-5-5' }]],
+  arrow: [['path', { d: 'M5 12h14' }], ['path', { d: 'm12 5 7 7-7 7' }]],
+  link: [['path', { d: 'M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71' }], ['path', { d: 'M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71' }]],
+  hourglass: [['path', { d: 'M5 22h14' }], ['path', { d: 'M5 2h14' }], ['path', { d: 'M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22' }], ['path', { d: 'M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2' }]],
+};
+const ic = (n, s, sw) => h('svg', { width: s || 16, height: s || 16, viewBox: '0 0 24 24', 'aria-hidden': true, style: { fill: 'none', stroke: 'currentColor', strokeWidth: sw || 1.5, strokeLinecap: 'round', strokeLinejoin: 'round', flex: 'none', display: 'block' } }, ICP[n].map(([t, a], i) => h(t, Object.assign({ key: i }, a))));
+const STEPS = [
+  ['Je website', 'We lezen je zaak', 'Geef je website op. AdSweet leest je producten, je prijzen, je stijl en je contactgegevens.', 'var(--snoep-roos)'],
+  ['Je brandguide', 'Kleuren, letter, logo', 'Laad je brandguide op, of vul je kleuren en je letter zelf in. Zo passen je advertenties bij je merk.', 'var(--snoep-citroen)', true],
+  ['Je documenten', 'Prijzen, reviews, resultaten', 'Laad op wat AdSweet beter laat begrijpen wat je verkoopt en wat werkt. Een productlijst, reviews of oude resultaten.', 'var(--snoep-munt)', true],
+  ['Je beelden', "Foto's en video's", "Je beelden en video's worden je eerste advertenties. Hoe meer, hoe meer AdSweet kan kiezen.", 'var(--snoep-hemel)'],
+  ['Je aanbod', 'Wat je anders maakt', 'Vertel in een paar zinnen wat je verkoopt, voor wie, en wanneer het druk is.', 'var(--snoep-bes)'],
+  ['Je toon', 'Hoe je klinkt', 'Kies hoe je klinkt. AdSweet schrijft je teksten in die toon.', 'var(--snoep-perzik)'],
+  ['Je doelen', 'Wat je wil bereiken', 'Wat moet je advertentie opleveren, en wat mag een verkoop kosten?', 'var(--snoep-roos)'],
+  ['Klaar', 'Zo kent AdSweet je', 'Dit weet AdSweet nu over Atelier Noor.', 'var(--snoep-citroen)'],
+];
+const DOCS = [['prijs', 'Productlijst of prijslijst', 'Excel, CSV of PDF. Dan kent AdSweet je prijzen en je bestsellers.', 'var(--tarwe)'], ['reviews', 'Reviews van klanten', 'Een export of screenshots. Goed voor middle-of-funnel advertenties.', 'var(--roos)'], ['resultaten', 'Eerdere advertenties', 'Een export uit Ads Manager of een rapport van je bureau.', 'var(--staal)'], ['anders', 'Iets anders', 'Een persbericht, een menukaart, een folder.', 'var(--lavendel)']];
+const SAY = ['Hoi, ik ben Dot. Geef me je website, dan lees ik je zaak voor je.', 'Heb je een brandguide? Dan zorg ik dat elke advertentie bij je merk past.', 'Alles wat je me geeft, helpt me om je zaak beter te leren kennen. Niets is verplicht.', "Video's van je gsm zijn goud waard. Ik kies de beste eruit.", 'Vertel me wat je anders maakt. Daar gaan je advertenties over.', 'Hoe klink jij? Kies drie woorden, dan schrijf ik zo.', 'Nog even rekenen, dan weet ik wanneer een advertentie je geld oplevert.', 'Sweet! Ik ken je zaak nu. Morgenochtend om 06:00 heb ik je eerste overzicht klaar.'];
+const TONES = ['warm', 'ambachtelijk', 'rustig', 'speels', 'direct', 'luxueus', 'grappig', 'eerlijk', 'deskundig', 'persoonlijk'];
+class Component extends DCLogic {
+  state = { step: 0, done: {}, skipped: {}, theme: 'light', w: window.innerWidth, site: 'ateliernoor.voorbeeld', read: 'idle', foundN: 0, brand: null, colors: ['#3A2E2A', '#EDE3D6', '#C9A27E', '#7E8B6F'], files: [], imgs: [], moments: { feest: true, moeder: true }, tones: ['warm', 'ambachtelijk', 'rustig'], goal: 'verkopen', aov: '58', margin: '40' };
+  componentDidMount() { this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR); try { const v = JSON.parse(localStorage.getItem('adsweet-onboarding') || 'null'); if (v) this.setState(v); } catch (e) {} }
+  componentDidUpdate() { const { step, done, skipped, site, brand, colors, files, imgs, tones, goal, aov, margin } = this.state; try { localStorage.setItem('adsweet-onboarding', JSON.stringify({ step, done, skipped, site, brand, colors, files, imgs, tones, goal, aov, margin })); } catch (e) {} }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); (this.tm || []).forEach(clearTimeout); }
+  later(fn, ms) { this.tm = this.tm || []; this.tm.push(setTimeout(fn, ms)); }
+  loader() {
+    const line = (anim, y) => h('span', { key: anim, style: { position: 'absolute', left: 2, right: 2, top: '50%', height: 1, marginTop: -0.5, background: 'var(--ink)', transform: `translateY(${y}px)`, animation: `${anim} 1.2s ${EASE} infinite` } });
+    return h('span', { 'aria-hidden': true, style: { position: 'relative', display: 'inline-block', width: 22, height: 14, flex: 'none' } }, [line('as-l1', -5), line('as-l2', 0), line('as-l3', 5), h('span', { key: 'd', style: { position: 'absolute', left: '50%', top: '50%', width: 6, height: 6, margin: '-3px 0 0 -3px', borderRadius: '50%', background: 'var(--robijn)', transform: 'scale(0)', animation: `as-dot 1.2s ${EASE} infinite` } })]);
+  }
+  addFiles(cat, list) {
+    const CAT = { prijs: ['Productlijst', 'prijzen en bestsellers gevonden'], reviews: ['Reviews', 'reviews gelezen, bruikbaar voor middle of funnel'], resultaten: ['Eerdere advertenties', 'resultaten gelezen'], anders: ['Ander document', 'gelezen'] };
+    const add = list.map((n) => ({ n, cat, st: 'busy' }));
+    this.setState((s) => ({ files: s.files.concat(add) }));
+    this.later(() => this.setState((s) => ({ files: s.files.map((f) => (f.st === 'busy' ? Object.assign({}, f, { st: 'ok' }) : f)) })), 1200);
+    this.CAT = CAT;
+  }
+  renderVals() {
+    const s = this.state, set = (o) => this.setState(o), wide = s.w >= 980, i = s.step;
+    const pill = (on) => ({ aria: String(on), bg: on ? 'var(--ink)' : 'transparent', fg: on ? 'var(--ground)' : 'var(--ink)', bd: on ? 'var(--ink)' : 'var(--line-strong)' });
+    const doneN = Object.keys(s.done).filter((k) => s.done[k]).length;
+    const steps = STEPS.map(([t, sub, , c, opt], j) => {
+      const done = !!s.done[j], cur = j === i, sk = !!s.skipped[j];
+      return { t, sub: sk ? 'Overgeslagen' : opt ? sub + ' · optioneel' : sub, aria: cur ? 'step' : 'false', fw: cur ? 500 : 400, rowBg: cur ? 'var(--surface-sunken)' : 'transparent', bd: done ? c : cur ? 'var(--ink)' : 'var(--line-strong)', bg: done ? c : 'transparent', nfg: done ? '#151514' : cur ? 'var(--ink)' : 'var(--ink-muted)', mark: done ? ic('check', 13, 2) : String(j + 1), pick: () => set({ step: j }) };
+    });
+    const go = (j) => { set({ step: j }); window.scrollTo(0, 0); };
+    const finish = (skip) => { const d = Object.assign({}, s.done, { [i]: !skip }); const k = Object.assign({}, s.skipped, { [i]: !!skip }); this.setState({ done: d, skipped: k }); if (i < 7) go(i + 1); else window.location.href = 'App.dc.html#vandaag'; };
+    const FOUND = [['Naam', 'Atelier Noor', 'var(--snoep-roos)'], ['Wat je verkoopt', 'Handgemaakte kaarsen en geschenkdozen', 'var(--snoep-citroen)'], ['Prijzen', 'gemiddeld €58 per bestelling', 'var(--snoep-munt)'], ['Kleuren', '4 merkkleuren', 'var(--snoep-hemel)'], ['Beelden', '12 foto’s en 2 video’s', 'var(--snoep-bes)'], ['Contact en regio', 'België · [adres]', 'var(--snoep-perzik)']];
+    const CAT = { prijs: ['Productlijst', 'prijzen en bestsellers gevonden'], reviews: ['Reviews', 'bruikbaar voor middle of funnel'], resultaten: ['Eerdere advertenties', 'resultaten gelezen'], anders: ['Ander document', 'gelezen'] };
+    const fileList = (e) => Array.from((e.target && e.target.files) || []).map((f) => f.name);
+    const m = (parseFloat(String(s.margin).replace(',', '.')) || 0) / 100, aov = parseFloat(String(s.aov).replace(',', '.')) || 0;
+    const fmt = (n, d) => n.toLocaleString('nl-BE', { minimumFractionDigits: d, maximumFractionDigits: d });
+    const be = m > 0 ? 1 / m : 0;
+    const imgKinds = [['Video', 'var(--snoep-roos)'], ['Foto', 'var(--snoep-citroen)']];
+    const st = STEPS[i];
+    const toneSample = { 'warm': 'Een geschenk dat blijft branden.', 'speels': 'Licht aan, zorgen uit.', 'luxueus': 'Een avond in kaarslicht, met de hand gegoten.', 'direct': 'Handgemaakte kaarsen. Bestel voor vrijdag, in huis voor het weekend.', 'grappig': 'Je partner zegt dat je genoeg kaarsen hebt. Wij niet.' };
+    const sampleKey = ['grappig', 'speels', 'luxueus', 'direct'].find((x) => s.tones.includes(x)) || 'warm';
+    return {
+      theme: s.theme, themeLabel: s.theme === 'dark' ? 'licht' : 'nacht', toggleTheme: () => set({ theme: s.theme === 'dark' ? 'light' : 'dark' }),
+      cols: wide ? '320px minmax(0, 1fr)' : 'minmax(0, 1fr)', asidePos: wide ? 'sticky' : 'static', asideH: wide ? '100vh' : 'auto', listDir: wide ? 'column' : 'row',
+      I: { upload: ic('upload', 20), file: ic('file', 18), ok: ic('ok', 15), arrow: ic('arrow', 16), link: ic('link', 15) },
+      steps, stepN: String(i + 1), pct: Math.round(doneN / 8 * 100) + '%', pctN: String(Math.round(doneN / 8 * 100)), doneText: `${doneN} van 8 stappen klaar`, timeLeft: doneN >= 8 ? 'Helemaal klaar.' : `± ${Math.max(1, Math.round((8 - doneN) * 1.2))} minuten over`,
+      bonSay: SAY[i], bonMood: i === 7 ? 'viert' : s.read === 'busy' ? 'denkt' : i === 0 && s.read === 'done' ? 'blij' : 'praat',
+      cur: { title: st[0] === 'Klaar' ? 'Zo kent AdSweet je nu.' : st[0], lead: st[2], chip: st[3], optional: !!st[4], opt: st[4] ? ' · optioneel' : '' },
+      s1: i === 0, s2: i === 1, s3: i === 2, s4: i === 3, s5: i === 4, s6: i === 5, s7: i === 6, s8: i === 7,
+      site: s.site, setSite: (e) => set({ site: e.target.value }), readIdle: s.read === 'idle', readActive: s.read !== 'idle',
+      readSite: () => { set({ read: 'busy', foundN: 0 }); FOUND.forEach((_, j) => this.later(() => set({ foundN: j + 1, read: j === FOUND.length - 1 ? 'done' : 'busy' }), 450 + j * 420)); },
+      readLine: s.read === 'done' ? 'Dit vonden we. Klopt iets niet, dan pas je het later aan.' : 'We lezen je website.', readIcon: s.read === 'done' ? h('span', { style: { color: 'var(--ok)', display: 'flex' } }, ic('ok', 18)) : this.loader(),
+      found: FOUND.slice(0, s.foundN).map(([k, v, c]) => ({ k, v, c })),
+      prevent: (e) => e.preventDefault(),
+      dropBrand: (e) => { e.preventDefault(); const f = e.dataTransfer && e.dataTransfer.files[0]; set({ brand: f ? f.name : 'brandguide.pdf' }); },
+      pickBrand: (e) => { const n = fileList(e)[0]; if (n) set({ brand: n }); },
+      brand: { has: !!s.brand, name: s.brand || '', head: s.brand ? 'Dit haalden we uit je brandguide' : 'Of vul het zelf in', font: s.brand ? '[letter uit je brandguide]' : '', logo: s.brand ? 'Logo gevonden in je brandguide' : 'Laad je logo op',
+        colors: s.colors.map((hex, j) => ({ hex, name: 'Merkkleur ' + (j + 1), set: (e) => { const c = s.colors.slice(); c[j] = e.target.value; set({ colors: c }); } })) },
+      docs: DOCS.map(([id, t, d, bg]) => { const n = s.files.filter((f) => f.cat === id).length; return { t, d, bg, count: n ? n + (n === 1 ? ' bestand' : ' bestanden') : '', btn: n ? 'Voeg meer toe' : 'Laad op', ring: n ? 'inset 0 0 0 1.5px #151514' : 'none', pick: (e) => { const l = fileList(e); if (l.length) this.addFiles(id, l); } }; }),
+      hasFiles: s.files.length > 0,
+      files: s.files.map((f, j) => ({ n: f.n, cat: CAT[f.cat][0], what: f.st === 'ok' ? CAT[f.cat][1] : 'we lezen het document', st: f.st === 'ok' ? 'Gelezen' : 'Bezig', fg: f.st === 'ok' ? 'var(--ok)' : 'var(--ink-muted)', icon: f.st === 'ok' ? ic('ok', 14) : ic('hourglass', 14), remove: () => set({ files: s.files.filter((_, k) => k !== j) }) })),
+      sampleDocs: () => { this.addFiles('prijs', ['prijslijst-2026.xlsx']); this.addFiles('reviews', ['reviews-google.pdf']); this.addFiles('resultaten', ['ads-manager-export-november.csv']); },
+      sources: ['Google Drive', 'Dropbox', 'Canva', 'Figma'],
+      pickImgs: (e) => { const l = fileList(e); if (l.length) set({ imgs: s.imgs.concat(l) }); },
+      addImgs: () => set({ imgs: s.imgs.concat(['kaars-amber.jpg', 'gieten.mp4', 'geschenkdoos.jpg', 'atelier.jpg']) }),
+      imgs: (s.imgs.length ? s.imgs : ['van je website: kaars-wit.jpg', 'van je website: doos.jpg', 'van je website: woonkamer.jpg']).map((n) => { const v = /\.mp4|\.mov/i.test(n); return { n, k: v ? 'Video' : 'Foto', c: v ? imgKinds[0][1] : imgKinds[1][1] }; }),
+      imgNote: s.imgs.length ? `${s.imgs.length} bestanden toegevoegd. Het playbook start met 3 foto's en 2 video's.` : "Dit vonden we op je website. Heb je een video? Voeg hem toe: het playbook start met 2 video's.",
+      offerQs: [['Wat verkoop je vooral?', 'Handgemaakte kaarsen en geschenkdozen.', '', 'auto'], ['Voor wie?', '', 'bijvoorbeeld: mensen die een persoonlijk cadeau zoeken', 'auto'], ['Wat maakt jou anders?', '', 'bijvoorbeeld: elke kaars met de hand gegoten, in kleine reeksen', '1 / -1'], ['Je bestsellers', '', 'bijvoorbeeld: de geschenkdoos met drie kaarsen', '1 / -1']].map(([l, v, ph, span]) => ({ l, v, ph, span })),
+      moments: [['feest', 'Feestdagen'], ['solden', 'Solden'], ['bf', 'Black Friday'], ['val', 'Valentijn'], ['moeder', 'Moederdag'], ['zomer', 'Zomer']].map(([id, t]) => Object.assign({ t, pick: () => set({ moments: Object.assign({}, s.moments, { [id]: !s.moments[id] }) }) }, pill(!!s.moments[id]))),
+      tones: TONES.map((t) => Object.assign({ t, pick: () => { const on = s.tones.includes(t); if (on) set({ tones: s.tones.filter((x) => x !== t) }); else if (s.tones.length < 3) set({ tones: s.tones.concat([t]) }); } }, pill(s.tones.includes(t)))),
+      toneCount: `${s.tones.length} van 3 gekozen${s.tones.length ? ': ' + s.tones.join(', ') : ''}`, toneSample: toneSample[sampleKey],
+      goals: [['verkopen', 'Online verkopen', 'Je hebt een webshop.', 'var(--snoep-roos)'], ['aanvragen', 'Aanvragen of afspraken', 'Formulier, offerte, afspraak.', 'var(--snoep-hemel)'], ['zaak', 'Meer mensen in je zaak', 'Je hebt een lokale zaak.', 'var(--snoep-citroen)'], ['anders', 'Iets anders', 'Volgers, bereik of een evenement.', 'var(--snoep-bes)']].map(([id, t, sub, c]) => ({ t, s: sub, c, aria: String(s.goal === id), ring: s.goal === id ? 'inset 0 0 0 1.5px var(--ink)' : 'none', pick: () => set({ goal: id }) })),
+      aov: s.aov, setAov: (e) => set({ aov: e.target.value }), margin: s.margin, setMargin: (e) => set({ margin: e.target.value }),
+      calc: m > 0 && aov > 0 ? `Bij ${Math.round(m * 100)}% marge verdien je je advertentie terug vanaf een ROAS van ${fmt(be, be * 10 % 1 === 0 ? 1 : 2)}. Een verkoop mag je hoogstens €${fmt(aov * m, 2)} aan advertenties kosten.` : 'Vul je orderwaarde en je marge in, dan rekenen we mee.',
+      summary: [['Je website', s.read === 'done' ? 'Gelezen: 6 dingen gevonden' : 'Nog niet gelezen', 'var(--roos)', s.read === 'done'], ['Je brandguide', s.brand ? s.brand : s.skipped[1] ? 'Overgeslagen, kleuren zelf ingevuld' : '4 merkkleuren', 'var(--tarwe)', true], ['Je documenten', s.files.length ? s.files.length + ' documenten gelezen' : 'Geen, kan later', 'var(--salie)', s.files.length > 0], ['Je beelden', (s.imgs.length || 3) + ' beelden', 'var(--staal)', true], ['Je toon', s.tones.join(', ') || 'Nog niet gekozen', 'var(--lavendel)', s.tones.length > 0], ['Je doel', { verkopen: 'Online verkopen', aanvragen: 'Aanvragen of afspraken', zaak: 'Meer mensen in je zaak', anders: 'Iets anders' }[s.goal] + (m > 0 ? ` · break-even ${fmt(be, 1)}` : ''), 'var(--klei)', true]]
+        .map(([k, v, bg, ok]) => ({ k, v, bg, icon: ok ? ic('ok', 15) : ic('hourglass', 15) })),
+      prevVis: i > 0 ? 'visible' : 'hidden', prev: () => go(Math.max(0, i - 1)), skip: () => finish(true),
+      next: () => { if (i === 0 && s.read === 'idle') return this.renderVals().readSite(); finish(false); },
+      nextLabel: i === 0 && s.read === 'idle' ? 'Lees mijn website' : i === 7 ? 'Naar Vandaag' : 'Verder',
+    };
+  }
+}
+</script>
+</body>
+</html>

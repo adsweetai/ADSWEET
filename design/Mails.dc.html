@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AdSweet · Mails</title>
+<style>
+@font-face { font-family: "Host Grotesk"; font-weight: 300; font-display: swap; src: url("fonts/host-grotesk-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "Host Grotesk"; font-weight: 400; font-display: swap; src: url("fonts/host-grotesk-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Host Grotesk"; font-weight: 500; font-display: swap; src: url("fonts/host-grotesk-latin-500-normal.woff2") format("woff2"); }
+:root, [data-theme="light"] { --ground: #EAE8E3; --surface: #F5F4F0; --surface-sunken: #E2E0DA; --ink: #151514; --ink-muted: #5F5C56; --ink-accent: #7A776F; --line: #15151424; --line-strong: #7A776F; --robijn: #C7254E; --tarwe: #E8D7AE; --staal: #B8C7D9; --lavendel: #CEC4EA; --salie: #BFD9C6; --klei: #E9C2AE; --roos: #EEC1D0; --snoep-roos: #F28AB2; --snoep-citroen: #F5CF5C; --snoep-munt: #7FD3B0; --snoep-bes: #A99BF2; --snoep-hemel: #8FC2F2; --snoep-perzik: #F7A97A; --act: #AE3A1F; --act-tint: #F5DCD3; --font: "Host Grotesk", "Helvetica Neue", Arial, sans-serif; --show-light: block; --show-dark: none; color-scheme: light; }
+[data-theme="dark"] { --ground: #111110; --surface: #1A1A19; --surface-sunken: #0C0C0B; --ink: #F1EFEA; --ink-muted: #A8A49B; --ink-accent: #9B978E; --line: #F1EFEA24; --line-strong: #6E6B65; --robijn: #E0577A; --act: #F0937A; --act-tint: #341C16; --show-light: none; --show-dark: block; color-scheme: dark; }
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.5; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+button { font: inherit; color: inherit; }
+a { color: var(--ink); text-decoration: none; }
+a:hover { color: var(--ink-muted); }
+:focus-visible { outline: 2px solid var(--robijn); outline-offset: 4px; }
+</style>
+<script src="dot.js"></script>
+</helmet>
+<div data-theme="{{ theme }}" data-screen-label="Mails" style="min-height:100vh; background:var(--ground); color:var(--ink); display:grid; grid-template-columns:{{ cols }}; gap:0;">
+  <nav aria-label="Mails" style="padding:28px 20px; border-right:1px solid var(--line); display:flex; flex-direction:{{ dir }}; gap:2px; overflow-x:auto; background:var(--surface);">
+    <span style="display:flex; align-items:center; gap:10px; padding:0 10px 16px;"><img src="assets/adsweet-logo.svg" alt="adsweet" style="display:var(--show-light); height:19px; width:auto;"><img src="assets/adsweet-logo-licht.svg" alt="adsweet" style="display:var(--show-dark); height:19px; width:auto;"><span style="font-size:13px; color:var(--ink-muted);">Mails</span></span>
+    <sc-for list="{{ list }}" as="m" hint-placeholder-count="12"><button type="button" aria-current="{{ m.cur }}" onClick="{{ m.pick }}" style="flex:none; display:flex; align-items:center; gap:10px; min-height:38px; padding:0 12px; border:0; border-radius:10px; background:{{ m.bg }}; color:{{ m.fg }}; font-size:14px; font-weight:500; text-align:left; cursor:pointer; white-space:nowrap;"><span style="font-size:12px; opacity:.7;">{{ m.n }}</span>{{ m.t }}</button></sc-for>
+    <button type="button" onClick="{{ toggleTheme }}" style="margin-top:12px; flex:none; height:32px; padding:0 12px; border:1px dashed var(--line-strong); border-radius:999px; background:transparent; color:var(--ink-muted); font-size:12.5px; font-weight:500; cursor:pointer;">Demo: {{ themeLabel }}</button>
+  </nav>
+  <main style="padding:clamp(20px, 4vw, 56px) clamp(12px, 3vw, 40px); display:flex; flex-direction:column; align-items:center; gap:14px;">
+    <div style="width:100%; max-width:600px; display:flex; flex-direction:column; gap:4px; font-size:13px; color:var(--ink-muted);"><span>Van: AdSweet &lt;hallo@adsweet.ai&gt;</span><span>Onderwerp: <b style="font-weight:500; color:var(--ink);">{{ mail.subject }}</b></span><sc-if value="{{ mail.hasNote }}" hint-placeholder-val="{{ false }}"><span style="padding-top:4px;">{{ mail.note }}</span></sc-if></div>
+    <article style="width:100%; max-width:600px; background:var(--ground); border:1px solid var(--line); border-radius:4px; padding:40px clamp(20px, 5vw, 48px); display:flex; flex-direction:column; gap:22px;">
+      <img src="assets/adsweet-logo.svg" alt="adsweet" style="display:var(--show-light); height:19px; width:auto; align-self:flex-start;"><img src="assets/adsweet-logo-licht.svg" alt="adsweet" style="display:var(--show-dark); height:19px; width:auto; align-self:flex-start;">
+      <h1 style="margin:8px 0 0; font-size:28px; font-weight:500; letter-spacing:-.03em; line-height:1.15; text-wrap:balance;">{{ mail.title }}</h1>
+      <sc-for list="{{ mail.body }}" as="p" hint-placeholder-count="2"><p style="margin:0; font-size:16px; line-height:1.55;">{{ p }}</p></sc-for>
+      <sc-if value="{{ mail.hasTile }}" hint-placeholder-val="{{ false }}"><table role="presentation" style="width:100%; border-collapse:collapse; border:1px solid var(--line); font-size:14px;"><tr><sc-for list="{{ mail.tile }}" as="c" hint-placeholder-count="3"><td style="padding:12px 14px; border-left:1px solid {{ c.bd }}; outline:{{ c.ol }};"><span style="display:block; font-size:12px; color:var(--ink-muted);">{{ c.k }}</span><b style="font-size:20px; font-weight:{{ c.fw }};">{{ c.v }}</b></td></sc-for></tr></table></sc-if>
+      <a href="{{ mail.href }}" style="align-self:flex-start; display:inline-flex; align-items:center; height:46px; padding:0 22px; border-radius:999px; background:var(--ink); color:var(--ground); font-size:15px; font-weight:500;" style-hover="color:var(--ground);">{{ mail.btn }}</a>
+      <sc-if value="{{ mail.hasSmall }}" hint-placeholder-val="{{ false }}"><p style="margin:0; font-size:13.5px; color:var(--ink-muted);">{{ mail.small }}</p></sc-if>
+      <footer style="margin-top:16px; padding-top:20px; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:6px;">
+        <span style="font-size:22px; font-weight:300; color:var(--ink-accent); letter-spacing:-.03em;">Hit the <span style="color:var(--robijn);">sweet</span> spot.</span>
+        <span style="font-size:12.5px; color:var(--ink-muted);">AdSweet · adsweet.ai · [bedrijfsgegevens en ondernemingsnummer]</span>
+        <span style="font-size:12.5px; color:var(--ink-muted);"><a href="App.dc.html#instellingen-meldingen" style="color:var(--ink-muted); border-bottom:1px solid var(--line-strong);">Meldingen aanpassen</a> · <a href="App.dc.html#instellingen-meldingen" style="color:var(--ink-muted); border-bottom:1px solid var(--line-strong);">Uitschrijven</a></span>
+      </footer>
+    </article>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const MAILS = [
+  { t: 'Welkom', subject: 'Welkom bij AdSweet, Sarah', title: 'Welkom bij AdSweet, Sarah.', body: ['Je account staat klaar en je eerste campagne is verstuurd. Meta keurt je advertenties eerst goed, daarna gaan ze lopen.', 'Morgenochtend om 06:00 staat je eerste overzicht klaar op Vandaag.'], btn: 'Naar Vandaag', href: 'App.dc.html#vandaag' },
+  { t: 'Link om in te loggen', subject: 'Je link om in te loggen', title: 'Je link om in te loggen', body: ['Klik op de knop om in te loggen bij AdSweet. De link werkt 15 minuten.'], btn: 'Log in', href: 'App.dc.html', small: 'Vroeg je geen link aan? Dan mag je deze mail negeren.' },
+  { t: 'Uitnodiging teamlid', subject: 'Lisa nodigt je uit voor Atelier Noor', title: 'Lisa nodigt je uit voor Atelier Noor op AdSweet.', body: ['Je rol is Beheerder: je kan alles behalve het abonnement.'], btn: 'Neem de uitnodiging aan', href: 'Inloggen.dc.html#uitnodiging' },
+  { t: 'Proefperiode bijna om', subject: 'Nog 3 dagen gratis', title: 'Nog 3 dagen gratis, Lisa.', body: ['Op 16 december betaal je €136,50 + €28,67 btw = €165,17 per maand voor Pro, met je founding-korting.', 'Wil je van plan wisselen of stoppen? Dat kan tot die dag, met één klik.'], btn: 'Plan beheren', href: 'App.dc.html#abonnement', note: 'Verstuurd op dag 27 van de proefperiode · [herinnering dag 27, voorstel]' },
+  { t: 'Proefperiode omgezet', subject: 'Je abonnement loopt', title: 'Je abonnement loopt.', body: ['Je proefperiode is voorbij. Je zit op Pro voor €136,50 per maand excl. btw. Je factuur staat in de app.'], btn: 'Bekijk je abonnement', href: 'App.dc.html#abonnement' },
+  { t: 'Factuur', subject: 'Je factuur van [datum]', title: 'Je factuur van [datum]', body: ['Pro, founding member: €136,50 + €28,67 btw = €165,17.', 'Betaald met [betaalmethode].'], btn: 'Download de factuur', href: 'App.dc.html#abonnement', small: 'Facturen voor Belgische bedrijven komen ook via Peppol.' },
+  { t: 'Betaling mislukt', subject: 'Je betaling is mislukt', title: 'Je betaling is mislukt.', body: ['We konden €165,17 niet afschrijven. Pas je betaalmethode aan, dan proberen we het opnieuw.', 'Je advertenties bij Meta lopen gewoon door. Die betaal je rechtstreeks aan Meta.'], btn: 'Pas je betaalmethode aan', href: 'App.dc.html#abonnement' },
+  { t: 'Weekrapport', subject: 'Je week in het kort', title: 'Tom, je week in het kort.', body: ['Je gaf €105 uit en kreeg 5 aanvragen, €21,00 per aanvraag. Je doel is €20. Vorige week waren het 4 aanvragen aan €26,25.', 'Beste advertentie: ‘Voor en na’. Slechtste: ‘Ons team aan het werk’, €60 zonder aanvraag.'], tile: [['Uitgegeven', '€105'], ['Aanvragen', '5'], ['Kost per aanvraag', '€21,00']], btn: 'Bekijk je weekrapport', href: 'App.dc.html#weekrapport' },
+  { t: 'Melding Actie nodig', subject: 'Actie nodig: ‘Sfeerbeeld woonkamer’', title: 'Lisa, ‘Sfeerbeeld woonkamer’ gaf €72 uit zonder verkoop.', body: ['Je maximale kost per verkoop is €23,20. Drie keer dat is €69,60, en die grens is voorbij.', 'Misschien moet je hem stilaan afzetten. Dat doe je met één klik op Vandaag.'], btn: 'Bekijk op Vandaag', href: 'App.dc.html#vandaag' },
+  { t: 'Kwartaalcall bevestigd', subject: 'Je kwartaalcall staat vast', title: 'Je kwartaalcall staat vast.', body: ['Op [datum] om [uur] overloopt PJ 20 minuten je advertenties met je.'], btn: 'Zet in je agenda', href: 'App.dc.html#hulp' },
+  { t: 'Doorverwijzing gelukt', subject: 'Je krijgt een maand gratis', title: 'Je krijgt een maand gratis.', body: ['[naam] meldde zich aan via je link. Jullie krijgen allebei een maand gratis. Die van jou gaat in op [datum].'], btn: 'Bekijk je doorverwijzingen', href: 'App.dc.html#doorverwijzen' },
+  { t: 'Opgezegd', subject: 'Je abonnement is opgezegd', title: 'Je abonnement is opgezegd.', body: ['Je abonnement loopt tot [einde periode]. Daarna kan je nog 30 dagen je gegevens downloaden.', 'Je advertenties bij Meta blijven bestaan in je eigen advertentieaccount.'], btn: 'Download je gegevens', href: 'App.dc.html#instellingen-privacy' },
+];
+class Component extends DCLogic {
+  state = { i: 0, theme: 'light', w: window.innerWidth };
+  componentDidMount() { this.onR = () => this.setState({ w: window.innerWidth }); window.addEventListener('resize', this.onR); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); }
+  renderVals() {
+    const s = this.state, m = MAILS[s.i], wide = s.w >= 900;
+    return {
+      theme: s.theme, cols: wide ? '280px minmax(0, 1fr)' : 'minmax(0, 1fr)', dir: wide ? 'column' : 'row',
+      themeLabel: s.theme === 'dark' ? 'licht' : 'nacht', toggleTheme: () => this.setState({ theme: s.theme === 'dark' ? 'light' : 'dark' }),
+      list: MAILS.map((x, i) => ({ t: x.t, n: String(i + 1).padStart(2, '0'), cur: i === s.i ? 'true' : 'false', bg: i === s.i ? 'var(--ink)' : 'transparent', fg: i === s.i ? 'var(--ground)' : 'var(--ink)', pick: () => this.setState({ i }) })),
+      mail: Object.assign({}, m, { hasNote: !!m.note, hasSmall: !!m.small, hasTile: !!m.tile, tile: (m.tile || []).map(([k, v], i, a) => ({ k, v, bd: i ? 'var(--line)' : 'transparent', ol: i === a.length - 1 ? '1px solid var(--ink)' : 'none', fw: i === a.length - 1 ? 500 : 400 })) }),
+    };
+  }
+}
+</script>
+</body>
+</html>

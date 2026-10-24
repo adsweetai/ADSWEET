@@ -1,0 +1,87 @@
+/* AdSweet · design tokens (Raakpunt)
+   Eén bron voor website en app. Licht is standaard; nacht volgt het toestel
+   of [data-theme="dark"]. Contrast nagekeken: tekst minstens 4,5:1,
+   ink-accent alleen in titels vanaf 32px (3:1), randen en focusring minstens 3:1. */
+
+:root {
+  /* Merk */
+  --ground: #EAE8E3;          /* steen: achtergrond van website en app */
+  --surface: #F5F4F0;         /* kaarten, panelen, tabellen, zijbalk */
+  --surface-sunken: #E2E0DA;  /* invoervelden, tabelkoppen */
+  --ink: #151514;             /* tekst, cijfers, primaire knop */
+  --ink-muted: #5F5C56;       /* uitleg, metadata */
+  --ink-accent: #7A776F;      /* alleen accentdeel van titels vanaf 32px */
+  --line: #15151424;          /* haarlijnen */
+  --line-strong: #7A776F;     /* randen van velden en tweede knop */
+  --robijn: #C7254E;          /* het raakpunt: punt, focusring, parel. Nooit vlak, tekst of knop */
+
+  /* Status: altijd met icoon en woord */
+  --ok: #2E6B45;      --ok-tint: #DCEADF;      /* In orde */
+  --warn: #8A5410;    --warn-tint: #F2E2C4;    /* Let op */
+  --act: #AE3A1F;     --act-tint: #F5DCD3;     /* Actie nodig, ook "Pas op, dit raden we niet aan" */
+
+  /* Reekskleuren (grafieken, avatars). Tekst erop altijd #151514 */
+  --tarwe: #E8D7AE;     /* lokale zaak */
+  --staal: #B8C7D9;     /* dienstverlener · top of funnel · Shopify */
+  --lavendel: #CEC4EA;  /* zelfstandige */
+  --salie: #BFD9C6;     /* middle of funnel · Google Analytics */
+  --klei: #E9C2AE;      /* bottom of funnel */
+  --roos: #EEC1D0;      /* webshop */
+  --on-series: #151514;
+
+  /* Letters */
+  --font: "Host Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --fw-light: 300; --fw-regular: 400; --fw-medium: 500; --fw-semibold: 600;
+  --fs-hero: clamp(40px, 6.6vw, 112px);   --lh-hero: .92;  --ls-hero: -.045em;
+  --fs-section: clamp(32px, 4vw, 64px);   --lh-section: 1; --ls-section: -.035em;
+  --fs-page: 30px;      --ls-page: -.03em;      /* paginatitel in de app, 28 tot 32px */
+  --fs-greeting: 34px;                          /* begroeting op Vandaag, 32 tot 36px */
+  --fs-card: 20px;      --ls-card: -.015em;     /* kaarttitel, 18 tot 22px */
+  --fs-body-site: 17px; --fs-body-app: 15px; --lh-body: 1.5; --ls-body: -.01em;
+  --fs-eyebrow: 12px;   --ls-eyebrow: .12em;    /* hoofdletters, lijntje van 28px ervoor */
+
+  /* Vorm */
+  --radius-card: 16px; --radius-field: 10px; --radius-pill: 999px;
+  --btn-h-site: 46px; --btn-h-app: 40px; --field-h: 44px;
+  --focus: 0 0 0 4px var(--ground), 0 0 0 6px var(--robijn); /* 2px robijn, 4px afstand */
+  --shadow-float: 0 12px 32px rgba(21, 21, 20, .12), 0 2px 6px rgba(21, 21, 20, .06);
+  --sidebar-w: 248px;
+  --gutter-desktop: 48px; --gutter-mobile: 20px;
+  --section-gap-desktop: 120px; --section-gap-mobile: 72px;
+  --measure: 560px; --measure-doc: 680px;
+
+  /* Beweging */
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --t-fast: 300ms; --t-reveal: 600ms; --t-stagger: 60ms; --t-loader: 1200ms; --t-breathe: 1600ms;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #111110; --surface: #1A1A19; --surface-sunken: #0C0C0B;
+    --ink: #F1EFEA; --ink-muted: #A8A49B; --ink-accent: #9B978E;
+    --line: #F1EFEA24; --line-strong: #6E6B65; --robijn: #E0577A;
+    --ok: #86C79A; --ok-tint: #1B2A20;
+    --warn: #E2B062; --warn-tint: #2D2414;
+    --act: #F0937A; --act-tint: #341C16;
+    --shadow-float: 0 12px 32px rgba(0, 0, 0, .45), 0 2px 6px rgba(0, 0, 0, .3);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #111110; --surface: #1A1A19; --surface-sunken: #0C0C0B;
+  --ink: #F1EFEA; --ink-muted: #A8A49B; --ink-accent: #9B978E;
+  --line: #F1EFEA24; --line-strong: #6E6B65; --robijn: #E0577A;
+  --ok: #86C79A; --ok-tint: #1B2A20;
+  --warn: #E2B062; --warn-tint: #2D2414;
+  --act: #F0937A; --act-tint: #341C16;
+  --shadow-float: 0 12px 32px rgba(0, 0, 0, .45), 0 2px 6px rgba(0, 0, 0, .3);
+  color-scheme: dark;
+}
+
+/* Basis */
+body { background: var(--ground); color: var(--ink); font-family: var(--font); font-size: var(--fs-body-app);
+  line-height: var(--lh-body); letter-spacing: var(--ls-body); -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--robijn); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

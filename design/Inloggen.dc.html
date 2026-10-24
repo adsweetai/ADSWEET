@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AdSweet · Inloggen en onboarding</title>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icon/app-icon-32.png">
+<style>
+@font-face { font-family: "Host Grotesk"; font-weight: 300; font-display: swap; src: url("fonts/host-grotesk-latin-300-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Host Grotesk"; font-weight: 400; font-display: swap; src: url("fonts/host-grotesk-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Host Grotesk"; font-weight: 500; font-display: swap; src: url("fonts/host-grotesk-latin-500-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Host Grotesk"; font-weight: 400; font-display: swap; src: url("fonts/host-grotesk-latin-ext-400-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+20A0-20AB,U+20AD-20C0,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: "Host Grotesk"; font-weight: 500; font-display: swap; src: url("fonts/host-grotesk-latin-ext-500-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+20A0-20AB,U+20AD-20C0,U+2C60-2C7F,U+A720-A7FF; }
+:root, [data-theme="light"] {
+  --ground: #EAE8E3; --surface: #F5F4F0; --surface-sunken: #E2E0DA; --ink: #151514; --ink-muted: #5F5C56; --ink-accent: #7A776F;
+  --line: #15151424; --line-strong: #7A776F; --robijn: #C7254E;
+  --ok: #2E6B45; --ok-tint: #DCEADF; --warn: #8A5410; --warn-tint: #F2E2C4; --act: #AE3A1F; --act-tint: #F5DCD3;
+  --tarwe: #E8D7AE; --staal: #B8C7D9; --lavendel: #CEC4EA; --salie: #BFD9C6; --klei: #E9C2AE; --roos: #EEC1D0; --snoep-roos: #F28AB2; --snoep-citroen: #F5CF5C; --snoep-munt: #7FD3B0; --snoep-bes: #A99BF2; --snoep-hemel: #8FC2F2; --snoep-perzik: #F7A97A;
+  --shadow-float: 0 12px 32px rgba(21,21,20,.12), 0 2px 6px rgba(21,21,20,.06);
+  --font: "Host Grotesk", "Helvetica Neue", Arial, sans-serif; --show-light: block; --show-dark: none; color-scheme: light;
+}
+[data-theme="dark"] {
+  --ground: #111110; --surface: #1A1A19; --surface-sunken: #0C0C0B; --ink: #F1EFEA; --ink-muted: #A8A49B; --ink-accent: #9B978E;
+  --line: #F1EFEA24; --line-strong: #6E6B65; --robijn: #E0577A;
+  --ok: #86C79A; --ok-tint: #1B2A20; --warn: #E2B062; --warn-tint: #2D2414; --act: #F0937A; --act-tint: #341C16;
+  --shadow-float: 0 12px 32px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.3); --show-light: none; --show-dark: block; color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.5; letter-spacing: -.01em; -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+button, input, select, textarea { font: inherit; letter-spacing: inherit; color: inherit; }
+a { color: var(--ink); text-decoration: none; }
+a:hover { color: var(--ink-muted); }
+:focus-visible { outline: 2px solid var(--robijn); outline-offset: 4px; }
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline-offset: 2px; }
+@keyframes as-l1 { 0%, 100% { transform: translateY(-5px) scaleX(1); opacity: 1; } 50% { transform: translateY(0) scaleX(.1); opacity: 0; } }
+@keyframes as-l2 { 0%, 100% { transform: scaleX(1); opacity: 1; } 50% { transform: scaleX(.1); opacity: 0; } }
+@keyframes as-l3 { 0%, 100% { transform: translateY(5px) scaleX(1); opacity: 1; } 50% { transform: translateY(0) scaleX(.1); opacity: 0; } }
+@keyframes as-dot { 0%, 20%, 80%, 100% { transform: scale(0); } 50% { transform: scale(1); } }
+@keyframes as-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+::highlight(as-term) { text-decoration-line: underline; text-decoration-style: dotted; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+</style>
+<script src="rondleiding.js"></script>
+<script src="dot.js"></script>
+</helmet>
+
+<div data-theme="{{ theme }}" lang="{{ lang }}" data-screen-label="{{ screenLabel }}" style="min-height:100vh; background:var(--ground); color:var(--ink);">
+
+  <!-- AUTH -->
+  <sc-if value="{{ isAuth }}" hint-placeholder-val="{{ true }}">
+    <div style="min-height:100vh; display:grid; grid-template-columns:{{ authCols }};">
+      <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+        <aside style="position:relative; display:flex; flex-direction:column; justify-content:space-between; padding:32px 48px; border-right:1px solid var(--line); min-height:100vh;">
+          <a href="Website.dc.html" aria-label="AdSweet, naar de website" style="align-self:flex-start; display:inline-flex;">
+            <img src="assets/adsweet-logo.svg" alt="adsweet" style="display:var(--show-light); height:19px; width:auto;">
+            <img src="assets/adsweet-logo-licht.svg" alt="adsweet" style="display:var(--show-dark); height:19px; width:auto;">
+          </a>
+          <div style="width:100%; aspect-ratio:2.5/1;"><x-import component-from-global-scope="raakpunt-beeld" from="./raakpunt.js" theme="{{ theme }}" hint-size="100%,100%" style="display:block; width:100%; height:100%;"></x-import></div>
+          <span style="font-size:clamp(28px, 2.6vw, 40px); font-weight:300; color:var(--ink-accent); letter-spacing:-.035em; line-height:1;">Hit the <span style="color:var(--robijn);">sweet</span> spot.</span>
+        </aside>
+      </sc-if>
+      <div style="display:flex; flex-direction:column; min-height:100vh; padding:28px clamp(20px, 4vw, 64px);">
+        <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <a href="Website.dc.html" aria-label="AdSweet" style="display:inline-flex;"><img src="assets/adsweet-logo.svg" alt="adsweet" style="display:var(--show-light); height:17px; width:auto;"><img src="assets/adsweet-logo-licht.svg" alt="adsweet" style="display:var(--show-dark); height:17px; width:auto;"></a>
+            <div style="width:100%; max-width:360px; aspect-ratio:2.5/1; margin:0 auto;"><x-import component-from-global-scope="raakpunt-beeld" from="./raakpunt.js" theme="{{ theme }}" hint-size="100%,100%" style="display:block; width:100%; height:100%;"></x-import></div>
+          </div>
+        </sc-if>
+        <div style="flex:1; display:flex; align-items:center;">
+          <div style="width:100%; max-width:440px; margin:0 auto; padding:32px 0; display:flex; flex-direction:column; gap:22px;">
+
+            <sc-if value="{{ a.signup }}" hint-placeholder-val="{{ true }}">
+              <h1 style="margin:0; font-size:clamp(34px, 4vw, 52px); font-weight:500; line-height:1; letter-spacing:-.035em;">{{ t.a.signupTitle }}</h1>
+              <sc-if value="{{ a.hasPlan }}" hint-placeholder-val="{{ false }}"><span style="align-self:flex-start; font-size:13px; padding:3px 10px; border:1px solid var(--line-strong); border-radius:999px; color:var(--ink-muted);">{{ a.planChip }}</span></sc-if>
+              <button type="button" onClick="{{ a.fbSignup }}" disabled="{{ a.noTerms }}" style="display:flex; align-items:center; justify-content:center; gap:10px; height:50px; border:0; border-radius:999px; background:var(--ink); color:var(--ground); font-size:15px; font-weight:500; cursor:pointer; opacity:{{ a.btnOp }};">{{ t.a.fb }}</button>
+              <p style="margin:-8px 0 0; font-size:14px; color:var(--ink-muted);">{{ t.a.signupNote }}</p>
+              <label style="display:flex; align-items:flex-start; gap:10px; font-size:14px; cursor:pointer;">
+                <input type="checkbox" checked="{{ a.terms }}" onChange="{{ a.toggleTerms }}" style="width:18px; height:18px; margin:2px 0 0; accent-color:var(--ink); flex:none;">
+                <span>{{ t.a.terms1 }} <a href="Website.dc.html#voorwaarden" style="border-bottom:1px solid var(--line-strong);">{{ t.a.terms2 }}</a> {{ t.a.terms3 }} <a href="Website.dc.html#privacy" style="border-bottom:1px solid var(--line-strong);">{{ t.a.terms4 }}</a>.</span>
+              </label>
+              <span style="font-size:14px; color:var(--ink-muted);">{{ t.a.haveAccount }} <a href="#inloggen" onClick="{{ a.toLogin }}" style="color:var(--ink); font-weight:500; border-bottom:1px solid var(--line-strong);">{{ t.a.loginLink }}</a></span>
+            </sc-if>
+
+            <sc-if value="{{ a.login }}" hint-placeholder-val="{{ false }}">
+              <h1 style="margin:0; font-size:clamp(34px, 4vw, 52px); font-weight:500; line-height:1; letter-spacing:-.035em;">{{ t.a.loginTitle }}</h1>
+              <button type="button" onClick="{{ a.fbLogin }}" style="display:flex; align-items:center; justify-content:center; height:50px; border:0; border-radius:999px; background:var(--ink); color:var(--ground); font-size:15px; font-weight:500; cursor:pointer;">{{ t.a.fb }}</button>
+              <sc-if value="{{ a.noMail }}" hint-placeholder-val="{{ true }}">
+                <button type="button" onClick="{{ a.showMail }}" style="align-self:flex-start; padding:4px 0; border:0; border-bottom:1px solid var(--line-strong); background:none; color:var(--ink); font-size:14.5px; font-weight:500; cursor:pointer;">{{ t.a.mailBtn }}</button>
+              </sc-if>
+              <sc-if value="{{ a.mail }}" hint-placeholder-val="{{ false }}">
+                <form onSubmit="{{ a.sendMail }}" style="display:flex; flex-direction:column; gap:12px; padding-top:16px; border-top:1px solid var(--line);">
+                  <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.a.mailLabel }}</span><input type="email" required="" autocomplete="email" placeholder="jij@jouwzaak.be" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+                  <button type="submit" style="align-self:flex-start; height:44px; padding:0 20px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:14.5px; font-weight:500; cursor:pointer;">{{ t.a.mailSend }}</button>
+                  <span style="font-size:13px; color:var(--ink-muted);">{{ t.a.mailNote }}</span>
+                </form>
+              </sc-if>
+              <span style="font-size:14px; color:var(--ink-muted);">{{ t.a.newHere }} <a href="#account-maken" onClick="{{ a.toSignup }}" style="color:var(--ink); font-weight:500; border-bottom:1px solid var(--line-strong);">{{ t.a.signupLink }}</a></span>
+            </sc-if>
+
+            <sc-if value="{{ a.mailSent }}" hint-placeholder-val="{{ false }}">
+              <h1 style="margin:0; font-size:clamp(34px, 4vw, 52px); font-weight:500; line-height:1; letter-spacing:-.035em;">{{ t.a.checkTitle }}</h1>
+              <p style="margin:0; color:var(--ink-muted);">{{ t.a.checkText }}</p>
+              <a href="App.dc.html" style="align-self:flex-start; font-size:14.5px; font-weight:500; border-bottom:1px solid var(--line-strong);">{{ t.a.checkDemo }}</a>
+            </sc-if>
+
+            <sc-if value="{{ a.test }}" hint-placeholder-val="{{ false }}">
+              <h1 style="margin:0; font-size:clamp(34px, 4vw, 52px); font-weight:500; line-height:1; letter-spacing:-.035em; text-wrap:balance;">{{ t.a.testTitle }}</h1>
+              <p style="margin:0; color:var(--ink-muted);">{{ t.a.testText }}</p>
+              <sc-if value="{{ a.testForm }}" hint-placeholder-val="{{ true }}">
+                <form onSubmit="{{ a.testSend }}" style="display:flex; flex-direction:column; gap:12px;">
+                  <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.a.name }}</span><input required="" type="text" autocomplete="name" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+                  <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.a.mailLabel }}</span><input required="" type="email" autocomplete="email" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+                  <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.a.site }}</span><input type="text" placeholder="jouwzaak.be" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+                  <button type="submit" style="align-self:flex-start; height:46px; padding:0 22px; border:0; border-radius:999px; background:var(--ink); color:var(--ground); font-size:14.5px; font-weight:500; cursor:pointer;">{{ t.a.testBtn }}</button>
+                </form>
+              </sc-if>
+              <sc-if value="{{ a.testDone }}" hint-placeholder-val="{{ false }}"><p role="status" style="margin:0; display:flex; align-items:center; gap:8px; color:var(--ok); font-weight:500;"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round;"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>{{ t.a.testOk }}</p></sc-if>
+            </sc-if>
+
+            <sc-if value="{{ a.invite }}" hint-placeholder-val="{{ false }}">
+              <span style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--ink-muted);"><span style="width:32px; height:32px; border-radius:50%; background:var(--roos); color:#151514; display:grid; place-items:center; font-size:13px; font-weight:500;">L</span>Lisa · Atelier Noor</span>
+              <h1 style="margin:0; font-size:clamp(30px, 3.6vw, 46px); font-weight:500; line-height:1.05; letter-spacing:-.035em; text-wrap:balance;">{{ t.a.inviteTitle }}</h1>
+              <p style="margin:0; color:var(--ink-muted);">{{ t.a.inviteRole }}</p>
+              <a href="App.dc.html" style="display:flex; align-items:center; justify-content:center; height:50px; border-radius:999px; background:var(--ink); color:var(--ground); font-size:15px; font-weight:500;" style-hover="color:var(--ground); opacity:.9;">{{ t.a.fb }}</a>
+              <a href="App.dc.html" style="display:flex; align-items:center; justify-content:center; height:50px; border:1px solid var(--line-strong); border-radius:999px; font-size:15px; font-weight:500;">{{ t.a.inviteMail }}</a>
+            </sc-if>
+
+            <sc-if value="{{ a.err }}" hint-placeholder-val="{{ false }}">
+              <span style="align-self:flex-start; display:inline-flex; align-items:center; gap:6px; height:26px; padding:0 10px 0 8px; border-radius:999px; background:var(--act-tint); color:var(--act); font-size:13px; font-weight:500;"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>{{ t.m.actie }}</span>
+              <h1 style="margin:0; font-size:clamp(26px, 3vw, 38px); font-weight:500; line-height:1.1; letter-spacing:-.03em; text-wrap:balance;">{{ a.errText }}</h1>
+              <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px 18px;">
+                <button type="button" onClick="{{ a.retry }}" style="height:46px; padding:0 22px; border:0; border-radius:999px; background:var(--ink); color:var(--ground); font-size:14.5px; font-weight:500; cursor:pointer;">{{ a.retryLabel }}</button>
+                <sc-if value="{{ a.errNoAcc }}" hint-placeholder-val="{{ false }}"><a href="Website.dc.html#les" style="font-size:14.5px; font-weight:500; border-bottom:1px solid var(--line-strong);">{{ t.m.howMake }}</a></sc-if>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; font-size:13px; color:var(--ink-muted);">
+          <div role="group" aria-label="Taal" style="display:flex; gap:4px;">
+            <sc-for list="{{ langs }}" as="lg" hint-placeholder-count="3"><button type="button" aria-pressed="{{ lg.aria }}" onClick="{{ lg.pick }}" style="height:32px; min-width:44px; padding:0 10px; border-radius:999px; border:1px solid {{ lg.bd }}; background:{{ lg.bg }}; color:{{ lg.fg }}; font-size:12.5px; font-weight:500; cursor:pointer;">{{ lg.label }}</button></sc-for>
+          </div>
+          <a href="Website.dc.html#privacy" style="color:var(--ink-muted);">{{ t.a.privacy }}</a>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ONBOARDING -->
+  <sc-if value="{{ isOb }}" hint-placeholder-val="{{ false }}">
+    <header style="position:sticky; top:0; z-index:20; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px 24px; padding:16px clamp(20px, 3.4vw, 48px); background:var(--ground); border-bottom:1px solid var(--line);">
+      <div style="display:flex; align-items:center; gap:20px; min-width:0;">
+        <img src="assets/adsweet-logo.svg" alt="adsweet" style="display:var(--show-light); height:{{ logoH }}; width:auto;">
+        <img src="assets/adsweet-logo-licht.svg" alt="adsweet" style="display:var(--show-dark); height:{{ logoH }}; width:auto;">
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}"><span style="font-size:13px; color:var(--ink-muted);">{{ t.o.saved }}</span></sc-if>
+      </div>
+      <div role="group" aria-label="Demo-variant" style="display:flex; align-items:center; gap:4px; padding:3px; border:1px dashed var(--line-strong); border-radius:999px; font-size:12.5px;">
+        <sc-for list="{{ variants }}" as="v" hint-placeholder-count="3"><button type="button" aria-pressed="{{ v.aria }}" onClick="{{ v.pick }}" style="height:28px; padding:0 10px; border:0; border-radius:999px; background:{{ v.bg }}; color:{{ v.fg }}; font-size:12.5px; font-weight:500; cursor:pointer;">{{ v.label }}</button></sc-for>
+      </div>
+    </header>
+    <div style="display:grid; grid-template-columns:{{ obCols }}; align-items:start;">
+      <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+        <nav aria-label="{{ t.o.stepsLabel }}" style="position:sticky; top:70px; padding:40px 24px 40px clamp(20px, 3.4vw, 48px); display:flex; flex-direction:column; gap:16px;">
+          <span style="font-size:13px; color:var(--ink-muted);">{{ minLeft }}</span>
+          <ol style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px;">
+            <sc-for list="{{ stepList }}" as="p" hint-placeholder-count="10">
+              <li><button type="button" onClick="{{ p.pick }}" disabled="{{ p.locked }}" aria-current="{{ p.aria }}" style="width:100%; display:flex; align-items:center; gap:12px; padding:6px 0; border:0; background:none; color:{{ p.fg }}; font-size:14px; font-weight:{{ p.fw }}; text-align:left; cursor:{{ p.cursor }};">
+                <span style="flex:none; width:22px; height:22px; border-radius:50%; border:1px solid {{ p.bd }}; background:{{ p.bg }}; color:{{ p.nfg }}; display:grid; place-items:center; font-size:11.5px; font-weight:500;">{{ p.mark }}</span><span>{{ p.t }}</span></button></li>
+            </sc-for>
+          </ol>
+        </nav>
+      </sc-if>
+      <main style="min-width:0; padding:clamp(28px, 4vw, 56px) clamp(20px, 3.4vw, 48px) 120px; border-left:{{ mainBorder }};">
+        <div style="max-width:780px; display:flex; flex-direction:column; gap:28px;">
+          <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div style="display:flex; justify-content:space-between; font-size:13px; color:var(--ink-muted);"><span>{{ stepOf }}</span><span>{{ minLeft }}</span></div>
+              <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ pctNum }}" aria-label="{{ t.o.stepsLabel }}" style="height:4px; border-radius:999px; background:var(--surface-sunken);"><div style="width:{{ pct }}; height:100%; border-radius:999px; background:var(--ink); transition:width 300ms cubic-bezier(.2,.7,.2,1);"></div></div>
+            </div>
+          </sc-if>
+
+          <!-- STAP 1 -->
+          <sc-if value="{{ s.s1 }}" hint-placeholder-val="{{ false }}">
+            <header style="display:flex; flex-direction:column; gap:12px;">
+              <h1 style="margin:0; font-size:clamp(34px, 4.4vw, 56px); font-weight:500; line-height:1; letter-spacing:-.035em;">{{ o.welcome }}</h1>
+              <p style="margin:0; font-size:17px; color:var(--ink-muted);">{{ t.o1.lead }}</p>
+            </header>
+            <label style="display:flex; flex-direction:column; gap:6px; max-width:420px;"><span style="font-size:13px; font-weight:500;">{{ t.o1.nameLabel }}</span><input type="text" value="{{ o.name }}" onInput="{{ o.setName }}" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"><span style="font-size:13px; color:var(--ink-muted);">{{ t.o1.nameHelp }}</span></label>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <span style="font-size:13px; font-weight:500;">{{ t.o1.langLabel }}</span>
+              <div role="group" aria-label="{{ t.o1.langLabel }}" style="display:flex; gap:6px;">
+                <sc-for list="{{ langsLong }}" as="lg" hint-placeholder-count="3"><button type="button" aria-pressed="{{ lg.aria }}" onClick="{{ lg.pick }}" style="height:40px; padding:0 16px; border-radius:999px; border:1px solid {{ lg.bd }}; background:{{ lg.bg }}; color:{{ lg.fg }}; font-size:14px; font-weight:500; cursor:pointer;">{{ lg.label }}</button></sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- STAP 2 -->
+          <sc-if value="{{ s.s2 }}" hint-placeholder-val="{{ false }}">
+            <h1 style="margin:0; font-size:clamp(32px, 4vw, 52px); font-weight:500; line-height:1.02; letter-spacing:-.035em;">{{ t.o2.title }}</h1>
+            <sc-if value="{{ o.notManual }}" hint-placeholder-val="{{ true }}">
+              <label style="display:flex; flex-direction:column; gap:8px;"><span style="font-size:13px; font-weight:500;">{{ t.o2.siteLabel }}</span><input type="text" value="{{ o.site }}" onInput="{{ o.setSite }}" placeholder="jouwzaak.be" style="height:60px; padding:0 18px; border-radius:12px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:20px;"></label>
+              <sc-if value="{{ o.readIdle }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex; flex-wrap:wrap; align-items:center; gap:14px 22px;">
+                  <button type="button" onClick="{{ o.read }}" style="display:inline-flex; align-items:center; gap:10px; height:46px; padding:0 22px; border:0; border-radius:999px; background:var(--ink); color:var(--ground); font-size:14.5px; font-weight:500; cursor:pointer;">{{ t.o2.read }}</button>
+                  <button type="button" onClick="{{ o.toManual }}" style="padding:4px 0; border:0; border-bottom:1px solid var(--line-strong); background:none; color:var(--ink); font-size:14.5px; font-weight:500; cursor:pointer;">{{ t.o2.noSite }}</button>
+                </div>
+              </sc-if>
+            </sc-if>
+            <sc-if value="{{ o.manual }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px;">
+                <sc-for list="{{ manualFields }}" as="mf" hint-placeholder-count="6"><label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ mf }}</span><input type="text" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label></sc-for>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:10px;">
+                <label style="display:inline-flex; align-items:center; height:40px; padding:0 16px; border:1px dashed var(--line-strong); border-radius:999px; font-size:14px; font-weight:500; cursor:pointer;">{{ t.o2.logo }}<input type="file" accept="image/*" style="position:absolute; width:1px; height:1px; opacity:0;"></label>
+                <label style="display:inline-flex; align-items:center; height:40px; padding:0 16px; border:1px dashed var(--line-strong); border-radius:999px; font-size:14px; font-weight:500; cursor:pointer;">{{ t.o2.images }}<input type="file" accept="image/*,video/*" multiple="" style="position:absolute; width:1px; height:1px; opacity:0;"></label>
+              </div>
+              <button type="button" onClick="{{ o.fromManual }}" style="align-self:flex-start; padding:4px 0; border:0; border-bottom:1px solid var(--line-strong); background:none; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer;">{{ t.o2.backToSite }}</button>
+            </sc-if>
+            <sc-if value="{{ o.readActive }}" hint-placeholder-val="{{ false }}">
+              <div role="status" aria-live="polite" style="display:flex; align-items:center; gap:12px; font-size:17px; font-weight:500;">{{ o.readIcon }}<span>{{ o.readLine }}</span></div>
+              <div style="display:flex; flex-direction:column; border-top:1px solid var(--line);">
+                <sc-for list="{{ o.found }}" as="f" hint-placeholder-count="3">
+                  <div style="display:grid; grid-template-columns:minmax(120px, 180px) minmax(0, 1fr); gap:8px 24px; padding:14px 0; border-bottom:1px solid var(--line); animation:as-in 600ms cubic-bezier(.2,.7,.2,1) both;">
+                    <span style="font-size:13px; color:var(--ink-muted);">{{ f.k }}</span>
+                    <div style="min-width:0; display:flex; flex-direction:column; gap:8px;">
+                      <sc-if value="{{ f.isText }}" hint-placeholder-val="{{ true }}"><span style="font-weight:500;">{{ f.v }}</span></sc-if>
+                      <sc-if value="{{ f.hasSub }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px; color:var(--ink-muted);">{{ f.sub }}</span></sc-if>
+                      <sc-if value="{{ f.isLogo }}" hint-placeholder-val="{{ false }}"><span style="width:44px; height:44px; border-radius:50%; background:var(--staal); color:#151514; display:grid; place-items:center; font-weight:500;">{{ f.v }}</span></sc-if>
+                      <sc-if value="{{ f.isColors }}" hint-placeholder-val="{{ false }}"><span style="display:flex; gap:8px;"><sc-for list="{{ f.colors }}" as="c" hint-placeholder-count="2"><span style="display:flex; align-items:center; gap:6px; font-size:13px;"><span style="width:28px; height:28px; border-radius:8px; border:1px solid var(--line); background:{{ c }};"></span>{{ c }}</span></sc-for></span></sc-if>
+                      <sc-if value="{{ f.isImages }}" hint-placeholder-val="{{ false }}"><span style="display:grid; grid-template-columns:repeat(auto-fill, minmax(54px, 1fr)); gap:6px; max-width:420px;"><sc-for list="{{ f.imgs }}" as="im" hint-placeholder-count="9"><span style="aspect-ratio:1; border-radius:6px; border:1px solid var(--line); background:repeating-linear-gradient(135deg, var(--surface-sunken) 0 5px, var(--surface) 5px 10px);"></span></sc-for></span></sc-if>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <aside style="display:flex; gap:10px; padding:14px 16px; border:1px solid var(--line); border-radius:12px; background:var(--surface); font-size:14px;"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:var(--ink-muted); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none; margin-top:2px;"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg><span><b style="font-weight:500;">{{ t.o.tip }}.</b> {{ t.o2.tip }}</span></aside>
+          </sc-if>
+
+          <!-- STAP 3 -->
+          <sc-if value="{{ s.s3 }}" hint-placeholder-val="{{ false }}">
+            <header style="display:flex; flex-direction:column; gap:10px;"><h1 style="margin:0; font-size:clamp(32px, 4vw, 52px); font-weight:500; line-height:1.02; letter-spacing:-.035em;">{{ t.o3.title }}</h1><p style="margin:0; color:var(--ink-muted);">{{ t.o3.lead }}</p></header>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap:12px;">
+              <sc-for list="{{ o.profile }}" as="pc" hint-placeholder-count="4">
+                <div style="background:var(--surface); border:1px solid var(--line); box-shadow:{{ pc.ring }}; border-radius:14px; padding:16px; display:flex; flex-direction:column; gap:10px;">
+                  <span style="font-size:12.5px; color:var(--ink-muted);">{{ pc.k }}</span>
+                  <sc-if value="{{ pc.view }}" hint-placeholder-val="{{ true }}"><span style="font-weight:500;">{{ pc.v }}</span></sc-if>
+                  <sc-if value="{{ pc.edit }}" hint-placeholder-val="{{ false }}"><textarea rows="2" defaultValue="{{ pc.v }}" style="padding:10px 12px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px; resize:vertical;"></textarea></sc-if>
+                  <div style="display:flex; gap:8px; margin-top:auto;">
+                    <button type="button" aria-pressed="{{ pc.okAria }}" onClick="{{ pc.ok }}" style="display:inline-flex; align-items:center; gap:6px; height:32px; padding:0 12px; border-radius:999px; border:1px solid {{ pc.okBd }}; background:{{ pc.okBg }}; color:{{ pc.okFg }}; font-size:13px; font-weight:500; cursor:pointer;">{{ t.o3.ok }}</button>
+                    <button type="button" onClick="{{ pc.editBtn }}" style="height:32px; padding:0 12px; border-radius:999px; border:1px solid var(--line-strong); background:transparent; color:var(--ink); font-size:13px; font-weight:500; cursor:pointer;">{{ t.o3.edit }}</button>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <span style="font-size:13px; font-weight:500;">{{ o.imgCount }}</span>
+              <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(88px, 1fr)); gap:8px;">
+                <sc-for list="{{ o.imgs }}" as="im" hint-placeholder-count="9">
+                  <div style="position:relative; aspect-ratio:1; border-radius:10px; border:1px solid var(--line); background:repeating-linear-gradient(135deg, var(--surface-sunken) 0 6px, var(--surface) 6px 12px);">
+                    <button type="button" aria-label="{{ t.o3.remove }}" onClick="{{ im.remove }}" style="position:absolute; top:6px; right:6px; width:26px; height:26px; display:grid; place-items:center; padding:0; border:1px solid var(--line); border-radius:50%; background:var(--surface); color:var(--ink); cursor:pointer;"><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round;"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+                  </div>
+                </sc-for>
+                <label style="aspect-ratio:1; border-radius:10px; border:1px dashed var(--line-strong); display:grid; place-items:center; font-size:13px; font-weight:500; cursor:pointer; text-align:center; padding:8px;">{{ t.o3.add }}<input type="file" accept="image/*,video/*" multiple="" style="position:absolute; width:1px; height:1px; opacity:0;"></label>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:14px; padding-top:20px; border-top:1px solid var(--line);">
+              <sc-for list="{{ o.extraQs }}" as="q" hint-placeholder-count="3"><label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ q.l }}</span><textarea rows="2" placeholder="{{ q.ph }}" style="padding:10px 12px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px; resize:vertical;"></textarea><sc-if value="{{ q.hasHelp }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px; color:var(--ink-muted);">{{ q.help }}</span></sc-if></label></sc-for>
+            </div>
+          </sc-if>
+
+          <!-- STAP 4 -->
+          <sc-if value="{{ s.s4 }}" hint-placeholder-val="{{ false }}">
+            <h1 style="margin:0; font-size:clamp(32px, 4vw, 52px); font-weight:500; line-height:1.02; letter-spacing:-.035em;">{{ t.o4.title }}</h1>
+            <div role="radiogroup" aria-label="{{ t.o4.title }}" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap:10px;">
+              <sc-for list="{{ o.goals }}" as="g" hint-placeholder-count="4">
+                <button type="button" role="radio" aria-checked="{{ g.aria }}" onClick="{{ g.pick }}" style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:18px; text-align:left; border-radius:14px; border:1px solid var(--line); box-shadow:{{ g.ring }}; background:var(--surface); color:var(--ink); cursor:pointer;">
+                  <span style="display:flex; flex-direction:column; gap:2px;"><span style="font-size:17px; font-weight:500; letter-spacing:-.01em;">{{ g.t }}</span><span style="font-size:13.5px; color:var(--ink-muted);">{{ g.s }}</span></span>
+                  <span style="flex:none; width:20px; height:20px; border-radius:50%; border:1px solid {{ g.dotBd }}; background:{{ g.dotBg }};"></span>
+                </button>
+              </sc-for>
+            </div>
+            <sc-if value="{{ o.isZaak }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <span style="font-size:13px; font-weight:500;">{{ t.o4.zaakQ }}</span>
+                <div role="radiogroup" style="display:flex; flex-wrap:wrap; gap:8px;">
+                  <sc-for list="{{ o.zaakOpts }}" as="z" hint-placeholder-count="2"><button type="button" role="radio" aria-checked="{{ z.aria }}" onClick="{{ z.pick }}" style="height:40px; padding:0 16px; border-radius:999px; border:1px solid {{ z.bd }}; background:{{ z.bg }}; color:{{ z.fg }}; font-size:14px; font-weight:500; cursor:pointer;">{{ z.t }}</button></sc-for>
+                </div>
+              </div>
+            </sc-if>
+            <div style="display:flex; flex-direction:column; gap:14px; padding-top:20px; border-top:1px solid var(--line);">
+              <h2 style="margin:0; font-size:20px; font-weight:500; letter-spacing:-.015em;">{{ t.o4.where }}</h2>
+              <div role="radiogroup" style="display:flex; flex-wrap:wrap; gap:8px;">
+                <sc-for list="{{ o.areaOpts }}" as="z" hint-placeholder-count="3"><button type="button" role="radio" aria-checked="{{ z.aria }}" onClick="{{ z.pick }}" style="height:36px; padding:0 14px; border-radius:999px; border:1px solid {{ z.bd }}; background:{{ z.bg }}; color:{{ z.fg }}; font-size:13.5px; font-weight:500; cursor:pointer;">{{ z.t }}</button></sc-for>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:14px;">
+                <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ o.areaLabel }}</span><input type="text" value="{{ o.areaVal }}" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+                <sc-if value="{{ o.isRadius }}" hint-placeholder-val="{{ true }}"><label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.o4.radius }}</span><select style="height:44px; padding:0 12px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"><option>10 km</option><option selected="">15 km</option><option>25 km</option><option>40 km</option></select></label></sc-if>
+                <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.o4.countries }}</span><input type="text" value="{{ t.o4.belgium }}" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+                <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.o4.langs }}</span><input type="text" value="{{ t.o4.dutch }}" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+                <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.o4.age }}</span><input type="text" value="{{ o.age }}" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+              </div>
+            </div>
+            <aside style="display:flex; gap:10px; padding:14px 16px; border:1px solid var(--line); border-radius:12px; background:var(--surface); font-size:14px;"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:var(--ink-muted); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none; margin-top:2px;"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg><span><b style="font-weight:500;">{{ t.o.tip }}.</b> {{ t.o4.tip }} <a href="App.dc.html#academy" style="font-weight:500; border-bottom:1px solid var(--line-strong);">{{ t.o.more }}</a></span></aside>
+            <div style="display:flex; flex-direction:column; gap:10px; padding-top:20px; border-top:1px solid var(--line);">
+              <span style="font-weight:500;">{{ t.o4.special }}</span>
+              <div role="radiogroup" style="display:flex; gap:8px;">
+                <sc-for list="{{ o.specialOpts }}" as="z" hint-placeholder-count="2"><button type="button" role="radio" aria-checked="{{ z.aria }}" onClick="{{ z.pick }}" style="height:36px; padding:0 16px; border-radius:999px; border:1px solid {{ z.bd }}; background:{{ z.bg }}; color:{{ z.fg }}; font-size:13.5px; font-weight:500; cursor:pointer;">{{ z.t }}</button></sc-for>
+              </div>
+              <sc-if value="{{ o.isSpecial }}" hint-placeholder-val="{{ false }}"><p style="margin:0; padding:12px 14px; border:1px solid var(--line); border-radius:12px; font-size:14px;">{{ t.o4.specialInfo }}</p></sc-if>
+              <span style="font-size:13px; color:var(--ink-muted);">{{ t.o4.political }}</span>
+            </div>
+          </sc-if>
+
+          <!-- STAP 5 -->
+          <sc-if value="{{ s.s5 }}" hint-placeholder-val="{{ false }}">
+            <h1 style="margin:0; font-size:clamp(32px, 4vw, 52px); font-weight:500; line-height:1.02; letter-spacing:-.035em;">{{ t.o5.title }}</h1>
+            <sc-if value="{{ o.gSales }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:14px;">
+                <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.o5.aov }}</span><input type="text" inputmode="decimal" value="{{ o.aov }}" onInput="{{ o.setAov }}" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+                <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.o5.margin }}</span><input type="text" inputmode="decimal" value="{{ o.margin }}" onInput="{{ o.setMargin }}" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+                <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.o5.roasGoal }}</span><input type="text" inputmode="decimal" placeholder="{{ t.o5.optional }}" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+              </div>
+              <button type="button" onClick="{{ o.togglePerProduct }}" style="align-self:flex-start; padding:4px 0; border:0; border-bottom:1px solid var(--line-strong); background:none; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer;">{{ t.o5.perProduct }}</button>
+              <sc-if value="{{ o.perProduct }}" hint-placeholder-val="{{ false }}">
+                <table style="width:100%; border-collapse:collapse; font-size:14px;"><thead><tr style="background:var(--surface-sunken); color:var(--ink-muted); font-size:12.5px; text-align:left;"><th style="padding:8px 12px; font-weight:500;">{{ t.o5.product }}</th><th style="padding:8px 12px; font-weight:500;">{{ t.o5.margin }}</th></tr></thead><tbody><sc-for list="{{ o.products }}" as="pr" hint-placeholder-count="3"><tr style="border-top:1px solid var(--line);"><td style="padding:8px 12px;">{{ pr }}</td><td style="padding:6px 12px;"><input type="text" value="40%" aria-label="{{ t.o5.margin }}" style="width:90px; height:34px; padding:0 10px; border-radius:8px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink);"></td></tr></sc-for></tbody></table>
+              </sc-if>
+              <div role="status" style="padding:20px; border:1px solid var(--ink); border-radius:16px; background:var(--surface); display:flex; flex-direction:column; gap:8px;"><span style="font-size:12.5px; color:var(--ink-muted);">{{ t.o5.calc }}</span><span style="font-size:18px; font-weight:500; line-height:1.4; text-wrap:pretty;">{{ o.calcSales }}</span></div>
+            </sc-if>
+            <sc-if value="{{ o.gLeads }}" hint-placeholder-val="{{ true }}">
+              <label style="display:flex; flex-direction:column; gap:6px; max-width:320px;"><span style="font-size:13px; font-weight:500;">{{ t.o5.cplQ }}</span><span style="position:relative; display:block;"><span style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--ink-muted);">€</span><input type="text" inputmode="decimal" value="{{ o.cpl }}" onInput="{{ o.setCpl }}" style="width:100%; height:44px; padding:0 14px 0 30px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></span></label>
+              <button type="button" aria-expanded="{{ o.helpAria }}" onClick="{{ o.toggleHelp }}" style="align-self:flex-start; padding:4px 0; border:0; border-bottom:1px solid var(--line-strong); background:none; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer;">{{ t.o5.helpBtn }}</button>
+              <sc-if value="{{ o.help }}" hint-placeholder-val="{{ true }}">
+                <div style="padding:20px; border:1px solid var(--line); border-radius:16px; background:var(--surface); display:flex; flex-direction:column; gap:14px;">
+                  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:12px;">
+                    <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.o5.clv }}</span><input type="text" value="{{ o.clv }}" onInput="{{ o.setClv }}" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+                    <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.o5.margin }}</span><input type="text" value="{{ o.lmargin }}" onInput="{{ o.setLmargin }}" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+                    <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.o5.chance }}</span><input type="text" value="{{ o.chance }}" onInput="{{ o.setChance }}" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+                  </div>
+                  <span role="status" style="font-size:18px; font-weight:500;">{{ o.calcLeads }}</span>
+                  <span style="font-size:13.5px; color:var(--ink-muted);">{{ o.calcLeadsSub }}</span>
+                </div>
+              </sc-if>
+            </sc-if>
+            <sc-if value="{{ o.gNone }}" hint-placeholder-val="{{ false }}"><p style="margin:0; padding:20px; border:1px solid var(--line); border-radius:16px; background:var(--surface); font-size:16px;">{{ t.o5.none }}</p></sc-if>
+            <aside style="display:flex; gap:10px; padding:14px 16px; border:1px solid var(--line); border-radius:12px; background:var(--surface); font-size:14px;"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:var(--ink-muted); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none; margin-top:2px;"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg><span><b style="font-weight:500;">{{ t.o.tip }}.</b> {{ t.o5.tip }}</span></aside>
+          </sc-if>
+
+          <!-- STAP 6 -->
+          <sc-if value="{{ s.s6 }}" hint-placeholder-val="{{ false }}">
+            <header style="display:flex; flex-direction:column; gap:10px;"><h1 style="margin:0; font-size:clamp(32px, 4vw, 52px); font-weight:500; line-height:1.02; letter-spacing:-.035em;">{{ t.o6.title }}</h1><p style="margin:0; color:var(--ink-muted);">{{ t.o6.lead }}</p></header>
+            <sc-if value="{{ o.metaErr }}" hint-placeholder-val="{{ false }}">
+              <div role="alert" style="display:flex; gap:12px; padding:16px 18px; border:1px solid var(--act); background:var(--act-tint); border-radius:12px;"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:var(--act); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg><div style="display:flex; flex-direction:column; gap:8px;"><span style="color:var(--ink);">{{ o.metaErrText }}</span><button type="button" onClick="{{ o.openMeta }}" style="align-self:flex-start; height:34px; padding:0 14px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:13.5px; font-weight:500; cursor:pointer;">{{ o.metaRetry }}</button></div></div>
+            </sc-if>
+            <div style="display:flex; flex-direction:column; border-top:1px solid var(--line);">
+              <sc-for list="{{ o.conns }}" as="c" hint-placeholder-count="4">
+                <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 20px; padding:16px 0; border-bottom:1px solid var(--line);">
+                  <span style="display:flex; align-items:center; gap:12px; font-weight:500;"><span aria-hidden="true" style="color:var(--ink-muted); display:flex;">{{ c.icon }}</span>{{ c.t }}</span>
+                  <sc-if value="{{ c.pending }}" hint-placeholder-val="{{ true }}"><span style="font-size:13.5px; color:var(--ink-muted);">{{ t.o6.notYet }}</span></sc-if>
+                  <sc-if value="{{ c.done }}" hint-placeholder-val="{{ false }}"><select aria-label="{{ c.t }}" style="height:40px; min-width:min(100%, 300px); padding:0 12px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:14px;"><sc-for list="{{ c.opts }}" as="op" hint-placeholder-count="1"><option>{{ op }}</option></sc-for></select></sc-if>
+                </div>
+              </sc-for>
+            </div>
+            <sc-if value="{{ o.metaDone }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <h2 style="margin:0; font-size:18px; font-weight:500;">{{ t.o6.checks }}</h2>
+                <sc-for list="{{ o.checks }}" as="ck" hint-placeholder-count="3">
+                  <div style="display:flex; flex-direction:column; gap:8px; padding:12px 0; border-bottom:1px solid var(--line);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;"><span>{{ ck.t }}</span><span style="display:inline-flex; align-items:center; gap:6px; height:26px; padding:0 10px 0 8px; border-radius:999px; background:{{ ck.bg }}; color:{{ ck.fg }}; font-size:13px; font-weight:500;">{{ ck.icon }}{{ ck.s }}</span></div>
+                    <sc-if value="{{ ck.hasWarn }}" hint-placeholder-val="{{ false }}"><p style="margin:0; font-size:14px; color:var(--ink-muted);">{{ ck.warn }} <a href="App.dc.html#academy" style="color:var(--ink); font-weight:500; border-bottom:1px solid var(--line-strong);">{{ t.o6.pixelLesson }}</a> · <a href="Website.dc.html#done-with-you" style="color:var(--ink); font-weight:500; border-bottom:1px solid var(--line-strong);">Done With You</a></p></sc-if>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:12px; padding:20px; border:1px solid var(--line); border-radius:16px;">
+                <span style="font-weight:500;">{{ t.o6.payer }}</span><span style="font-size:13.5px; color:var(--ink-muted); margin-top:-8px;">{{ t.o6.payerNote }}</span>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px;">
+                  <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.o6.payerA }}</span><input type="text" value="{{ o.bizName }}" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+                  <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.o6.payerB }}</span><input type="text" value="{{ o.bizName }}" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+                </div>
+              </div>
+            </sc-if>
+            <div style="border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+              <button type="button" aria-expanded="{{ o.moreAria }}" onClick="{{ o.toggleMore }}" style="width:100%; display:flex; justify-content:space-between; align-items:center; padding:14px 0; border:0; background:none; color:var(--ink); font-size:15px; font-weight:500; cursor:pointer;"><span>{{ t.o6.more }}</span><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; transform:rotate({{ o.moreRot }}); transition:transform 300ms cubic-bezier(.2,.7,.2,1);"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></button>
+              <sc-if value="{{ o.more }}" hint-placeholder-val="{{ false }}">
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:8px; padding-bottom:16px;">
+                  <sc-for list="{{ o.moreList }}" as="m" hint-placeholder-count="7"><div style="display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; border:1px solid var(--line); border-radius:10px;"><span style="display:flex; align-items:center; gap:10px;"><span aria-hidden="true" style="color:var(--ink-muted); display:flex;">{{ m.icon }}</span>{{ m.t }}</span><span style="font-size:13px; font-weight:500; border-bottom:1px solid var(--line-strong);">{{ t.o6.connect }}</span></div></sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <!-- STAP 7 -->
+          <sc-if value="{{ s.s7 }}" hint-placeholder-val="{{ false }}">
+            <header style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:16px;">
+              <div style="display:flex; flex-direction:column; gap:10px;"><h1 style="margin:0; font-size:clamp(32px, 4vw, 52px); font-weight:500; line-height:1.02; letter-spacing:-.035em;">{{ t.o7.title }}</h1><p style="margin:0; color:var(--ink-muted);">{{ t.o7.lead }}</p></div>
+              <span style="display:flex; align-items:baseline; gap:6px;"><span style="font-size:72px; font-weight:500; letter-spacing:-.05em; line-height:.9;">48</span><span style="color:var(--ink-muted);">/ 100</span></span>
+            </header>
+            <sc-for list="{{ o.auditCards }}" as="c" hint-placeholder-count="3">
+              <article style="background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:20px; display:flex; flex-direction:column; gap:10px;">
+                <span style="display:inline-flex; align-items:center; gap:8px; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; font-weight:500;"><span style="width:7px; height:7px; border-radius:50%; background:{{ c.dot }};"></span>{{ t.o.proposal }}</span>
+                <h3 style="margin:0; font-size:19px; font-weight:500; letter-spacing:-.015em; line-height:1.3;">{{ c.t }}</h3>
+                <p style="margin:0; font-size:14px; color:var(--ink-muted);">{{ c.d }}</p>
+                <sc-if value="{{ c.canApply }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ o.applyFirst }}" style="align-self:flex-start; height:40px; padding:0 18px; border:0; border-radius:999px; background:var(--ink); color:var(--ground); font-size:14px; font-weight:500; cursor:pointer;">{{ c.btn }}</button></sc-if>
+                <sc-if value="{{ c.applied }}" hint-placeholder-val="{{ false }}"><span role="status" style="display:flex; align-items:center; gap:8px; color:var(--ok); font-weight:500;"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round;"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>{{ t.o7.done }}</span></sc-if>
+              </article>
+            </sc-for>
+          </sc-if>
+
+          <!-- STAP 8 -->
+          <sc-if value="{{ s.s8 }}" hint-placeholder-val="{{ false }}">
+            <h1 style="margin:0; font-size:clamp(32px, 4vw, 52px); font-weight:500; line-height:1.02; letter-spacing:-.035em; text-wrap:balance;">{{ o.stratTitle }}</h1>
+            <div style="display:flex; flex-direction:column; border-top:1px solid var(--line);">
+              <sc-for list="{{ o.strat }}" as="r" hint-placeholder-count="4"><div style="display:grid; grid-template-columns:minmax(120px, 180px) minmax(0, 1fr); gap:8px 24px; padding:14px 0; border-bottom:1px solid var(--line);"><span style="font-size:13.5px; color:var(--ink-muted);">{{ r.k }}</span><span style="display:flex; flex-direction:column; gap:2px;"><span style="font-weight:500;">{{ r.v }}</span><sc-if value="{{ r.hasSub }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px; color:var(--ink-muted);">{{ r.sub }}</span></sc-if></span></div></sc-for>
+            </div>
+            <figure role="img" aria-label="1 campagne, 1 ad set, 5 advertenties" style="margin:0; padding:20px; border:1px solid var(--line); border-radius:16px; background:var(--surface); display:flex; flex-direction:column; align-items:center; gap:10px; font-size:13.5px;">
+              <span style="padding:8px 14px; border:1px solid var(--ink); border-radius:10px; font-weight:500;">{{ t.o8.campaign }}</span><span style="width:1px; height:14px; background:var(--line-strong);"></span>
+              <span style="padding:8px 14px; border:1px solid var(--line-strong); border-radius:10px; font-weight:500;">{{ t.o8.adset }}</span><span style="width:1px; height:14px; background:var(--line-strong);"></span>
+              <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:6px;"><sc-for list="{{ o.briefs }}" as="b" hint-placeholder-count="5"><span style="padding:6px 10px; border-radius:8px; background:{{ b.bg }}; color:#151514; font-size:12.5px;">{{ b.kind }} · {{ b.fase }}</span></sc-for></div>
+            </figure>
+            <aside style="display:flex; gap:10px; padding:14px 16px; border:1px solid var(--line); border-radius:12px; background:var(--surface); font-size:14px;"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:var(--ink-muted); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none; margin-top:2px;"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg><span><b style="font-weight:500;">{{ t.o.tip }}.</b> {{ t.o8.funnelTip }}</span></aside>
+            <h2 style="margin:8px 0 0; font-size:22px; font-weight:500; letter-spacing:-.015em;">{{ t.o8.briefTitle }}</h2>
+            <ol style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;">
+              <sc-for list="{{ o.briefs }}" as="b" hint-placeholder-count="5">
+                <li style="display:grid; grid-template-columns:28px minmax(0, 1fr); gap:12px; padding:16px; border:1px solid var(--line); border-radius:14px; background:var(--surface);">
+                  <span style="font-size:14px; color:var(--ink-muted);">{{ b.n }}</span>
+                  <div style="display:flex; flex-direction:column; gap:6px;">
+                    <span style="display:flex; flex-wrap:wrap; gap:6px;"><span style="height:22px; padding:0 8px; display:inline-flex; align-items:center; border-radius:999px; background:{{ b.bg }}; color:#151514; font-size:12px; font-weight:500;">{{ b.fase }}</span><span style="font-size:13px; color:var(--ink-muted);">{{ b.kind }}</span></span>
+                    <span style="font-weight:500;">{{ b.what }}</span>
+                    <span style="font-size:14px; color:var(--ink-muted);">{{ t.o8.why }}: {{ b.why }}</span>
+                    <span style="font-size:14px;">{{ t.o8.first }}: “{{ b.first }}”</span>
+                  </div>
+                </li>
+              </sc-for>
+            </ol>
+            <div style="display:flex; flex-direction:column; border-top:1px solid var(--line);">
+              <div style="padding:14px 0; border-bottom:1px solid var(--line); display:flex; flex-direction:column; gap:4px;"><b style="font-weight:500;">{{ t.o8.expect }}</b><span style="color:var(--ink-muted);">{{ t.o8.expectText }}</span></div>
+              <div style="padding:14px 0; border-bottom:1px solid var(--line); display:flex; flex-direction:column; gap:4px;"><b style="font-weight:500;">{{ t.o8.moments }}</b><sc-for list="{{ o.moments }}" as="mo" hint-placeholder-count="2"><span style="color:var(--ink-muted);">{{ mo }}</span></sc-for></div>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:12px;">
+              <button type="button" style="height:40px; padding:0 18px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer;">{{ t.o8.adjust }}</button>
+              <a href="App.dc.html#parel" style="display:inline-flex; align-items:center; gap:8px; height:40px; padding:0 18px; border:1px solid var(--line-strong); border-radius:999px; font-size:14px; font-weight:500;"><dot-karakter size="28" mood="knipoog"></dot-karakter>{{ t.o8.askParel }}</a>
+            </div>
+          </sc-if>
+
+          <!-- STAP 9 -->
+          <sc-if value="{{ s.s9 }}" hint-placeholder-val="{{ false }}">
+            <header style="display:flex; flex-direction:column; gap:10px;"><h1 style="margin:0; font-size:clamp(32px, 4vw, 52px); font-weight:500; line-height:1.02; letter-spacing:-.035em;">{{ t.o9.title }}</h1><p style="margin:0; color:var(--ink-muted);">{{ t.o9.lead }}</p></header>
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <sc-for list="{{ o.slots }}" as="sl" hint-placeholder-count="5">
+                <article style="display:grid; grid-template-columns:96px minmax(0, 1fr); gap:16px; padding:16px; border:1px solid var(--line); box-shadow:{{ sl.ring }}; border-radius:16px; background:var(--surface);">
+                  <button type="button" onClick="{{ sl.pick }}" aria-label="{{ sl.a11y }}" style="aspect-ratio:4/5; padding:8px; border-radius:10px; border:{{ sl.thumbBd }}; background:repeating-linear-gradient(135deg, var(--surface-sunken) 0 6px, var(--surface) 6px 12px); color:var(--ink-muted); font-size:11px; display:grid; place-items:center; text-align:center; cursor:pointer;">{{ sl.thumb }}</button>
+                  <div style="display:flex; flex-direction:column; gap:8px; min-width:0;">
+                    <span style="display:flex; flex-wrap:wrap; align-items:center; gap:6px;"><b style="font-weight:500;">{{ sl.n }}</b><span style="height:22px; padding:0 8px; display:inline-flex; align-items:center; border-radius:999px; background:{{ sl.bg }}; color:#151514; font-size:12px; font-weight:500;">{{ sl.fase }}</span><span style="font-size:13px; color:var(--ink-muted);">{{ sl.kind }}</span></span>
+                    <sc-if value="{{ sl.hasMedia }}" hint-placeholder-val="{{ true }}">
+                      <span style="font-size:14px;">{{ sl.text }}</span>
+                      <span style="font-size:13.5px; color:var(--ink-muted);">{{ t.o9.headline }}: {{ sl.kop }} · {{ t.o9.cta }}: {{ sl.cta }}</span>
+                    </sc-if>
+                    <sc-if value="{{ sl.noVideo }}" hint-placeholder-val="{{ false }}">
+                      <span style="font-size:14px;">{{ t.o9.noVideo }} <a href="App.dc.html#academy" style="font-weight:500; border-bottom:1px solid var(--line-strong);">{{ t.o9.howFilm }}</a></span>
+                    </sc-if>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px 14px; font-size:13px;">
+                      <label style="font-weight:500; border-bottom:1px solid var(--line-strong); cursor:pointer;">{{ t.o9.upload }}<input type="file" accept="image/*,video/*" style="position:absolute; width:1px; height:1px; opacity:0;"></label>
+                      <span style="font-weight:500; border-bottom:1px solid var(--line-strong);">{{ t.o9.choose }}</span>
+                      <span style="color:var(--ink-muted);">{{ sl.ai }}</span>
+                    </div>
+                  </div>
+                </article>
+              </sc-for>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:10px; padding:20px; border:1px solid var(--line); border-radius:16px;">
+              <label style="display:flex; flex-direction:column; gap:6px; max-width:280px;"><span style="font-size:13px; font-weight:500;">{{ t.o9.budget }}</span><span style="position:relative; display:block;"><span style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--ink-muted);">€</span><input type="text" inputmode="numeric" value="{{ o.budget }}" onInput="{{ o.setBudget }}" aria-invalid="{{ o.budgetLowS }}" style="width:100%; height:44px; padding:0 14px 0 30px; border-radius:10px; border:1px solid {{ o.budgetBd }}; background:var(--surface-sunken); color:var(--ink); font-size:15px;"></span><span style="font-size:13px; color:{{ o.budgetFg }};">{{ o.budgetHelp }}</span></label>
+              <sc-if value="{{ o.budgetWarn }}" hint-placeholder-val="{{ false }}">
+                <div role="alert" style="display:flex; gap:12px; padding:14px 16px; border:1px solid var(--act); background:var(--act-tint); border-radius:12px;"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:var(--act); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none; margin-top:1px;"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg><div style="display:flex; flex-direction:column; gap:8px;"><b style="font-weight:500; color:var(--act);">{{ t.o.warnTitle }}</b><span style="font-size:14px;">{{ t.o9.budgetWarn }}</span><div style="display:flex; gap:16px; align-items:center;"><a href="App.dc.html#academy" style="font-size:14px; font-weight:500; border-bottom:1px solid var(--line-strong);">{{ t.o.why }}</a><button type="button" onClick="{{ o.acceptBudget }}" style="height:34px; padding:0 14px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:13.5px; font-weight:500; cursor:pointer;">{{ t.o.continueAnyway }}</button></div></div></div>
+              </sc-if>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <span style="font-weight:500;">{{ o.previewTitle }}</span>
+              <div style="display:flex; gap:14px; overflow-x:auto; padding-bottom:4px;">
+                <sc-for list="{{ o.placements }}" as="pl" hint-placeholder-count="3">
+                  <figure style="margin:0; flex:none; width:{{ pl.w }}; display:flex; flex-direction:column; gap:6px;">
+                    <div style="aspect-ratio:{{ pl.ar }}; border:1px solid var(--line); border-radius:12px; background:var(--surface); padding:10px; display:flex; flex-direction:column; gap:8px;">
+                      <span style="font-size:11.5px; font-weight:500;">{{ o.bizName }}</span>
+                      <span style="flex:1; border-radius:8px; background:repeating-linear-gradient(135deg, var(--surface-sunken) 0 5px, var(--surface) 5px 10px); display:grid; place-items:center; font-size:10.5px; color:var(--ink-muted);">{{ pl.ar }}</span>
+                      <span style="align-self:flex-start; height:24px; padding:0 10px; display:inline-flex; align-items:center; border:1px solid var(--line-strong); border-radius:999px; font-size:11px; font-weight:500; white-space:nowrap; flex:none;">{{ o.ctaWord }}</span>
+                    </div>
+                    <figcaption style="font-size:12.5px; color:var(--ink-muted);">{{ pl.t }}</figcaption>
+                  </figure>
+                </sc-for>
+              </div>
+              <span style="font-size:14px;">{{ t.o9.extras }} <span style="color:var(--ink-muted);">{{ t.o9.extrasWhy }}</span></span>
+            </div>
+          </sc-if>
+
+          <!-- STAP 10 -->
+          <sc-if value="{{ s.s10 }}" hint-placeholder-val="{{ false }}">
+            <h1 style="margin:0; font-size:clamp(32px, 4vw, 52px); font-weight:500; line-height:1.02; letter-spacing:-.035em;">{{ t.o10.title }}</h1>
+            <div role="group" aria-label="{{ t.o10.period }}" style="align-self:flex-start; display:inline-flex; gap:2px; padding:3px; border:1px solid var(--line-strong); border-radius:999px;">
+              <sc-for list="{{ o.periods }}" as="b" hint-placeholder-count="2"><button type="button" aria-pressed="{{ b.aria }}" onClick="{{ b.pick }}" style="height:34px; padding:0 14px; border:0; border-radius:999px; background:{{ b.bg }}; color:{{ b.fg }}; font-size:13.5px; font-weight:500; cursor:pointer;">{{ b.label }}</button></sc-for>
+            </div>
+            <div role="radiogroup" aria-label="Plan" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap:10px;">
+              <sc-for list="{{ o.planCards }}" as="p" hint-placeholder-count="3">
+                <button type="button" role="radio" aria-checked="{{ p.aria }}" onClick="{{ p.pick }}" style="display:flex; flex-direction:column; align-items:flex-start; gap:8px; padding:18px; text-align:left; border-radius:14px; border:1px solid var(--line); box-shadow:{{ p.ring }}; background:var(--surface); color:var(--ink); cursor:pointer;">
+                  <span style="width:100%; display:flex; justify-content:space-between; align-items:center; gap:8px;"><span style="font-size:18px; font-weight:500;">{{ p.name }}</span><sc-if value="{{ p.rec }}" hint-placeholder-val="{{ false }}"><span style="font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; font-weight:500; padding:2px 8px; border:1px solid var(--ink); border-radius:999px;">{{ t.o10.rec }}</span></sc-if></span>
+                  <span style="font-size:30px; font-weight:500; letter-spacing:-.03em; line-height:1;">{{ p.price }}</span>
+                  <span style="font-size:12.5px; color:var(--ink-muted);">{{ t.o10.perMonth }}</span>
+                  <span style="font-size:13.5px; color:var(--ink-muted);">{{ p.what }}</span>
+                </button>
+              </sc-for>
+            </div>
+            <a href="Website.dc.html#gesprek" style="align-self:flex-start; font-size:14px; font-weight:500; border-bottom:1px solid var(--line-strong);">{{ t.o10.agency }}</a>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px;">
+              <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.o10.code }}</span><input type="text" value="{{ o.code }}" onInput="{{ o.setCode }}" placeholder="[founding-code]" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"><sc-if value="{{ o.codeOk }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px; color:var(--ok);">{{ t.o10.codeOk }}</span></sc-if></label>
+            </div>
+            <div role="status" style="padding:20px; border:1px solid var(--ink); border-radius:16px; background:var(--surface); display:flex; flex-direction:column; gap:6px;"><span style="font-size:18px; font-weight:500; line-height:1.4; text-wrap:pretty;">{{ o.summary }}</span><sc-if value="{{ o.reverse }}" hint-placeholder-val="{{ false }}"><span style="font-weight:500;">{{ t.o10.reverse }}</span></sc-if></div>
+            <div style="display:flex; flex-direction:column; gap:14px; padding-top:20px; border-top:1px solid var(--line);">
+              <h2 style="margin:0; font-size:20px; font-weight:500;">{{ t.o10.billing }}</h2>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px;">
+                <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.o10.company }}</span><input type="text" value="{{ o.bizName }}" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+                <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.o10.vat }}</span><input type="text" value="{{ o.vat }}" onInput="{{ o.setVat }}" placeholder="BE0123456789" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+                <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.o10.address }}</span><input type="text" placeholder="[adres]" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+                <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:13px; font-weight:500;">{{ t.o10.invoiceMail }}</span><input type="email" placeholder="facturen@jouwzaak.be" style="height:44px; padding:0 14px; border-radius:10px; border:1px solid var(--line-strong); background:var(--surface-sunken); color:var(--ink); font-size:15px;"></label>
+              </div>
+              <span style="font-size:13px; color:var(--ink-muted);">{{ t.o10.peppol }}</span>
+            </div>
+            <sc-if value="{{ o.paid }}" hint-placeholder-val="{{ false }}"><p role="status" style="margin:0; display:flex; align-items:center; gap:10px; padding:16px 18px; border:1px solid var(--ok); background:var(--ok-tint); color:var(--ok); border-radius:12px; font-weight:500;"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round;"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>{{ t.o10.trialOn }}</p></sc-if>
+          </sc-if>
+
+          <!-- STAP 11 -->
+          <sc-if value="{{ s.s11 }}" hint-placeholder-val="{{ false }}">
+            <h1 style="margin:0; font-size:clamp(32px, 4vw, 52px); font-weight:500; line-height:1.02; letter-spacing:-.035em;">{{ o.liveTitle }}</h1>
+            <ul style="list-style:none; margin:0; padding:0; border-top:1px solid var(--line);">
+              <sc-for list="{{ o.checklist }}" as="c" hint-placeholder-count="5">
+                <li style="display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid var(--line); color:{{ c.fg }};"><span style="flex:none; width:22px; height:22px; border-radius:50%; border:1px solid {{ c.bd }}; background:{{ c.bg }}; color:var(--ground); display:grid; place-items:center;">{{ c.icon }}</span>{{ c.t }}</li>
+              </sc-for>
+            </ul>
+            <sc-if value="{{ o.liveDone }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; flex-direction:column; gap:12px; animation:as-in 600ms cubic-bezier(.2,.7,.2,1) both;">
+                <p style="margin:0; font-size:18px; font-weight:500;">{{ t.o11.sent }}</p>
+                <p style="margin:0; color:var(--ink-muted);">{{ t.o11.learning }}</p>
+              </div>
+              <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; padding:20px; border:1px solid var(--line); border-radius:16px; background:var(--surface); animation:as-in 600ms cubic-bezier(.2,.7,.2,1) 120ms both;">
+                <span style="max-width:460px;">{{ t.o11.first50 }}</span>
+                <button type="button" style="height:40px; padding:0 18px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:14px; font-weight:500; cursor:pointer;">{{ t.o11.pick }}</button>
+              </div>
+            </sc-if>
+          </sc-if>
+
+          <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; padding-top:28px; border-top:1px solid var(--line);">
+            <sc-if value="{{ hasPrev }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ prev }}" style="height:46px; padding:0 20px; border:1px solid var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:14.5px; font-weight:500; cursor:pointer;">{{ t.o.prev }}</button></sc-if>
+            <sc-if value="{{ noPrev }}" hint-placeholder-val="{{ true }}"><span></span></sc-if>
+            <button type="button" onClick="{{ next }}" disabled="{{ nextDisabled }}" style="display:inline-flex; align-items:center; gap:10px; height:46px; padding:0 22px; border:0; border-radius:999px; background:var(--ink); color:var(--ground); font-size:14.5px; font-weight:500; cursor:pointer; opacity:{{ nextOp }}; transition:gap 300ms cubic-bezier(.2,.7,.2,1), padding 300ms cubic-bezier(.2,.7,.2,1);" style-hover="gap:13px; padding-right:19px;">{{ nextLabel }}<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none;"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </sc-if>
+
+  <!-- META-VENSTER -->
+  <sc-if value="{{ metaOpen }}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-modal="true" aria-labelledby="meta-t" style="position:fixed; inset:0; z-index:90; background:var(--ground); color:var(--ink); overflow:auto; display:flex; align-items:center; justify-content:center; padding:40px 20px;">
+      <div style="width:100%; max-width:560px; display:flex; flex-direction:column; gap:22px;">
+        <h1 id="meta-t" style="margin:0; font-size:clamp(30px, 3.6vw, 46px); font-weight:500; line-height:1.02; letter-spacing:-.035em;">{{ t.m.title }}</h1>
+        <p style="margin:0; color:var(--ink-muted);">{{ t.m.text }}</p>
+        <ol style="list-style:none; margin:0; padding:0; border-top:1px solid var(--line);">
+          <sc-for list="{{ metaSteps }}" as="ms" hint-placeholder-count="3"><li style="display:flex; gap:16px; padding:13px 0; border-bottom:1px solid var(--line);"><span style="color:var(--ink-muted); width:18px;">{{ ms.n }}</span><span>{{ ms.t }}</span></li></sc-for>
+        </ol>
+        <div role="status" style="display:flex; align-items:center; gap:12px;">{{ loader }}<span>{{ t.m.waiting }}</span></div>
+        <div style="display:flex; flex-direction:column; gap:10px; padding:16px; border:1px dashed var(--line-strong); border-radius:12px;">
+          <span style="font-size:12.5px; color:var(--ink-muted);">{{ t.m.demo }}</span>
+          <div style="display:flex; flex-wrap:wrap; gap:8px;">
+            <sc-for list="{{ metaOutcomes }}" as="mo" hint-placeholder-count="4"><button type="button" onClick="{{ mo.pick }}" style="height:34px; padding:0 14px; border:1px solid {{ mo.bd }}; border-radius:999px; background:{{ mo.bg }}; color:{{ mo.fg }}; font-size:13.5px; font-weight:500; cursor:pointer;">{{ mo.t }}</button></sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- BETAALPAGINA -->
+  <sc-if value="{{ payOpen }}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-modal="true" aria-label="{{ t.o10.redirect }}" style="position:fixed; inset:0; z-index:90; background:var(--ground); color:var(--ink); display:flex; align-items:center; justify-content:center; padding:40px 20px;">
+      <div style="width:100%; max-width:480px; display:flex; flex-direction:column; gap:20px;">
+        <div role="status" style="display:flex; align-items:center; gap:14px; font-size:clamp(22px, 2.4vw, 30px); font-weight:500; letter-spacing:-.02em;">{{ loader }}<span>{{ t.o10.redirect }}</span></div>
+        <p style="margin:0; color:var(--ink-muted);">{{ t.o10.redirectNote }}</p>
+        <button type="button" onClick="{{ payBack }}" style="align-self:flex-start; height:40px; padding:0 16px; border:1px dashed var(--line-strong); border-radius:999px; background:transparent; color:var(--ink); font-size:13.5px; font-weight:500; cursor:pointer;">{{ t.o10.demoBack }}</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <dc-import name="Demopaneel" values="{{ demo }}" on-change="{{ setDemo }}" hint-size="64px,30px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const KEY = 'adsweet-demo';
+const DEF = { theme: 'auto', lang: 'nl', labels: false, scenario: 'sarah', plan: 'pro', staat: 'normaal' };
+const EASE = 'cubic-bezier(.2,.7,.2,1)';
+const h = React.createElement;
+const ICP = {
+  check: [['path', { d: 'M20 6 9 17l-5-5' }]],
+  ok: [['circle', { cx: 12, cy: 12, r: 10 }], ['path', { d: 'm9 12 2 2 4-4' }]],
+  warn: [['path', { d: 'm21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3' }], ['path', { d: 'M12 9v4' }], ['path', { d: 'M12 17h.01' }]],
+  flag: [['path', { d: 'M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528' }]],
+  camera: [['path', { d: 'M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z' }], ['circle', { cx: 12, cy: 13, r: 3 }]],
+  wallet: [['path', { d: 'M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1' }], ['path', { d: 'M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4' }]],
+  code: [['path', { d: 'm16 18 6-6-6-6' }], ['path', { d: 'm8 6-6 6 6 6' }]],
+  link: [['path', { d: 'M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71' }], ['path', { d: 'M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71' }]],
+};
+const ic = (n, s, sw) => h('svg', { width: s || 16, height: s || 16, viewBox: '0 0 24 24', 'aria-hidden': true, style: { fill: 'none', stroke: 'currentColor', strokeWidth: sw || 1.5, strokeLinecap: 'round', strokeLinejoin: 'round', flex: 'none', display: 'block' } }, ICP[n].map(([t, a], i) => h(t, Object.assign({ key: i }, a))));
+const nl2 = (n, d) => Number(n).toLocaleString('nl-BE', { minimumFractionDigits: d, maximumFractionDigits: d });
+const eur = (n, d) => '€' + nl2(n, d == null ? (Math.round(n) === n ? 0 : 2) : d);
+const num = (v) => { const x = parseFloat(String(v).replace('€', '').replace('%', '').replace(',', '.')); return isNaN(x) ? 0 : x; };
+const FASE = { top: 'var(--staal)', middle: 'var(--salie)', bottom: 'var(--klei)' };
+
+const NL = {
+  a: { signupTitle: 'Maak je account.', fb: 'Doorgaan met Facebook', signupNote: 'Met je Facebook-account log je in en koppel je straks je advertenties.', terms1: 'Ik ga akkoord met de', terms2: 'voorwaarden', terms3: 'en het', terms4: 'privacybeleid', haveAccount: 'Heb je al een account?', loginLink: 'Inloggen', loginTitle: 'Welkom terug.', mailBtn: 'Inloggen met e-mail', mailLabel: 'E-mail', mailSend: 'Stuur me een link', mailNote: 'Voor teamleden die geen Facebook gebruiken.', newHere: 'Nieuw bij AdSweet?', signupLink: 'Maak je account', checkTitle: 'Check je mailbox.', checkText: 'De link werkt 15 minuten.', checkDemo: 'Demo: open de link', testTitle: 'AdSweet is nog in testfase.', testText: 'We laten nieuwe bedrijven in kleine groepen toe. Laat je gegevens na en we laten je weten wanneer je account klaarstaat.', name: 'Naam', site: 'Website', testBtn: 'Zet me op de lijst', testOk: 'Je staat op de lijst.', inviteTitle: 'Lisa nodigt je uit voor Atelier Noor op AdSweet.', inviteRole: 'Je rol: Beheerder. Je kan alles behalve het abonnement.', inviteMail: 'Doorgaan met e-mail', privacy: 'Privacy' },
+  m: { title: 'Meta opent nu een venster.', text: 'Daarin kies je je bedrijf, je advertentieaccount, je Facebook-pagina, je Instagram-account en je pixel.', s1: 'Log in bij Facebook, als dat nog niet gebeurd is.', s2: 'Kies je bedrijf, je advertentieaccount, je pagina en je pixel.', s3: 'Geef AdSweet toegang. Daarna kom je vanzelf hier terug.', waiting: 'We wachten op Meta.', demo: 'Demo · wat geeft Meta terug?', ok: 'Toegang gegeven', perm: 'Geen toestemming', noacc: 'Geen advertentieaccount', expired: 'Koppeling verlopen', errPerm: 'Zonder toegang tot je advertentieaccount kunnen we niets voor je klaarzetten.', errNoAcc: 'Je hebt nog geen advertentieaccount bij Meta. Zo maak je er een.', errExpired: 'Je koppeling met Meta is verlopen. Koppel opnieuw, het duurt een halve minuut.', retry: 'Opnieuw proberen', relink: 'Koppel opnieuw', howMake: 'Zo maak je er een', actie: 'Actie nodig' },
+  o: { saved: 'Alles wordt bewaard. Je kan stoppen en later verdergaan.', stepsLabel: 'Stappen van de onboarding', stepOf: 'Stap {a} van {b}', minLeft: '± {n} minuten over', almost: 'Bijna klaar', prev: 'Vorige', next: 'Verder', tip: 'Tip uit het playbook', more: 'Meer in de Academy', why: 'Waarom?', warnTitle: 'Pas op, dit raden we niet aan.', continueAnyway: 'Toch doorgaan', proposal: 'Voorstel van AdSweet', variants: ['Sarah', 'Webshop', 'Al campagnes'],
+    steps: ['Welkom', 'Je website', 'Je bedrijfsprofiel', 'Wat wil je bereiken?', 'Je cijfers', 'Koppelen', 'Je bestaande advertenties', 'Je strategie', 'Je eerste campagne', 'Je plan', 'Live'] },
+  o1: { welcome: 'Welkom, {n}.', lead: 'In ongeveer 8 minuten staat je eerste campagne klaar.', nameLabel: 'Hoe mogen we je noemen?', nameHelp: 'Uit je Facebook-account. Pas het aan als je wil.', langLabel: 'Taal van de app', langs: ['Nederlands', 'Français', 'English'] },
+  o2: { title: 'Wat is je website?', siteLabel: 'Je website', read: 'Lees mijn website', noSite: 'Geen website? Vul het zelf in.', reading: 'We lezen je website.', found: 'Dit vonden we. Je kijkt het na in de volgende stap.', tip: 'Hoe beter je website, hoe beter je eerste voorstel.', logo: 'Logo opladen', images: 'Beelden opladen', backToSite: 'Toch met een website', manual: ['Naam van je zaak', 'Wat je verkoopt', 'Prijzen', 'Voor wie', 'Regio', 'Je stijl in een paar woorden'], k: ['Naam', 'Logo', 'Kleuren', 'Wat je verkoopt', 'Je toon', 'Beelden', 'Contact en regio'], example: 'Voorbeeldzin' },
+  o3: { title: 'Je bedrijfsprofiel', lead: 'Klopt dit? Pas aan wat niet juist is.', ok: 'Klopt', edit: 'Aanpassen', remove: 'Haal weg', add: 'Voeg toe', images: '{n} beelden', q1: 'Wat maakt jou anders?', q2: 'Wie zijn je beste klanten?', q3: 'Welke concurrenten ken je?', q3help: 'Optioneel. Vanaf Pro gebruikt AdSweet dit bij Concurrenten.', k: ['Naam', 'Wat je verkoopt', 'Je toon', 'Contact en regio'] },
+  o4: { title: 'Wat wil je bereiken?', goals: [['Online verkopen', 'Je hebt een webshop.'], ['Aanvragen of afspraken', 'Een formulier, een offerte of een afspraak.'], ['Meer mensen in je zaak', 'Je hebt een lokale zaak.'], ['Iets anders', 'Meer volgers, bereik of een evenement.']], zaakQ: 'Wat wil je vooral?', zaakOpts: ['Afspraken of aanvragen', 'Meer bekendheid in de buurt'], where: 'Waar?', area: ['Gemeente met straal', 'Provincie', 'Land'], areaLabel: ['Gemeente', 'Provincie', 'Land'], radius: 'Straal', countries: 'Landen', belgium: 'België', langs: 'Talen', dutch: 'Nederlands', age: 'Leeftijd, optioneel', tip: 'We adverteren breed. Meta vindt je klanten zelf binnen de regio die jij kiest. Interesses maken je doelgroep kleiner zonder dat het beter werkt.', special: 'Gaan je advertenties over huisvesting, werk of krediet?', yes: 'Ja', no: 'Nee', specialInfo: 'Dan laat Meta minder keuzes toe: geen leeftijdsgrens en een straal van minstens 25 km. AdSweet stelt alles daarop af.', political: 'Politieke of maatschappelijke advertenties kan je in de EU niet via Meta plaatsen.' },
+  o5: { title: 'Je cijfers', aov: 'Gemiddelde orderwaarde', margin: 'Brutomarge', roasGoal: 'Eigen doel-ROAS', optional: 'optioneel', perProduct: 'Marge per product invullen', product: 'Product', calc: 'Zo rekent AdSweet', calcSales: 'Bij {m} marge verdien je je advertentie terug vanaf een ROAS van {be}. Elke euro advertentie moet dus {per} omzet opbrengen. Een verkoop mag je hoogstens {max} aan advertenties kosten.', cplQ: 'Wat mag een aanvraag je kosten?', helpBtn: 'Help me rekenen', clv: 'Wat een klant je opbrengt', chance: 'Hoeveel aanvragen worden klant', calcLeads: 'Tot {x} per aanvraag verdien je je advertentie terug.', calcLeadsSub: '{clv} × {m} × {c}. Je eigen doel kan lager liggen: AdSweet gebruikt het bedrag hierboven.', none: 'Voor deze campagne meten we bereik en volgers. Winnaars en verliezers zijn er dan niet.', tip: 'Je kan dit later altijd aanpassen in Instellingen. Je drempels passen dan meteen mee.' },
+  o6: { title: 'Koppelen', lead: 'AdSweet werkt in je eigen advertentieaccount bij Meta. Jij blijft eigenaar.', rows: ['Facebook-pagina', 'Instagram-account', 'Advertentieaccount', 'Pixel of dataset'], notYet: 'Nog niet gekoppeld', connectFb: 'Koppel met Facebook', checks: 'Controles', cur: 'Munteenheid euro', pay: 'Een betaalmethode in je advertentieaccount', pixelSales: 'Je pixel meet verkopen (laatste 7 dagen)', pixelLeads: 'Je pixel meet aanvragen (laatste 7 dagen)', okS: 'In orde', warnS: 'Let op', pixelWarn: 'Je kan verder, maar zonder pixel ziet niemand welke advertentie verkoopt. Dan geef je geld uit zonder te weten waaraan.', pixelLesson: 'Les: wat je pixel doet', payer: 'Wie betaalt en wie heeft er baat bij', payerNote: 'Dit vraagt de EU bij elke advertentie.', payerA: 'Wie betaalt', payerB: 'Wie heeft er baat bij', more: 'Meer koppelen (kan ook later)', connect: 'Koppel' },
+  o7: { title: 'Je bestaande advertenties', lead: 'We legden je campagnes naast het playbook. Pas er meteen één toe.', apply: 'Pas toe', done: 'Gedaan. Je eerste verbetering staat live.', cards: [['Je gebruikt interesses in 4 van je 6 ad sets.', 'Interesses maken je doelgroep kleiner zonder dat het beter werkt. Haal ze weg en adverteer breed.'], ['Je budget staat verdeeld over 6 ad sets.', 'Met budget op campagneniveau stuurt Meta het geld zelf naar wat het best loopt.'], ['2 advertenties gaven elk meer dan 3 keer je maximale kost per verkoop uit, zonder verkoop.', 'Laat een advertentie niet langer lopen dan 3 keer je doel zonder resultaat.']] },
+  o8: { title: '{n}, zo zouden wij het aanpakken.', goal: 'Doel', area: 'Regio, taal en leeftijd', budget: 'Budget', structure: 'Structuur', funnel: 'Funnelverdeling', campaign: '1 campagne', adset: '1 ad set', funnelTip: 'Een verdeling over de drie fases. Je kan ze aanpassen. [standaardverdeling PJ]', briefTitle: 'Welke beelden je nodig hebt', why: 'Waarom', first: 'Eerste zin', expect: 'Wat je de eerste twee weken mag verwachten', expectText: 'De eerste 1 tot 2 weken zit je campagne in de leerfase. Meta zoekt dan wie je advertenties wil zien. Resultaten schommelen, dat is normaal. Laat je campagne in die tijd met rust.', moments: 'Momenten in de komende drie maanden', adjust: 'Pas aan', askParel: 'Vraag het aan Dot', good: 'Ziet er goed uit', structureV: '1 campagne, 1 ad set, 5 advertenties', structureS: "3 foto's en 2 video's" },
+  o9: { title: 'Je eerste campagne', lead: 'Vijf advertenties, voorgevuld met de beste beelden van je website. Vervang wat je wil.', headline: 'Kop', cta: 'Call-to-action', noVideo: 'Nog geen video? Film iets met je gsm.', howFilm: 'Zo doe je dat', upload: 'Opladen', choose: 'Kies uit je beelden', ai: 'Maak met AI · 10 credits, vanaf Pro', script: 'Laat een script schrijven, vanaf Pro', budget: 'Budget per dag', budgetHelp: 'AdSweet stelt {s} voor. Het minimum is {m}.', budgetLow: 'Onder het minimum van {m} per dag.', budgetWarn: 'Met minder dan €10 per dag (€30 voor een webshop) krijgt Meta te weinig resultaten binnen om te leren wie je klanten zijn. Je campagne blijft dan lang in de leerfase.', preview: 'Preview van {n}', extras: "De extra's van Meta staan uit.", extrasWhy: 'Zo ziet je advertentie er altijd uit zoals jij hem goedkeurde.', approve: 'Keur goed', placements: ['Feed', 'Stories', 'Reels'], photo: 'Foto', video: 'Video', fromSite: 'van je website', empty: 'leeg' },
+  o10: { title: 'Je plan en je proefperiode', period: 'Betaalperiode', monthly: 'Maandelijks', yearly: 'Jaarlijks · 2 maanden gratis', rec: 'Aanbevolen', perMonth: 'per maand, excl. btw', agency: 'Meer dan 3 advertentieaccounts? Bekijk Agency.', code: 'Kortingscode', codeOk: 'Founding member: 30% korting zolang je klant blijft.', summary: 'Vandaag betaal je niets. Op {d} betaal je {p} + {v} btw = {t} {per}, tenzij je voordien stopt.', summaryRev: 'Vandaag betaal je niets. Op {d} betaal je {p} {per}, tenzij je voordien stopt.', perM: 'per maand', perY: 'per jaar', reverse: 'Btw verlegd.', billing: 'Facturatie', company: 'Bedrijfsnaam', vat: 'Ondernemingsnummer of btw-nummer', address: 'Adres', invoiceMail: 'E-mail voor facturen', peppol: 'Facturen voor Belgische bedrijven komen via Peppol.', pay: 'Ga naar de betaalpagina', redirect: 'Je gaat naar de beveiligde betaalpagina.', redirectNote: 'Je kaartgegevens geef je daar in, niet bij AdSweet. Daarna kom je vanzelf terug.', demoBack: 'Demo: betaling geslaagd, terug naar AdSweet', trialOn: 'Je proefperiode loopt. Je hebt 30 dagen. In je proefperiode heb je hoogstens 50 AI-credits.', date: '6 januari', what: ['1 account, wekelijks rapport', '1 account, 300 credits, live dashboard', '3 accounts, 600 credits'] },
+  o11: { title: 'Zet je campagne live.', titleDone: 'Je campagne is verstuurd.', go: 'Zet mijn campagne live', today: 'Naar Vandaag', list: ['Campagne gemaakt', 'Ad set gemaakt', '5 advertenties gemaakt', "Extra's van Meta uitgezet", "Namen en UTM's ingesteld"], sent: 'Je campagne is verstuurd. Meta keurt je advertenties eerst goed, daarna gaan ze lopen.', learning: 'De eerste dagen zit je campagne in de leerfase. Resultaten schommelen dan, dat is normaal. Morgenochtend om 06:00 staat je eerste overzicht klaar.', first50: 'Je bent een van onze eerste 50 klanten. Zullen we samen 20 minuten je campagne overlopen?', pick: 'Kies een moment' },
+};
+
+const FR = {
+  a: { signupTitle: 'Créez votre compte.', fb: 'Continuer avec Facebook', signupNote: 'Avec votre compte Facebook, vous vous connectez et vous reliez ensuite vos publicités.', terms1: "J'accepte les", terms2: 'conditions', terms3: 'et la', terms4: 'politique de confidentialité', haveAccount: 'Vous avez déjà un compte ?', loginLink: 'Se connecter', loginTitle: 'Bon retour.', mailBtn: 'Se connecter par e-mail', mailLabel: 'E-mail', mailSend: 'Envoyez-moi un lien', mailNote: "Pour les membres de l'équipe qui n'utilisent pas Facebook.", newHere: 'Nouveau sur AdSweet ?', signupLink: 'Créez votre compte', checkTitle: 'Vérifiez votre boîte mail.', checkText: 'Le lien est valable 15 minutes.', checkDemo: 'Démo : ouvrir le lien', testTitle: 'AdSweet est encore en phase de test.', testText: 'Nous accueillons les nouvelles entreprises par petits groupes. Laissez vos coordonnées et nous vous préviendrons quand votre compte sera prêt.', name: 'Nom', site: 'Site web', testBtn: 'Inscrivez-moi sur la liste', testOk: 'Vous êtes sur la liste.', inviteTitle: 'Lisa vous invite pour Atelier Noor sur AdSweet.', inviteRole: "Votre rôle : Gestionnaire. Vous pouvez tout faire sauf gérer l'abonnement.", inviteMail: 'Continuer par e-mail', privacy: 'Confidentialité' },
+  m: { title: 'Meta ouvre maintenant une fenêtre.', text: 'Vous y choisissez votre entreprise, votre compte publicitaire, votre page Facebook, votre compte Instagram et votre pixel.', s1: "Connectez-vous à Facebook, si ce n'est pas encore fait.", s2: 'Choisissez votre entreprise, votre compte publicitaire, votre page et votre pixel.', s3: 'Donnez accès à AdSweet. Vous revenez ensuite ici automatiquement.', waiting: 'Nous attendons Meta.', demo: 'Démo · que renvoie Meta ?', ok: 'Accès donné', perm: 'Pas d’autorisation', noacc: 'Pas de compte publicitaire', expired: 'Connexion expirée', errPerm: "Sans accès à votre compte publicitaire, nous ne pouvons rien préparer pour vous.", errNoAcc: "Vous n'avez pas encore de compte publicitaire chez Meta. Voici comment en créer un.", errExpired: 'Votre connexion avec Meta a expiré. Reconnectez-vous, cela prend trente secondes.', retry: 'Réessayer', relink: 'Reconnecter', howMake: 'Comment en créer un', actie: 'Action requise' },
+  o: { saved: 'Tout est enregistré. Vous pouvez arrêter et reprendre plus tard.', stepsLabel: "Étapes de l'onboarding", stepOf: 'Étape {a} sur {b}', minLeft: '± {n} minutes restantes', almost: 'Presque terminé', prev: 'Précédent', next: 'Continuer', tip: 'Conseil du playbook', more: "Plus dans l'Academy", why: 'Pourquoi ?', warnTitle: 'Attention, nous ne le conseillons pas.', continueAnyway: 'Continuer quand même', proposal: "Proposition d'AdSweet", variants: ['Sarah', 'Boutique en ligne', 'Déjà des campagnes'],
+    steps: ['Bienvenue', 'Votre site web', "Votre profil d'entreprise", 'Que voulez-vous atteindre ?', 'Vos chiffres', 'Connecter', 'Vos publicités existantes', 'Votre stratégie', 'Votre première campagne', 'Votre formule', 'En ligne'] },
+  o1: { welcome: 'Bienvenue, {n}.', lead: 'Dans environ 8 minutes, votre première campagne est prête.', nameLabel: 'Comment pouvons-nous vous appeler ?', nameHelp: 'Depuis votre compte Facebook. Modifiez-le si vous voulez.', langLabel: "Langue de l'app" },
+  o2: { title: 'Quel est votre site web ?', siteLabel: 'Votre site web', read: 'Lire mon site', noSite: 'Pas de site ? Remplissez vous-même.', reading: 'Nous lisons votre site.', found: "Voici ce que nous avons trouvé. Vous vérifiez à l'étape suivante.", tip: 'Meilleur est votre site, meilleure est votre première proposition.', logo: 'Charger le logo', images: 'Charger des images', backToSite: 'Avec un site, finalement', manual: ['Nom de votre entreprise', 'Ce que vous vendez', 'Prix', 'Pour qui', 'Région', 'Votre style en quelques mots'], k: ['Nom', 'Logo', 'Couleurs', 'Ce que vous vendez', 'Votre ton', 'Images', 'Contact et région'], example: 'Phrase exemple' },
+  o3: { title: "Votre profil d'entreprise", lead: "C'est juste ? Modifiez ce qui ne va pas.", ok: "C'est juste", edit: 'Modifier', remove: 'Retirer', add: 'Ajouter', images: '{n} images', q1: "Qu'est-ce qui vous rend différent ?", q2: 'Qui sont vos meilleurs clients ?', q3: 'Quels concurrents connaissez-vous ?', q3help: "Optionnel. À partir de Pro, AdSweet l'utilise dans Concurrents.", k: ['Nom', 'Ce que vous vendez', 'Votre ton', 'Contact et région'] },
+  o4: { title: 'Que voulez-vous atteindre ?', goals: [['Vendre en ligne', 'Vous avez une boutique en ligne.'], ['Demandes ou rendez-vous', 'Un formulaire, un devis ou un rendez-vous.'], ['Plus de monde dans votre commerce', 'Vous avez un commerce local.'], ['Autre chose', 'Plus d’abonnés, de portée ou un événement.']], zaakQ: 'Que voulez-vous surtout ?', zaakOpts: ['Rendez-vous ou demandes', 'Plus de notoriété dans le quartier'], where: 'Où ?', area: ['Commune avec rayon', 'Province', 'Pays'], areaLabel: ['Commune', 'Province', 'Pays'], radius: 'Rayon', countries: 'Pays', belgium: 'Belgique', langs: 'Langues', dutch: 'Néerlandais', age: 'Âge, optionnel', tip: "Nous ciblons large. Meta trouve vos clients lui-même dans la région que vous choisissez. Les centres d'intérêt réduisent votre audience sans améliorer les résultats.", special: 'Vos publicités concernent-elles le logement, l’emploi ou le crédit ?', yes: 'Oui', no: 'Non', specialInfo: "Meta autorise alors moins de choix : pas de limite d'âge et un rayon d'au moins 25 km. AdSweet s'y adapte.", political: "Les publicités politiques ou sociales ne peuvent pas être diffusées via Meta dans l'UE." },
+  o5: { title: 'Vos chiffres', aov: 'Valeur moyenne de commande', margin: 'Marge brute', roasGoal: 'ROAS cible personnel', optional: 'optionnel', perProduct: 'Indiquer la marge par produit', product: 'Produit', calc: 'Le calcul d’AdSweet', calcSales: 'Avec {m} de marge, votre publicité est rentable à partir d’un ROAS de {be}. Chaque euro de publicité doit donc rapporter {per} de chiffre d’affaires. Une vente peut vous coûter au maximum {max} en publicité.', cplQ: 'Combien peut vous coûter une demande ?', helpBtn: 'Aidez-moi à calculer', clv: 'Ce que vous rapporte un client', chance: 'Combien de demandes deviennent clientes', calcLeads: 'Jusqu’à {x} par demande, votre publicité est rentable.', calcLeadsSub: '{clv} × {m} × {c}. Votre propre objectif peut être plus bas : AdSweet utilise le montant ci-dessus.', none: "Pour cette campagne, nous mesurons la portée et les abonnés. Il n'y a alors pas de gagnants ni de perdants.", tip: 'Vous pouvez toujours modifier cela plus tard dans Paramètres. Vos seuils suivent immédiatement.' },
+  o6: { title: 'Connecter', lead: 'AdSweet travaille dans votre propre compte publicitaire chez Meta. Vous restez propriétaire.', rows: ['Page Facebook', 'Compte Instagram', 'Compte publicitaire', 'Pixel ou dataset'], notYet: 'Pas encore connecté', connectFb: 'Connecter avec Facebook', checks: 'Contrôles', cur: 'Devise euro', pay: 'Un moyen de paiement dans votre compte publicitaire', pixelSales: 'Votre pixel mesure les ventes (7 derniers jours)', pixelLeads: 'Votre pixel mesure les demandes (7 derniers jours)', okS: 'En ordre', warnS: 'Attention', pixelWarn: 'Vous pouvez continuer, mais sans pixel personne ne voit quelle publicité vend. Vous dépensez alors sans savoir pour quoi.', pixelLesson: 'Leçon : ce que fait votre pixel', payer: 'Qui paie et qui en bénéficie', payerNote: "L'UE le demande pour chaque publicité.", payerA: 'Qui paie', payerB: 'Qui en bénéficie', more: 'Connecter plus (aussi possible plus tard)', connect: 'Connecter' },
+  o7: { title: 'Vos publicités existantes', lead: "Nous avons comparé vos campagnes au playbook. Appliquez-en une tout de suite.", apply: 'Appliquer', done: 'Fait. Votre première amélioration est en ligne.', cards: [["Vous utilisez des centres d'intérêt dans 4 de vos 6 ad sets.", 'Les centres d’intérêt réduisent votre audience sans améliorer les résultats. Retirez-les et ciblez large.'], ['Votre budget est réparti sur 6 ad sets.', "Avec un budget au niveau de la campagne, Meta dirige lui-même l'argent vers ce qui marche le mieux."], ['2 publicités ont chacune dépensé plus de 3 fois votre coût maximal par vente, sans vente.', "Ne laissez pas tourner une publicité plus de 3 fois votre objectif sans résultat."]] },
+  o8: { title: '{n}, voici comment nous ferions.', goal: 'Objectif', area: 'Région, langue et âge', budget: 'Budget', structure: 'Structure', funnel: 'Répartition du funnel', campaign: '1 campagne', adset: '1 ad set', funnelTip: 'Une répartition sur les trois phases. Vous pouvez la modifier. [standaardverdeling PJ]', briefTitle: 'Les images dont vous avez besoin', why: 'Pourquoi', first: 'Première phrase', expect: 'À quoi vous attendre les deux premières semaines', expectText: "Les 1 à 2 premières semaines, votre campagne est en phase d'apprentissage. Meta cherche qui veut voir vos publicités. Les résultats varient, c'est normal. Laissez votre campagne tranquille pendant ce temps.", moments: 'Moments des trois prochains mois', adjust: 'Modifier', askParel: 'Demander à Dot', good: "C'est bon", structureV: '1 campagne, 1 ad set, 5 publicités', structureS: '3 photos et 2 vidéos' },
+  o9: { title: 'Votre première campagne', lead: 'Cinq publicités, préremplies avec les meilleures images de votre site. Remplacez ce que vous voulez.', headline: 'Titre', cta: 'Call-to-action', noVideo: 'Pas encore de vidéo ? Filmez quelque chose avec votre téléphone.', howFilm: 'Comment faire', upload: 'Charger', choose: 'Choisir parmi vos images', ai: "Créer avec l'IA · 10 crédits, dès Pro", script: 'Faire écrire un script, dès Pro', budget: 'Budget par jour', budgetHelp: 'AdSweet propose {s}. Le minimum est de {m}.', budgetLow: 'Sous le minimum de {m} par jour.', budgetWarn: "Avec moins de €10 par jour (€30 pour une boutique en ligne), Meta reçoit trop peu de résultats pour apprendre qui sont vos clients. Votre campagne reste alors longtemps en phase d'apprentissage.", preview: 'Aperçu de {n}', extras: 'Les extras de Meta sont désactivés.', extrasWhy: "Votre publicité reste toujours telle que vous l'avez validée.", approve: 'Valider', placements: ['Fil', 'Stories', 'Reels'], photo: 'Photo', video: 'Vidéo', fromSite: 'de votre site', empty: 'vide' },
+  o10: { title: 'Votre formule et votre essai', period: 'Période de paiement', monthly: 'Mensuel', yearly: 'Annuel · 2 mois gratuits', rec: 'Recommandé', perMonth: 'par mois, HTVA', agency: 'Plus de 3 comptes publicitaires ? Voir Agency.', code: 'Code de réduction', codeOk: 'Founding member : 30% de réduction tant que vous restez client.', summary: "Aujourd'hui, vous ne payez rien. Le {d}, vous payez {p} + {v} de TVA = {t} {per}, sauf si vous arrêtez avant.", summaryRev: "Aujourd'hui, vous ne payez rien. Le {d}, vous payez {p} {per}, sauf si vous arrêtez avant.", perM: 'par mois', perY: 'par an', reverse: 'Autoliquidation de la TVA.', billing: 'Facturation', company: "Nom de l'entreprise", vat: "Numéro d'entreprise ou de TVA", address: 'Adresse', invoiceMail: 'E-mail pour les factures', peppol: 'Les factures pour les entreprises belges passent par Peppol.', pay: 'Aller à la page de paiement', redirect: 'Vous allez vers la page de paiement sécurisée.', redirectNote: "Vous y entrez votre carte, pas chez AdSweet. Vous revenez ensuite automatiquement.", demoBack: 'Démo : paiement réussi, retour vers AdSweet', trialOn: "Votre essai a commencé. Vous avez 30 jours. Pendant l'essai, vous avez au maximum 50 crédits IA.", date: '6 janvier', what: ['1 compte, rapport hebdomadaire', '1 compte, 300 crédits, tableau de bord en direct', '3 comptes, 600 crédits'] },
+  o11: { title: 'Mettez votre campagne en ligne.', titleDone: 'Votre campagne est envoyée.', go: 'Mettre ma campagne en ligne', today: "Vers Aujourd'hui", list: ['Campagne créée', 'Ad set créé', '5 publicités créées', 'Extras de Meta désactivés', 'Noms et UTM configurés'], sent: 'Votre campagne est envoyée. Meta valide d’abord vos publicités, puis elles commencent à tourner.', learning: "Les premiers jours, votre campagne est en phase d'apprentissage. Les résultats varient, c'est normal. Demain matin à 06:00, votre premier aperçu est prêt.", first50: 'Vous êtes parmi nos 50 premiers clients. On passe votre campagne en revue ensemble pendant 20 minutes ?', pick: 'Choisir un moment' },
+};
+const EN = {
+  a: { signupTitle: 'Create your account.', fb: 'Continue with Facebook', signupNote: 'You log in with your Facebook account and connect your ads in a moment.', terms1: 'I agree to the', terms2: 'terms', terms3: 'and the', terms4: 'privacy policy', haveAccount: 'Already have an account?', loginLink: 'Log in', loginTitle: 'Welcome back.', mailBtn: 'Log in with email', mailLabel: 'Email', mailSend: 'Send me a link', mailNote: "For team members who don't use Facebook.", newHere: 'New to AdSweet?', signupLink: 'Create your account', checkTitle: 'Check your inbox.', checkText: 'The link works for 15 minutes.', checkDemo: 'Demo: open the link', testTitle: 'AdSweet is still in testing.', testText: "We're letting new businesses in small groups. Leave your details and we'll let you know when your account is ready.", name: 'Name', site: 'Website', testBtn: 'Put me on the list', testOk: "You're on the list.", inviteTitle: 'Lisa invites you to Atelier Noor on AdSweet.', inviteRole: 'Your role: Admin. You can do everything except manage the subscription.', inviteMail: 'Continue with email', privacy: 'Privacy' },
+  m: { title: 'Meta is opening a window.', text: 'In it you choose your business, your ad account, your Facebook page, your Instagram account and your pixel.', s1: "Log in to Facebook, if you haven't yet.", s2: 'Choose your business, your ad account, your page and your pixel.', s3: 'Give AdSweet access. You come back here automatically.', waiting: 'Waiting for Meta.', demo: 'Demo · what does Meta return?', ok: 'Access given', perm: 'No permission', noacc: 'No ad account', expired: 'Connection expired', errPerm: "Without access to your ad account, we can't set anything up for you.", errNoAcc: "You don't have an ad account with Meta yet. Here's how to make one.", errExpired: 'Your connection with Meta has expired. Reconnect, it takes half a minute.', retry: 'Try again', relink: 'Reconnect', howMake: 'How to make one', actie: 'Action needed' },
+  o: { saved: 'Everything is saved. You can stop and continue later.', stepsLabel: 'Onboarding steps', stepOf: 'Step {a} of {b}', minLeft: '± {n} minutes left', almost: 'Almost done', prev: 'Back', next: 'Continue', tip: 'Tip from the playbook', more: 'More in the Academy', why: 'Why?', warnTitle: "Careful, we don't recommend this.", continueAnyway: 'Continue anyway', proposal: 'AdSweet suggests', variants: ['Sarah', 'Online shop', 'Has campaigns'],
+    steps: ['Welcome', 'Your website', 'Your business profile', 'What do you want to achieve?', 'Your numbers', 'Connect', 'Your existing ads', 'Your strategy', 'Your first campaign', 'Your plan', 'Live'] },
+  o1: { welcome: 'Welcome, {n}.', lead: 'In about 8 minutes your first campaign is ready.', nameLabel: 'What should we call you?', nameHelp: 'From your Facebook account. Change it if you like.', langLabel: 'App language' },
+  o2: { title: "What's your website?", siteLabel: 'Your website', read: 'Read my website', noSite: 'No website? Fill it in yourself.', reading: "We're reading your website.", found: "Here's what we found. You check it in the next step.", tip: 'The better your website, the better your first proposal.', logo: 'Upload logo', images: 'Upload images', backToSite: 'Use a website after all', manual: ['Business name', 'What you sell', 'Prices', 'Who it’s for', 'Region', 'Your style in a few words'], k: ['Name', 'Logo', 'Colours', 'What you sell', 'Your tone', 'Images', 'Contact and region'], example: 'Example sentence' },
+  o3: { title: 'Your business profile', lead: "Is this right? Change what isn't.", ok: 'Correct', edit: 'Edit', remove: 'Remove', add: 'Add', images: '{n} images', q1: 'What makes you different?', q2: 'Who are your best customers?', q3: 'Which competitors do you know?', q3help: 'Optional. From Pro, AdSweet uses this in Competitors.', k: ['Name', 'What you sell', 'Your tone', 'Contact and region'] },
+  o4: { title: 'What do you want to achieve?', goals: [['Sell online', 'You have an online shop.'], ['Enquiries or appointments', 'A form, a quote or an appointment.'], ['More people in your shop', 'You have a local business.'], ['Something else', 'More followers, reach or an event.']], zaakQ: 'What do you want most?', zaakOpts: ['Appointments or enquiries', 'Being better known locally'], where: 'Where?', area: ['Town with radius', 'Province', 'Country'], areaLabel: ['Town', 'Province', 'Country'], radius: 'Radius', countries: 'Countries', belgium: 'Belgium', langs: 'Languages', dutch: 'Dutch', age: 'Age, optional', tip: "We target broadly. Meta finds your customers itself within the area you choose. Interests make your audience smaller without working better.", special: 'Are your ads about housing, employment or credit?', yes: 'Yes', no: 'No', specialInfo: 'Then Meta allows fewer choices: no age limit and a radius of at least 25 km. AdSweet adapts everything to that.', political: "Political or social issue ads can't be placed through Meta in the EU." },
+  o5: { title: 'Your numbers', aov: 'Average order value', margin: 'Gross margin', roasGoal: 'Your own target ROAS', optional: 'optional', perProduct: 'Enter margin per product', product: 'Product', calc: 'How AdSweet calculates', calcSales: 'At {m} margin your ad pays for itself from a ROAS of {be}. Every euro of advertising must bring in {per} of revenue. A sale may cost you at most {max} in ads.', cplQ: 'What may an enquiry cost you?', helpBtn: 'Help me calculate', clv: 'What a customer brings in', chance: 'How many enquiries become customers', calcLeads: 'Up to {x} per enquiry, your ad pays for itself.', calcLeadsSub: '{clv} × {m} × {c}. Your own target can be lower: AdSweet uses the amount above.', none: "For this campaign we measure reach and followers. There are no winners or losers then.", tip: 'You can always change this later in Settings. Your thresholds update right away.' },
+  o6: { title: 'Connect', lead: 'AdSweet works in your own ad account at Meta. You stay the owner.', rows: ['Facebook page', 'Instagram account', 'Ad account', 'Pixel or dataset'], notYet: 'Not connected yet', connectFb: 'Connect with Facebook', checks: 'Checks', cur: 'Currency euro', pay: 'A payment method in your ad account', pixelSales: 'Your pixel measures sales (last 7 days)', pixelLeads: 'Your pixel measures enquiries (last 7 days)', okS: 'All good', warnS: 'Watch out', pixelWarn: "You can continue, but without a pixel nobody sees which ad sells. You'd be spending without knowing on what.", pixelLesson: 'Lesson: what your pixel does', payer: 'Who pays and who benefits', payerNote: 'The EU asks this for every ad.', payerA: 'Who pays', payerB: 'Who benefits', more: 'Connect more (can be done later)', connect: 'Connect' },
+  o7: { title: 'Your existing ads', lead: 'We compared your campaigns with the playbook. Apply one right away.', apply: 'Apply', done: 'Done. Your first improvement is live.', cards: [['You use interests in 4 of your 6 ad sets.', 'Interests make your audience smaller without working better. Remove them and target broadly.'], ['Your budget is split over 6 ad sets.', 'With budget at campaign level, Meta sends the money to what performs best.'], ['2 ads each spent more than 3 times your maximum cost per sale, without a sale.', "Don't let an ad run longer than 3 times your target without a result."]] },
+  o8: { title: "{n}, here's how we'd do it.", goal: 'Goal', area: 'Region, language and age', budget: 'Budget', structure: 'Structure', funnel: 'Funnel split', campaign: '1 campaign', adset: '1 ad set', funnelTip: 'A split over the three phases. You can change it. [standaardverdeling PJ]', briefTitle: 'The images you need', why: 'Why', first: 'First line', expect: 'What to expect in the first two weeks', expectText: 'For the first 1 to 2 weeks your campaign is in the learning phase. Meta looks for who wants to see your ads. Results go up and down, that’s normal. Leave your campaign alone during that time.', moments: 'Moments in the next three months', adjust: 'Adjust', askParel: 'Ask Dot', good: 'Looks good', structureV: '1 campaign, 1 ad set, 5 ads', structureS: '3 photos and 2 videos' },
+  o9: { title: 'Your first campaign', lead: 'Five ads, prefilled with the best images from your website. Replace what you like.', headline: 'Headline', cta: 'Call to action', noVideo: 'No video yet? Film something with your phone.', howFilm: "Here's how", upload: 'Upload', choose: 'Choose from your images', ai: 'Make with AI · 10 credits, from Pro', script: 'Have a script written, from Pro', budget: 'Budget per day', budgetHelp: 'AdSweet suggests {s}. The minimum is {m}.', budgetLow: 'Below the minimum of {m} a day.', budgetWarn: 'With less than €10 a day (€30 for an online shop), Meta gets too few results to learn who your customers are. Your campaign then stays in the learning phase for a long time.', preview: 'Preview of {n}', extras: "Meta's extras are off.", extrasWhy: 'Your ad always looks the way you approved it.', approve: 'Approve', placements: ['Feed', 'Stories', 'Reels'], photo: 'Photo', video: 'Video', fromSite: 'from your website', empty: 'empty' },
+  o10: { title: 'Your plan and your trial', period: 'Billing period', monthly: 'Monthly', yearly: 'Yearly · 2 months free', rec: 'Recommended', perMonth: 'per month, excl. VAT', agency: 'More than 3 ad accounts? See Agency.', code: 'Discount code', codeOk: 'Founding member: 30% off for as long as you stay a customer.', summary: "Today you pay nothing. On {d} you pay {p} + {v} VAT = {t} {per}, unless you stop before then.", summaryRev: 'Today you pay nothing. On {d} you pay {p} {per}, unless you stop before then.', perM: 'per month', perY: 'per year', reverse: 'VAT reverse charged.', billing: 'Billing', company: 'Company name', vat: 'Enterprise or VAT number', address: 'Address', invoiceMail: 'Email for invoices', peppol: 'Invoices for Belgian companies are sent through Peppol.', pay: 'Go to the payment page', redirect: "You're going to the secure payment page.", redirectNote: "You enter your card there, not at AdSweet. Then you come back automatically.", demoBack: 'Demo: payment succeeded, back to AdSweet', trialOn: 'Your trial has started. You have 30 days. During the trial you have at most 50 AI credits.', date: '6 January', what: ['1 account, weekly report', '1 account, 300 credits, live dashboard', '3 accounts, 600 credits'] },
+  o11: { title: 'Put your campaign live.', titleDone: 'Your campaign has been sent.', go: 'Put my campaign live', today: 'Go to Today', list: ['Campaign created', 'Ad set created', '5 ads created', "Meta's extras switched off", 'Names and UTMs set'], sent: 'Your campaign has been sent. Meta reviews your ads first, then they start running.', learning: "For the first days your campaign is in the learning phase. Results go up and down, that's normal. Tomorrow morning at 06:00 your first overview is ready.", first50: "You're one of our first 50 customers. Shall we go through your campaign together for 20 minutes?", pick: 'Pick a time' },
+};
+function loadDemo() { try { return Object.assign({}, DEF, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) { return Object.assign({}, DEF); } }
+function deep(a, b) { if (!b) return a; const o = Array.isArray(a) ? a.slice() : Object.assign({}, a); Object.keys(b).forEach((k) => { o[k] = (a && typeof a[k] === 'object' && !Array.isArray(a[k]) && b[k] && typeof b[k] === 'object' && !Array.isArray(b[k])) ? deep(a[k], b[k]) : b[k]; }); return o; }
+const fill = (s, o) => String(s).replace(/\{(\w+)\}/g, (_, k) => (o[k] != null ? o[k] : ''));
+function parseHash() {
+  const raw = (location.hash || '').replace(/^#\/?/, '');
+  const [path, q] = raw.split('?');
+  const params = {}; (q || '').split('&').forEach((p) => { const [k, v] = p.split('='); if (k) params[k] = decodeURIComponent(v || ''); });
+  return { path: path || 'inloggen', params };
+}
+
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    const hp = parseHash();
+    let screen = hp.path, step = 1;
+    const m = /^onboarding-?(\d+)?$/.exec(screen);
+    if (m) { screen = 'onboarding'; step = m[1] ? Math.min(11, Math.max(1, +m[1])) : 1; }
+    this.state = {
+      demo: loadDemo(), sysDark: !!(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches), w: window.innerWidth,
+      screen, params: hp.params, step, terms: false, mail: false, testDone: false, err: null, errCtx: null,
+      meta: null, metaCtx: null, variant: 'sarah', name: 'Sarah', site: 'salonmila.voorbeeld', manual: false, read: 'idle', foundN: 0,
+      profOk: {}, profEdit: {}, imgs: 9, goal: 'zaak', zaak: 'afspraken', area: 'radius', special: false,
+      aov: '€58', margin: '40%', perProduct: false, cpl: '15', help: true, clv: '€360', lmargin: '50%', chance: '1 op 4',
+      linked: false, metaErr: null, more: false, applied: false, slot: 0, budget: '12', budgetOk: false,
+      period: 'maand', plan: 'pro', code: '', vat: '', pay: 'none', live: 'idle', liveN: 0,
+    };
+  }
+  componentDidMount() {
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    this.mq = window.matchMedia('(prefers-color-scheme: dark)');
+    this.onMq = () => this.setState({ sysDark: this.mq.matches });
+    this.onHash = () => { const hp = parseHash(); const m = /^onboarding-?(\d+)?$/.exec(hp.path); this.setState(m ? { screen: 'onboarding', step: m[1] ? +m[1] : this.state.step } : { screen: hp.path, params: hp.params }); };
+    window.addEventListener('resize', this.onResize); window.addEventListener('hashchange', this.onHash);
+    this.mq.addEventListener && this.mq.addEventListener('change', this.onMq);
+    if (this.state.params.periode === 'jaar') this.setState({ period: 'jaar' });
+    if (this.state.params.plan) this.setState({ plan: this.state.params.plan === 'agency' ? 'scale' : this.state.params.plan });
+    this.sync();
+  }
+  componentDidUpdate() { this.sync(); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); window.removeEventListener('hashchange', this.onHash); this.timers && this.timers.forEach(clearTimeout); }
+  later(fn, ms) { this.timers = this.timers || []; this.timers.push(setTimeout(fn, ms)); }
+  themeNow() { const t = this.state.demo.theme; return t === 'auto' ? (this.state.sysDark ? 'dark' : 'light') : t; }
+  sync() { const th = this.themeNow(); if (document.documentElement.dataset.theme !== th) document.documentElement.dataset.theme = th; document.documentElement.lang = this.state.demo.lang; }
+  setDemo(p) { const demo = Object.assign({}, this.state.demo, p); try { localStorage.setItem(KEY, JSON.stringify(demo)); } catch (e) {} this.setState({ demo }); }
+  go(screen) { const hash = screen === 'onboarding' ? 'onboarding-' + this.state.step : screen; history.replaceState(null, '', '#' + hash); this.setState({ screen }); window.scrollTo(0, 0); }
+  loader() {
+    const line = (anim, y) => h('span', { key: anim, style: { position: 'absolute', left: 2, right: 2, top: '50%', height: 1, marginTop: -0.5, background: 'var(--ink)', transform: `translateY(${y}px)`, animation: `${anim} 1.2s ${EASE} infinite` } });
+    return h('span', { 'aria-hidden': true, style: { position: 'relative', display: 'inline-block', width: 22, height: 14, flex: 'none' } }, [line('as-l1', -5), line('as-l2', 0), line('as-l3', 5),
+      h('span', { key: 'd', style: { position: 'absolute', left: '50%', top: '50%', width: 6, height: 6, margin: '-3px 0 0 -3px', borderRadius: '50%', background: 'var(--robijn)', transform: 'scale(0)', animation: `as-dot 1.2s ${EASE} infinite` } })]);
+  }
+  goalType() { const s = this.state; if (s.goal === 'verkopen') return 'sales'; if (s.goal === 'aanvragen') return 'leads'; if (s.goal === 'zaak') return s.zaak === 'afspraken' ? 'leads' : 'none'; return 'none'; }
+  steps() { return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].filter((n) => n !== 7 || this.state.variant === 'bestaand'); }
+  setVariant(v) {
+    const base = { variant: v, read: 'idle', foundN: 0, linked: false, applied: false, metaErr: null, pay: 'none', live: 'idle', liveN: 0, budgetOk: false };
+    if (v === 'webshop') Object.assign(base, { name: 'Lisa', site: 'ateliernoor.voorbeeld', goal: 'verkopen', budget: '40' });
+    else Object.assign(base, { name: 'Sarah', site: 'salonmila.voorbeeld', goal: 'zaak', zaak: 'afspraken', budget: '12' });
+    if (v !== 'bestaand' && this.state.step === 7) base.step = 8;
+    this.setState(base);
+  }
+  readSite() {
+    this.setState({ read: 'busy', foundN: 0 });
+    const total = 7;
+    for (let i = 1; i <= total; i++) this.later(() => this.setState({ foundN: i, read: i === total ? 'done' : 'busy' }), 500 + i * 450);
+  }
+  openMeta(ctx) { this.setState({ meta: 'open', metaCtx: ctx }); }
+  metaResult(r) {
+    const ctx = this.state.metaCtx;
+    this.setState({ meta: null });
+    if (ctx === 'onboarding') { if (r === 'ok') this.setState({ linked: true, metaErr: null }); else this.setState({ metaErr: r }); return; }
+    if (r === 'ok') { if (ctx === 'signup') { this.setState({ step: 1 }); this.go('onboarding'); } else window.location.href = 'App.dc.html'; return; }
+    this.setState({ err: r, errCtx: ctx }); this.go('fout');
+  }
+  goLive() {
+    this.setState({ live: 'busy', liveN: 0 });
+    for (let i = 1; i <= 5; i++) this.later(() => this.setState({ liveN: i, live: i === 5 ? 'done' : 'busy' }), i * 520);
+  }
+  renderVals() {
+    const s = this.state, set = (o) => this.setState(o), demo = s.demo;
+    const lang = ['nl', 'fr', 'en'].includes(demo.lang) ? demo.lang : 'nl';
+    const t = lang === 'nl' ? NL : deep(NL, ({ fr: FR, en: EN })[lang]);
+    const theme = this.themeNow(), w = s.w, wide = w >= 980;
+    const testfase = demo.staat === 'testfase' || s.screen === 'testfase';
+    const scr = s.screen === 'onboarding' ? 'onboarding' : testfase && (s.screen === 'account-maken' || s.screen === 'inloggen' || s.screen === 'testfase') ? 'testfase' : s.screen;
+    const isOb = scr === 'onboarding';
+    const langs = ['nl', 'fr', 'en'].map((l, i) => ({ label: l.toUpperCase(), aria: String(lang === l), bg: lang === l ? 'var(--ink)' : 'transparent', fg: lang === l ? 'var(--ground)' : 'var(--ink)', bd: lang === l ? 'var(--ink)' : 'var(--line-strong)', pick: () => this.setDemo({ lang: l }) }));
+    const langsLong = langs.map((l, i) => Object.assign({}, l, { label: t.o1.langs[i] }));
+    const errMap = { perm: t.m.errPerm, noacc: t.m.errNoAcc, expired: t.m.errExpired };
+    const planName = { starter: 'Starter', pro: 'Pro', scale: 'Scale' }[s.plan] || 'Pro';
+    const a = {
+      signup: scr === 'account-maken', login: scr === 'inloggen', mailSent: scr === 'mail-verstuurd', test: scr === 'testfase', invite: scr === 'uitnodiging', err: scr === 'fout',
+      hasPlan: !!s.params.plan, planChip: planName + (s.period === 'jaar' ? ' · jaarlijks' : ' · maandelijks'),
+      terms: s.terms, noTerms: !s.terms, btnOp: s.terms ? 1 : 0.45, toggleTerms: () => set({ terms: !s.terms }),
+      fbSignup: () => { if (s.terms) this.openMeta('signup'); }, fbLogin: () => this.openMeta('login'),
+      toLogin: (e) => { e.preventDefault(); this.go('inloggen'); }, toSignup: (e) => { e.preventDefault(); this.go('account-maken'); },
+      noMail: !s.mail, mail: s.mail, showMail: () => set({ mail: true }), sendMail: (e) => { e.preventDefault(); this.go('mail-verstuurd'); },
+      testForm: !s.testDone, testDone: s.testDone, testSend: (e) => { e.preventDefault(); set({ testDone: true }); },
+      errText: errMap[s.err] || t.m.errPerm, errNoAcc: s.err === 'noacc', retryLabel: s.err === 'expired' ? t.m.relink : t.m.retry,
+      retry: () => this.openMeta(s.errCtx || 'login'),
+    };
+    // onboarding
+    const list = this.steps(), idx = Math.max(0, list.indexOf(s.step)), gt = this.goalType();
+    const isWeb = s.variant === 'webshop';
+    const biz = isWeb ? 'Atelier Noor' : 'Salon Mila';
+    const minutes = Math.max(0, Math.round(8 * (list.length - 1 - idx) / (list.length - 1)));
+    const stepList = list.map((n, i) => {
+      const done = i < idx, cur = i === idx;
+      return { t: t.o.steps[n - 1], aria: cur ? 'step' : 'false', fg: cur ? 'var(--ink)' : 'var(--ink-muted)', fw: cur ? 500 : 400, locked: i > idx, cursor: i > idx ? 'default' : 'pointer',
+        bd: done ? 'var(--snoep-munt)' : cur ? 'var(--ink)' : 'var(--line-strong)', bg: done ? 'var(--snoep-munt)' : 'transparent', nfg: done ? '#151514' : cur ? 'var(--ink)' : 'var(--ink-muted)', mark: done ? ic('check', 12, 2) : String(i + 1), pick: () => { if (i <= idx) { set({ step: n }); history.replaceState(null, '', '#onboarding-' + n); } } };
+    });
+    const sFlags = {}; for (let n = 1; n <= 11; n++) sFlags['s' + n] = isOb && s.step === n;
+    const pill = (on) => ({ bg: on ? 'var(--ink)' : 'transparent', fg: on ? 'var(--ground)' : 'var(--ink)', bd: on ? 'var(--ink)' : 'var(--line-strong)', aria: String(on) });
+    const ring = (on) => (on ? 'inset 0 0 0 1px var(--ink)' : 'none');
+    const foundAll = isWeb
+      ? [{ type: 'text', v: 'Atelier Noor' }, { type: 'logo', v: 'N' }, { type: 'colors', colors: ['#3A2E2A', '#EDE3D6'] }, { type: 'text', v: 'Handgemaakte kaarsen en geschenkdozen', sub: 'Gemiddeld €58 per bestelling' }, { type: 'text', v: 'warm, ambachtelijk, rustig', sub: t.o2.example + ': “Elke kaars gieten we met de hand.”' }, { type: 'images' }, { type: 'text', v: 'België · [adres]', sub: 'webshop, levering in België' }]
+      : [{ type: 'text', v: 'Salon Mila' }, { type: 'logo', v: 'M' }, { type: 'colors', colors: ['#3D4A3F', '#E8DCCB'] }, { type: 'text', v: 'Knippen dames €48 · Kleuren vanaf €75 · Balayage vanaf €120' }, { type: 'text', v: 'warm, persoonlijk, rustig', sub: t.o2.example + ': “Bij ons neem je even de tijd voor jezelf.”' }, { type: 'images' }, { type: 'text', v: 'Hasselt · [adres] · [telefoon]' }];
+    const found = foundAll.slice(0, s.foundN).map((f, i) => ({ k: t.o2.k[i], v: f.v || '', sub: f.sub || '', hasSub: !!f.sub, isText: f.type === 'text', isLogo: f.type === 'logo', isColors: f.type === 'colors', colors: f.colors || [], isImages: f.type === 'images', imgs: Array.from({ length: 9 }, (_, j) => j) }));
+    const profVals = isWeb ? ['Atelier Noor', 'Handgemaakte kaarsen en geschenkdozen, gemiddeld €58 per bestelling', 'warm, ambachtelijk, rustig', 'België · webshop'] : ['Salon Mila', 'Knippen dames €48 · Kleuren vanaf €75 · Balayage vanaf €120', 'warm, persoonlijk, rustig', 'Hasselt · [adres] · [telefoon]'];
+    const profile = profVals.map((v, i) => { const ok = !!s.profOk[i], ed = !!s.profEdit[i]; return { k: t.o3.k[i], v, view: !ed, edit: ed, ring: ring(ok), okAria: String(ok), okBg: ok ? 'var(--ink)' : 'transparent', okFg: ok ? 'var(--ground)' : 'var(--ink)', okBd: ok ? 'var(--ink)' : 'var(--line-strong)', ok: () => set({ profOk: Object.assign({}, s.profOk, { [i]: !ok }), profEdit: Object.assign({}, s.profEdit, { [i]: false }) }), editBtn: () => set({ profEdit: Object.assign({}, s.profEdit, { [i]: !ed }) }) }; });
+    const goalIds = ['verkopen', 'aanvragen', 'zaak', 'anders'];
+    const goals = t.o4.goals.map(([tt, sub], i) => { const on = s.goal === goalIds[i]; return { t: tt, s: sub, aria: String(on), ring: ring(on), dotBd: on ? 'var(--ink)' : 'var(--line-strong)', dotBg: on ? 'var(--ink)' : 'transparent', pick: () => set({ goal: goalIds[i] }) }; });
+    const zaakOpts = t.o4.zaakOpts.map((tt, i) => Object.assign({ t: tt, pick: () => set({ zaak: i ? 'bekendheid' : 'afspraken' }) }, pill((i ? 'bekendheid' : 'afspraken') === s.zaak)));
+    const areaIds = ['radius', 'prov', 'land'];
+    const areaOpts = t.o4.area.map((tt, i) => Object.assign({ t: tt, pick: () => set({ area: areaIds[i] }) }, pill(s.area === areaIds[i])));
+    const ai = areaIds.indexOf(s.area);
+    const specialOpts = [t.o4.no, t.o4.yes].map((tt, i) => Object.assign({ t: tt, pick: () => set({ special: !!i }) }, pill(s.special === !!i)));
+    const m = num(s.margin) / 100, aovN = num(s.aov);
+    const be = m > 0 ? 1 / m : 0;
+    const calcSales = m > 0 && aovN > 0 ? fill(t.o5.calcSales, { m: Math.round(m * 100) + '%', be: nl2(be, be * 10 % 1 === 0 ? 1 : 2), per: eur(be, 2), max: eur(aovN * m, 2) }) : '';
+    const chanceN = (() => { const mm = /(\d+)\s*op\s*(\d+)/.exec(s.chance); if (mm) return +mm[1] / +mm[2]; const p = num(s.chance); return p > 1 ? p / 100 : p; })();
+    const leadMax = num(s.clv) * (num(s.lmargin) / 100) * chanceN;
+    const conns = t.o6.rows.map((tt, i) => ({ t: tt, icon: ic(['flag', 'camera', 'wallet', 'code'][i], 18), pending: !s.linked, done: s.linked, opts: [[biz], ['@' + biz.toLowerCase().replace(/\s/g, '')], [biz + ' · [nummer] · EUR · Actief'], [biz + ' pixel']][i] })).filter((c, i) => i < 3 || gt !== 'none');
+    const badge = (k) => ({ bg: `var(--${k}-tint)`, fg: `var(--${k})`, icon: ic(k === 'ok' ? 'ok' : 'warn', 14), s: k === 'ok' ? t.o6.okS : t.o6.warnS });
+    const pixelOk = isWeb;
+    const checks = [Object.assign({ t: t.o6.cur, hasWarn: false }, badge('ok')), Object.assign({ t: t.o6.pay, hasWarn: false }, badge('ok'))];
+    if (gt !== 'none') checks.push(Object.assign({ t: gt === 'sales' ? t.o6.pixelSales : t.o6.pixelLeads, hasWarn: !pixelOk, warn: t.o6.pixelWarn }, badge(pixelOk ? 'ok' : 'warn')));
+    const moreList = ['Google Ads', 'Shopify', 'Google Analytics', 'Google Drive', 'Dropbox', 'Canva', 'Figma'].map((x) => ({ t: x, icon: ic('link', 16) }));
+    const auditCards = t.o7.cards.map(([tt, d], i) => ({ t: tt, d, dot: i === 0 ? 'var(--robijn)' : 'var(--ink-muted)', canApply: i === 0 && !s.applied, applied: i === 0 && s.applied, btn: t.o7.apply }));
+    const BRIEF_S = [['top', 'photo', 'Een balayage van dichtbij, in daglicht.', 'Valt op in de feed en toont meteen wat je doet.', 'Zo ziet een balayage eruit die mooi uitgroeit.'], ['top', 'video', 'Een knipbeurt van begin tot eind, versneld tot 15 seconden.', 'Video wordt langer bekeken en het playbook start met 2 video’s.', 'Van lang naar fris in 15 seconden.'], ['middle', 'photo', 'Het salon zelf: de stoelen, het licht, de koffie.', 'Wie twijfelt, wil weten waar ze binnenstapt.', 'Even tijd voor jezelf, in het centrum van Hasselt.'], ['middle', 'video', 'Een vaste klant vertelt in een paar zinnen waarom ze terugkomt.', 'Wat een ander zegt, overtuigt meer dan je eigen woorden.', '[eerste zin uit wat je klant zegt]'], ['bottom', 'photo', 'Je prijzen naast elkaar, met een duidelijke knop.', 'Wie klaar is om te boeken, wil weten wat het kost.', 'Knippen dames €48. Boek je moment online.']];
+    const BRIEF_W = [['top', 'video', 'Een kaars wordt aangestoken, van dichtbij.', 'De eerste seconde trekt de aandacht, en video wordt langer bekeken.', 'Zo begint een rustige avond.'], ['middle', 'video', 'Hoe jullie de kaarsen gieten, in 15 seconden.', 'Wie twijfelt, wil zien dat het echt handwerk is.', 'Elke kaars gieten we met de hand.'], ['bottom', 'photo', 'De geschenkdoos met de prijs erbij.', 'Wie klaar is om te kopen, wil weten wat het kost.', 'Een geschenk dat blijft branden.'], ['top', 'photo', 'Een kaars in een woonkamer, zonder tekst.', 'Toont hoe het product in een interieur staat.', 'Licht dat bij je thuis past.'], ['middle', 'photo', 'Een review van een klant, als beeld.', 'Wat een ander zegt, overtuigt meer dan je eigen woorden.', '[zin uit een echte review]']];
+    const briefs = (isWeb ? BRIEF_W : BRIEF_S).map(([fase, k, what, why, first], i) => ({ n: String(i + 1), fase: fase[0].toUpperCase() + fase.slice(1), bg: FASE[fase], kind: t.o9[k], what, why, first, isVideo: k === 'video' }));
+    const strat = isWeb
+      ? [[t.o8.goal, t.o4.goals[0][0]], [t.o8.area, 'België, Nederlandstalig, 25 tot 65 jaar'], [t.o8.budget, '€40 per dag', 'Het minimum voor een webshop is €30 per dag.'], [t.o8.structure, t.o8.structureV, t.o8.structureS], [t.o8.funnel, '2 top, 2 middle, 1 bottom']]
+      : [[t.o8.goal, t.o4.zaakOpts[0]], [t.o8.area, 'Hasselt plus 15 km, Nederlandstalig, 18 tot 65+'], [t.o8.budget, '€10 per dag', 'Dat is ook het minimum.'], [t.o8.structure, t.o8.structureV, t.o8.structureS], [t.o8.funnel, '2 top, 2 middle, 1 bottom']];
+    const moments = isWeb ? ['Feestdagen, 8 tot en met 24 december: je geschenkdozen, in een aparte campagne.', 'Solden in januari.'] : ['Feestdagen, vanaf half december: cadeaubonnen, in een aparte campagne.', 'Begin januari: een nieuwe start, ook voor je haar.'];
+    const slots = briefs.map((b, i) => {
+      const noVid = !isWeb && b.isVideo;
+      return { n: (isWeb ? 'A' : '') + (i + 1), fase: b.fase, bg: b.bg, kind: b.kind, hasMedia: !noVid, noVideo: noVid, text: b.first, kop: isWeb ? 'Handgemaakte kaarsen' : 'Salon Mila, Hasselt', cta: isWeb ? (b.fase === 'Bottom' ? 'Nu kopen' : 'Meer informatie') : 'Afspraak maken',
+        thumb: noVid ? t.o9.empty : b.kind + ' · ' + t.o9.fromSite, thumbBd: noVid ? '1px dashed var(--line-strong)' : '1px solid var(--line)', ai: noVid ? t.o9.script : t.o9.ai, a11y: 'Preview van advertentie ' + (i + 1), ring: ring(s.slot === i), pick: () => set({ slot: i }) };
+    });
+    const minB = gt === 'sales' ? 30 : 10, sugB = isWeb ? 40 : 10, bN = num(s.budget), bLow = bN < minB;
+    const placements = t.o9.placements.map((tt, i) => ({ t: tt, ar: i ? '9/16' : '4/5', w: i ? '120px' : '170px' }));
+    const PR = { starter: [99, 82.5, 990], pro: [195, 162.5, 1950], scale: [299, 249.17, 2990] };
+    const FOUND = { starter: 69.3, pro: 136.5, scale: 209.3 };
+    const codeOk = s.code.trim().length >= 4;
+    const yearly = s.period === 'jaar';
+    const planCards = ['starter', 'pro', 'scale'].map((id, i) => { const on = s.plan === id; return { name: ['Starter', 'Pro', 'Scale'][i], price: eur(yearly ? PR[id][1] : PR[id][0]), what: t.o10.what[i], rec: id === 'pro', aria: String(on), ring: ring(on), pick: () => set({ plan: id }) }; });
+    const vatTrim = s.vat.replace(/\s/g, '').toUpperCase();
+    const reverse = /^[A-Z]{2}/.test(vatTrim) && !vatTrim.startsWith('BE') && vatTrim.length > 6;
+    let base = yearly ? PR[s.plan][2] : (codeOk ? FOUND[s.plan] : PR[s.plan][0]);
+    const vatAmt = Math.round(base * 21) / 100;
+    const summary = reverse
+      ? fill(t.o10.summaryRev, { d: t.o10.date, p: eur(base, 2).replace(',00', ''), per: yearly ? t.o10.perY : t.o10.perM })
+      : fill(t.o10.summary, { d: t.o10.date, p: eur(base, 2).replace(',00', ''), v: eur(vatAmt, 2), t: eur(base + vatAmt, 2), per: yearly ? t.o10.perY : t.o10.perM }) + (codeOk && yearly ? ' [founding en jaarplan]' : '');
+    const checklist = t.o11.list.map((tt, i) => { const done = s.liveN > i; return { t: tt, fg: done ? 'var(--ink)' : 'var(--ink-muted)', bd: done ? 'var(--snoep-munt)' : 'var(--line-strong)', bg: done ? 'var(--snoep-munt)' : 'transparent', icon: done ? h('span', { style: { color: '#151514', display: 'flex' } }, ic('check', 12, 2)) : null }; });
+    // primary per step
+    const advance = () => { const n = list[Math.min(list.length - 1, idx + 1)]; set({ step: n }); history.replaceState(null, '', '#onboarding-' + n); window.scrollTo(0, 0); };
+    let nextLabel = t.o.next, next = advance, nextDisabled = false;
+    if (s.step === 2 && !s.manual && s.read !== 'done') { nextLabel = t.o2.read; next = () => this.readSite(); nextDisabled = s.read === 'busy'; }
+    if (s.step === 6 && !s.linked) { nextLabel = t.o6.connectFb; next = () => this.openMeta('onboarding'); }
+    if (s.step === 8) nextLabel = t.o8.good;
+    if (s.step === 9) nextLabel = t.o9.approve;
+    if (s.step === 10 && s.pay !== 'paid') { nextLabel = t.o10.pay; next = () => set({ pay: 'redirect' }); }
+    if (s.step === 11) { if (s.live === 'done') { nextLabel = t.o11.today; next = () => { window.location.href = 'App.dc.html#vandaag'; }; } else { nextLabel = t.o11.go; next = () => this.goLive(); nextDisabled = s.live === 'busy'; } }
+    const variants = t.o.variants.map((label, i) => { const id = ['sarah', 'webshop', 'bestaand'][i]; return { label, aria: String(s.variant === id), bg: s.variant === id ? 'var(--ink)' : 'transparent', fg: s.variant === id ? 'var(--ground)' : 'var(--ink)', pick: () => this.setVariant(id) }; });
+    const o = {
+      welcome: fill(t.o1.welcome, { n: s.name || 'Sarah' }), name: s.name, setName: (e) => set({ name: e.target.value }),
+      site: s.site, setSite: (e) => set({ site: e.target.value }), manual: s.manual, notManual: !s.manual, toManual: () => set({ manual: true }), fromManual: () => set({ manual: false }),
+      read: () => this.readSite(), readIdle: s.read === 'idle', readActive: s.read !== 'idle' && !s.manual, readLine: s.read === 'done' ? t.o2.found : t.o2.reading,
+      readIcon: s.read === 'done' ? h('span', { style: { color: 'var(--ok)', display: 'flex' } }, ic('ok', 18)) : this.loader(), found,
+      profile, imgCount: fill(t.o3.images, { n: s.imgs }), imgs: Array.from({ length: s.imgs }, (_, i) => ({ remove: () => set({ imgs: Math.max(0, s.imgs - 1) }) })),
+      extraQs: [{ l: t.o3.q1, ph: '', hasHelp: false }, { l: t.o3.q2, ph: '', hasHelp: false }, { l: t.o3.q3, ph: '', hasHelp: true, help: t.o3.q3help }],
+      goals, isZaak: s.goal === 'zaak', zaakOpts, areaOpts, areaLabel: t.o4.areaLabel[ai], areaVal: ai === 0 ? (isWeb ? 'Gent' : 'Hasselt') : ai === 1 ? 'Limburg' : t.o4.belgium, isRadius: ai === 0,
+      age: isWeb ? '25 tot 65' : '18 tot 65+', specialOpts, isSpecial: s.special,
+      gSales: gt === 'sales', gLeads: gt === 'leads', gNone: gt === 'none',
+      aov: s.aov, setAov: (e) => set({ aov: e.target.value }), margin: s.margin, setMargin: (e) => set({ margin: e.target.value }), calcSales,
+      perProduct: s.perProduct, togglePerProduct: () => set({ perProduct: !s.perProduct }), products: ['Geurkaars groot', 'Geurkaars klein', 'Geschenkdoos'],
+      cpl: s.cpl, setCpl: (e) => set({ cpl: e.target.value }), help: s.help, helpAria: String(s.help), toggleHelp: () => set({ help: !s.help }),
+      clv: s.clv, setClv: (e) => set({ clv: e.target.value }), lmargin: s.lmargin, setLmargin: (e) => set({ lmargin: e.target.value }), chance: s.chance, setChance: (e) => set({ chance: e.target.value }),
+      calcLeads: leadMax > 0 ? fill(t.o5.calcLeads, { x: eur(Math.round(leadMax * 100) / 100) }) : '', calcLeadsSub: fill(t.o5.calcLeadsSub, { clv: s.clv, m: s.lmargin, c: s.chance }),
+      conns, linked: s.linked, metaDone: s.linked, checks, bizName: biz, openMeta: () => this.openMeta('onboarding'),
+      metaErr: !!s.metaErr && !s.linked, metaErrText: errMap[s.metaErr] || '', metaRetry: s.metaErr === 'expired' ? t.m.relink : t.m.retry,
+      more: s.more, moreAria: String(s.more), moreRot: s.more ? '45deg' : '0deg', toggleMore: () => set({ more: !s.more }), moreList,
+      auditCards, applyFirst: () => set({ applied: true }),
+      stratTitle: fill(t.o8.title, { n: s.name || 'Sarah' }), strat: strat.map(([k, v, sub]) => ({ k, v, sub: sub || '', hasSub: !!sub })), briefs, moments,
+      slots, previewTitle: fill(t.o9.preview, { n: (isWeb ? 'A' : '') + (s.slot + 1) }), placements, ctaWord: slots[s.slot] ? slots[s.slot].cta : '',
+      budget: s.budget, setBudget: (e) => set({ budget: e.target.value, budgetOk: false }), budgetLowS: String(bLow), budgetBd: bLow ? 'var(--act)' : 'var(--line-strong)', budgetFg: bLow ? 'var(--act)' : 'var(--ink-muted)',
+      budgetHelp: bLow ? fill(t.o9.budgetLow, { m: eur(minB) }) : fill(t.o9.budgetHelp, { s: eur(sugB), m: eur(minB) }), budgetWarn: bLow && !s.budgetOk, acceptBudget: () => set({ budgetOk: true }),
+      periods: [['maand', t.o10.monthly], ['jaar', t.o10.yearly]].map(([id, label]) => ({ label, aria: String(s.period === id), bg: s.period === id ? 'var(--ink)' : 'transparent', fg: s.period === id ? 'var(--ground)' : 'var(--ink)', pick: () => set({ period: id }) })),
+      planCards, code: s.code, setCode: (e) => set({ code: e.target.value }), codeOk, vat: s.vat, setVat: (e) => set({ vat: e.target.value }), reverse, summary, paid: s.pay === 'paid',
+      liveTitle: s.live === 'done' ? t.o11.titleDone : t.o11.title, checklist, liveDone: s.live === 'done',
+    };
+    const metaOutcomes = [['ok', t.m.ok], ['perm', t.m.perm], ['noacc', t.m.noacc], ['expired', t.m.expired]].map(([id, tt], i) => ({ t: tt, bg: i ? 'transparent' : 'var(--ink)', fg: i ? 'var(--ink)' : 'var(--ground)', bd: i ? 'var(--line-strong)' : 'var(--ink)', pick: () => this.metaResult(id) }));
+    const pctN = Math.round((idx + 1) / list.length * 100);
+    return {
+      t, lang, theme, wide, narrow: !wide, demo, setDemo: (p) => this.setDemo(p), langs, langsLong,
+      screenLabel: isOb ? 'Onboarding stap ' + (idx + 1) : 'Inloggen · ' + scr,
+      isAuth: !isOb, isOb, authCols: wide ? 'minmax(0, 1fr) minmax(0, 1fr)' : 'minmax(0, 1fr)', obCols: wide ? '300px minmax(0, 1fr)' : 'minmax(0, 1fr)', mainBorder: wide ? '1px solid var(--line)' : '0',
+      logoH: w < 640 ? '17px' : '19px', a, s: sFlags, o, stepList, variants,
+      stepOf: fill(t.o.stepOf, { a: idx + 1, b: list.length }), minLeft: minutes > 0 ? fill(t.o.minLeft, { n: minutes }) : t.o.almost, pct: pctN + '%', pctNum: String(pctN),
+      hasPrev: idx > 0, noPrev: idx === 0, prev: () => { const n = list[Math.max(0, idx - 1)]; set({ step: n }); history.replaceState(null, '', '#onboarding-' + n); window.scrollTo(0, 0); },
+      next, nextLabel, nextDisabled, nextOp: nextDisabled ? 0.45 : 1,
+      metaOpen: s.meta === 'open', metaSteps: [t.m.s1, t.m.s2, t.m.s3].map((x, i) => ({ n: String(i + 1), t: x })), metaOutcomes, loader: this.loader(),
+      payOpen: s.pay === 'redirect', payBack: () => set({ pay: 'paid' }),
+    };
+  }
+}
+</script>
+</body>
+</html>

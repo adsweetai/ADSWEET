@@ -1,0 +1,1058 @@
+ADSWEET: DE VOLLEDIGE APP, DE WEBSITE EN HET BEHEER
+Prompt voor Claude Design · 23 oktober 2026
+
+
+=====================================================================
+WAT JE BOUWT
+=====================================================================
+
+AdSweet is een webapp waarmee bedrijven zelf adverteren op Facebook en Instagram, met de aanpak van een goed advertentiebureau erin. De klant geeft zijn website op. AdSweet leest zijn zaak, maakt een strategie en de advertenties, zet ze live, kijkt elke nacht wat werkt en zegt in gewone taal wat de klant best doet. De klant keurt goed met één klik. Wat Lovable doet voor websites, doet AdSweet voor advertenties op Meta.
+
+Voor wie: webshops, dienstverleners die aanvragen willen, lokale zaken en zelfstandigen. Mensen die geen €1.000 per maand aan een bureau willen geven, of die er nu een hebben en het zelf goedkoper willen doen. Ze kennen weinig van advertenties en willen dat het simpel is.
+
+De belofte: de resultaten van een bureau, voor een derde van de prijs, zonder lange contracten en zonder dat je zelf in de Meta Business Suite moet werken.
+
+Hoofdslogan: Hit the sweet spot.
+
+Bouw een volledig klikbaar prototype van:
+1. de website met de landingspagina, die naar inloggen leidt
+2. inloggen, de onboarding-wizard en het starten van het abonnement
+3. de volledige app, met alle schermen, staten en flows
+4. het interne beheer voor het AdSweet-team
+
+in licht en nacht, op de computer (1440px) en de gsm (390px), in het Nederlands, met Frans en Engels vanaf het begin ingebouwd.
+
+
+=====================================================================
+HOE JE WERKT
+=====================================================================
+
+- Werk in acht golven, in de volgorde van dit document. Na elke golf klik je alle flows door die al bestaan, in licht en nacht, op 1440 en 390 pixels breed.
+- Raak je een limiet, stop dan na een afgeronde golf en zeg welke golf de volgende is. Begin niet aan een golf die je niet kan afmaken.
+- Stel geen vragen. Ontbreekt iets, zet dan een plaatshouder tussen vierkante haken, zoals [bedrijfsgegevens], en zet hem in de samenvatting.
+- Alle demo-cijfers komen uit deel C3. Verzin geen andere cijfers. Reken alles na wat je toont: totalen, ROAS, kost per verkoop, btw.
+- Teksten die tussen aanhalingstekens staan, neem je letterlijk over. Waar dit document geen tekst geeft, schrijf je zelf volgens A3.
+- Werk je in een bestaand AdSweet-project, dan vervangt dit document alle vorige rondes. Zie "Wat vervalt".
+
+
+=====================================================================
+BIJLAGEN
+=====================================================================
+
+- adsweet-woordmerk.svg (inkt, voor licht) en adsweet-woordmerk-licht.svg (voor nacht)
+- adsweet-sculptuur-licht.jpg en adsweet-sculptuur-nacht.jpg (liggend, 2:1)
+- adsweet-sculptuur-gsm-licht.jpg en adsweet-sculptuur-gsm-nacht.jpg (staand, 4:5)
+- sculpture-hero-referentie.tsx: de originele React-code van het deeltjeseffect
+- raakpunt-engine.js en adsweet-raakpunt-hero.html: dezelfde motor in gewone JavaScript, al in de AdSweet-stijl, als werkend voorbeeld van de hero
+- tokens.css: alle kleuren, letters, maten en bewegingen
+- De letter Host Grotesk (woff2, 300 tot 600). Laad hem via Google Fonts of uit de bestanden.
+
+
+=====================================================================
+WAT VERVALT (alleen als je in een bestaand project werkt)
+=====================================================================
+
+- Elke vorige naam en stijl: Rakio, de snoepstijl, de kermisstijl, lolly's, bonnetjes, stempels, spikkels, emoji.
+- De WhatsApp-koppeling en alle WhatsApp-kaarten. Mensen kijken zelf elke dag in de app.
+- Werkruimtes om meerdere klanten toe te voegen.
+- De oude pakketten (Gratis, Basic, Pro, Expert) en hun prijzen. Alleen de plannen uit C1 gelden.
+- De tagline "Adverteren zonder zuur." en elke tekst met "zuur".
+- De oude demo-personages en sectoren. Gebruik de scenario's uit C3.
+
+Behoud wat past, met de inhoud uit dit document: de EuroTegel, het Sweetmoment, het label "Voorstel van AdSweet", de lader en de Raakpunt-hero.
+
+
+#####################################################################
+DEEL A. VASTE REGELS
+#####################################################################
+
+A1. Productprincipes (gelden voor elk scherm)
+1. Gestuurd, maar vrij. Elke flow heeft één aanbevolen pad en alle keuzes staan voorgevuld. Aanpassen hoeft nooit, maar mag altijd.
+2. Het playbook adviseert. Structuur, budget, doelgroep en wanneer iets een winnaar is, komen uit het playbook (C2).
+3. Geen restricties, wel waarschuwingen. Iedereen mag in elk plan alles wijzigen. Wijkt een keuze af van het playbook, dan wordt ze rood met de melding "Pas op, dit raden we niet aan" en de reden. Daarna kan de klant gewoon verder met "Toch doorgaan".
+4. Kennis als tips, op het juiste moment: bij de onboarding, bij het uploaden, bij het budget, bij elke aanbeveling. Eén of twee zinnen, met "Meer in de Academy" erbij.
+5. Uitleg overal. Elk vakwoord (ROAS, kost per verkoop, kost per aanvraag, top of funnel, leerfase...) heeft een stippellijn eronder. Hover of tik toont een kaartje met uitleg en een voorbeeld met de cijfers van de klant zelf (C5).
+6. Launchen is een beeld of video erin zetten. Tekst, kop, call-to-action, budget en instellingen stelt AdSweet voor.
+7. AdSweet zet nooit zelf een advertentie af. Het adviseert, de klant klikt.
+8. Persoonlijk. Waar AdSweet iets voorstelt, spreekt het de klant aan met zijn voornaam ("Lisa, je video's doen het beter dan je foto's."). Niet in elke zin.
+9. Alles op Meta zit bovenop wat Meta zelf al doet (Advantage+), niet ernaast. AdSweet bouwt geen eigen doelgroepen of biedingen na.
+
+A2. Wat nooit mag
+- Geen verzonnen klanten, getuigenissen, reviews, klantlogo's of gebruikersaantallen. Geen "Meest gekozen" of "1.000+ bedrijven". Demo-cijfers krijgen het label "Voorbeeld".
+- Geen nagebootste schermen of logo's van Meta, Facebook, Instagram, Google, Shopify, de betaalpartner, Canva, Figma, Dropbox of Slack. Gebruik de naam als gewone tekst met een neutraal Lucide-icoon. Advertenties toon je in neutrale preview-kaders (1.7), niet in een nagemaakte feed.
+- "Doorgaan met Facebook" is in het prototype een gewone AdSweet-knop. Zet in de samenvatting dat de echte app de officiële knop van Meta gebruikt.
+- Geen velden voor kaartgegevens. Betalen gebeurt op de pagina van de betaalpartner. Toon een neutrale tussenpagina "Je gaat naar de beveiligde betaalpagina." en kom terug met een geslaagde betaling.
+- Geen WhatsApp-koppeling in het product.
+- Noem nergens een maker of bureau achter AdSweet. De enige partner met naam is Fully Booked, voor Done With You.
+- Geen emoji, geen confetti, geen uitroeptekens behalve bij "Sweet!".
+
+A3. Schrijfstijl
+- Vlaams Nederlands, je en jij, kort. Zeg wat er gebeurt en wat de klant best doet.
+- "Verkopen" in plaats van "conversies", "aanvragen" in plaats van "leads", waar het kan.
+- Geen marketingtaal: niet "krachtig", "naadloos", "revolutionair", "ontgrendel", "til naar een hoger niveau". Geen gedachtestreepjes (em dashes).
+- Getallen concreet: "€72 uitgegeven, 0 verkopen" in plaats van "slecht presterend".
+- Toegelaten Engels: AdSweet, Sweet!, Sweet spot, Hit the sweet spot, Academy, Studio, ad set, en de vakwoorden ROAS, CTR, top, middle en bottom of funnel. Elk vakwoord krijgt uitleg.
+
+A4. Taal en formaten
+- Nederlands is standaard. Frans en Engels zitten er vanaf het begin in: elke tekst via een sleutel, een taalkeuze in de app (Instellingen en het gebruikersmenu) en in de footer van de website.
+- Vertaal deze schermen volledig in FR en EN: de home, inloggen, de onboarding en Vandaag. Elders mag de vertaling nog ontbreken, maar elk ontwerp kan 30% langere Franse teksten aan.
+- Bedragen: €1.234,56. Prijzen zonder centen als het kan (€195). Percentages: 40%. ROAS met komma: 2,5. Datum: maandag 7 december. Tijd: 06:00.
+- Prijzen staan overal exclusief btw, met "excl. btw" erbij.
+
+A5. Plannen en rechten
+- De app zet functies aan of uit per plan (C1). Een functie buiten het plan toon je wel: het scherm gedimd, met een sober paneel "Dit zit in Pro." (of Scale, of Agency), één zin over wat het je oplevert, en de knop "Bekijk de plannen". Geen kleur, geen robijn.
+- Wie in Starter of Pro een tweede advertentieaccount wil toevoegen, krijgt de uitleg dat dat Scale is. Losse extra accounts bestaan niet.
+
+A6. Labels per functie
+Elke functie heeft een label: MVP, V1 of Later (lijst in C6). Ontwerp ze allemaal. De klant ziet het label nooit. Het staat in het schermoverzicht (Golf 8) en verschijnt in de app als je in het demopaneel "Toon labels" aanzet.
+
+A7. Het demopaneel
+Rechtsonder op elk scherm, links van de assistent, staat een klein grijs knopje "Demo" met een stippelrand. Het hoort niet bij het product. Het opent een paneel waarmee je wisselt van:
+- scenario: Lisa (webshop, Pro), Tom (dakwerken, Starter), Sarah (nieuwe klant, onboarding), Bram (drie webshops, Scale)
+- plan: Starter, Pro, Scale, Agency (om de rechten te zien)
+- staat: normaal, proefperiode bijna om, credits op, betaalprobleem bij Meta, koppeling verlopen, testfase (alleen toegang op uitnodiging)
+- thema licht of nacht, taal NL, FR of EN, "Toon labels"
+De demodatum is maandag 7 december 2026.
+
+
+#####################################################################
+DEEL B. DE GOLVEN
+#####################################################################
+
+
+=====================================================================
+GOLF 1. MERK EN DESIGNSYSTEEM
+=====================================================================
+
+1.1 Logo en naam
+- Het logo is het woordmerk "adsweet" in kleine letters uit de bijlage. Typ het nooit na. In nacht gebruik je de licht-versie.
+- In lopende tekst schrijf je AdSweet. Geen ® of ™: de naam is nog niet geregistreerd.
+- Hoogte: 19px op de computer, 17px op de gsm. Laat rondom minstens de hoogte van de "a" vrij.
+- Er is geen apart beeldmerk. Het app-icoon is een vierkante uitsnede van adsweet-sculptuur-nacht.jpg, met de robijnrode parel exact in het midden en de strengen die links en rechts uit beeld lopen. Maak 1024, 512, 180, 32 en 16 pixels. De favicon is dezelfde uitsnede in 32 en 16.
+- Open Graph-beeld (1200 × 630): adsweet-sculptuur-licht.jpg, het woordmerk linksboven, "Hit the sweet spot." linksonder.
+
+1.2 Kleuren (alles staat in tokens.css)
+
+| Token | Licht | Nacht | Waarvoor |
+| --- | --- | --- | --- |
+| ground (steen) | #EAE8E3 | #111110 | achtergrond van website en app |
+| surface | #F5F4F0 | #1A1A19 | kaarten, panelen, tabellen, zijbalk |
+| surface-sunken | #E2E0DA | #0C0C0B | invoervelden, tabelkoppen |
+| ink | #151514 | #F1EFEA | tekst, cijfers, primaire knop |
+| ink-muted | #5F5C56 | #A8A49B | uitleg, metadata |
+| ink-accent | #7A776F | #9B978E | alleen het accentdeel van titels vanaf 32px |
+| line | #15151424 | #F1EFEA24 | haarlijnen |
+| line-strong | #7A776F | #6E6B65 | randen van velden en van de tweede knop |
+| robijn | #C7254E | #E0577A | het raakpunt, de Sweet spot, de focusring |
+
+Status, altijd met icoon en woord, nooit alleen kleur:
+
+| Status | Tekst licht | Vlak licht | Tekst nacht | Vlak nacht |
+| --- | --- | --- | --- | --- |
+| In orde (cirkel met vinkje) | #2E6B45 | #DCEADF | #86C79A | #1B2A20 |
+| Let op (driehoek) | #8A5410 | #F2E2C4 | #E2B062 | #2D2414 |
+| Actie nodig (cirkel met uitroepteken) | #AE3A1F | #F5DCD3 | #F0937A | #341C16 |
+
+Gedempte reekskleuren voor grafieken en avatars, tekst erop altijd in #151514: tarwe #E8D7AE, staal #B8C7D9, lavendel #CEC4EA, salie #BFD9C6, klei #E9C2AE, roos #EEC1D0.
+- Funnel: top of funnel staal, middle salie, bottom klei.
+- Soort zaak (avatars, "Voor wie"): webshop roos, dienstverlener staal, lokale zaak tarwe, zelfstandige lavendel.
+- Kanalen in grafieken: Meta in ink, Google Ads in ink-muted met een streepjeslijn, Shopify staal, Google Analytics salie.
+
+Kleurregels:
+- Robijn is het raakpunt. Alleen als punt van 6 tot 8px (Sweet spot, "Voorstel van AdSweet", de hint op de website), als focusring en in de parel van de assistent. Nooit als vlak, tekst of knop.
+- Hoogstens één robijn punt per scherm. De assistent, de focusring en de sculptuur tellen niet mee.
+- "Pas op, dit raden we niet aan" gebruikt de status Actie nodig, nooit robijn.
+- Geen verlopen, geen gloed, geen glas. Wat opvalt, valt op door grootte, gewicht en ruimte.
+
+1.3 Letters
+- Eén letter: Host Grotesk, gewichten 300, 400, 500 en 600. Geen Geist, Inter, Instrument Serif of andere.
+- Hero-titel: clamp(40px, 6.6vw, 112px), 500, regelhoogte 0,92, letterafstand -0,045em.
+- Sectietitel: clamp(32px, 4vw, 64px), 500, regelhoogte 1, -0,035em.
+- Paginatitel in de app: 28 tot 32px, 500, -0,03em. De begroeting op Vandaag: 32 tot 36px.
+- Kaarttitel: 18 tot 22px, 500, -0,015em.
+- Lopende tekst: 400, 16 tot 17px op de website en 15px in de app, regelhoogte 1,5, -0,01em.
+- Eyebrow: 12px hoofdletters, letterafstand 0,12em, ink-muted, met een lijntje van 28px ervoor.
+- Accent in een titel: het accentdeel op een eigen regel in gewicht 300 en ink-accent. Geen cursief. Eén accent per titel, en niet in elke titel.
+- Getallen altijd met tabular-nums.
+
+1.4 Vorm
+- Knoppen zijn pillen. Primair: 46px hoog op de website en 40px in de app, ink met tekst in ground, met een pijltje dat bij hover 3px opschuift. Tweede knop: pil met een haarlijn in line-strong. Tekstknop: tekst met een haarlijn eronder.
+- Kaarten: surface, radius 16, haarlijn in line, geen schaduw. Alleen wat zweeft (menu's, dialogen, de assistent, meldingen) krijgt een zachte schaduw.
+- Invoervelden: surface-sunken, radius 10, rand line-strong, 44px hoog. Fout of afwijking: rand en hulptekst in Actie nodig.
+- Focusring: 2px robijn met 4px afstand.
+- Iconen: Lucide, lijndikte 1,5, currentColor.
+- Raster: 12 kolommen, rand 48px op de computer, 20px op de gsm. Secties op de website minstens 120px uit elkaar (72px op de gsm). Lange uitleg in een kolom van hoogstens 560px.
+- Rijen en blokken scheid je met haarlijnen, niet met gekleurde vlakken.
+
+1.5 Beweging
+- Overgangen 300 ms met cubic-bezier(.2,.7,.2,1).
+- Secties op de website komen één keer binnen: 12px omhoog en van onzichtbaar naar zichtbaar in 600 ms, elementen 60 ms na elkaar.
+- Getallen tellen op in 600 ms wanneer ze in beeld komen.
+- De lader: drie dunne lijnen die naar één robijn punt bewegen en weer uit elkaar gaan (1,2 s), altijd met een zin ernaast, zoals "We lezen je website." Stil bij prefers-reduced-motion.
+- Geen stuiters, geen confetti. Bij prefers-reduced-motion staat alles meteen in zijn eindtoestand.
+
+1.6 De assistent: het karakter rechtsonder
+- Werknaam: Parel. Zet de naam in één variabele, want hij kan nog veranderen.
+- Uiterlijk: een rondje van 56px (48px op de gsm) met daarin een ronde uitsnede van adsweet-sculptuur-nacht.jpg, de robijnrode parel in het midden, en een haarlijn eromheen. Geen ogen, geen gezicht, geen mascotte. Het karakter zit in hoe Parel beweegt en praat.
+- Leven: heeft Parel iets te zeggen, dan ademt de parel één keer (schaal 1 naar 1,06 en terug, 1,6 s) en verschijnt er een tekstballon met één zin, bijvoorbeeld "Lisa, ik heb 5 dingen voor vandaag." Uit zichzelf hoogstens één keer per dag. Denkt Parel na, dan toont het de lader.
+- Stem: rustig, direct, Vlaams, met de voornaam. Zegt wat het ziet, wat het zou doen en waarom. Zegt het eerlijk als iets niet kan of als het iets niet weet.
+- Wat Parel kan, staat in Golf 6.
+
+1.7 Componenten
+Bouw deze componenten en toon ze in één componentenoverzicht, in licht en nacht:
+- Knoppen, invoervelden, schakelaars, keuzekaarten, stappenbalk, tabs, tabellen met haarlijnen, een accordeon met een plus die een kruis wordt.
+- Statusbadge (In orde, Let op, Actie nodig).
+- Advertentielabel: Winnaar, Nog geen winnaar, Verliezer, Te vroeg om te zeggen, Enkel rapportage. Winnaar krijgt een vinkje, Verliezer een uitroepteken, de rest een neutraal icoon.
+- Waarschuwingsblok: icoon, "Pas op, dit raden we niet aan", de reden in één of twee zinnen, de link "Waarom?" naar de Academy, en de knop "Toch doorgaan". Het veld waar het over gaat krijgt een rand in Actie nodig.
+- Tipkaart: klein, met een lampje-icoon en het label "Tip uit het playbook".
+- Uitlegkaartje voor vakwoorden: woord, uitleg, "In jouw cijfers:" met een rekenvoorbeeld, link naar de les.
+- Actiekaart, de kern van Vandaag: label "Voorstel van AdSweet" met een punt, titel, de cijfers, uitleg in één of twee zinnen, een tip, en de knoppen: de 1-klikactie (primair), "Waarom?" en "Later". Alleen de bovenste kaart krijgt een robijn punt, de andere een punt in ink-muted. Staat er een Sweetmoment op het scherm, dan krijgt dat het robijn en zijn alle punten ink-muted.
+- EuroTegel: drie of vier blokken op een rij met een dunne pijl ertussen. Webshop: Uitgegeven → Verkopen → Omzet → ROAS, met de break-even ernaast. Aanvragen: Uitgegeven → Aanvragen → Kost per aanvraag, met het doel ernaast. Het laatste blok valt op door een haarlijn in ink en het getal in vol ink, niet door kleur.
+- Advertentiekaart: miniatuur, naam, funnelfase, label en de twee belangrijkste cijfers.
+- Preview-kaders per plaatsing: Feed (4:5), Stories (9:16), Reels (9:16). Neutraal: een sober kader in surface met de paginanaam als gewone tekst, het beeld, de tekst en de call-to-action als pil. Geen iconen of knoppen van Meta.
+- Funnelbalk: drie vakken (top, middle, bottom) met het aantal ads per fase. Een ontbrekende fase heeft een streepjesrand en de tekst "Ontbreekt".
+- Creditsmeter, proefperiodebalk, voortgangsbalk van de onboarding.
+- Melding (toast) met "Ongedaan maken".
+- Lege staat: één zin in ink-muted, eventueel met de kleine stilstaande sculptuur. Geen illustraties.
+- Foutstaat en laadstaat (met de lader).
+- Het gedimde paneel voor functies buiten het plan.
+- Het Sweetmoment: het getal telt op, het robijn punt pulseert één keer, met één zin ("Sweet! 3 nieuwe verkopen sinds gisteren."). Verder niets.
+
+
+=====================================================================
+GOLF 2. DE WEBSITE
+=====================================================================
+
+2.1 Navigatie en footer
+- Navigatie: het woordmerk links. Rechts: Hoe het werkt · Prijzen · Gratis audit · Academy · Inloggen, de licht/nacht-schakelaar en een omlijnde pil "Gratis starten". Op de gsm een menuknop die een volledig scherm opent.
+- Footer: het woordmerk met "Hit the sweet spot." eronder, en vier kolommen:
+  - Product: Hoe het werkt, Prijzen, Gratis audit, Academy
+  - Samenwerken: Partners, Done With You
+  - Juridisch: Privacy, Voorwaarden, Cookies, Verwerkersovereenkomst, Je gegevens verwijderen
+  - Taal: NL · FR · EN
+- Onderaan: "© 2026 AdSweet · adsweet.ai", [bedrijfsgegevens en ondernemingsnummer], en de vermelding van de maker van het hero-effect.
+
+2.2 De hero: Het Raakpunt
+Het Raakpunt is een realistische sculptuur van twee strengen zijde en geborsteld metaal, in ivoor, parelmoer en champagne, die in het midden samenkomen in één robijnrode glazen parel. Aan de buitenkanten valt het materiaal uiteen in stof en kleine parels. Beweeg je eroverheen, dan valt de sculptuur in deeltjes uiteen en trekt ze daarna weer scherp samen. De linkerstreng is iedereen op Facebook en Instagram in je regio. De rechterstreng zijn je klanten. De parel is de advertentie die raak is.
+
+Motor:
+- Neem de motor uit de bijlagen over (raakpunt-engine.js is de werkende versie, de .tsx is het origineel): WebGL2-deeltjes berekend op de GPU, de flow map voor het spoor van de cursor, het beeld dat scherp blijft in rust en vloeibaar wordt onder de cursor.
+- Behoud alle vangnetten: het stilstaande beeld als WebGL2 ontbreekt of de context wegvalt, minder deeltjes op zwakke toestellen en touchscreens, stoppen als de hero uit beeld is of het tabblad verborgen is, en de rustige modus bij prefers-reduced-motion.
+- Gebruik alleen de sculptuurbeelden uit de bijlagen. Laad nooit de standaardbeelden van cdn.21st.dev.
+- Neem niets over van de inhoud van het origineel: niet de naam "Forma", niet de teksten, niet Geist of Instrument Serif.
+- De maker vraagt een vermelding. Laat "effect: Sculpture Hero door guglielmogiannattasio.it" klein en zichtbaar staan tot de licentie nagekeken is.
+
+Instellingen:
+- interactive aan; strength 1, radius 220, particleDensity 1, particleSpread 1, dotSize 1, turbulence 1, liquid 1, returnSpeed 1
+- streaks aan, restStyle "image", intro aan (de sculptuur bouwt zich bij het laden één keer op uit deeltjes), ambient uit
+- background #EAE8E3 in licht en #111110 in nacht
+- beelden: de liggende versies op de computer, de staande op de gsm, licht of nacht volgens het thema
+- imageBackground leeg laten, zodat de motor de kleur uit de hoeken haalt. Zie je toch een rand rond de sculptuur, zet het dan op de exacte hoekkleur.
+- backdropText "adsweet", heel licht achter de sculptuur
+- hint: "Beweeg over het raakpunt", op touchscreens "Raak het raakpunt aan". Het bolletje van de hint is robijn.
+
+Inhoud:
+- Eyebrow: "Facebook- en Instagram-advertenties, zonder bureau"
+- Titel: "Meer klanten uit Facebook en Instagram." in 500, en op een eigen regel "Hit the sweet spot." in 300 en ink-accent
+- Rechts naast de titel: "AdSweet zet je advertenties klaar zoals een goed bureau dat zou doen, kijkt elke nacht wat beter kan en toont zwart op wit wat het opbrengt. Jij keurt goed."
+- Knoppen: "Gratis starten" (primair, met pijltje) en "Doe de gratis audit" (tekstknop)
+- De hero is precies één scherm hoog. De sculptuur staat in de band tussen navigatie en tekst. Op de gsm staat de staande sculptuur boven de tekst en valt de hint weg.
+- De licht/nacht-schakelaar wisselt de hele site. Standaard volgt de site het toestel. Bij het wisselen wisselt ook het sculptuurbeeld, met de korte overgang uit de motor.
+
+2.3 Home, onder de hero
+1. Zo werkt het. Drie genummerde rijen met een haarlijn ertussen, rechts telkens een echt app-scherm in een sober gsm-kader in ink:
+   - 01 "Je geeft je website op." AdSweet leest je zaak, je producten, je prijzen en je stijl. Jij kijkt het na. (scherm: Sarah, stap 3 van de onboarding)
+   - 02 "AdSweet maakt je strategie en je eerste campagne." Vijf advertenties volgens het playbook. Jij zet er je beelden in of laat ze maken. (scherm: Lisa, eerste campagne)
+   - 03 "Elke ochtend zie je wat werkt." Een korte lijst met wat je best doet, en een knop om het meteen te doen. (scherm: Lisa, Vandaag)
+2. Het Raakpunt uitgelegd. Een kleine, stilstaande versie van de sculptuur met drie dunne aanwijslijnen: bij de linkerstreng "Iedereen op Facebook en Instagram in je regio", bij de parel "De advertentie die raak is", bij de rechterstreng "Jouw klanten". Daaronder: "AdSweet zoekt elke nacht het punt waar je budget het meest oplevert."
+3. Wat een bureau doet, zonder bureau. Drie kolommen met haarlijnen: "Zelf in Ads Manager", "Een bureau", "AdSweet". Rijen:
+   - Wie zet je campagnes op: jij / het bureau / AdSweet, en jij keurt goed
+   - Wie kijkt elke dag: jij, als je tijd hebt / je accountmanager / AdSweet, elke nacht
+   - Wat moet je weten: veel / weinig / weinig, alles wordt uitgelegd
+   - Wat kost het: je tijd / al snel €1.000 per maand / vanaf €99 per maand excl. btw
+   - Hoe lang zit je vast: niet / vaak een jaar of langer / maandelijks opzegbaar
+4. Het playbook. Titel "De sweet spot vind je niet op gevoel." Vijf korte rijen, elk met één zin waarom (teksten uit C2):
+   - 1 campagne, 1 ad set, 5 advertenties
+   - Breed adverteren, zonder interesses
+   - Budget op campagneniveau
+   - Nieuwe advertenties in een nieuwe ad set
+   - De extra's van Meta uit
+5. Jij beslist. Een grote actiekaart als voorbeeld (Lisa, advertentie A4 uit C3) met het label "Voorbeeld" en de tekst "Kijk, we zien dat deze ad het niet goed doet. Misschien moet je hem stilaan afzetten." Ernaast: "AdSweet zet nooit zelf een advertentie af. Het zegt wat het ziet, jij klikt. Wil je dat AdSweet kleine dingen zelf doet, zoals het budget van een winnaar verhogen? Dan bepaal jij de grenzen. Alles komt in een logboek en kan terug."
+6. Voor wie. Vier rustige rijen met een klein icoon en het gekleurde bolletje uit 1.2: Webshops, Dienstverleners die aanvragen willen, Lokale zaken, Zelfstandigen. Eén zin per rij.
+7. Gratis audit. "Hoe staan je advertenties er nu voor?" en "Koppel je advertentieaccount en krijg binnen 2 minuten een score en 3 dingen die je vandaag kan verbeteren." Knop "Doe de gratis audit".
+8. Prijzen in het kort: Starter €99, Pro €195 (label "Aanbevolen"), Scale €299, Agency vanaf €499, met "per maand, excl. btw" en een link naar de prijzenpagina.
+9. Veelgestelde vragen: accordeon met de vragen uit C4.
+10. Slot, altijd in nacht (#111110), ook in het lichte thema: titel "Morgenochtend zie je wat je advertenties opbrachten.", knop "Gratis starten", eronder klein "30 dagen gratis. Maandelijks opzegbaar."
+11. Footer.
+
+2.4 Hoe het werkt
+Eén lange pagina in dezelfde rust, met deze secties: De onboarding in ongeveer 10 minuten · Je strategie en je eerste campagne · Advertenties maken (beeld erin, de rest wordt voorgesteld, preview per plaatsing, de extra's van Meta uit) · Elke nacht een audit · Winnaars en verliezers (met de rekenvoorbeelden van Lisa en Tom uit C3, gelabeld als voorbeeld) · Autopilot binnen jouw grenzen, met logboek · Parel, je assistent · Leren terwijl je werkt (Academy en uitleg bij elk woord). Elke sectie toont het echte app-scherm.
+
+2.5 Prijzen
+- Titel "Bureauresultaten zonder bureaufactuur." Daaronder: "30 dagen gratis. Maandelijks opzegbaar. Geen percentage van je advertentiebudget."
+- Schakelaar "Maandelijks / Jaarlijks · 2 maanden gratis" als sobere pil met haarlijn. Jaarlijks toont het bedrag per maand en eronder het jaarbedrag (C1).
+- Founding members als smalle balk met haarlijn: "Founding member: de eerste 50 klanten krijgen 30% korting, zolang ze klant blijven. Nog [x] plaatsen." Geen aftelklok.
+- Vier kolommen met haarlijnen ertussen, geen losse kaarten. Pro valt op door omkering: een ink-vlak met tekst in ground en een klein label "AANBEVOLEN" in hoofdletters. Bedragen groot in 500 met tabular-nums, "/maand excl. btw" klein in ink-muted.
+- Per kolom: voor wie, prijs, ad accounts, credits, gebruikers, vijf belangrijkste functies, knop. Starter, Pro en Scale: "Start 30 dagen gratis". Agency: "Plan een gesprek".
+- Daaronder de volledige vergelijkingstabel uit C1, met haarlijnen en vinkjes in ink (geen groen).
+- De Agency-staffel als aparte tabel: ad accounts, prijs per maand, prijs per account.
+- "Wat voor elk plan geldt" als korte lijst (C1).
+- Veelgestelde vragen over prijzen (C4).
+- Blok Done With You: "Liever samen met een expert? Fully Booked werkt met je samen in het Done With You-model: zij zetten je advertenties samen met jou op en volgen ze mee op." Knop "Neem contact op met Fully Booked" naar het formulier van 2.9.
+
+2.6 Gratis audit (de ingang van de website)
+1. Landing: titel "Gratis audit van je Meta-advertenties." Tekst: "Koppel je advertentieaccount. Binnen 2 minuten krijg je een score en 3 concrete verbeteringen. We wijzigen niets aan je account." Knop "Doorgaan met Facebook", klein eronder "We vragen alleen leesrechten."
+2. Tussenpagina voor het venster van Meta (zie 3.3).
+3. Kies je advertentieaccount, als er meer dan één is.
+4. Twee korte vragen: "Wat wil je vooral?" (verkopen, aanvragen, iets anders). Bij verkopen: gemiddelde orderwaarde en brutomarge. Bij aanvragen: wat een aanvraag mag kosten. Klein: "Een schatting is genoeg."
+5. Analyse met de lader en zinnen die elkaar opvolgen: "We bekijken je campagnes." "We tellen je ad sets en advertenties." "We leggen alles naast het playbook."
+6. Resultaat, met het label "Voorbeeld" in het prototype:
+   - Een score op 100, groot (voorbeeld: 48). De weging komt van het playbook: [weging score].
+   - Drie verbeteringen als actiekaarten, elk met wat we zagen, waarom het telt en wat je doet:
+     - "Je gebruikt interesses in 4 van je 6 ad sets." (breed adverteren)
+     - "Je budget staat verdeeld over 6 ad sets." (budget op campagneniveau)
+     - "2 advertenties gaven elk meer dan 3 keer je maximale kost per verkoop uit, zonder verkoop." (afzetten)
+   - Daaronder: "En nog 4 andere punten." in ink-muted.
+   - Knoppen: "Pas ze toe met AdSweet: 30 dagen gratis" en "Stuur me het rapport" (e-mailveld).
+
+2.7 Academy (publiek)
+- Overzicht van de trajecten (lijst in 7.1) als genummerde rijen. De eerste les van elk traject en de hele begrippenlijst zijn open. De rest: "Log in om verder te leren."
+- De lespagina heeft dezelfde opbouw als in de app (7.1), zonder het blok "In jouw account".
+
+2.8 Partners
+- Titel: "Bouw je websites of webshops, maar doe je geen advertenties?"
+- Voor wie: webbureaus, bouwers van Shopify-, WooCommerce- en Odoo-shops, freelancers en creators.
+- Wat het oplevert: "30% van wat je klant betaalt, elke maand, 12 maanden lang." Rekenvoorbeeld met het label "Voorbeeld": een klant op Pro betaalt €195 per maand, jij krijgt €58,50 per maand, of €702 over 12 maanden.
+- Formulier: naam, bedrijf, e-mail, website, wat je doet. Link "Inloggen als partner" naar het partnerportaal (7.7).
+
+2.9 Done With You
+- Korte pagina: "Liever niet alleen? Fully Booked zet je advertenties samen met jou op en volgt ze mee op."
+- Formulier: naam, bedrijf, e-mail, telefoon, website, maandelijks advertentiebudget (keuzes), bericht. Onder de knop: "Je gegevens gaan naar Fully Booked, zodat zij je kunnen contacteren."
+
+2.10 Juridische pagina's
+- Privacybeleid, Algemene voorwaarden, Cookiebeleid, Verwerkersovereenkomst en "Je gegevens verwijderen". De laatste legt uit hoe je je gegevens laat verwijderen (via Instellingen of per mail naar [privacy-adres]). Die pagina is nodig voor de goedkeuring van de app bij Meta.
+- Opbouw: titel, datum van de laatste wijziging, inhoudstafel links, tekst in een kolom van 680px. Inhoud als [plaatshouder] met de juiste koppen.
+- Cookiemelding: sober paneel onderaan met "Alles aanvaarden", "Alleen noodzakelijke" en "Zelf kiezen".
+
+2.11 Andere pagina's
+- 404: "Deze pagina bestaat niet." met links naar Home en Hulp, en de kleine stilstaande sculptuur.
+- Onderhoud: "AdSweet is even in onderhoud. We zijn zo terug."
+- Eén sjabloon voor zoekpagina's (Later), bijvoorbeeld "Adverteren op Meta zonder Business Suite", in de opbouw van Hoe het werkt.
+
+
+=====================================================================
+GOLF 3. INLOGGEN, ONBOARDING EN HET ABONNEMENT
+=====================================================================
+
+3.1 Inloggen en account maken
+- Eén pagina in twee kolommen: links de kleine stilstaande sculptuur op ground, rechts het formulier. Op de gsm alleen het formulier met de sculptuur klein bovenaan.
+- Account maken (via "Gratis starten"): titel "Maak je account.", knop "Doorgaan met Facebook", eronder "Met je Facebook-account log je in en koppel je straks je advertenties." en een vinkje "Ik ga akkoord met de voorwaarden en het privacybeleid."
+- Inloggen: titel "Welkom terug.", knop "Doorgaan met Facebook", en de tekstknop "Inloggen met e-mail" voor teamleden. E-mail werkt met een link per mail: "Check je mailbox. De link werkt 15 minuten."
+- Eén Facebook-account per klant. Binnen dat account kiest de klant zijn advertentieaccounts en pagina's.
+
+3.2 Testfase
+Een variant van dezelfde pagina, aan te zetten in het demopaneel. Zolang Meta de app niet goedgekeurd heeft, kan alleen wie uitgenodigd is inloggen.
+- Titel "AdSweet is nog in testfase."
+- Tekst: "We laten nieuwe bedrijven in kleine groepen toe. Laat je gegevens na en we laten je weten wanneer je account klaarstaat."
+- Formulier: naam, e-mail, website. Bevestiging: "Je staat op de lijst."
+
+3.3 Het venster van Meta
+- Bij elke koppeling opent Meta zijn eigen venster. Bootst dat niet na. Toon een neutrale tussenpagina: "Meta opent nu een venster. Daarin kies je je bedrijf, je advertentieaccount, je Facebook-pagina, je Instagram-account en je pixel." met drie genummerde stappen in tekst, en daarna de terugkeer in AdSweet.
+- Fouten: geen toestemming gegeven ("Zonder toegang tot je advertentieaccount kunnen we niets voor je klaarzetten." + "Opnieuw proberen"), geen advertentieaccount ("Je hebt nog geen advertentieaccount bij Meta. Zo maak je er een." met link naar de Academy), koppeling verlopen ("Je koppeling met Meta is verlopen. Koppel opnieuw, het duurt een halve minuut.").
+
+3.4 De onboarding-wizard
+Doel: in ongeveer 10 minuten van nieuw account naar een eerste campagne, of naar de eerste toegepaste aanbeveling voor wie al adverteert.
+- Opbouw: links een verticale stappenlijst (op de gsm een balk bovenaan) met "± 8 minuten over". Rechts één stap per scherm met "Vorige" en de primaire knop. Alles wordt bewaard: "Je kan stoppen en later verdergaan."
+- Demo: Sarah (C3) doorloopt de wizard. Toon ook de varianten voor een webshop (cijfers van Lisa) en voor iemand die al campagnes heeft.
+
+Stap 1 · Welkom
+- "Welkom, Sarah." en "In ongeveer 8 minuten staat je eerste campagne klaar."
+- Veld "Hoe mogen we je noemen?", voorgevuld met de voornaam uit Facebook. Taal van de app (NL, FR, EN).
+
+Stap 2 · Je website
+- Groot veld "Je website", met als voorbeeld jouwzaak.be. Knop "Lees mijn website".
+- Tekstknop "Geen website? Vul het zelf in." opent een formulier: naam van je zaak, wat je verkoopt, prijzen, voor wie, regio, je stijl in een paar woorden, logo, beelden.
+- Tijdens het lezen: de lader, en de dingen die AdSweet vindt verschijnen één voor één: naam, logo, kleuren als stalen, wat je verkoopt met prijzen, je toon in drie woorden met een voorbeeldzin, beelden in een raster, contactgegevens en regio.
+- Tip: "Hoe beter je website, hoe beter je eerste voorstel."
+
+Stap 3 · Je bedrijfsprofiel
+- Alles wat gevonden is, als bewerkbare kaarten met "Klopt" of "Aanpassen" per kaart. Beelden kan je weghalen of toevoegen.
+- Extra velden: "Wat maakt jou anders?", "Wie zijn je beste klanten?", "Welke concurrenten ken je?" (optioneel, gebruikt in Concurrenten vanaf Pro).
+
+Stap 4 · Wat wil je bereiken?
+- Vier keuzekaarten:
+  - "Online verkopen" (webshop)
+  - "Aanvragen of afspraken" (formulier, offerte, afspraak)
+  - "Meer mensen in je zaak" (lokaal bedrijf). Daarna nog één keuze: "afspraken of aanvragen" (werkt zoals aanvragen) of "meer bekendheid in de buurt" (werkt zoals bereik).
+  - "Iets anders: meer volgers, bereik of een evenement" (geen verkoopdoel)
+- Waar: gemeente met straal, provincie of land; landen; talen; leeftijd (optioneel, standaard 18 tot 65+). Een lijst, geen nagemaakte kaart.
+- Tip: "We adverteren breed. Meta vindt je klanten zelf binnen de regio die jij kiest. Interesses maken je doelgroep kleiner zonder dat het beter werkt."
+- Vraag: "Gaan je advertenties over huisvesting, werk of krediet?" Bij ja: uitleg dat Meta dan minder keuzes toelaat in leeftijd en regio.
+- Klein onderaan: "Politieke of maatschappelijke advertenties kan je in de EU niet via Meta plaatsen."
+
+Stap 5 · Je cijfers
+- Webshop: gemiddelde orderwaarde, brutomarge (gemiddeld, of per product in een tabel met de producten van stap 2) en optioneel een eigen doel-ROAS. Een kaart rekent live mee, in gewone taal (voorbeeld Lisa): "Bij 40% marge verdien je je advertentie terug vanaf een ROAS van 2,5. Elke euro advertentie moet dus €2,50 omzet opbrengen. Een verkoop mag je hoogstens €23,20 aan advertenties kosten."
+- Aanvragen: "Wat mag een aanvraag je kosten?" met de hulp "Help me rekenen": klantwaarde, marge en slaagkans. Voorbeeld Sarah: klantwaarde €360, marge 50%, 1 op 4 wordt klant: "Tot €45 per aanvraag verdien je je advertentie terug." Sarah vult zelf €15 in als doel.
+- Geen verkoopdoel: deze stap valt weg, met de zin "Voor deze campagne meten we bereik en volgers. Winnaars en verliezers zijn er dan niet."
+- Tip: "Je kan dit later altijd aanpassen in Instellingen. Je drempels passen dan meteen mee."
+
+Stap 6 · Koppelen
+- Vier rijen met status: Facebook-pagina, Instagram-account, advertentieaccount, pixel of dataset (de pixel alleen bij een webshop of een aanvraagformulier op je site). Knop "Koppel met Facebook", dan de tussenpagina van 3.3.
+- Terug in AdSweet kies je per rij uit wat Meta doorgaf: advertentieaccount (naam, nummer, munteenheid, status), pagina, Instagram, pixel.
+- Controles met statusbadge: munteenheid euro, een betaalmethode in je advertentieaccount, en "Je pixel meet verkopen (laatste 7 dagen)". Meet de pixel niet: "Je kan verder, maar zonder pixel ziet niemand welke advertentie verkoopt. Dan geef je geld uit zonder te weten waaraan." met een les en de link naar Done With You.
+- Wie betaalt en wie heeft er baat bij: "Dit vraagt de EU bij elke advertentie." Voorgevuld met de naam van de zaak.
+- Ingeklapt, "Meer koppelen (kan ook later)": Google Ads, Shopify, Google Analytics, Google Drive, Dropbox, Canva, Figma. Elk als tekst met een neutraal icoon.
+
+Stap 7 · Je bestaande advertenties (alleen als er al campagnes zijn)
+- Dezelfde audit als 2.6, met score en 3 verbeteringen, maar nu met de knop om er meteen één toe te passen. Na de klik: "Gedaan. Je eerste verbetering staat live." Dit is het moment waarop de klant AdSweet ziet werken.
+
+Stap 8 · Je strategie
+- "Sarah, zo zouden wij het aanpakken." Een rustige pagina zoals een document:
+  - Doel, regio, taal, leeftijd
+  - Budget: voorstel met het minimum erbij
+  - Structuur: 1 campagne, 1 ad set, 5 advertenties (3 foto's, 2 video's), als klein schema
+  - Funnelverdeling: voorstel als tip, aanpasbaar (voorbeeld: 2 top, 2 middle, 1 bottom; [standaardverdeling PJ])
+  - Welke beelden je nodig hebt: vijf korte briefings, één per advertentie, met de fase, wat erop staat, waarom, en een voorbeeld van de eerste zin
+  - Wat je de eerste twee weken mag verwachten: uitleg over de leerfase
+  - Momenten in de komende drie maanden waarvoor een aparte campagne loont (feestdagen, solden in januari)
+- Knoppen: "Ziet er goed uit", "Pas aan", "Vraag het aan Parel".
+
+Stap 9 · Je eerste campagne
+- Vijf vakken voor advertenties, voorgevuld met de beste beelden van de website, gekoppeld aan de briefings. Per vak: het beeld, de funnelfase, de voorgestelde tekst en kop, de call-to-action.
+- Per vak kan je vervangen: uploaden, kiezen uit je beelden, of "Maak met AI" (vanaf Pro, met de kost in credits).
+- Een video-vak zonder video: "Nog geen video? Film iets met je gsm. Zo doe je dat." (les) of "Laat een script schrijven" (vanaf Pro).
+- Budget met het minimum. Onder het minimum: het waarschuwingsblok uit C2.
+- Preview per plaatsing, en een regel "De extra's van Meta staan uit." met uitleg.
+- Knop "Keur goed".
+
+Stap 10 · Je plan en je proefperiode
+- De plannen Starter, Pro en Scale naast elkaar, Pro voorgeselecteerd met "Aanbevolen". Een link "Meer dan 3 advertentieaccounts? Bekijk Agency."
+- Maandelijks of jaarlijks. Een veld "Kortingscode" (founding members, partners, doorverwijzing).
+- Samenvatting, voorbeeld Pro maandelijks voor een Belgische klant: "Vandaag betaal je niets. Op [datum + 30 dagen] betaal je €195 + €40,95 btw = €235,95 per maand, tenzij je voordien stopt." Met een geldig btw-nummer uit een ander EU-land: "Btw verlegd."
+- Velden voor facturatie: bedrijfsnaam, ondernemingsnummer of btw-nummer, adres, e-mail voor facturen. Klein: "Facturen voor Belgische bedrijven komen via Peppol."
+- Knop "Ga naar de betaalpagina". Dan de neutrale tussenpagina (A2) en terug met "Je proefperiode loopt. Je hebt 30 dagen." AI-content in de proefperiode: hoogstens 50 credits.
+
+Stap 11 · Live
+- Knop "Zet mijn campagne live". Een lijst die zich afvinkt: campagne gemaakt, ad set gemaakt, 5 advertenties gemaakt, extra's van Meta uitgezet, namen en UTM's ingesteld.
+- Daarna: "Je campagne is verstuurd. Meta keurt je advertenties eerst goed, daarna gaan ze lopen." en "De eerste dagen zit je campagne in de leerfase. Resultaten schommelen dan, dat is normaal. Morgenochtend om 06:00 staat je eerste overzicht klaar."
+- Voor de eerste 50 klanten een kaart: "Je bent een van onze eerste 50 klanten. Zullen we samen 20 minuten je campagne overlopen?" met "Kies een moment".
+- Knop "Naar Vandaag".
+
+3.5 Uitnodiging van een teamlid
+- Mail met een knop, landingspagina "Lisa nodigt je uit voor Atelier Noor op AdSweet." met "Doorgaan met Facebook" of "Doorgaan met e-mail". Daarna meteen Vandaag, met de rechten van de rol.
+
+
+=====================================================================
+GOLF 4. DE APP: HET DAGELIJKSE WERK
+=====================================================================
+
+4.1 De buitenkant van de app
+- Computer: zijbalk van 248px in surface met een haarlijn. Bovenaan het woordmerk en de accountkiezer (naam van het advertentieaccount en het kanaal, bij Scale en Agency een lijst met zoekveld en "Alle accounts"). Dan: Vandaag, Campagnes, Advertenties, Studio, Concurrenten, Inzichten, Autopilot en regels, Academy. Onderaan: Hulp, Instellingen, en het gebruikersmenu (naam, plan, creditsmeter, taal, thema, uitloggen). Het actieve item in ink met tekst in ground.
+- Bovenbalk: paginatitel, periodekiezer waar het past (Gisteren, Laatste 7 dagen, Laatste 30 dagen, Sinds de start, Zelf kiezen), de bel voor meldingen en de primaire knop "Nieuwe campagne".
+- Gsm: onderaan vijf knoppen: Vandaag, Campagnes, Nieuw (+), Inzichten, Meer. Parel staat net boven die balk.
+- Proefperiode: een dunne balk bovenaan, "Nog 8 dagen gratis. Je eerste betaling is op 16 december." met "Plan beheren". Vanaf dag 27 in Let op.
+- Parel staat rechtsonder op elk scherm van de app (Golf 6).
+
+4.2 Vandaag
+Het scherm waar iedereen elke dag begint. Het moet in 30 seconden duidelijk zijn wat goed loopt, wat niet, en wat je best doet. Ontwerp het eerst voor de gsm.
+
+Opbouw, voorbeeld Lisa (C3):
+1. "Goeiemorgen, Lisa" en één zin: "Je campagne bracht de afgelopen 7 dagen 11 verkopen op. Eén advertentie houdt je tegen."
+2. Statusregel: "1 actie nodig · 2 keer let op".
+3. Het Sweetmoment, als er sinds het vorige bezoek nieuwe resultaten zijn: "Sweet! 3 nieuwe verkopen sinds gisteren."
+4. De EuroTegel over de laatste 7 dagen: €280 uitgegeven → 11 verkopen → €638 omzet → ROAS 2,28, met daarnaast "Je break-even is 2,5" en de badge Let op.
+5. "Wat je vandaag best doet": de actiekaarten van de dagelijkse audit, de belangrijkste eerst (inhoud in C3). Elke kaart heeft de 1-klikknop. Na de klik: een melding met "Ongedaan maken" en de wijziging in het logboek.
+6. "Wat goed loopt" en "Wat minder loopt": twee korte lijsten met advertentiekaarten en hun label.
+7. Een tip uit het playbook die past bij wat er vandaag speelt.
+8. Onderaan: "De volgende audit is morgen om 06:00."
+
+Varianten:
+- Tom (aanvragen, Starter): de EuroTegel met kost per aanvraag tegenover zijn doel van €20.
+- Bram (Scale, drie accounts): eerst een blok "Al je accounts" met per account uitgegeven, resultaat, ROAS tegenover break-even en een statusbadge, daarna Vandaag van het gekozen account.
+- Dag 1 na de launch: "Je advertenties lopen sinds gisteren. Morgen weten we meer." met uitleg over de leerfase en de lijst wat Meta nog goedkeurt.
+- Campagne zonder verkoopdoel: alleen bereik, vertoningen en volgers, met het label Enkel rapportage.
+- Geen acties vandaag: "Alles loopt zoals het moet. Niets te doen vandaag." in ink-muted.
+
+4.3 Meldingen
+- De bel opent een lijst. Een volledige pagina toont alles, met filters.
+- Soorten (inhoud volgens C2): kosten plots veel hoger, advertentie afgekeurd door Meta, betaalprobleem bij Meta, pixel of verkopen die niet meer gemeten worden, wijziging buiten de app, creative-vermoeidheid, budget onder het minimum, koppeling verlopen, credits bijna op, proefperiode bijna om.
+- Elke melding: statusbadge, wat er gebeurde, wat het betekent, wat je doet, en een knop. Voorbeeld Tom: "Meta kon je laatste betaling niet afschrijven. Als dat zo blijft, stoppen je advertenties." met "Zo los je het op".
+- Meldingen gaan naar de app en per mail. Er is geen WhatsApp.
+
+4.4 Logboek
+- Een tijdlijn van elke wijziging: wie (Jij, een teamlid, AdSweet-autopilot, of "Buiten AdSweet" voor wijzigingen in Ads Manager), wat, van wat naar wat, wanneer. Per regel "Terugdraaien" waar dat kan.
+- Filters: wie, campagne, soort wijziging.
+- Voorbeeldregels van Lisa in C3.
+
+4.5 Wijzigingen buiten de app
+- AdSweet vergelijkt elke nacht de live instellingen met wat het verwacht. Een wijziging in Ads Manager krijgt een markering in de campagne, een regel in het logboek en, als ze afwijkt van het playbook, het waarschuwingsblok.
+- Voorbeeld Lisa: "Bij 'Zo gieten we ze' werd muziek aangezet in Ads Manager, op 5 december." met "Pas op, dit raden we niet aan" en de knoppen "Terug uitzetten" en "Zo laten".
+
+4.6 Weekrapport
+- Elke maandag. In de app onder Inzichten en per mail. Starter krijgt alleen dit rapport, Pro en hoger hebben daarnaast het live dashboard.
+- Opbouw: één zin samenvatting, de EuroTegel van de week tegenover de week ervoor, beste en slechtste advertentie, wat AdSweet deze week deed of voorstelde, één tip voor volgende week. Voorbeeld Tom in C3.
+
+
+=====================================================================
+GOLF 5. DE APP: LAUNCHEN EN MAKEN
+=====================================================================
+
+5.1 Campagnes
+- Lijst met per campagne: naam, status (Actief, Leerfase, Gepland, Gepauzeerd, Afgelopen), soort (Vaste campagne, Speciaal moment, Zonder verkoopdoel), kanaal, budget per dag, resultaat tegenover het doel, statusbadge.
+- Campagnes die buiten AdSweet gemaakt zijn, staan erbij met "Buiten AdSweet gemaakt" en de punten waar ze van het playbook afwijken.
+- Knoppen: "Nieuwe campagne", "Nieuwe advertenties toevoegen", "Bulk launch".
+- Lege staat: "Je hebt nog geen campagnes. Je eerste staat klaar in een paar minuten." met "Start je eerste campagne".
+
+5.2 Campagnedetail
+- Kop: naam, status, soort, budget per dag, de EuroTegel van deze campagne.
+- De structuur als boom: campagne → ad sets → advertenties. Per ad set de startdatum en of hij in de leerfase zit. Bestaande ad sets hebben een klein slotje met de uitleg "Lopende ad sets raken we niet aan."
+- De advertenties als kaarten met label, fase en cijfers. De funnelbalk toont welke fase ontbreekt.
+- Budget: het huidige budget en, als er een winnaar is, het voorstel om te schalen ("Verhoog van €40 naar €48 per dag", [schaalstappen PJ]).
+- Instellingen: doel, regio, talen, leeftijd, plaatsingen ([plaatsingen PJ], voorbeeld: automatisch), de extra's van Meta (alle uit), wie betaalt en wie er baat bij heeft.
+- Tabs: Overzicht, Advertenties, Instellingen, Logboek.
+- Knoppen: "Nieuwe advertenties toevoegen", "Preview-link delen", "Pauzeren".
+
+5.3 Advertentiedetail (zijpaneel)
+- Preview per plaatsing (Feed, Stories, Reels).
+- Tekst, kop en beschrijving met de varianten, de call-to-action, de funnelfase. Alles bewerkbaar.
+- Cijfers: uitgegeven, resultaten, kost per resultaat, ROAS bij een webshop, CTR, kost per klik, frequentie.
+- "Waarom dit label?": de rekensom in gewone taal. Voorbeeld A4: "Je maximale kost per verkoop is €23,20. Drie keer dat is €69,60. Deze advertentie gaf €72 uit zonder verkoop."
+- Score tegenover je eigen gemiddelde (V1).
+- Knoppen: "Afzetten" (met bevestiging), "Dupliceren in een nieuwe ad set" (de bestaande reacties en likes blijven behouden, V1).
+
+5.4 De campagnewizard (Meta)
+Eén aanbevolen pad, alles voorgevuld vanuit het bedrijfsprofiel. Links de stappen, rechts een samenvatting die meeschuift. Parel kan elke stap invullen ("Laat Parel dit voorstellen").
+
+1. Wat wil je doen? Strategieën als keuzekaarten, uit het playbook: Vaste campagne, Solden, Black Friday, Feestdagen, Evenement of opening, Nieuw product, Catalogus (Later). Bij een speciaal moment: begin- en einddatum, en de uitleg "Dit wordt een aparte campagne naast je vaste."
+2. Doel: verkopen, aanvragen, volgers, bereik of evenement, voorgevuld. Bij volgers, bereik of evenement: "Hier zijn geen winnaars of verliezers. We tonen je de resultaten."
+3. Kanaal: Meta (Facebook en Instagram) of Google Ads (zie 5.10).
+4. Structuur: het schema 1 campagne, 1 ad set, 5 advertenties. Meer of minder kan, met het waarschuwingsblok.
+5. Doelgroep: regio, landen, talen, leeftijd. Er is geen veld voor interesses. Een ingeklapte regel "Waarom geen interesses?" legt het uit.
+6. Budget: voorstel per dag, minimum €10 en €30 voor een webshop. Budget op campagneniveau staat aan. "Budget per ad set" is een schakelaar met het waarschuwingsblok.
+7. Advertenties: zie 5.6.
+8. Namen en tracking: de naamconventie en de UTM's, voorgevuld en bewerkbaar, met een voorbeeld (C3).
+9. Nakijken en live zetten: samenvatting, alle afwijkingen van het playbook op een rij met "Toch doorgaan" per afwijking, "Preview-link delen" (V1), en de knop "Zet live". Daarna de lijst die zich afvinkt, zoals in 3.4 stap 11.
+
+5.5 Nieuwe advertenties toevoegen
+- Vanuit een campagne of vanuit een actiekaart. Kies de campagne, voeg beelden of video's toe, AdSweet maakt een nieuwe ad set in dezelfde campagne.
+- Een keuze "In een bestaande ad set zetten" bestaat, met het waarschuwingsblok.
+- Tip: "Zet nieuwe advertenties in een nieuwe ad set. Zo blijven je lopende ad sets uit de leerfase en kunnen je winnaars doorgroeien."
+- Frequentie: AdSweet stelt om de [x weken, PJ] een nieuwe ad set voor (voorbeeld: elke 2 weken).
+
+5.6 Een advertentie maken
+1. Uploaden: slepen, kiezen van je computer, of uit Google Drive, Dropbox, Canva of Figma (als tekstknoppen), of uit je beelden in AdSweet, of "Maak met AI" (vanaf Pro).
+2. Controle: formaat, lengte, kwaliteit. AdSweet maakt de juiste uitsnede per plaatsing (4:5 of 1:1 voor de feed, 9:16 voor stories en reels) en toont ze. Een te klein beeld of een te lange video krijgt een duidelijke melding met wat je doet.
+3. Funnelfase: AdSweet stelt de fase voor op basis van het beeld. Je kan wisselen. De funnelbalk toont wat nog ontbreekt.
+4. Teksten: AdSweet bekijkt het beeld of de video en combineert dat met je profiel. Het schrijft de primaire tekst, de kop en de beschrijving, met twee of drie varianten. Je kan alles aanpassen of "Schrijf opnieuw" vragen.
+5. Call-to-action: automatisch volgens doel en fase (Nu kopen, Meer informatie, Offerte aanvragen, Afspraak maken). Aanpasbaar.
+6. Extra's van Meta: een ingeklapte lijst "Alle extra's van Meta staan uit": muziek, tekst op je beeld, beelduitbreiding, automatische varianten. Een extra aanzetten mag, met het waarschuwingsblok. Ook in bulk aan of uit te zetten (V1).
+7. Preview per plaatsing, naast elkaar op de computer, als swipe op de gsm.
+8. Klaar. Het voorstel is meteen goed om live te zetten. Aanpassen mag, moet niet.
+
+5.7 Bulk launch
+- Veel beelden of video's tegelijk opladen. AdSweet verdeelt ze over nieuwe ad sets van vijf, schrijft de teksten en toont alles in één bewerkbare tabel: beeld, fase, tekst, kop, call-to-action, ad set. Daarna in één keer live.
+- Agency: dezelfde flow over meerdere advertentieaccounts heen.
+- Later: importeren uit Google Sheets (een sjabloon downloaden, invullen, opladen).
+
+5.8 Advertenties (de bibliotheek)
+- Tab Advertenties: alle advertenties over alle campagnes, met filters op label, fase, soort (foto, video) en campagne.
+- Tab Beelden: alles wat je opliet, wat AdSweet van je website haalde en wat Studio maakte. Per beeld: waar het gebruikt wordt, en hoe het het doet.
+- Tab Organische posts (Later): je beste posts op Facebook en Instagram, met "Zet dit om in een advertentie".
+
+5.9 Testgrid (V1)
+- Test koppen, beelden, regio's of leeftijden, en plaatsingen in een nieuwe ad set. Kies wat je test, AdSweet maakt de varianten, en toont na afloop welke wint. Interesses kan je niet testen.
+
+5.10 Google Ads
+- Google Ads koppel je in Instellingen, en de cijfers verschijnen in Inzichten.
+- De wizard heeft een Google-variant met dezelfde stappen, maar vul de inhoud niet zelf in. Campagnetypes, structuur, budgetten en drempels komen uit het Google-playbook van PJ, dat nog niet klaar is. Zet in elke stap een duidelijke plaatshouder "[Google-playbook PJ]".
+
+5.11 Catalogus-advertenties (Later)
+- Voor webshops met een gekoppelde Shopify-catalogus: kies producten, AdSweet maakt advertenties met een vaste merkstijl per product.
+
+5.12 Preview-link (V1)
+- Een publieke pagina om advertenties goed te keuren zonder account (bijvoorbeeld voor een vennoot): de previews, en per advertentie "Goedgekeurd" of "Opmerking". De maker ziet het resultaat in de campagne.
+
+
+=====================================================================
+GOLF 6. DE APP: SLIMMER WERKEN
+=====================================================================
+
+6.1 Parel, de assistent
+- Klik op Parel: een paneel schuift open (op de computer 420px breed rechts, op de gsm volledig scherm). Bovenaan "Parel" en de naam van het account. Onderaan een tekstveld met een microfoonknop voor spraak.
+- Parel kent het bedrijfsprofiel, de cijfers, de doelen, de campagnes en het playbook.
+- Startvoorstellen als pillen: "Hoe gaat het deze week?", "Maak een campagne voor de feestdagen", "Waarom is mijn ROAS gedaald?", "Welke advertentie moet ik maken?"
+- Wat Parel kan:
+  1. Vragen over je account beantwoorden in gewone taal, met de cijfers en eventueel een klein grafiekje.
+  2. Een volledige campagne uitschrijven en klaarzetten: doelgroep, regio, looptijd, budget, aantal advertenties, funnelverdeling, hoe vaak er nieuwe advertenties bij moeten, en welke beelden of video's je moet maken. Dat verschijnt als plankaart met de knoppen "Zet klaar in de wizard", "Pas aan" en, vanaf Pro, "Maak de beelden met AI".
+  3. Iets wijzigen op jouw vraag ("Zet het budget op €45"). Parel voert nooit iets uit zonder bevestiging: het toont een kaart met wat er verandert en de knop "Doe het". Afwijkingen van het playbook krijgen het waarschuwingsblok.
+  4. Uitleggen wat iets betekent, met een link naar de Academy.
+- Wat Parel niet doet: zelf advertenties afzetten, iets launchen zonder klik, cijfers verzinnen. Weet Parel iets niet: "Dat kan ik niet zien in je account. Wil je dat ik het aan iemand van ons vraag?"
+- Voorbeeldgesprek met Lisa in C3.
+
+6.2 Studio (AI-content, vanaf Pro)
+- Bovenaan de creditsmeter: "Nog 18 van je 50 credits in je proefperiode" (Lisa).
+- Maken: beelden in alle formaten van Meta, teksten, hooks en invalshoeken (ook uit klantreviews die je plakt of oplaadt), scripts voor video's, en later beelden omzetten naar een korte video.
+- Elke opdracht vertrekt van je profiel, je product en de fase die ontbreekt. Bij elke knop staat de kost in credits. Voorbeeldkosten (plaatshouders): AI-beeld 10 credits, een set teksten 1 credit, een set hooks 2 credits, een videoscript 3 credits.
+- Resultaten in een raster, met "Gebruik in een advertentie", "Nog eens" en "Bewaar".
+- Starter: het gedimde paneel "Dit zit in Pro." met de zin "Met Pro maakt AdSweet zelf beelden, teksten en videoscripts voor de fase die je mist."
+- Credits op: "Je credits van deze maand zijn op. Ze vullen aan op [datum]." met "Bekijk Scale".
+- Later: "Prestatievoorspelling vóór je live gaat", een inschatting per advertentie.
+
+6.3 Concurrenten (vanaf Pro)
+- Voeg concurrenten toe met hun naam of Facebook-pagina. AdSweet toont hun lopende advertenties uit de openbare advertentiebibliotheek van Meta. In het prototype: neutrale kaders met verzonnen namen als "Concurrent A", geen echte merken.
+- Per concurrent: hoeveel advertenties, welke soorten, hoe lang ze al lopen (wat lang loopt, werkt meestal), terugkerende boodschappen en aanbiedingen.
+- "Wat valt op": drie zinnen over patronen. Knop "Maak er een eigen versie van" opent Studio met die invalshoek. Kopiëren doen we niet.
+- Creative-strateeg: drie persona's van je klanten en per funnelfase de boodschap die past, met voorbeelden van hooks.
+- Inspiratiebibliotheek: bewaarde voorbeelden met tags.
+
+6.4 Inzichten
+- Tab Overzicht (Pro en hoger, live): kerncijfers tegenover je doel, een grafiek uitgegeven tegenover omzet met een lijn voor je break-even, en per kanaal (Meta, Google Ads, Shopify, Google Analytics). Toon een verschil tussen wat Meta en wat Shopify telt als dat er is, met uitleg.
+- Tab Advertenties: tabel met alle advertenties, labels en cijfers. Creative-analyse per hook, formaat en boodschap (V1). Score per advertentie tegenover je eigen gemiddelde (V1).
+- Tab Doelgroepen (Later): welke regio, leeftijd en plaatsing het best en het slechtst loopt.
+- Tab Benchmarks: je cijfers naast Belgische cijfers voor je sector, met "Voorbeeld" en [bron benchmarks].
+- Tab Rapporten: het weekrapport, geplande rapporten per mail of naar Slack, export als PDF. Agency: white-label rapporten met eigen logo en kleuren.
+- "Stel een vraag over je cijfers" opent Parel.
+- Later: eigen meetwaarden met externe data.
+- Starter ziet het weekrapport en het gedimde paneel voor het live dashboard.
+
+6.5 Autopilot en regels
+- Autopilot heeft drie standen, als keuzekaarten:
+  - "Uit": AdSweet doet niets zelf.
+  - "Vraag het mij eerst" (standaard): elke actie verschijnt op Vandaag en wacht op jouw klik.
+  - "Doe het binnen mijn grenzen": jij kiest welke soorten acties AdSweet zelf mag doen, met grenzen. Bijvoorbeeld: budget van een winnende campagne verhogen met hoogstens [x]% per keer en tot hoogstens €[y] per dag, budget verlagen als de ROAS onder [z] zakt, extra's van Meta die buiten de app aangingen terug uitzetten.
+- Een rij "Een advertentie afzetten" staat erbij, uitgeschakeld, met de zin "Dit doet AdSweet nooit zelf. Jij beslist."
+- Elke actie van de autopilot staat in het logboek en kan terug.
+- Regels: een lijst met regels en een bouwer in gewone taal: "Als [kost per verkoop] [hoger is dan] [€30] [2 dagen na elkaar], dan [stuur me een melding]." Mogelijke acties: een melding sturen, het budget aanpassen, een campagne op een tijdstip starten of stoppen, voorstellen om een advertentie af te zetten. Automatisch afzetten bestaat niet.
+- Vaste regels van het playbook staan bovenaan en kunnen niet weg, wel bekeken: "Verliezer bij 3 keer je doel zonder resultaat", "Nieuwe advertenties in een nieuwe ad set".
+- Sjablonen: kosten plots hoog, creative-vermoeidheid, budget op, campagne voor een speciaal moment automatisch starten en stoppen.
+
+
+=====================================================================
+GOLF 7. ACADEMY, HULP, INSTELLINGEN EN MAILS
+=====================================================================
+
+7.1 Academy (in de app)
+- Trajecten als genummerde rijen met voortgang. De lessen zijn conceptteksten die je zelf schrijft op basis van C2 en C5, met het label "Concept, PJ keurt goed".
+  - 01 De basis: hoe Meta-advertenties werken (campagne, ad set, advertentie) · de leerfase · wat je pixel doet en hoe je weet dat hij meet · je cijfers: ROAS, kost per verkoop, kost per aanvraag · break-even: wanneer verdien je aan een advertentie
+  - 02 Het AdSweet-playbook: 1 campagne, 1 ad set, 5 advertenties · waarom breed adverteren werkt · budget op campagneniveau · nieuwe advertenties altijd in een nieuwe ad set · waarom we de extra's van Meta uitzetten · winnaars schalen en verliezers afzetten
+  - 03 Content die werkt: top, middle en bottom of funnel · een sterke eerste seconde · video maken met je gsm · foto's die opvallen · tekst die mensen lezen · reviews gebruiken
+  - 04 Speciale momenten: solden · Black Friday · feestdagen · een evenement of opening
+  - 05 AdSweet gebruiken: je eerste week · Vandaag lezen · autopilot en grenzen · Parel vragen stellen · rapporten
+- Een les: 3 tot 5 minuten. Titel, leestijd, tekst in een kolom van 680px, één schema of een vak voor een video, een blok "In jouw account" met de eigen cijfers van de klant, één controlevraag, en de knop "Doe het nu" naar de juiste plek in de app.
+- Begrippenlijst: alle woorden uit C5, doorzoekbaar.
+- Na traject 01 en 02 een sober certificaat met het woordmerk en het app-icoon als zegel.
+- Overal in de app linken tips en uitlegkaartjes naar de juiste les.
+
+7.2 Hulp
+- Zoekveld met de veelgestelde vragen.
+- Contact volgens plan: Starter per e-mail, Pro chat, Scale chat met voorrang, Agency een eigen accountmanager en een Slack- of WhatsApp-kanaal (een supportkanaal, geen koppeling met het product).
+- Kwartaalcall (Pro en Scale): "Elk kwartaal 20 minuten met PJ over je advertenties." met de volgende call en "Kies een moment". Agency: de accountmanager met naam [accountmanager].
+- Onboardinggesprek voor de eerste 50 klanten.
+- Done With You: "Liever dat iemand het samen met je doet? Fully Booked werkt met je samen in het Done With You-model." met het formulier.
+- Automatisaties in je bedrijf: een kaart met [partner automatisaties] als plaatshouder.
+- Status van de koppelingen met Meta en Google.
+
+7.3 Instellingen
+Links een lijst, rechts het scherm:
+- Bedrijfsprofiel: alles uit de onboarding, bewerkbaar, met "Lees mijn website opnieuw".
+- Cijfers en doelen: orderwaarde, marge, doel-ROAS, doel per aanvraag. De rekenkaart uit de onboarding rekent mee, met "Je drempels passen meteen mee."
+- Koppelingen: Meta (advertentieaccounts, pagina, Instagram, pixel), Google Ads, Shopify, Google Analytics, Google Drive, Dropbox, Canva, Figma, Slack. Per koppeling status, wanneer gekoppeld, "Opnieuw koppelen", "Loskoppelen". Later: server-side meting (Conversions API Gateway).
+- Advertentieaccounts: overzicht, wisselen, toevoegen volgens plan (A5).
+- Naamgeving en UTM's: de conventie, met een live voorbeeld. Agency: per klant eigen instellingen.
+- Wie betaalt en wie heeft er baat bij.
+- Meldingen: per soort aan of uit, in de app en per mail.
+- Taal en regio: NL, FR, EN; tijdzone; euro.
+- Team en rollen (7.5).
+- Abonnement en facturen (7.4).
+- Doorverwijzen (7.6).
+- Privacy en gegevens: je gegevens downloaden, je account verwijderen, de verwerkersovereenkomst, de rechten die Meta en Google aan AdSweet gaven.
+- Het playbook: alleen lezen, "Zo werkt AdSweet", met de versie.
+- Ontwikkelaars (Later): API-sleutels en de koppeling met Claude of ChatGPT via MCP.
+
+7.4 Abonnement en facturen
+- Je plan, de prijs, maandelijks of jaarlijks, je founding-korting, de proefperiode, de volgende betaling, de credits en de gebruikers van je plan.
+- Upgraden en downgraden met een vergelijking en het nieuwe bedrag. "Overschakelen naar jaarlijks: 2 maanden gratis."
+- Betaalmethode en facturatiegegevens beheren gebeurt op de pagina van de betaalpartner (knop).
+- Facturen als lijst met datum, bedrag, btw, status en PDF.
+- Opzeggen: reden (keuzes), het einde van je periode, wat er met je gegevens gebeurt. Voor founding members: "Als je opzegt, verlies je je founding-korting van 30%." Bevestigen met een gewone knop, geen trucjes.
+- Staten: proefperiode, actief, betaling mislukt, opgezegd (loopt tot), verlopen.
+
+7.5 Team en rollen
+- Gebruikers per plan: Starter 1, Pro 2, Scale 5, Agency onbeperkt.
+- Rollen: Eigenaar (alles), Beheerder (alles behalve abonnement), Lezer (alleen bekijken). Agency: rechten per advertentieaccount.
+- Uitnodigen per mail. Boven de limiet: het gedimde paneel.
+
+7.6 Doorverwijzen
+- "Ken je iemand die AdSweet kan gebruiken? Jullie krijgen allebei een maand gratis." Een persoonlijke link, kopiëren, en een lijst wie zich aanmeldde en wanneer je maand ingaat.
+
+7.7 Partnerportaal (Later)
+- Voor partners uit 2.8: je link, aanmeldingen, betalende klanten, je commissie per maand en de uitbetalingen.
+
+7.8 Mails
+Sober, ground als achtergrond, het woordmerk bovenaan, één knop, geen beelden behalve het woordmerk. Ontwerp: welkom, link om in te loggen, uitnodiging van een teamlid, proefperiode bijna om (dag 27, voorstel), proefperiode omgezet, factuur, betaling mislukt, weekrapport, melding Actie nodig, kwartaalcall bevestigd, doorverwijzing gelukt, opgezegd.
+
+
+=====================================================================
+GOLF 8. INTERN BEHEER, OVERZICHT, CONTROLE EN OPLEVERING
+=====================================================================
+
+8.1 Beheer (alleen voor het AdSweet-team)
+Een aparte omgeving met dezelfde stijl en een kleine badge "Beheer" naast het woordmerk.
+- Playbook: alle regels als gegevens, per kanaal (Meta, Google Ads leeg). Secties: startstructuur, budgetten, doelgroep, winnaars en verliezers, schalen, funnelverdeling, frequentie van nieuwe ad sets, plaatsingen, extra's van Meta, waarschuwingen (tekst en reden per regel), tips (per moment). Elke waarde is bewerkbaar zonder code.
+- Versies: concept en gepubliceerd, versiegeschiedenis, twee versies vergelijken, terugzetten. "Publiceer versie 1.3" met een korte notitie.
+- Strategieën: de keuzekaarten van de wizard (vaste campagne, solden, Black Friday...) per sector en doel.
+- Teksten en vertalingen: alle sleutels in NL, FR en EN, met een filter op ontbrekende vertalingen.
+- Academy: lessen schrijven, ordenen en publiceren.
+- Klanten: lijst met bedrijf, plan, maandelijks of jaarlijks, proefdag, founding member, wat ze per maand betalen, laatste bezoek, status van de koppelingen. Een teller "Founding members: [x] van 50". Detail per klant met meldingen en AI-kosten.
+- AI-kosten: per account het gebruik van credits en de kost in euro, per model, en de marge per plan.
+- Kortingscodes: founding members (30%, zolang klant), doorverwijzingen, partners.
+- Partners: aanmeldingen, klanten, commissies.
+- Calls: agenda van onboardinggesprekken en kwartaalcalls.
+- Systeemstatus: koppelingen met Meta en Google, gebruik van de API-limieten, en de geplande taken (audit, autopilot, meldingen, rapporten) met hun laatste run.
+
+8.2 Schermoverzicht
+Eén pagina met alle schermen van website, app en beheer, gegroepeerd per golf. Per scherm: naam, een kleine miniatuur, het label MVP, V1 of Later, de plannen waarin het zit, en een link. Bovenaan een filter op label.
+
+8.3 Controle voor je oplevert
+- Nergens "zuur", "Rakio", "Forma" of de naam van een bureau, behalve Fully Booked.
+- Nergens logo's of nagebootste schermen van Meta, Facebook, Instagram, Google, WhatsApp of de betaalpartner, en geen velden voor kaartgegevens.
+- Alle cijfers kloppen met C3. Reken na: totalen, ROAS, kost per verkoop of aanvraag, de grens van drie keer het doel, btw.
+- Prijzen, credits, gebruikers en accounts per plan kloppen met C1, op de website en in de app.
+- Elk vakwoord heeft uitleg. Elke afwijking van het playbook heeft het waarschuwingsblok met "Toch doorgaan".
+- Nergens zet AdSweet zelf een advertentie af.
+- Robijn hoogstens één keer per scherm, de assistent, de focusring en de sculptuur niet meegeteld.
+- Elke tekst haalt minstens 4,5:1 in licht en nacht. ink-accent alleen in titels vanaf 32px. Randen, iconen en de focusring minstens 3:1.
+- Alles werkt met het toetsenbord, met een zichtbare focusring.
+- De hero werkt met muis en touch, valt terug op het stilstaande beeld zonder WebGL2, pauzeert buiten beeld en respecteert prefers-reduced-motion.
+- Op 390px breed geen horizontale scroll. De hero blijft precies één scherm hoog.
+- De home, inloggen, de onboarding en Vandaag bestaan volledig in NL, FR en EN.
+- Elke flow loopt door tot het einde, ook de foutstaten.
+
+8.4 Oplevering
+- De website, de app en het beheer, in licht en nacht, op computer en gsm.
+- Het componentenoverzicht en het schermoverzicht.
+- Een samenvatting met: de keuzes die je maakte, alle plaatshouders tussen vierkante haken, de punten uit C6 die nog open staan, de licentie van de hero-code die nog nagekeken moet worden, en elke plek waar je van dit document afweek.
+
+
+#####################################################################
+DEEL C. WAT JE NODIG HEBT
+#####################################################################
+
+
+=====================================================================
+C1. PLANNEN EN PRIJZEN
+=====================================================================
+
+Alle prijzen per maand, in euro, exclusief btw.
+
+| | Starter | Pro | Scale | Agency |
+| --- | --- | --- | --- | --- |
+| Voor wie | Wie zelf content maakt en alleen sturing wil | Wie zijn bureau wil vervangen | Freelancers en webshops die producten testen | Bureaus |
+| Prijs | €99 | €195 | €299 | vanaf €499 (staffel) |
+| Advertentieaccounts | 1 | 1 | 3 | 5 tot 50+ |
+| AI-audit, alle aanbevelingen, 1 klik toepassen | ja | ja | ja | ja |
+| Autopilot binnen grenzen (budget, kost per verkoop, ROAS) | ja | ja | ja | ja |
+| Launchen en bulk launch | ja | ja | ja | ja, over klantaccounts heen |
+| Regels en meldingen | ja | ja | ja | ja |
+| Playbook-campagnes | ja | ja | ja | ja, plus eigen sjablonen |
+| AI-content: beelden, teksten, hooks | nee | 300 credits | 600 credits | 1.500 credits |
+| Creative-strateeg en concurrenten | nee | ja | ja | ja |
+| Rapportage | wekelijks AI-rapport | live dashboard | live dashboard per account | white-label klantrapporten |
+| Gebruikers | 1 | 2 | 5 | onbeperkt, rollen per account |
+| Persoonlijk | nee | kwartaalcall met PJ | kwartaalcall met PJ | eigen accountmanager |
+| Support | e-mail | chat | chat met voorrang | Slack- of WhatsApp-kanaal |
+
+Agency-staffel:
+
+| Advertentieaccounts | Prijs per maand | Per account |
+| --- | --- | --- |
+| tot 5 | €499 | €100 |
+| tot 10 | €899 | €90 |
+| tot 20 | €1.599 | €80 |
+| tot 30 | €2.199 | €73 |
+| 50+ | op maat | onder €70 |
+
+Wat voor elk plan geldt:
+- 30 dagen gratis proberen, met je kaart bij de start. Tijdens de proefperiode hoogstens 50 AI-credits.
+- Jaarplan: 2 maanden gratis.
+- Maandelijks opzegbaar. Geen percentage van je advertentiebudget.
+- Je advertentiebudget betaal je rechtstreeks aan Meta (of Google), niet aan AdSweet.
+- Geen losse extra accounts. Wie een tweede advertentieaccount wil, gaat naar Scale.
+- Founding members: de eerste 50 klanten krijgen 30% korting zolang ze klant blijven, in ruil voor feedback en een review. Code: [founding-code].
+- Doorverwijzen: een maand gratis voor jou en voor wie je doorverwijst.
+
+Bedragen die je toont (nagerekend):
+- Jaarlijks: Starter €990 per jaar (€82,50 per maand), Pro €1.950 (€162,50), Scale €2.990 (€249,17), Agency tot 5 accounts €4.990 (€415,83).
+- Founding member, maandelijks: Starter €69,30, Pro €136,50, Scale €209,30, Agency tot 5 €349,30. Of de founding-korting ook op een jaarplan geldt, staat nog open: [founding en jaarplan].
+- Met 21% btw voor een Belgische klant: Starter €99 + €20,79 = €119,79. Pro €195 + €40,95 = €235,95. Scale €299 + €62,79 = €361,79. Lisa (Pro, founding) €136,50 + €28,67 = €165,17.
+
+Welke schermen per plan open zijn: Studio vanaf Pro. Concurrenten en creative-strateeg vanaf Pro. Het live dashboard in Inzichten vanaf Pro, per account vanaf Scale. "Alle accounts" vanaf Scale. White-label rapporten, eigen sjablonen, bulk launch over accounts en rechten per account in Agency. Al de rest in elk plan, ook Parel.
+
+
+=====================================================================
+C2. HET PLAYBOOK
+=====================================================================
+
+Startstructuur (Meta):
+- 1 campagne met het doel dat bij de zaak past: verkopen voor een webshop, aanvragen voor wie leads wil.
+- Budget altijd op campagneniveau (Advantage-campagnebudget). Per ad set alleen als de klant dat expliciet kiest.
+- 1 ad set.
+- 5 advertenties: standaard 3 foto's en 2 video's. Meer video mag; AdSweet moedigt video aan.
+
+Doelgroep:
+- Altijd breed. De klant geeft alleen regio, landen, talen en eventueel leeftijd op.
+- Geen interesses. Die werken niet meer en zitten niet in de app. Worden ze in Ads Manager toegevoegd, dan markeert AdSweet dat.
+
+Funnel:
+- Top of funnel: mensen die je merk nog niet kennen. Een probleem, herkenning, aandacht trekken.
+- Middle of funnel: mensen die twijfelen. Uitleg, voordelen, bewijs, reviews.
+- Bottom of funnel: mensen die klaar zijn om te kopen. Een aanbod, een reden om nu te kopen, een duidelijke knop.
+- De klant kiest de verdeling. AdSweet stelt een verdeling voor als tip en toont welke fase ontbreekt.
+
+Nieuwe advertenties:
+- Altijd in een nieuwe ad set binnen dezelfde campagne. Lopende ad sets worden nooit aangeraakt, zodat ze niet terug in de leerfase belanden.
+- Te weinig advertenties die werken: AdSweet vraagt om nieuwe content (of maakt die vanaf Pro), in een nieuwe ad set.
+
+Budget:
+- AdSweet stelt altijd een budget voor. Minimum €10 per dag, €30 per dag voor een webshop.
+
+Andere campagnes:
+- Voor solden, Black Friday, feestdagen en evenementen een aparte campagne naast de vaste.
+- Campagnes zonder verkoopdoel (volgers, bereik, evenement) krijgen een standaardopzet. Geen winnaars of verliezers, alleen rapportage.
+
+Winnaar of verliezer:
+- Webshop: winnaar als de ROAS boven de break-even ROAS ligt, of boven de doel-ROAS als de klant er een opgaf. Signalen ernaast: kost per verkoop, CTR, kost per klik.
+- Aanvragen: winnaar als de kost per aanvraag op of onder het doel ligt. Signalen: CTR, kost per klik.
+- Verliezer: 3 keer de maximale kost per verkoop (of 3 keer het doel per aanvraag) uitgegeven, zonder resultaat. AdSweet zet hem niet zelf af. Het toont: "Kijk, we zien dat deze ad het niet goed doet. Misschien moet je hem stilaan afzetten." met een knop om dat met 1 klik te doen.
+- Tussen die twee: "Nog geen winnaar". Te weinig uitgegeven of in de leerfase: "Te vroeg om te zeggen".
+- Winnaars blijven lopen en worden geschaald via het campagnebudget: [schaalstappen PJ], voorbeeld in het prototype +20%.
+
+Rekenregels:
+- Break-even ROAS = 1 / brutomarge. 40% marge → 2,5.
+- Maximale kost per verkoop = orderwaarde × brutomarge. €58 × 40% = €23,20.
+- Hulp voor het doel per aanvraag = klantwaarde × marge × slaagkans.
+
+Extra's van Meta: bij elke launch actief uitzetten. Geen muziek, geen automatische tekst op het beeld, geen beelduitbreiding, geen automatische varianten.
+
+Waarschuwingen. Telkens "Pas op, dit raden we niet aan." gevolgd door de reden. Conceptteksten, PJ keurt goed:
+- Budget onder het minimum: "Met minder dan €10 per dag (€30 voor een webshop) krijgt Meta te weinig resultaten binnen om te leren wie je klanten zijn. Je campagne blijft dan lang in de leerfase."
+- Budget per ad set: "Met budget op campagneniveau stuurt Meta het geld zelf naar wat het best loopt. Per ad set moet je dat telkens zelf verdelen."
+- Advertenties in een bestaande ad set: "Nieuwe advertenties in een lopende ad set zetten die ad set terug in de leerfase. Je winnaars verliezen dan hun vaart."
+- Interesses (toegevoegd in Ads Manager): "Interesses maken je doelgroep kleiner zonder dat het beter werkt. Meta vindt je klanten zelf als je breed adverteert."
+- Extra's van Meta aan: "Dan past Meta je advertentie zelf aan: muziek, tekst op je beeld, een uitgerekt beeld. Je advertentie ziet er dan niet meer uit zoals jij hem goedkeurde."
+- Minder dan 5 advertenties: "Met minder advertenties heeft Meta minder om uit te kiezen, en weet je later minder over wat werkt."
+
+Tips. Conceptteksten, PJ keurt goed:
+- Bij het uploaden: "Heb je een video? Gebruik hem. Het playbook start met 2 video's op 5 advertenties."
+- Bij de funnel: "Je hebt nog geen bottom-of-funnel advertentie. Wie twijfelt, heeft een duwtje nodig: een aanbod, een deadline, een duidelijke knop."
+- Bij het budget: "Laat je budget de eerste week met rust. Elke grote wijziging start de leerfase opnieuw."
+- Bij een verliezer: "Laat een advertentie niet langer lopen dan 3 keer je doel zonder resultaat."
+- Bij een winnaar: "Een winnaar schaal je via het budget van de campagne, niet door hem te kopiëren."
+- Bij een speciaal moment: "Start je campagne voor de feestdagen een paar weken op voorhand. Zo is ze uit de leerfase als het druk wordt."
+
+
+=====================================================================
+C3. DEMO-SCENARIO'S
+=====================================================================
+
+Demodatum: maandag 7 december 2026. "Laatste 7 dagen" is maandag 30 november tot en met zondag 6 december. Alle namen en zaken zijn verzonnen. Gebruik voor websites alleen verzonnen adressen die op .voorbeeld eindigen, zodat ze zeker niet bestaan.
+
+--- Lisa · Atelier Noor (webshop met handgemaakte kaarsen) · Pro, founding member ---
+- Proefperiode gestart op 16 november, dag 22 van 30. "Nog 8 dagen gratis. Je eerste betaling is op 16 december." Ze betaalt dan €136,50 per maand excl. btw.
+- Credits: 32 van de 50 gebruikt (3 AI-beelden aan 10 en 2 tekstsets aan 1).
+- Orderwaarde €58, brutomarge 40%. Break-even ROAS 2,5. Maximale kost per verkoop €23,20. Verliezersgrens 3 × €23,20 = €69,60. Geen eigen doel-ROAS.
+- Regio België, Nederlandstalig, 25 tot 65 jaar. Autopilot: "Vraag het mij eerst".
+- Vaste campagne, live sinds 17 november, €40 per dag. Eén ad set met vijf advertenties.
+
+Laatste 7 dagen:
+| Advertentie | Soort | Fase | Uitgegeven | Verkopen | Omzet | ROAS | Kost per verkoop | Label |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| A1 Kaars wordt aangestoken | video | top | €82 | 5 | €290 | 3,54 | €16,40 | Winnaar |
+| A2 Zo gieten we ze | video | middle | €71 | 4 | €232 | 3,27 | €17,75 | Winnaar |
+| A3 Geschenkdoos | foto | bottom | €48 | 2 | €116 | 2,42 | €24,00 | Nog geen winnaar |
+| A4 Sfeerbeeld woonkamer | foto | top | €72 | 0 | €0 | 0 | geen | Verliezer |
+| A5 Klantreview | foto | middle | €7 | 0 | €0 | 0 | geen | Te vroeg om te zeggen (Meta toont hem weinig) |
+| Totaal | | | €280 | 11 | €638 | 2,28 | €25,45 | |
+
+- A4 liep pas echt in de laatste 7 dagen; dit is ook zijn totaal sinds de start.
+- Zonder A4: €208 uitgegeven voor €638 omzet, ROAS 3,07.
+- Video's: €153 uitgegeven, €522 omzet, ROAS 3,41. Foto's: €127 uitgegeven, €116 omzet, ROAS 0,91.
+- A1 loopt sinds 17 november. Zijn CTR zakte van 2,1% in de eerste week naar 1,4% in de laatste week, met een frequentie van 2,8.
+- Black Friday-campagne, afgelopen: 27 tot en met 30 november, €45 per dag, €180 uitgegeven, 9 verkopen, €522 omzet, ROAS 2,90.
+
+Actiekaarten op Vandaag, in deze volgorde:
+1. Actie nodig · "Lisa, 'Sfeerbeeld woonkamer' gaf €72 uit zonder verkoop." Tekst: "Kijk, we zien dat deze ad het niet goed doet. Misschien moet je hem stilaan afzetten." Uitleg: "Je maximale kost per verkoop is €23,20. Drie keer dat is €69,60, en die grens is voorbij." Knop "Zet hem af". Na de klik verschijnt een nieuwe kaart: "Zonder deze advertentie zit je campagne op een ROAS van 3,07, boven je break-even van 2,5. Verhoog je budget van €40 naar €48 per dag?" met "Verhoog naar €48".
+2. Let op · "Bij 'Zo gieten we ze' werd muziek aangezet in Ads Manager." Het waarschuwingsblok, en de knoppen "Terug uitzetten" en "Zo laten".
+3. Voorstel · "Je video's doen het veel beter dan je foto's: ROAS 3,41 tegenover 0,91. Maak er deze week nog één." Knoppen "Laat een script schrijven" (Studio) en "Upload een video". Uitleg: de nieuwe video komt in een nieuwe ad set.
+4. Voorstel · "Over 2,5 week is het Kerstmis. Zal ik een aparte campagne voor de feestdagen klaarzetten?" Knop "Zet klaar" (opent Parel met de plankaart).
+5. Let op · "Je beste video wordt minder aangeklikt: CTR van 2,1% naar 1,4%. Mensen hebben hem al gemiddeld 2,8 keer gezien." Tip over creative-vermoeidheid, knop "Bekijk".
+
+Logboek van Lisa:
+- 7 december 06:00 · AdSweet · Dagelijkse audit klaar, 5 voorstellen.
+- 5 december 14:12 · Buiten AdSweet · Muziek aangezet bij "Zo gieten we ze".
+- 30 november 23:59 · AdSweet · Campagne "Black Friday" gestopt op de einddatum.
+- 26 november 20:41 · Lisa · Campagne "Black Friday" live gezet, €45 per dag, 27 tot en met 30 november.
+- 17 november 10:05 · Lisa · Vaste campagne live gezet, €40 per dag, 5 advertenties.
+
+Naamgeving en tracking (voorbeeld):
+- Campagne: "Noor · Vast · Verkopen · nov26"
+- Ad set: "AS1 · 17-11-2026 · start"
+- Advertentie: "A1 · Top · Video · Kaars wordt aangestoken"
+- UTM: utm_source=meta, utm_medium=paid_social, utm_campaign=noor-vast-verkopen, utm_content=a1-top-video
+
+Voorbeeldgesprek met Parel:
+- Lisa: "Ik wil voor de feestdagen mijn geschenkdozen verkopen. Schrijf een strategie uit."
+- Parel: "Goed idee, Lisa. Ik zou een aparte campagne maken naast je vaste, zodat die gewoon blijft lopen. Zo zou ik het doen:" en dan de plankaart:
+  - Campagne: Feestdagen 2026, apart naast je vaste campagne
+  - Doel: verkopen
+  - Looptijd: 8 tot en met 24 december
+  - Regio: België, Nederlandstalig, 25 tot 65 jaar (zoals je vaste campagne)
+  - Budget: €30 per dag, het minimum voor een webshop
+  - Advertenties: 5, waarvan 3 foto's en 2 video's
+  - Verdeling: 2 top, 1 middle, 2 bottom (voorbeeld)
+  - Nieuwe advertenties: na [x weken, PJ] in een nieuwe ad set
+  - Wat je moet maken:
+    1. Video, top: een geschenkdoos die opengaat, de kaars brandt binnen de eerste 2 seconden.
+    2. Video, middle: hoe je een doos samenstelt, in 15 seconden.
+    3. Foto, top: de doos onder een kerstboom, zonder tekst.
+    4. Foto, bottom: de doos met de prijs en "Bestel voor [datum] en het ligt op tijd onder de boom."
+    5. Foto, bottom: drie dozen naast elkaar met hun prijs.
+  - Knoppen: "Zet klaar in de wizard", "Pas aan", "Maak de 3 foto's met AI · 30 credits"
+- Lisa: "Waarom was mijn ROAS vorige week zo laag?"
+- Parel: "Door één advertentie. 'Sfeerbeeld woonkamer' gaf €72 uit zonder verkoop. Zonder die advertentie zat je op 3,07 in plaats van 2,28. Ik zou hem afzetten, het voorstel staat op Vandaag."
+
+--- Tom · Peeters Dakwerken (aanvragen) · Starter ---
+- Proefperiode gestart op 15 november, dag 23 van 30. "Nog 7 dagen gratis. Je eerste betaling is op 15 december." Daarna €99 per maand excl. btw.
+- Doel per aanvraag €20. Zo berekend met de hulp: klantwaarde €2.000 × marge 25% × slaagkans 4% (1 op 25) = €20. Verliezersgrens 3 × €20 = €60.
+- Regio: Limburg en Antwerpen. Vaste campagne live sinds 23 november, €15 per dag.
+
+Sinds de start (23 november tot en met 6 december, 14 dagen):
+| Advertentie | Soort | Fase | Uitgegeven | Aanvragen | Kost per aanvraag | Label |
+| --- | --- | --- | --- | --- | --- | --- |
+| B1 Voor en na | video | top | €64 | 5 | €12,80 | Winnaar |
+| B2 Gratis dakinspectie | foto | bottom | €48 | 3 | €16,00 | Winnaar |
+| B3 Ons team aan het werk | foto | top | €60 | 0 | geen | Verliezer |
+| B4 Een klant vertelt | video | middle | €30 | 1 | €30,00 | Nog geen winnaar |
+| B5 Werkwijze in 4 stappen | foto | middle | €8 | 0 | geen | Te vroeg om te zeggen |
+| Totaal | | | €210 | 9 | €23,33 | |
+
+- Zonder B3: €150 voor 9 aanvragen, €16,67 per aanvraag.
+
+Per week:
+| Advertentie | Week 1 (23 tot 29 nov) | Week 2 (30 nov tot 6 dec) |
+| --- | --- | --- |
+| B1 | €30, 2 aanvragen | €34, 3 aanvragen |
+| B2 | €23, 1 aanvraag | €25, 2 aanvragen |
+| B3 | €32, 0 | €28, 0 |
+| B4 | €16, 1 aanvraag | €14, 0 |
+| B5 | €4, 0 | €4, 0 |
+| Totaal | €105, 4 aanvragen, €26,25 per aanvraag | €105, 5 aanvragen, €21,00 per aanvraag |
+
+- Vandaag toont de laatste 7 dagen: €105 → 5 aanvragen → €21,00 per aanvraag, met "Je doel is €20" en de badge Let op.
+- Actiekaarten: (1) Actie nodig, B3 is een verliezer (€60, de grens van 3 × €20). (2) Actie nodig, de melding over de mislukte betaling bij Meta. (3) Voorstel: "Je video 'Voor en na' doet het het best. Heb je nog zo'n video?" met "Upload een video" en het gedimde paneel voor "Laat een script schrijven" (Studio zit in Pro).
+- Weekrapport van maandag 7 december: "Tom, je week in het kort. Je gaf €105 uit en kreeg 5 aanvragen, €21,00 per aanvraag. Je doel is €20. Vorige week waren het 4 aanvragen aan €26,25." Beste advertentie: B1. Slechtste: B3. Tip voor volgende week.
+
+--- Sarah · Salon Mila (kapsalon) · nieuwe klant ---
+- Doorloopt de onboarding. Website: salonmila.voorbeeld.
+- AdSweet vindt: naam Salon Mila, logo, twee kleuren, diensten (Knippen dames €48, Kleuren vanaf €75, Balayage vanaf €120), toon "warm, persoonlijk, rustig", 9 beelden, adres in Hasselt.
+- Doel: meer mensen in je zaak, afspraken. Regio Hasselt plus 15 km, Nederlandstalig, 18 tot 65+.
+- Doel per aanvraag: de hulp rekent €360 × 50% × 1 op 4 = tot €45. Sarah vult zelf €15 in.
+- Budget: AdSweet stelt €10 per dag voor. Sarah kiest €12.
+- Ze heeft nog geen campagnes, dus stap 7 valt weg. Ze start de proefperiode van Pro.
+
+--- Bram · drie webshops · Scale ---
+| Account | Marge | Break-even | Uitgegeven (7 dagen) | Verkopen | Omzet | ROAS | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Veld & Vuur (kampeerspullen) | 35% | 2,86 | €420 | 18 | €1.512 | 3,60 | In orde |
+| Trapkracht (fietsonderdelen) | 45% | 2,22 | €280 | 9 | €549 | 1,96 | Let op |
+| Proefshop (nieuwe productlijn) | 50% | 2,00 | €140 | 2 | €90 | 0,64 | Actie nodig |
+| Totaal | | | €840 | 29 | €2.151 | 2,56 | |
+
+Orderwaarde: Veld & Vuur €84, Trapkracht €61, Proefshop €45.
+
+
+=====================================================================
+C4. SLOGANS EN VASTE TEKSTEN
+=====================================================================
+
+Hoofdslogan: "Hit the sweet spot."
+- Hero (accentregel), footer, Open Graph, het slot van de mails.
+
+Andere slogans en waar ze komen:
+- "Bureauresultaten zonder bureaufactuur." Titel van de prijzenpagina.
+- "De sweet spot vind je niet op gevoel." Titel van het playbook op de home.
+- "Elke nacht een beetje beter." Sectie over de dagelijkse audit op Hoe het werkt.
+- "Minder gokken, meer raak." Eyebrow of titel in advertenties voor AdSweet zelf.
+- "Elke euro op de juiste plek." Sectie over budget en autopilot.
+- "The ad suite with a sweet spot." Engelse versie van de home en Engelstalige plekken.
+- In de app: "Sweet spot gevonden." wanneer een advertentie voor het eerst Winnaar wordt, en "Sweet!" in het Sweetmoment.
+
+Veelgestelde vragen (home en prijzen):
+- "Moet ik iets kennen van advertenties?" Nee. AdSweet stelt alles voor en legt elk woord uit. Jij keurt goed.
+- "Moet ik mijn kaart ingeven?" Ja, bij de start. Je betaalt pas na 30 dagen en je kan voordien stoppen.
+- "Betaal ik ook een percentage van mijn advertentiebudget?" Nee. Je betaalt je plan. Je advertentiebudget betaal je rechtstreeks aan Meta.
+- "Zijn de prijzen inclusief btw?" Nee, alle prijzen zijn exclusief btw.
+- "Kan ik maandelijks opzeggen?" Ja.
+- "Zet AdSweet zelf advertenties af?" Nooit. Het zegt wat het ziet, jij klikt.
+- "Heb ik de Meta Business Suite nog nodig?" Je hebt een advertentieaccount bij Meta nodig, maar je hoeft er niet meer in te werken.
+- "Ik wil een tweede advertentieaccount." Dan heb je Scale nodig, met drie accounts.
+- "Wat zijn credits?" Daarmee maakt AdSweet beelden, teksten en scripts voor je. Pro heeft er 300 per maand, Scale 600, Agency 1.500.
+- "Wat is een founding member?" De eerste 50 klanten krijgen 30% korting zolang ze klant blijven.
+- "Werkt het ook met Google Ads?" [antwoord volgens de release]
+
+
+=====================================================================
+C5. BEGRIPPENLIJST
+=====================================================================
+
+Elk woord krijgt een korte uitleg en een voorbeeld. Gebruik in de app de cijfers van de klant zelf; hieronder de voorbeelden van Lisa en Tom.
+
+- Campagne, ad set, advertentie: de campagne is je doel en je budget, de ad set een groep advertenties die naar dezelfde mensen gaat, de advertentie wat mensen zien. Lisa heeft 1 campagne, 1 ad set en 5 advertenties.
+- ROAS: omzet gedeeld door wat je advertenties kostten. Lisa gaf €280 uit en verkocht voor €638: 638 / 280 = 2,28.
+- Break-even ROAS: de ROAS waarboven je geld verdient aan je advertenties. 1 gedeeld door je marge. Lisa heeft 40% marge: 1 / 0,40 = 2,5.
+- Doel-ROAS: een ROAS die je zelf wil halen, hoger dan je break-even.
+- Kost per verkoop (CPA): wat één verkoop aan advertenties kostte. Lisa: €280 / 11 = €25,45.
+- Maximale kost per verkoop: orderwaarde × marge. Lisa: €58 × 40% = €23,20.
+- Kost per aanvraag (CPL): wat één aanvraag kostte. Tom: €210 / 9 = €23,33. Zijn doel is €20.
+- Winnaar en verliezer: een winnaar haalt je doel. Een verliezer gaf 3 keer je doel uit zonder resultaat. Tom: 3 × €20 = €60.
+- CTR: hoeveel procent van wie je advertentie ziet, erop klikt. Lisa's beste video: 1,4%, dus 14 op 1.000.
+- Kost per klik (CPC): wat één klik kostte.
+- Frequentie: hoe vaak iemand je advertentie gemiddeld zag. Lisa's beste video: 2,8 keer.
+- Bereik en vertoningen: hoeveel verschillende mensen je advertentie zagen, en hoe vaak ze in totaal getoond werd.
+- Leerfase: de eerste periode waarin Meta uitzoekt aan wie het je advertentie best toont. Resultaten schommelen dan. Daarom raken we lopende ad sets niet aan.
+- Top, middle en bottom of funnel: de drie fases van iemand die je nog niet kent tot iemand die koopt. Lisa: de brandende kaars (top), hoe ze gegoten worden (middle), de geschenkdoos met prijs (bottom).
+- Advantage-campagnebudget: je budget staat op de campagne, en Meta verdeelt het zelf over wat het best loopt.
+- Plaatsing: waar je advertentie verschijnt, zoals de feed, stories of reels.
+- Pixel of dataset: een stukje code op je website dat aan Meta laat weten wie iets kocht of een formulier invulde.
+- Creative-vermoeidheid: mensen hebben je advertentie te vaak gezien en klikken minder. Lisa's video: CTR van 2,1% naar 1,4%.
+- UTM: een label achter je link, zodat je in Google Analytics of Shopify ziet van welke advertentie een bezoeker kwam.
+- Extra's van Meta (Advantage+ creative): aanpassingen die Meta zelf aan je advertentie doet, zoals muziek of tekst op je beeld. Bij AdSweet staan ze uit.
+
+
+=====================================================================
+C6. LABELS, PLAATSHOUDERS EN OPEN PUNTEN
+=====================================================================
+
+Labels uit de featurelijst:
+- MVP: website en inloggen, onboarding, abonnement en proefperiode, campagnewizard met het playbook, bulk launch, beeldverhouding per plaatsing, media uit Google Drive, Dropbox, Canva en Figma, naamgeving en UTM's, dagelijkse audit, 1 klik toepassen, uitleg in gewone taal, regels, creative-vermoeidheid, meldingen, AI-beelden, AI-teksten en hooks, dashboard over Meta, Google, Shopify en Analytics, geplande rapporten, Nederlandstalig met Belgische benchmarks.
+- V1: reacties behouden bij dupliceren, extra's van Meta in bulk aan of uit, preview-links, autopilot met goedkeuring en logboek, kant-en-klare strategieën, testgrid, Parel (chat die campagnes aanpast), AI die volgens het playbook werkt, creative-strateeg, concurrenten en inspiratie, creative-analyse, score per advertentie, vragen over je cijfers, white-label rapporten, meerdere accounts, rollen, instellingen per klant, kwartaalcall.
+- Later: launchen vanuit Google Sheets, organische posts boosten, catalogus-advertenties, budget verschuiven op voorspelde ROAS, koppeling met Claude of ChatGPT via MCP, beelden omzetten naar video, prestatievoorspelling, ranking van doelgroepen, eigen meetwaarden, server-side meting, volledige white label van de app, API-toegang, partnerportaal, zoekpagina's.
+
+Plaatshouders (laat ze zichtbaar en zet ze in de samenvatting):
+- [schaalstappen PJ] (voorbeeld in het prototype: +20%)
+- [standaardverdeling PJ] (voorbeeld: 2 top, 2 middle, 1 bottom)
+- [x weken, PJ] voor nieuwe ad sets (voorbeeld: elke 2 weken)
+- [plaatsingen PJ] (voorbeeld: automatisch)
+- [Google-playbook PJ]
+- [weging score] van de audit
+- de kost van AI-acties in credits (voorbeelden in 6.2)
+- [founding-code], de teller van founding members, en [founding en jaarplan]
+- [bron benchmarks]
+- [partner automatisaties]
+- [accountmanager] voor Agency
+- [bedrijfsgegevens en ondernemingsnummer], [privacy-adres]
+- de naam van de assistent (werknaam Parel)
+- het uur van de dagelijkse audit (voorbeeld: 06:00)
+- de herinnering op dag 27 van de proefperiode (voorstel)
+- [antwoord volgens de release] bij de vraag over Google Ads
+- de licentie van de hero-code
