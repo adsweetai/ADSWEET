@@ -23,7 +23,7 @@ describe("seed.sql", () => {
 
   it("maakt profielen voor alle gebruikers", async () => {
     const rows = await one<{ first_name: string }>(null, "select first_name from profiles order by first_name");
-    expect(rows.map((r) => r.first_name)).toEqual(["AdSweet", "Bram", "Eva", "Lisa", "Sarah", "Tom"]);
+    expect(rows.map((r) => r.first_name)).toEqual(["AdSweet", "Bram", "Eva", "Lisa", "Sarah", "Teamlid", "Tom"]);
   });
 });
 

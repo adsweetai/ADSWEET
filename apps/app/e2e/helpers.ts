@@ -6,6 +6,7 @@ export const EMAIL = {
   sarah: "sarah@salonmila.voorbeeld",
   bram: "bram@veldenvuur.voorbeeld",
   eva: "eva@bureaukompas.voorbeeld",
+  kompasTeam: "teamlid@bureaukompas.voorbeeld",
 } as const;
 
 /** Inloggen met de demolink (demomodus, geen echte mail). */

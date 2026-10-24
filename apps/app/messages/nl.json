@@ -2618,5 +2618,114 @@
       "adset": "Je hebt 1 campagne, {sets, plural, one {# ad set} other {# ad sets}} en {ads} advertenties.",
       "funnel": "{top} (top), {middle} (middle), {bottom} (bottom)."
     }
+  },
+  "agency": {
+    "greeting": "Goeiemorgen, {name}",
+    "summary": "{agency} beheert {n} klanten. Bij geen enkele is er vandaag actie nodig.",
+    "summaryAct": "{agency} beheert {n} klanten. Bij {act} is er vandaag actie nodig: {names}.",
+    "and": "en",
+    "kpi": {
+      "clients": "Klanten",
+      "clientsSub": "in Agency tot {slots} accounts",
+      "spend": "Uitgegeven",
+      "spendSub": "{n} klanten met cijfers, laatste 7 dagen",
+      "open": "Open voorstellen",
+      "openSub": "over al je klanten",
+      "act": "Actie nodig",
+      "actNone": "geen"
+    },
+    "onboarding": "Onboarding",
+    "learning": "Leerfase",
+    "sinceYesterday": "sinds gisteren",
+    "leads": "{n, plural, one {# aanvraag} other {# aanvragen}}",
+    "sales": "{n, plural, one {# verkoop} other {# verkopen}}",
+    "early": "Te vroeg om te zeggen",
+    "cpl": "{v} per aanvraag",
+    "roas": "ROAS {v}",
+    "goalPerAppointment": "doel {v} per afspraak",
+    "goalCpl": "doel {v}",
+    "goalBe": "break-even {v}",
+    "todoPayment": "Meta kon de laatste betaling van {client} niet afschrijven. Als dat zo blijft, stoppen de advertenties.",
+    "todoLoser": "‘{ad}’ gaf {spend} uit zonder verkoop, boven de grens van {limit}.",
+    "todoLoserLeads": "‘{ad}’ gaf {spend} uit zonder aanvraag, boven de grens van {limit}.",
+    "todoUnder": "{client} gaf {spend} uit voor {revenue} omzet: ROAS {roas}, onder de break-even van {be}.",
+    "todoUnderWarn": "{client} zit op een ROAS van {roas}, onder de break-even van {be}.",
+    "logAdded": "Klant ‘{name}’ toegevoegd",
+    "logInvite": "uitnodiging verstuurd",
+    "logSelf": "eigen koppeling",
+    "allClients": "Al je klanten",
+    "add": "Nieuwe klant toevoegen",
+    "slots": "{used} van {total} accounts in je staffel",
+    "filter": "Filter",
+    "filters": {
+      "alle": "Alle klanten",
+      "act": "Actie nodig",
+      "warn": "Let op",
+      "ok": "In orde"
+    },
+    "cols": ["Klant", "Uitgegeven, 7 dagen", "Resultaat", "Tegenover het doel", "Status", "Voorstellen", "Wie volgt op", ""],
+    "open": "Open klant",
+    "openAria": "Open {name}",
+    "note": "Laatste 7 dagen. Uit de cijfers van elke klant.",
+    "todoTitle": "Wat vandaag eerst moet",
+    "toolsTitle": "Voor bureaus",
+    "tools": [
+      ["Bulk launch over klanten", "Laad beelden op en verdeel ze over de advertentieaccounts van je klanten.", "Start een bulk launch", "/bulk", "citroen"],
+      ["White-label rapporten", "Rapporten met je eigen logo en kleuren, elke week naar je klanten.", "Stel rapporten in", "/inzichten?tab=rapporten", "hemel"],
+      ["Rechten per klant", "Bepaal per advertentieaccount wie van je team mag kijken of wijzigen.", "Naar Team en rollen", "/team", "munt"],
+      ["Eigen sjablonen", "Je eigen campagne-opzet, naast het playbook, voor al je klanten.", "Maak een sjabloon", "/campagnes/nieuw", "perzik"]
+    ],
+    "addTitle": "Nieuwe klant toevoegen",
+    "close": "Sluiten",
+    "fields": {
+      "name": "Naam van de zaak",
+      "namePh": "bijvoorbeeld Bakkerij Lente",
+      "site": "Website",
+      "kind": "Soort zaak",
+      "owner": "Wie volgt op",
+      "email": "E-mail van je klant"
+    },
+    "kinds": {
+      "webshop": "Webshop",
+      "dienstverlener": "Dienstverlener",
+      "lokaal": "Lokale zaak",
+      "zelfstandige": "Zelfstandige"
+    },
+    "modesTitle": "Advertentieaccount en onboarding",
+    "modes": {
+      "invite": {
+        "t": "Stuur de onboarding naar je klant",
+        "s": "Je klant koppelt zijn advertentieaccount en vult website, brandguide en documenten zelf in."
+      },
+      "self": {
+        "t": "Ik koppel het zelf",
+        "s": "Je hebt al toegang tot het advertentieaccount van je klant in Meta. Daarna doe jij de onboarding."
+      }
+    },
+    "addNote": "De klant krijgt zijn eigen instellingen, naamgeving en rapporten. Rechten per account regel je in Team en rollen.",
+    "errors": {
+      "agency": "Alleen een bureau kan klanten toevoegen.",
+      "slots": "Je staffel is vol. Neem contact op om er accounts bij te nemen.",
+      "name": "Vul de naam van de zaak in.",
+      "email": "Vul een geldig e-mailadres van je klant in."
+    },
+    "submitInvite": "Voeg toe en stuur de uitnodiging",
+    "submitSelf": "Voeg toe en koppel met Facebook",
+    "cancel": "Annuleer",
+    "addedInvite": "{name} is toegevoegd. De uitnodiging is verstuurd.",
+    "addedSelf": "{name} is toegevoegd. Koppel nu het advertentieaccount.",
+    "rights": {
+      "title": "Rechten per klant",
+      "intro": "Bepaal per klant wie van je team mag kijken of wijzigen. Jij als eigenaar ziet altijd alles.",
+      "none": "Nog geen teamleden. Nodig ze uit in Team en rollen.",
+      "member": "Teamlid",
+      "aria": "Rechten van {member} voor {client}",
+      "saved": "Bewaard. De rechten gelden meteen.",
+      "levels": {
+        "geen": "Geen toegang",
+        "lezer": "Kijken",
+        "beheerder": "Wijzigen"
+      }
+    }
   }
 }
