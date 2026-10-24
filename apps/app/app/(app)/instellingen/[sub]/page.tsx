@@ -9,6 +9,9 @@ import { Row, Rows } from "../Row";
 import { AccountsList, ConnectionsList, LanguageRows, NamingForm, NotificationsList, NumbersForm, PayerForm, PrivacyRows, ProfileForm } from "../Settings";
 import { SettingsFrame } from "../SettingsFrame";
 
+// Koppelen met Meta haalt meteen 30 dagen cijfers op.
+export const maxDuration = 60;
+
 export const generateMetadata = routeMetadata("instellingen");
 
 const OWN_ROUTE = new Set<SettingsPage>(["team", "abonnement", "doorverwijzen"]);
@@ -30,7 +33,7 @@ export default async function SettingsPage({ params }: { params: Promise<{ sub: 
       body = <NumbersForm vm={vm.numbers} canEdit={ctx.canEdit} />;
       break;
     case "koppelingen":
-      body = <ConnectionsList rows={vm.connections} biz={vm.biz} canEdit={ctx.canEdit} />;
+      body = <ConnectionsList rows={vm.connections} biz={vm.biz} canEdit={ctx.canEdit} metaLive={vm.metaLive} lastSync={vm.lastSync} />;
       break;
     case "accounts":
       body = <AccountsList vm={vm.accounts} />;

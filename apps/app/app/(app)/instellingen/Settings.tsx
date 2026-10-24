@@ -8,6 +8,8 @@ import { breakEvenRoas, leadMax, maxCostPerSale } from "@adsweet/playbook";
 import { Button, Input, StatusBadge, Switch, TextButton, formatEuro, formatPercent, useToast } from "@adsweet/ui";
 import { NAMING_TOKENS, fillTemplate, fillUtm, type Naming } from "@/lib/naming";
 import type { AccountsVM, ConnectionRowVM, NamingVM, NumbersVM, PrivacyVM, ProfileVM } from "@/lib/server/settings";
+import { MetaPicker } from "@/components/meta/MetaPicker";
+import { metaSyncAction } from "@/app/meta-actions";
 import { selectAccount } from "../shell-actions";
 import {
   disconnectMetaAction,
@@ -205,11 +207,25 @@ export function NumbersForm({ vm, canEdit }: { vm: NumbersVM; canEdit: boolean }
 // Koppelingen
 // ---------------------------------------------------------------------------
 
-export function ConnectionsList({ rows, biz, canEdit }: { rows: ConnectionRowVM[]; biz: string; canEdit: boolean }) {
+export function ConnectionsList({
+  rows,
+  biz,
+  canEdit,
+  metaLive,
+  lastSync,
+}: {
+  rows: ConnectionRowVM[];
+  biz: string;
+  canEdit: boolean;
+  metaLive: boolean;
+  lastSync: string | null;
+}) {
   const t = useTranslations("settings.connections");
+  const tp = useTranslations("metaPicker");
   const toast = useToast();
   const router = useRouter();
   const [confirm, setConfirm] = useState(false);
+  const [picking, setPicking] = useState(false);
   const [pending, start] = useTransition();
   const later = (name: string) => toast.show({ message: t("connectLater", { name }) });
   return (
@@ -224,7 +240,13 @@ export function ConnectionsList({ rows, biz, canEdit }: { rows: ConnectionRowVM[
                 key={r.provider}
                 icon="link"
                 title={name}
-                sub={on ? t("metaSub", { biz, date: r.since ?? "[datum]" }) : r.status === "los" ? t("off") : t("metaSubNone")}
+                sub={
+                  on
+                    ? `${t("metaSub", { biz, date: r.since ?? "[datum]" })}${lastSync ? ` · ${t("lastSync", { when: lastSync })}` : ""}`
+                    : r.status === "los"
+                      ? t("off")
+                      : t("metaSubNone")
+                }
               >
                 {on ? (
                   <StatusBadge kind={r.status === "verlopen" ? "act" : "ok"} size="sm">
@@ -236,16 +258,38 @@ export function ConnectionsList({ rows, biz, canEdit }: { rows: ConnectionRowVM[
                     <TextButton
                       disabled={pending}
                       onClick={() =>
-                        start(async () => {
-                          const res = await reconnectMetaAction();
-                          if (!res.ok) return router.push(res.href);
-                          toast.show({ message: t("reconnected") });
-                          router.refresh();
-                        })
+                        metaLive
+                          ? setPicking((p) => !p)
+                          : start(async () => {
+                              const res = await reconnectMetaAction();
+                              if (!res.ok) return router.push(res.href);
+                              toast.show({ message: t("reconnected") });
+                              router.refresh();
+                            })
                       }
                     >
                       {on ? t("reconnect") : t("connect")}
                     </TextButton>
+                    {on && metaLive ? (
+                      <TextButton
+                        disabled={pending}
+                        onClick={() =>
+                          start(async () => {
+                            toast.show({ message: tp("syncing") });
+                            const res = await metaSyncAction();
+                            toast.show({
+                              message:
+                                res.ok && res.result
+                                  ? tp("synced", { campaigns: res.result.campaigns, ads: res.result.ads, days: res.result.days })
+                                  : tp("syncFailed", { error: res.error ?? "" }),
+                            });
+                            router.refresh();
+                          })
+                        }
+                      >
+                        {tp("syncNow")}
+                      </TextButton>
+                    ) : null}
                     {on ? <TextButton onClick={() => setConfirm(true)}>{t("disconnect")}</TextButton> : null}
                   </>
                 ) : null}
@@ -266,6 +310,14 @@ export function ConnectionsList({ rows, biz, canEdit }: { rows: ConnectionRowVM[
         })}
         <Row icon="link" title={t("capi")} sub={t("later")} />
       </Rows>
+      {picking ? (
+        <MetaPicker
+          onConnected={() => {
+            setPicking(false);
+            router.refresh();
+          }}
+        />
+      ) : null}
       {confirm ? (
         <div className="st-confirm" role="alertdialog" aria-label={t("disconnect")}>
           <p>{t("disconnectConfirm")}</p>

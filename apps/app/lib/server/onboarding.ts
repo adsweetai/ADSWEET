@@ -12,9 +12,11 @@ import { mediaUrl, slugify } from "./campaigns";
 import { writeLog } from "./changes";
 import { ORG_COOKIE, assertCanEdit, getContext, type AppContext } from "./context";
 import { demoSiteOf, type Brief } from "./demo-sites";
+import { metaLive } from "./meta/connect";
 import { sendMail } from "./mail";
 import { minDailyBudget } from "./playbook";
 import { recordReferral } from "./referral";
+import { testfaseOn } from "./testfase";
 import { readWebsite, type Found } from "./website";
 
 // De onboarding: van een nieuw account naar een eerste campagne in ongeveer 10 minuten (Inloggen.dc.html#onboarding-1…11).
@@ -128,6 +130,8 @@ export interface OnboardingVM {
   trialEnd: string;
   hasAI: boolean;
   demo: boolean;
+  /** Echte koppeling met Meta (geen demo, sleutel ingesteld). */
+  metaLive: boolean;
 }
 
 const pct = (n: number | null | undefined) => (n ? `${Math.round(n * 100)}%` : "");
@@ -271,6 +275,7 @@ export async function loadOnboarding(ctx: AppContext, step: number): Promise<Onb
     trialEnd: formatDayMonth(ctx.org.trial_ends_at ?? addDays(day, TRIAL_DAYS)),
     hasAI: hasAI(ctx.plan),
     demo: isDemo,
+    metaLive: metaLive(),
   };
 }
 
@@ -699,7 +704,8 @@ export async function startTrialDemo(input: {
   billing: { name: string; vat: string; address: string; email: string };
 }) {
   const { ctx } = await own();
-  if (!isDemo) return { ok: false as const };
+  // Zonder betaalpartner (fase 13) kan je de proefperiode alleen in de demo of in de interne testfase starten.
+  if (!isDemo && !(await testfaseOn())) return { ok: false as const };
   if (!["starter", "pro", "scale"].includes(input.plan)) return { ok: false as const };
   const code = input.code ? await checkCode(input.code) : null;
   const svc = serviceDb();

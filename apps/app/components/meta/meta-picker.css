@@ -1,0 +1,22 @@
+/* Kiezen uit Meta: advertentieaccount, pagina en pixel */
+.mp {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 760px;
+}
+.mp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 12px;
+}
+.mp-note {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 14px;
+}
+.mp-alert {
+  margin: 0;
+  color: var(--act);
+  font-size: 14px;
+}

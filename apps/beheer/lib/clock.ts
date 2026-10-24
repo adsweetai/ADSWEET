@@ -31,5 +31,8 @@ export function nowIso(): string {
   const time = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Brussels", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false }).format(
     new Date(),
   );
-  return new Date(`${today()}T${time}+01:00`).toISOString();
+  // De voorbeelddata van vandaag loopt tot 06:00 (de dagelijkse audit). Wat je 's nachts in de demo doet, schuift
+  // 8 uur op, zodat het altijd na de audit komt en bovenaan in het logboek staat.
+  const [h, rest] = [Number(time.slice(0, 2)), time.slice(2)];
+  return new Date(`${today()}T${String(h < 8 ? h + 8 : h).padStart(2, "0")}${rest}+01:00`).toISOString();
 }
