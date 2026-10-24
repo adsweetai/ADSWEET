@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -105,6 +106,9 @@ export function DemoPanel({ shell }: { shell: ShellData }) {
           ])}
           <div className="sh-demo__foot">
             <span>{t("date")}</span>
+            <Link href="/mails" className="as-textbtn" style={{ fontSize: 12.5 }} onClick={() => setOpen(false)}>
+              {t("mails")}
+            </Link>
             <button
               type="button"
               className="as-textbtn"

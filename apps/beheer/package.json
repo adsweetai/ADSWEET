@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@adsweet/db": "workspace:^",
+    "@adsweet/mails": "workspace:*",
     "@adsweet/playbook": "workspace:*",
     "@adsweet/ui": "workspace:*",
     "@electric-sql/pglite": "^0.3.16",

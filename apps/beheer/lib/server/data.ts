@@ -5,10 +5,11 @@ import { getTranslations } from "next-intl/server";
 import { must, type PlaybookVersion } from "@adsweet/db";
 import { findRepoRoot } from "@adsweet/db/server";
 import { FOUNDING_MAX, PLAN_LIMITS, TRIAL_CREDITS, planPrice, type PlanId } from "@adsweet/playbook";
-import { formatDateTime, formatDayMonth, formatEuro } from "@adsweet/ui";
+import { formatDateTime, formatDayMonth, formatEuro, formatLongDate } from "@adsweet/ui";
 import { nowIso, today } from "@/lib/clock";
 import { diffRules, nextVersion, rulesOf, versionOrder, type Rules } from "@/lib/playbook";
 import { requireAdmin, serviceDb } from "./auth";
+import { ownerEmail, sendMail } from "./mail";
 
 // Gegevens voor de schermen van Beheer. Elke functie controleert eerst of je adsweet_admin bent; daarna lezen we
 // zonder RLS, want een beheerder ziet alle klanten.
@@ -284,11 +285,16 @@ export async function loadCalls() {
 export async function planCall(id: string, startsAt: string) {
   const { db } = await admin();
   if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(startsAt)) return false;
+  const call = must(await db.from("calls").select().eq("id", id).maybeSingle());
+  if (!call) return false;
   // Het uur is Belgische tijd.
-  await db
-    .from("calls")
-    .update({ starts_at: new Date(`${startsAt}:00+01:00`).toISOString(), status: "gepland" })
-    .eq("id", id);
+  const at = new Date(`${startsAt}:00+01:00`).toISOString();
+  await db.from("calls").update({ starts_at: at, status: "gepland" }).eq("id", id);
+  // Mails.dc.html: Kwartaalcall bevestigd, naar de eigenaar van de klant.
+  if (call.kind === "kwartaal") {
+    const to = await ownerEmail(call.organization_id);
+    if (to) await sendMail("kwartaalcall", to, { date: formatLongDate(startsAt.slice(0, 10)), time: startsAt.slice(11, 16) });
+  }
   return true;
 }
 

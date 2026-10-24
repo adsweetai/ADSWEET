@@ -2,10 +2,12 @@ import "server-only";
 import { getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
 import { must, type Plan, type Role, type SeriesColor } from "@adsweet/db";
+import { env } from "@/lib/env";
 import { PLAN_LIMITS } from "@/lib/plans";
 import { getDb } from "./auth";
 import { writeLog } from "./changes";
 import { getContext, type AppContext } from "./context";
+import { sendMail } from "./mail";
 
 // Team en rollen (App.dc.html#team). Gebruikers per plan: Starter 1, Pro 2, Scale 5, Agency onbeperkt. Een
 // open uitnodiging telt mee. Bij een bureau is het team dat van het bureau; rechten per klant staan eronder.
@@ -106,8 +108,14 @@ export async function inviteMember(email: string, role: Role): Promise<InviteRes
   if (team.users.some((u) => u.sub.toLowerCase() === clean || u.name.toLowerCase() === clean)) return { ok: false, error: "exists" };
   const db = await getDb();
   const org = teamOrg(ctx);
-  await db.from("invitations").insert({ organization_id: org.id, email: clean, role: r, invited_by: ctx.user.id });
-  // De mail met de link (Mails.dc.html#uitnodiging-teamlid) gaat uit via packages/mails.
+  const inv = must(await db.from("invitations").insert({ organization_id: org.id, email: clean, role: r, invited_by: ctx.user.id }).select("token").single());
+  // Mails.dc.html: Uitnodiging teamlid, met de link naar /uitnodiging/[token].
+  await sendMail("uitnodiging", clean, {
+    inviter: ctx.profile.first_name || ctx.profile.email,
+    org: org.name,
+    role: r,
+    url: `${env.appUrl}/uitnodiging/${inv.token}`,
+  });
   await writeLog(db, { ...ctx, org }, { kind: "wijziging", what: t("log"), from_to: t("logSub", { email: clean, role: tr(r) }) });
   revalidatePath("/team");
   return { ok: true };

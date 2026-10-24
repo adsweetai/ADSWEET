@@ -7,6 +7,7 @@ import { today } from "@/lib/clock";
 import { env } from "@/lib/env";
 import { slug } from "@/lib/naming";
 import { serviceDb } from "./auth";
+import { ownerOf, sendMail } from "./mail";
 import type { AppContext } from "./context";
 
 // Doorverwijzen (App.dc.html#doorverwijzen): een persoonlijke link adsweet.ai/r/[code]. Wie zich daarmee
@@ -73,6 +74,9 @@ export async function recordReferral(newOrgId: string, name: string) {
   await serviceDb()
     .from("referrals")
     .insert({ organization_id: referrer, code: code.toLowerCase(), referred_name: name, signed_up_at: today(), referred_organization_id: newOrgId });
+  // Mails.dc.html: Doorverwijzing gelukt. De gratis maand gaat in zodra de nieuwe klant betaalt (fase 13).
+  const owner = await ownerOf(referrer);
+  if (owner) await sendMail("doorverwijzing", owner.email, { name, date: "[datum]" });
   try {
     (await cookies()).delete(REF_COOKIE);
   } catch {

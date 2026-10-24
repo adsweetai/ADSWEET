@@ -64,6 +64,7 @@ const TABLE: [RegExp, RouteInfo][] = [
   [/^\/team/, R("team", "V1", "instellingen")],
   [/^\/doorverwijzen/, R("doorverwijzen", "MVP", "instellingen")],
   [/^\/partner/, R("partner", "Later", "instellingen")],
+  [/^\/mails/, R("mails", "MVP", "instellingen")],
 ];
 
 export function routeInfo(pathname: string): RouteInfo {

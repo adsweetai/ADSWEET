@@ -27,6 +27,17 @@ pnpm dev
 
 De voorbeelddata komt uit `packages/db/src/fixtures`. Na een wijziging: `pnpm --filter @adsweet/db gen:seed`.
 
+**Mails.** De 12 mails staan in `packages/mails`. Zonder `RESEND_API_KEY` gaan ze naar een postvak: in de demo zie je
+ze op `/mails` (via het demopaneel), met een knop om alle 12 naar de testomgeving te sturen.
+
+```bash
+pnpm --filter @adsweet/mails send:test         # de 12 voorbeeldmails: met RESEND_API_KEY via Resend naar delivered@resend.dev, anders naar .mail-outbox/
+pnpm --filter @adsweet/mails gen:supabase      # supabase/templates/magic_link.html uit hetzelfde sjabloon
+```
+
+De dagelijkse mails (proefperiode dag 27, Actie nodig, op maandag het weekrapport) draaien via
+`GET /api/cron/dagelijks` met `Authorization: Bearer $CRON_SECRET`.
+
 ## Controleren
 
 ```bash
@@ -48,7 +59,7 @@ Gebruik `PW_CHANNEL=chrome` (of `msedge`) om de rooktest in een geïnstalleerde 
 | `apps/beheer` | Next.js 15. Intern beheer, alleen voor `adsweet_admin`: playbook bewerken en publiceren, versies, strategieën, teksten, Academy, klanten, AI-kosten, kortingscodes, partners, calls, systeemstatus. |
 | `packages/ui` | Designsysteem: tokens, letter, knoppen, badges, EuroTegel, actiekaart, Dot, lader. |
 | `packages/db` | Supabase-schema, migraties, seed, gegenereerde types. |
-| `packages/mails` | De 12 mails als gewone HTML-sjablonen. |
+| `packages/mails` | De 12 mails: één sjabloon (600px, tabellen, inline stijlen, licht), teksten in `nl.json`, verzending via Resend of een postvak. |
 | `packages/playbook` | Het playbook als gegevens + de rekenregels (break-even, max. kost per verkoop, winnaar/verliezer). |
 | `design/` | De HTML-prototypes. **Referentie, geen productiecode.** Open `design/Schermoverzicht.dc.html` in een browser. |
 | `docs/` | Specificatie, schermen, koppelingen, de oorspronkelijke brief. |

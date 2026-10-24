@@ -4,11 +4,13 @@ import { must, type OrgKind, type Role, type SeriesColor } from "@adsweet/db";
 import { costPer, roas } from "@adsweet/playbook";
 import { formatEuro, formatRoas, type StatusKind } from "@adsweet/ui";
 import { nowIso, today } from "@/lib/clock";
+import { env } from "@/lib/env";
 import { periodRange } from "@/lib/period";
 import { getDb, serviceDb } from "./auth";
 import { isLive } from "./campaigns";
 import { writeLog } from "./changes";
 import { assertCanEdit, getContext, type AppContext } from "./context";
+import { sendMail } from "./mail";
 import { goalFor, goalKind, statusFor, sumRows, targets } from "./metrics";
 
 // Agency (App.dc.html#klanten): het overzicht van al je klanten, een klant toevoegen en de rechten per klant.
@@ -278,6 +280,12 @@ export async function createClient(input: { name: string; website: string; kind:
         .single(),
     );
     token = inv.token;
+    await sendMail("uitnodiging", email, {
+      inviter: ctx.profile.first_name || agency.name,
+      org: name,
+      role: "eigenaar",
+      url: `${env.appUrl}/uitnodiging/${inv.token}`,
+    });
   }
   const t = await getTranslations("agency");
   const db = await getDb();

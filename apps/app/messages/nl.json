@@ -563,7 +563,8 @@
     "team": "Instellingen",
     "doorverwijzen": "Instellingen",
     "partner": "Partnerportaal",
-    "previewLink": "Preview-link"
+    "previewLink": "Preview-link",
+    "mails": "Mails"
   },
   "notifications": {
     "types": {
@@ -673,7 +674,8 @@
       "aan": "Aan"
     },
     "reset": "Begin opnieuw met de voorbeelddata",
-    "resetDone": "De voorbeelddata staat terug."
+    "resetDone": "De voorbeelddata staat terug.",
+    "mails": "Mails bekijken"
   },
   "gates": {
     "studio": "Met Pro maakt AdSweet zelf beelden, teksten en videoscripts voor de fase die je mist.",
@@ -3286,5 +3288,26 @@
     "example": "Een klant op Pro betaalt {price} per maand. Jij krijgt 30%: {month} per maand, of {year} over 12 maanden.",
     "payouts": "Uitbetalingen",
     "payoutsNone": "[uitbetalingen per maand]"
+  },
+  "mailsPage": {
+    "note": "De 12 mails van AdSweet, met de voorbeelden uit het prototype. Verzenden gaat nu via {transport}. Hoort niet bij het product.",
+    "transport": {
+      "outbox": "het postvak van de testomgeving (er gaat niets echt de deur uit)",
+      "resend": "Resend"
+    },
+    "listAria": "Mails",
+    "previewAria": "Voorbeeld van de mail",
+    "from": "Van: AdSweet <hallo@adsweet.ai>",
+    "subject": "Onderwerp:",
+    "to": "Aan: {to}",
+    "sendAll": "Verstuur de 12 mails naar de testomgeving",
+    "sentAll": "{n} mails verstuurd naar {to}.",
+    "runJobs": "Draai de dagelijkse mails nu",
+    "jobsDone": "Dagelijkse mails: {trial} proefperiode, {action} Actie nodig, {weekly} weekrapporten.",
+    "sentTitle": "Verstuurd in deze sessie ({n})",
+    "cols": ["Wanneer", "Aan", "Onderwerp", ""],
+    "open": "Bekijk",
+    "openAria": "Bekijk ‘{subject}’ aan {to}",
+    "noneSent": "Nog niets verstuurd. Nodig iemand uit in Team, zeg op, of verstuur de 12 mails hierboven."
   }
 }
