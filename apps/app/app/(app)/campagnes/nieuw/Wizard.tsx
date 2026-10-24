@@ -4,10 +4,24 @@ import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import type { CampaignGoal, CampaignKind } from "@adsweet/db";
-import { Button, ChoiceCards, Icon, Input, Steps, SwitchRow, formatDashDate, formatDayMonth, formatMonthCode, type IconName } from "@adsweet/ui";
+import {
+  Button,
+  ChoiceCards,
+  DotCharacter,
+  Icon,
+  Input,
+  Steps,
+  SwitchRow,
+  formatDashDate,
+  formatDayMonth,
+  formatMonthCode,
+  useToast,
+  type IconName,
+} from "@adsweet/ui";
 import { LinkButton } from "@/components/LinkButton";
 import { PlaybookWarning } from "@/components/ui";
 import type { MakerContext } from "@/lib/server/campaigns";
+import { dotFillAction } from "../../dot-actions";
 import { createCampaignAction } from "../actions";
 
 type Strategy = CampaignKind;
@@ -61,6 +75,8 @@ export function Wizard({ m, preset, tomorrow, xmasEnd }: WizardProps) {
   const [campaignId, setCampaignId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [pending, start] = useTransition();
+  const [fly, setFly] = useState<{ x: number; y: number; say: string; mood: "praat" | "viert" } | null>(null);
+  const toast = useToast();
   const timers = useRef<number[]>([]);
   const heading = useRef<HTMLHeadingElement>(null);
   useEffect(() => () => timers.current.forEach((x) => window.clearTimeout(x)), []);
@@ -86,6 +102,35 @@ export function Wizard({ m, preset, tomorrow, xmasEnd }: WizardProps) {
   const xmas = s.strat === "feest";
   const adNames = xmas ? (t.raw("xmasAds") as string[]) : Array.from({ length: s.ads }, (_, i) => t("adSlot", { n: i + 1 }));
   const done = live >= LIVE_STEPS && !!campaignId;
+
+  /** Laat Dot dit voorstellen: Dot vliegt langs de 9 stappen en vult alles in volgens het playbook. */
+  const dotFill = async () => {
+    if (fly) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const wait = (ms: number) => new Promise((r) => setTimeout(r, reduce ? Math.min(ms, 60) : ms));
+    const say = t.raw("dotSay") as string[];
+    const base = {
+      strat: s.strat === "catalogus" ? "vast" : s.strat,
+      goal: m.goalType,
+      chan: "meta" as const,
+      sets: 1,
+      ads: 5,
+      perSet: false,
+      budget: String(s.strat === "feest" ? 30 : m.defaultBudget).replace(".", ","),
+      ok: {},
+    };
+    for (let i = 0; i < 9; i++) {
+      setS((o) => ({ ...o, ...base, step: i }));
+      await wait(80);
+      const el = document.querySelector('[data-tour="w-choices"], .wz-fields, .wz-schema, .wz-list, .wz-main .as-switchrow') ?? heading.current;
+      const r = el?.getBoundingClientRect();
+      if (r) setFly({ x: Math.min(window.innerWidth - 80, r.right - 40), y: Math.max(80, r.top - 10), say: say[i], mood: i === 8 ? "viert" : "praat" });
+      await wait(i === 8 ? 1200 : 700);
+    }
+    setFly(null);
+    await dotFillAction();
+    toast.show({ message: t("dotToast") });
+  };
 
   const goLive = () =>
     start(async () => {
@@ -160,13 +205,19 @@ export function Wizard({ m, preset, tomorrow, xmasEnd }: WizardProps) {
 
   return (
     <div className="wz">
-      <div className="wz-steps">
+      <div data-tour="w-steps" className="wz-steps">
         <Steps label={t("stepsLabel")} steps={steps} current={s.step + 1} reached={done || live ? s.step + 1 : 9} onPick={(n) => !live && W({ step: n - 1 })} />
       </div>
 
       <section className="wz-main" aria-busy={pending}>
         <div className="wz-top">
           <span>{t("stepOf", { n: s.step + 1 })}</span>
+          {m.hasAI && !live ? (
+            <button data-tour="w-parel" type="button" className="wz-dot" onClick={dotFill} disabled={!!fly}>
+              <DotCharacter size={26} mood="knipoog" />
+              {t("dotFill")}
+            </button>
+          ) : null}
         </div>
         <h2 className="wz-title" ref={heading} tabIndex={-1}>
           {steps[s.step]}
@@ -175,27 +226,31 @@ export function Wizard({ m, preset, tomorrow, xmasEnd }: WizardProps) {
         {isGoogle ? <p className="wz-note wz-note--dashed">{t("googleNote")}</p> : null}
 
         {choiceStep ? (
-          <ChoiceCards
-            label={steps[s.step]}
-            value={s.step === 0 ? s.strat : s.step === 1 ? s.goal : s.chan}
-            options={
-              s.step === 0
-                ? STRATS.map((k) => {
-                    const [title, sub] = t.raw(`strategies.${k}`) as string[];
-                    return { value: k, title, sub, disabled: k === "catalogus" };
-                  })
-                : s.step === 1
-                  ? GOALS.map((k) => {
-                      const [title, sub] = t.raw(`goals.${k}`) as string[];
-                      return { value: k, title, sub };
+          <div data-tour="w-choices">
+            <ChoiceCards
+              label={steps[s.step]}
+              value={s.step === 0 ? s.strat : s.step === 1 ? s.goal : s.chan}
+              options={
+                s.step === 0
+                  ? STRATS.map((k) => {
+                      const [title, sub] = t.raw(`strategies.${k}`) as string[];
+                      return { value: k, title, sub, disabled: k === "catalogus" };
                     })
-                  : (["meta", "google"] as const).map((k) => {
-                      const [title, sub] = t.raw(`channels.${k}`) as string[];
-                      return { value: k, title, sub };
-                    })
-            }
-            onChange={(v) => (s.step === 0 ? W({ strat: v as Strategy }) : s.step === 1 ? W({ goal: v as CampaignGoal }) : W({ chan: v as "meta" | "google" }))}
-          />
+                  : s.step === 1
+                    ? GOALS.map((k) => {
+                        const [title, sub] = t.raw(`goals.${k}`) as string[];
+                        return { value: k, title, sub };
+                      })
+                    : (["meta", "google"] as const).map((k) => {
+                        const [title, sub] = t.raw(`channels.${k}`) as string[];
+                        return { value: k, title, sub };
+                      })
+              }
+              onChange={(v) =>
+                s.step === 0 ? W({ strat: v as Strategy }) : s.step === 1 ? W({ goal: v as CampaignGoal }) : W({ chan: v as "meta" | "google" })
+              }
+            />
+          </div>
         ) : null}
 
         {s.step === 0 && special ? <p className="wz-note">{t("specialNote")}</p> : null}
@@ -330,14 +385,14 @@ export function Wizard({ m, preset, tomorrow, xmasEnd }: WizardProps) {
                 {t("preview")}
               </LinkButton>
             ) : null}
-            <Button arrow onClick={next} disabled={pending || (live > 0 && !done)}>
+            <Button data-tour="w-next" arrow onClick={next} disabled={pending || (live > 0 && !done)}>
               {s.step === 8 ? (done ? t("toCampaign") : t("live")) : t("next")}
             </Button>
           </div>
         </div>
       </section>
 
-      <aside className="wz-sum" aria-label={t("summary")}>
+      <aside data-tour="w-sum" className="wz-sum" aria-label={t("summary")}>
         <b>{t("summary")}</b>
         {sum.map(([k, v, act]) => (
           <div key={k}>
@@ -346,6 +401,12 @@ export function Wizard({ m, preset, tomorrow, xmasEnd }: WizardProps) {
           </div>
         ))}
       </aside>
+      {fly ? (
+        <div className="dot-fly" style={{ transform: `translate(${fly.x}px, ${fly.y}px)`, left: 0, top: 0 }} aria-hidden="true">
+          <DotCharacter size={56} mood={fly.mood} />
+          <span className="dot-fly__say">{fly.say}</span>
+        </div>
+      ) : null}
     </div>
   );
 }

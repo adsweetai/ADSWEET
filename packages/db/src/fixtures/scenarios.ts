@@ -1401,6 +1401,9 @@ export function buildSeed(): Seed {
     expires_at: at("2026-12-21", "23:59"),
     created_at: at("2026-12-07", "08:30"),
   });
+  // De voorbeeldgebruikers kennen de app al: hun rondleidingen zijn gezien. Een nieuwe gebruiker krijgt ze de eerste keer.
+  for (const key of ["lisa", "tom", "sarah", "bram", "eva"] as const)
+    for (const tour of ["app", "campagne", "wizard"] as const) seed.user_tours.push({ user_id: userId(key), tour, seen_at: at("2026-11-20", "09:00") });
   // Founding members: −30% zolang ze klant blijven, voor de eerste 50 (docs/regels.md).
   seed.discount_codes.push({ id: seedId("discount:founding"), code: "FOUNDING50", kind: "founding", percent_off: 30, max_uses: 50, uses: 1 });
   return seed;

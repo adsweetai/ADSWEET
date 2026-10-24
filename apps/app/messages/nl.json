@@ -1111,7 +1111,19 @@
       "structuur": "Kies tussen 1 en 5 ad sets en tussen 1 en 10 advertenties.",
       "budget": "Vul een budget per dag in.",
       "afwijking": "Bevestig eerst de afwijkingen van het playbook met ‘Toch doorgaan’."
-    }
+    },
+    "dotSay": [
+      "Ik kies de aanpak.",
+      "Het doel.",
+      "Meta, zoals altijd.",
+      "1 campagne, 1 ad set, 5 advertenties.",
+      "Breed, binnen je regio.",
+      "Een budget dat Meta laat leren.",
+      "Dit heb je nodig.",
+      "Namen en tracking.",
+      "Alsjeblieft."
+    ],
+    "dotToast": "Dot vulde je campagne in volgens het playbook. Kijk alles na en zet ze live."
   },
   "addAds": {
     "campaign": "Campagne",
@@ -1958,7 +1970,8 @@
     "off": "Uit",
     "setup": "Instellen",
     "pdf": "Exporteer als PDF",
-    "customLater": "Later: eigen meetwaarden met externe data."
+    "customLater": "Later: eigen meetwaarden met externe data.",
+    "ask": "Stel een vraag over je cijfers"
   },
   "studio": {
     "credits": "Credits",
@@ -2148,6 +2161,462 @@
         "t": "Speciaal moment automatisch",
         "rule": "Start de campagne Feestdagen op 8 december om 06:00 en stop ze op 24 december om 23:59."
       }
+    }
+  },
+  "dot": {
+    "name": "Dot",
+    "open": "Open Dot, je assistent",
+    "close": "Sluiten",
+    "balloon": "{name}, ik heb {n, plural, one {# ding} other {# dingen}} voor vandaag.",
+    "show": "Bekijk ze",
+    "later": "Later",
+    "hello": "Hoi {name}, ik ben Dot. Ik ken je zaak, je cijfers en het playbook. Vraag me wat je wil, ik doe niets zonder jouw klik.",
+    "thinking": "Even kijken in je cijfers.",
+    "questions": {
+      "week": "Hoe gaat het deze week?",
+      "xmas": "Maak een campagne voor de feestdagen",
+      "roas": "Waarom is mijn ROAS gedaald?",
+      "which": "Welke advertentie moet ik maken?"
+    },
+    "askLabel": "Vraag iets aan Dot",
+    "mic": "Spreek in",
+    "micLater": "Inspreken komt later",
+    "send": "Verstuur",
+    "barsLabel": "Uitgegeven en omzet per advertentie",
+    "barsNote": "Donker: omzet · grijs: uitgegeven · laatste 7 dagen",
+    "planTitle": "Je campagne voor de feestdagen",
+    "planMake": "Wat je moet maken",
+    "toWizard": "Zet klaar in de wizard",
+    "adjust": "Pas aan",
+    "adjustQ": "Pas de looptijd aan",
+    "aiPhotos": "Maak de 3 foto's met AI · 30 credits",
+    "photosShort": "Je hebt nog {n} credits, en 3 foto's kosten er 30. Na je proefperiode heb je er 300 per maand. Wil je er nu al één maken?",
+    "photosOk": "Je hebt genoeg credits. In Studio maak je ze in een paar klikken.",
+    "toStudio": "Naar Studio",
+    "changeTitle": "Wat er verandert",
+    "warnTitle": "Pas op, dit raden we niet aan.",
+    "warnBudget": "Met minder dan €10 per dag (€30 voor een webshop) krijgt Meta te weinig resultaten binnen om te leren wie je klanten zijn.",
+    "doIt": "Doe het",
+    "dont": "Niet doen",
+    "doneYes": "Gedaan. Dit staat in je logboek.",
+    "doneNo": "Niets veranderd.",
+    "fillLog": "Campagnewizard ingevuld volgens het playbook",
+    "fillSteps": "9 stappen",
+    "answers": {
+      "tooEarly": "Dat kan ik nog niet zien: je advertenties lopen pas sinds gisteren. Morgenochtend om 06:00 weet ik meer.",
+      "weekSales": "{name}, je campagne bracht {sales} verkopen op voor {spend}. Je ROAS is {roas}, boven je break-even van {be}.",
+      "weekSalesUnder": "{name}, je campagne bracht {sales} verkopen op voor {spend}. Je ROAS is {roas}, net onder je break-even van {be}.",
+      "weekCause": "Dat komt door één advertentie: ‘{ad}’.",
+      "weekLeads": "{name}, je campagne bracht de afgelopen 7 dagen {leads} aanvragen op aan {cpl} per aanvraag. Je doel is {target}.",
+      "weekLeadsLoser": "‘{ad}’ gaf {spend} uit zonder aanvraag: zonder die advertentie zat je op {without} per aanvraag sinds de start.",
+      "roasFine": "Je ROAS is {roas}. Ik zie geen advertentie die je tegenhoudt.",
+      "roasLoser": "Door één advertentie. ‘{ad}’ gaf {spend} uit zonder verkoop. Zonder die advertentie zat je op {without} in plaats van {now}. Ik zou hem afzetten, het voorstel staat op Vandaag.",
+      "roasLoserLeads": "Door één advertentie. ‘{ad}’ gaf {spend} uit zonder aanvraag. Ik zou hem afzetten, het voorstel staat op Vandaag.",
+      "toToday": "Naar Vandaag",
+      "whichVideo": "Een video. Je video's doen het veel beter dan je foto's: ROAS {v} tegenover {f}.",
+      "whichPhoto": "Een foto met je aanbod en de prijs erbij: je foto's doen het nu beter dan je video's.",
+      "whichBottom": "En je hebt maar één bottom-of-funnel advertentie.",
+      "whichIdea": "Ik zou je best verkopende product filmen, met de prijs in beeld.",
+      "script": "Laat een script schrijven",
+      "uploadVideo": "Upload een video",
+      "uploadAd": "Maak een advertentie",
+      "xmasIntro": "Goed idee, {name}. Ik zou een aparte campagne maken naast je vaste, zodat die gewoon blijft lopen. Zo zou ik het doen:",
+      "langAdj": "{lang, select, Nederlands {Nederlandstalig} Frans {Franstalig} Engels {Engelstalig} Duits {Duitstalig} other {{lang}}}",
+      "agePlus": "{min} tot 65+",
+      "ageRange": "{min} tot {max} jaar",
+      "plan": {
+        "campaign": "Campagne",
+        "campaignV": "Feestdagen {year}, apart naast je vaste campagne",
+        "goal": "Doel",
+        "goals": {
+          "sales": "Verkopen",
+          "leads": "Aanvragen",
+          "none": "Bereik"
+        },
+        "period": "Looptijd",
+        "periodV": "8 tot en met 24 december",
+        "region": "Regio",
+        "budget": "Budget",
+        "budgetWebshop": "{min} per dag, het minimum voor een webshop",
+        "budgetMin": "{min} per dag, het minimum",
+        "ads": "Advertenties",
+        "adsV": "5, waarvan 3 foto's en 2 video's",
+        "split": "Verdeling",
+        "splitV": "2 top, 1 middle, 2 bottom (voorbeeld)",
+        "newAds": "Nieuwe ads",
+        "newAdsV": "Na [x weken, PJ] in een nieuwe ad set"
+      },
+      "fromTo": "{from} → {to} per dag",
+      "changeIntro": "Dit zou ik veranderen. Ik doe het pas als jij op \"Doe het\" klikt.",
+      "changeBudget": "Budget van de vaste campagne: {fromTo}",
+      "logBudget": "Budget vaste campagne aangepast",
+      "period": "Tot wanneer wil je de campagne laten lopen? Ik raad tot en met 24 december aan, zodat bestellingen op tijd geleverd worden.",
+      "cantSee": "Dat kan ik niet zien in je account. Wil je dat ik het aan iemand van ons vraag?",
+      "askUs": "Ja, vraag het"
+    }
+  },
+  "tours": {
+    "app": {
+      "steps": [
+        {
+          "t": "Hoi, ik ben Dot.",
+          "d": "Het puntje uit het logo, en je assistent bij AdSweet. In {n} korte stappen laat ik je zien waar alles staat en wat je elke dag doet. Je kan altijd stoppen."
+        },
+        {
+          "sel": "[data-tour=\"nav\"]",
+          "t": "Je menu",
+          "d": "Hier vind je alles: Vandaag, je campagnes, je advertenties, je cijfers en de Academy. Onderaan staan Hulp en je instellingen."
+        },
+        {
+          "sel": "[data-tour=\"account\"]",
+          "t": "Je advertentieaccount",
+          "d": "Hier zie je in welk advertentieaccount je werkt. Met Scale of Agency wissel je hier van account of klant."
+        },
+        {
+          "sel": "[data-tour=\"greet\"]",
+          "t": "Vandaag, in één zin",
+          "d": "Elke ochtend vat AdSweet samen hoe je advertenties het doen, en hoeveel er vandaag te doen is."
+        },
+        {
+          "sel": "[data-tour=\"tile\"]",
+          "t": "De EuroTegel",
+          "d": "Van links naar rechts: wat je uitgaf, wat het opleverde en of je eraan verdient. Woorden met een stippellijn leggen we uit als je erover beweegt of erop tikt."
+        },
+        {
+          "sel": "[data-tour=\"cards\"]",
+          "t": "Wat je vandaag best doet",
+          "d": "Elke kaart is een voorstel uit de audit van vannacht, met de cijfers en de reden. Eén klik en het is gedaan. AdSweet zet nooit zelf een advertentie af."
+        },
+        {
+          "sel": "[data-tour=\"lists\"]",
+          "t": "Wat goed en minder loopt",
+          "d": "Je advertenties met hun label: Winnaar, Nog geen winnaar, Verliezer of Te vroeg om te zeggen. Klik erop voor de details."
+        },
+        {
+          "sel": "[data-tour=\"period\"]",
+          "t": "Kies je periode",
+          "d": "Bekijk gisteren, de laatste 7 of 30 dagen, of alles sinds de start."
+        },
+        {
+          "sel": "[data-tour=\"bell\"]",
+          "t": "Meldingen",
+          "d": "Is er iets dringends, zoals een betaalprobleem bij Meta, dan zie je het hier en in je mailbox."
+        },
+        {
+          "sel": "[data-tour=\"new\"]",
+          "t": "Een nieuwe campagne",
+          "d": "Start hier een campagne. AdSweet vult alles voor volgens het playbook. Jij zet er je beelden in."
+        },
+        {
+          "sel": "[data-tour=\"parel\"]",
+          "t": "Hier woon ik",
+          "d": "Klik op mij en vraag wat je wil: over je cijfers, of laat me een campagne uitschrijven. Ik doe niets zonder jouw klik."
+        },
+        {
+          "sel": "[data-tour=\"help\"]",
+          "t": "Uitleg nodig?",
+          "d": "Met deze knop krijg je uitleg bij de pagina waar je bent. In Hulp start je deze rondleiding opnieuw."
+        }
+      ]
+    },
+    "campagne": {
+      "steps": [
+        {
+          "sel": "[data-tour=\"c-head\"]",
+          "t": "Je campagne in één oogopslag",
+          "d": "Naam, status, soort en budget per dag. Rechts voeg je advertenties toe, deel je een preview of pauzeer je."
+        },
+        {
+          "sel": "[data-tour=\"c-tabs\"]",
+          "t": "Vier tabs",
+          "d": "Overzicht, Advertenties, Instellingen en Logboek. In het logboek zie je elke wijziging, ook die buiten AdSweet."
+        },
+        {
+          "sel": "[data-tour=\"c-tile\"]",
+          "t": "Wat deze campagne opbracht",
+          "d": "De EuroTegel van deze campagne, in de periode die je bovenaan kiest."
+        },
+        {
+          "sel": "[data-tour=\"c-tree\"]",
+          "t": "De structuur",
+          "d": "Campagne, ad set en advertenties, zoals het playbook ze opbouwt: 1 campagne, 1 ad set, 5 advertenties. Klik op een advertentie voor de details."
+        },
+        {
+          "sel": "[data-tour=\"c-lock\"]",
+          "t": "Lopende ad sets blijven met rust",
+          "d": "Een wijziging zet een ad set terug in de leerfase. Nieuwe advertenties komen daarom in een nieuwe ad set."
+        },
+        {
+          "sel": "[data-tour=\"c-funnel\"]",
+          "t": "De funnelbalk",
+          "d": "Hoeveel advertenties je per fase hebt: top, middle en bottom. Een ontbrekende fase krijgt een streepjesrand."
+        },
+        {
+          "sel": "[data-tour=\"c-budget\"]",
+          "t": "Budget en schalen",
+          "d": "Doet je campagne het goed, dan stelt AdSweet voor om het budget te verhogen. Jij beslist."
+        }
+      ]
+    },
+    "wizard": {
+      "steps": [
+        {
+          "t": "Een nieuwe campagne",
+          "d": "In 9 stappen zet je een campagne klaar. Alles staat al ingevuld volgens het playbook. Aanpassen mag, moet niet."
+        },
+        {
+          "sel": "[data-tour=\"w-steps\"]",
+          "t": "De stappen",
+          "d": "Van wat je wil doen tot live zetten. Je kan altijd terug naar een vorige stap."
+        },
+        {
+          "sel": "[data-tour=\"w-choices\"]",
+          "t": "Kies wat past",
+          "d": "Het aanbevolen pad staat al geselecteerd. Een speciaal moment, zoals de feestdagen, wordt een aparte campagne naast je vaste."
+        },
+        {
+          "sel": "[data-tour=\"w-parel\"]",
+          "t": "Laat Dot het voorstellen",
+          "d": "Twijfel je? Dot vult de stap in volgens het playbook en je cijfers."
+        },
+        {
+          "sel": "[data-tour=\"w-sum\"]",
+          "t": "De samenvatting",
+          "d": "Hier zie je wat je koos. Wijkt iets af van het playbook, dan staat het hier in rood."
+        },
+        {
+          "sel": "[data-tour=\"w-next\"]",
+          "t": "Verder",
+          "d": "Wijkt een keuze af, dan krijg je eerst een waarschuwing met de reden. Met Toch doorgaan ga je gewoon verder."
+        }
+      ]
+    },
+    "starterIntro": {
+      "t": "Welkom bij AdSweet.",
+      "d": "In {n} korte stappen zie je waar alles staat en wat je elke dag doet. Je kan altijd stoppen."
+    },
+    "stepOf": "Stap {i} van {n}",
+    "skip": "Sla over",
+    "close": "Sluiten",
+    "prev": "Vorige",
+    "next": "Volgende",
+    "done": "Klaar",
+    "helpTitle": "Geef mij opnieuw uitleg",
+    "helpText": "Een korte rondleiding die stukken van de app belicht en uitlegt wat ze doen.",
+    "startApp": "Rondleiding door de app",
+    "startCampaign": "Een campagne lezen",
+    "startWizard": "Een campagne maken",
+    "reset": "Toon alle uitleg opnieuw bij je volgende bezoek",
+    "resetDone": "Bij je volgende bezoek zie je de uitleg opnieuw."
+  },
+  "glossary": {
+    "terms": [
+      {
+        "k": "break-even",
+        "re": "break-even(?:\\s+ROAS)?",
+        "title": "Break-even ROAS",
+        "def": "De ROAS waarboven je geld verdient aan je advertenties: 1 gedeeld door je marge."
+      },
+      {
+        "k": "doel-roas",
+        "re": "doel-ROAS",
+        "title": "Doel-ROAS",
+        "def": "Een ROAS die je zelf wil halen, hoger dan je break-even."
+      },
+      {
+        "k": "roas",
+        "re": "ROAS",
+        "title": "ROAS",
+        "def": "Omzet gedeeld door wat je advertenties kostten."
+      },
+      {
+        "k": "max-cpa",
+        "re": "maximale kost per verkoop",
+        "title": "Maximale kost per verkoop",
+        "def": "Orderwaarde × marge. Meer mag één verkoop niet kosten."
+      },
+      {
+        "k": "cpa",
+        "re": "kost per verkoop",
+        "title": "Kost per verkoop",
+        "def": "Wat één verkoop aan advertenties kostte."
+      },
+      {
+        "k": "cpl",
+        "re": "kost per aanvraag",
+        "title": "Kost per aanvraag",
+        "def": "Wat één aanvraag aan advertenties kostte."
+      },
+      {
+        "k": "cpc",
+        "re": "kost per klik",
+        "title": "Kost per klik",
+        "def": "Wat één klik op je advertentie kostte."
+      },
+      {
+        "k": "ctr",
+        "re": "CTR",
+        "title": "CTR",
+        "def": "Hoeveel procent van wie je advertentie ziet, erop klikt."
+      },
+      {
+        "k": "freq",
+        "re": "frequentie",
+        "title": "Frequentie",
+        "def": "Hoe vaak iemand je advertentie gemiddeld zag."
+      },
+      {
+        "k": "bereik",
+        "re": "bereik|vertoningen",
+        "title": "Bereik en vertoningen",
+        "def": "Bereik: hoeveel verschillende mensen je advertentie zagen. Vertoningen: hoe vaak ze in totaal getoond werd."
+      },
+      {
+        "k": "leerfase",
+        "re": "leerfase",
+        "title": "Leerfase",
+        "def": "De eerste periode waarin Meta uitzoekt aan wie het je advertentie best toont. Resultaten schommelen dan. Daarom raken we lopende ad sets niet aan."
+      },
+      {
+        "k": "adset",
+        "re": "ad ?sets?",
+        "title": "Ad set",
+        "def": "Een groep advertenties die naar dezelfde mensen gaat. De campagne is je doel en je budget, de advertentie is wat mensen zien."
+      },
+      {
+        "k": "funnel",
+        "re": "(?:top|middle|bottom)[- ]of[- ]funnel|funnel(?:fase|balk|verdeling)?",
+        "title": "Top, middle en bottom of funnel",
+        "def": "De drie fases van iemand die je nog niet kent tot iemand die koopt. Top: aandacht. Middle: uitleg en bewijs. Bottom: een aanbod en een duidelijke knop."
+      },
+      {
+        "k": "cbo",
+        "re": "budget op campagneniveau|Advantage-campagnebudget|campagnebudget",
+        "title": "Budget op campagneniveau",
+        "def": "Je budget staat op de campagne, en Meta verdeelt het zelf over wat het best loopt."
+      },
+      {
+        "k": "plaatsing",
+        "re": "plaatsing(?:en)?",
+        "title": "Plaatsing",
+        "def": "Waar je advertentie verschijnt, zoals de feed, stories of reels."
+      },
+      {
+        "k": "pixel",
+        "re": "pixel|dataset",
+        "title": "Pixel of dataset",
+        "def": "Een stukje code op je website dat aan Meta laat weten wie iets kocht of een formulier invulde."
+      },
+      {
+        "k": "fatigue",
+        "re": "creative-vermoeidheid",
+        "title": "Creative-vermoeidheid",
+        "def": "Mensen hebben je advertentie te vaak gezien en klikken minder."
+      },
+      {
+        "k": "utm",
+        "re": "UTM(?:'s)?",
+        "title": "UTM",
+        "def": "Een label achter je link, zodat je in Google Analytics of Shopify ziet van welke advertentie een bezoeker kwam."
+      },
+      {
+        "k": "extras",
+        "re": "extra's van Meta|Advantage\\+(?: creative)?",
+        "title": "Extra's van Meta",
+        "def": "Aanpassingen die Meta zelf aan je advertentie doet, zoals muziek of tekst op je beeld. Bij AdSweet staan ze uit."
+      },
+      {
+        "k": "cta",
+        "re": "call-to-action",
+        "title": "Call-to-action",
+        "def": "De knop onder je advertentie, zoals Nu kopen of Afspraak maken."
+      },
+      {
+        "k": "hookrate",
+        "re": "hook rate",
+        "title": "Hook rate",
+        "def": "Hoeveel procent van wie je video ziet, de eerste 3 seconden blijft kijken."
+      },
+      {
+        "k": "hook",
+        "re": "hooks?",
+        "title": "Hook",
+        "def": "De eerste zin of seconde van je advertentie, die mensen doet stoppen met scrollen."
+      },
+      {
+        "k": "interesses",
+        "re": "interesses",
+        "title": "Interesses",
+        "def": "Doelgroepen op basis van wat mensen leuk vinden. AdSweet gebruikt ze niet: ze maken je doelgroep kleiner zonder dat het beter werkt."
+      },
+      {
+        "k": "breed",
+        "re": "breed adverteren",
+        "title": "Breed adverteren",
+        "def": "Je kiest alleen regio, taal en leeftijd. Meta zoekt zelf wie je advertentie wil zien."
+      },
+      {
+        "k": "orderwaarde",
+        "re": "(?:gemiddelde )?orderwaarde",
+        "title": "Orderwaarde",
+        "def": "Wat een klant gemiddeld per bestelling uitgeeft."
+      },
+      {
+        "k": "marge",
+        "re": "(?:bruto)?marge",
+        "title": "Brutomarge",
+        "def": "Wat je overhoudt van een verkoop na de kost van je product, in procent."
+      },
+      {
+        "k": "cpm",
+        "re": "CPM",
+        "title": "CPM",
+        "def": "Wat 1.000 vertoningen van je advertentie kostten."
+      },
+      {
+        "k": "hold",
+        "re": "hold rate",
+        "title": "Hold rate",
+        "def": "Hoeveel procent je video bijna helemaal uitkijkt."
+      },
+      {
+        "k": "thumb",
+        "re": "thumb-stop",
+        "title": "Thumb-stop",
+        "def": "Hoeveel procent stopt met scrollen bij je advertentie."
+      },
+      {
+        "k": "lpv",
+        "re": "landingpaginaweergaven|landingsratio",
+        "title": "Landingpaginaweergaven",
+        "def": "Hoeveel mensen na een klik je pagina echt zagen laden. De ratio toont hoeveel klikken aankomen."
+      },
+      {
+        "k": "credits",
+        "re": "credits?",
+        "title": "Credits",
+        "def": "Daarmee maakt AdSweet beelden, teksten en scripts voor je. Pro heeft er 300 per maand, Scale 600, Agency 1.500."
+      }
+    ],
+    "yours": "In jouw cijfers",
+    "more": "Meer in de begrippenlijst",
+    "examples": {
+      "breakEven": "{m} marge: 1 / {md} = {be}.",
+      "breakEvenLeads": "Bij aanvragen werk je met een doel per aanvraag. Jouw doel is {target}.",
+      "roasGoal": "Je doel-ROAS is {v}.",
+      "roasGoalNone": "Je gaf geen doel-ROAS op, dus telt je break-even van {be}.",
+      "maxCpa": "{aov} × {m} = {max}.",
+      "aov": "{aov} per bestelling.",
+      "margin": "{m}: van {aov} hou je {left} over.",
+      "roas": "{rev} / {spend} = {roas}.",
+      "roasLeads": "Voor aanvragen kijkt AdSweet naar de kost per aanvraag, niet naar ROAS.",
+      "cpa": "{spend} / {n} = {cpa}.",
+      "cpl": "{spend} / {n} = {cpl}. Je doel is {target}.",
+      "cpm": "{spend} / {imp} × 1.000 = {cpm}.",
+      "ctr": "Je beste video: {ctr}, dus {per} op 1.000.",
+      "freq": "Je beste video: {f} keer.",
+      "adset": "Je hebt 1 campagne, {sets, plural, one {# ad set} other {# ad sets}} en {ads} advertenties.",
+      "funnel": "{top} (top), {middle} (middle), {bottom} (bottom)."
     }
   }
 }

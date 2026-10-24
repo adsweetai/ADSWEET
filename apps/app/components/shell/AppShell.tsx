@@ -9,6 +9,9 @@ import type { Period } from "@/lib/period";
 import { hasPlan } from "@/lib/plans";
 import { NAV_BOTTOM, NAV_CLIENTS, NAV_EXTRA_MOBILE, NAV_MAIN, routeInfo, type NavItem } from "@/lib/routes";
 import type { ShellData } from "@/lib/server/shell";
+import { DotLauncher } from "@/components/dot/DotLauncher";
+import { Terms } from "@/components/dot/Terms";
+import { Tours } from "@/components/dot/Tours";
 import { DemoPanel } from "./DemoPanel";
 import { GateProvider } from "./Gate";
 import { Sidebar } from "./Sidebar";
@@ -66,6 +69,9 @@ export function AppShell({ shell, period, children }: { shell: ShellData; period
             </div>
           </div>
           <TabBar active={route.group} isNew={route.id === "campagneNieuw"} more={more} />
+          {shell.dot ? <DotLauncher balloon={shell.dot.balloon} account={shell.account.name} firstName={shell.user.name} /> : null}
+          <Tours seen={shell.toursSeen} hasAI={shell.hasAI} />
+          <Terms examples={shell.glossary} />
           {shell.demo.enabled ? <DemoPanel shell={shell} /> : null}
         </div>
       </GateProvider>

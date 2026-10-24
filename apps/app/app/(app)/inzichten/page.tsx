@@ -6,11 +6,12 @@ import { Sparkline, TrendChart, type ChartTone } from "@/components/charts";
 import { RouteTabs } from "@/components/RouteTabs";
 import { GatePanel, Label } from "@/components/ui";
 import { routeMetadata } from "@/lib/meta";
-import { PLAN_NAME, hasPlan } from "@/lib/plans";
+import { PLAN_NAME, hasAI, hasPlan } from "@/lib/plans";
 import { loadAdPanel, loadCampaignDetail } from "@/lib/server/campaigns";
 import { getContext } from "@/lib/server/context";
 import { loadInsights, type Tile } from "@/lib/server/insights";
 import { currentPeriod } from "@/lib/server/period";
+import { AskDot } from "./AskDot";
 import { ReportActions } from "./ReportActions";
 import "../campagnes/campagnes.css";
 import "./inzichten.css";
@@ -68,6 +69,7 @@ export default async function InsightsPage({ searchParams }: { searchParams: Pro
     <div className="cp iz">
       <div className="iz-bar">
         <RouteTabs label={t("tabsLabel")} value={tab} items={TABS.map((tb) => ({ value: tb, label: t(`tabs.${tb}`), href: href(tb) }))} />
+        {hasAI(ctx.plan) ? <AskDot /> : null}
       </div>
 
       {tab === "overzicht" ? (

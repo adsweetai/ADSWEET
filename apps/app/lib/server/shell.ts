@@ -6,7 +6,9 @@ import { today } from "@/lib/clock";
 import { hasAI, hasPlan, PLAN_LIMITS, PLAN_NAME, TRIAL_CREDITS, TRIAL_WARN_FROM_DAY, trialDays } from "@/lib/plans";
 import { getDb } from "./auth";
 import type { AppContext } from "./context";
+import { glossaryExamples } from "./glossary";
 import { notificationText } from "./notifications";
+import { seenTours, type TourName } from "./tours";
 
 export interface ShellAccountItem {
   id: string;
@@ -30,6 +32,10 @@ export interface ShellData {
   labels: boolean;
   demo: { enabled: boolean; scenario: string | null; plan: string | null; state: string; labels: boolean };
   roasHint?: string;
+  /** Dot (vanaf Pro): de ballon van vandaag, of niets. */
+  dot: { balloon: string | null } | null;
+  toursSeen: TourName[];
+  glossary: Record<string, string>;
 }
 
 const DEMO_SCENARIOS: Record<string, string> = {
@@ -123,6 +129,15 @@ export async function loadShell(ctx: AppContext): Promise<ShellData> {
   );
 
   const first = ctx.profile.first_name ?? ctx.user.email;
+  // Dot: hoogstens één keer per dag een ballon met wat er vandaag te doen is.
+  let dot: ShellData["dot"] = null;
+  if (hasAI(plan) && !(ctx.agency && !ctx.inClient)) {
+    const recs = must(await db.from("recommendations").select("status, snoozed_until").eq("organization_id", org.id).in("status", ["open", "later"]));
+    const open = recs.filter((r) => r.status === "open" || (r.snoozed_until && r.snoozed_until <= day)).length;
+    const td = await getTranslations("dot");
+    dot = { balloon: open ? td("balloon", { name: ctx.profile.first_name ?? "", n: open }) : null };
+  }
+  const [toursSeen, glossary] = await Promise.all([seenTours(ctx.user.id), glossaryExamples(ctx)]);
   return {
     user: { name: first, initial: first.slice(0, 1).toUpperCase(), plan: PLAN_NAME[plan] + (inTrial ? ` · ${t("trialSuffix")}` : "") },
     plan,
@@ -136,6 +151,9 @@ export async function loadShell(ctx: AppContext): Promise<ShellData> {
     bell: { items: bellItems, count: Math.min(9, visible.filter((n) => n.severity !== "ok" && !n.read_at).length) },
     labels: demo.labels,
     demo: { enabled: demo.enabled, scenario: DEMO_SCENARIOS[ctx.user.email] ?? null, plan: demo.plan, state: demo.state, labels: demo.labels },
+    dot,
+    toursSeen,
+    glossary,
   };
 }
 
