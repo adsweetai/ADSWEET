@@ -23,11 +23,7 @@ export const currentUser = cache(async (): Promise<SessionUser | null> => {
     const store = await cookies();
     const t = verifyDemoToken(store.get(DEMO_SESSION_COOKIE)?.value, "sessie");
     if (!t) return null;
-    const { data } = await serviceDb()
-      .from("profiles")
-      .select("user_id, email")
-      .eq("user_id", t.uid)
-      .maybeSingle();
+    const { data } = await serviceDb().from("profiles").select("user_id, email").eq("user_id", t.uid).maybeSingle();
     return data ? { id: data.user_id, email: data.email } : null;
   }
   const sb = await supabaseForRequest();
@@ -50,17 +46,13 @@ export function serviceDb(): Db {
   return createDb(supabaseExecutor(supabaseService()));
 }
 
-const safeNext = (next: string | null | undefined) =>
-  next && next.startsWith("/") && !next.startsWith("//") ? next : "/vandaag";
+const safeNext = (next: string | null | undefined) => (next && next.startsWith("/") && !next.startsWith("//") ? next : "/vandaag");
 
 /**
  * Stuurt een link om in te loggen. Bestaat het adres niet, dan zeggen we dat niet (geen lek van accounts).
  * In de demomodus gaat er geen mail uit: de link komt op de pagina "Check je mailbox".
  */
-export async function sendLoginLink(
-  email: string,
-  next?: string,
-): Promise<{ ok: true } | { ok: false; error: "ongeldig" | "fout" }> {
+export async function sendLoginLink(email: string, next?: string): Promise<{ ok: true } | { ok: false; error: "ongeldig" | "fout" }> {
   const clean = email.trim().toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clean)) return { ok: false, error: "ongeldig" };
   const target = safeNext(next);
@@ -107,17 +99,13 @@ export async function completeLogin(params: URLSearchParams): Promise<{ ok: bool
     const t = verifyDemoToken(params.get("token") ?? undefined, "link");
     if (!t) return { ok: false, next };
     const store = await cookies();
-    store.set(
-      DEMO_SESSION_COOKIE,
-      signDemoToken({ uid: t.uid, kind: "sessie", exp: Date.now() + SESSION_DAYS * 86_400_000 }),
-      {
-        httpOnly: true,
-        sameSite: "lax",
-        secure: process.env.NODE_ENV === "production" && env.appUrl.startsWith("https"),
-        path: "/",
-        maxAge: SESSION_DAYS * 86_400,
-      },
-    );
+    store.set(DEMO_SESSION_COOKIE, signDemoToken({ uid: t.uid, kind: "sessie", exp: Date.now() + SESSION_DAYS * 86_400_000 }), {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production" && env.appUrl.startsWith("https"),
+      path: "/",
+      maxAge: SESSION_DAYS * 86_400,
+    });
     store.delete(DEMO_MAIL_COOKIE);
     return { ok: true, next };
   }

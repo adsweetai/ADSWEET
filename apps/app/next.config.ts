@@ -14,12 +14,7 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: repoRoot,
   // De demomodus leest het schema en de voorbeelddata van schijf.
   outputFileTracingIncludes: {
-    "/**": [
-      "../../supabase/migrations/*.sql",
-      "../../packages/db/sql/*.sql",
-      "../../packages/db/seed.sql",
-      "../../pnpm-workspace.yaml",
-    ],
+    "/**": ["../../supabase/migrations/*.sql", "../../packages/db/sql/*.sql", "../../packages/db/seed.sql", "../../pnpm-workspace.yaml"],
   },
 };
 

@@ -25,17 +25,7 @@ export function Loading({ children }: { children: ReactNode }) {
 }
 
 /** Lege staat: één zin in ink-muted, eventueel met de kleine stilstaande sculptuur. Geen illustraties. */
-export function EmptyState({
-  text,
-  sculpture = true,
-  action,
-  plain,
-}: {
-  text: ReactNode;
-  sculpture?: boolean;
-  action?: ReactNode;
-  plain?: boolean;
-}) {
+export function EmptyState({ text, sculpture = true, action, plain }: { text: ReactNode; sculpture?: boolean; action?: ReactNode; plain?: boolean }) {
   return (
     <div className={["as-empty", plain && "as-empty--plain"].filter(Boolean).join(" ")}>
       {sculpture && !plain ? <Sculpture /> : null}
@@ -46,17 +36,7 @@ export function EmptyState({
 }
 
 /** Foutstaat met badge Actie nodig. */
-export function ErrorState({
-  badge,
-  title,
-  text,
-  action,
-}: {
-  badge: ReactNode;
-  title: ReactNode;
-  text?: ReactNode;
-  action?: ReactNode;
-}) {
+export function ErrorState({ badge, title, text, action }: { badge: ReactNode; title: ReactNode; text?: ReactNode; action?: ReactNode }) {
   return (
     <div className="as-state" role="alert">
       <StatusBadge kind="act">{badge}</StatusBadge>

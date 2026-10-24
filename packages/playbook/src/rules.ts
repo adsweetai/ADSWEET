@@ -23,8 +23,7 @@ export function labelAd(
   const target = goal.kind === "sales" ? maxCostPerSale(goal.aov, goal.margin) : goal.target;
   if (a.results === 0 && a.spend >= PLAYBOOK.loserMultiple * target) return "verliezer";
   if (a.spend < minSpendToJudge) return "vroeg";
-  if (goal.kind === "sales")
-    return roas(a.revenue ?? 0, a.spend) >= breakEvenRoas(goal.margin) ? "winnaar" : "geen";
+  if (goal.kind === "sales") return roas(a.revenue ?? 0, a.spend) >= breakEvenRoas(goal.margin) ? "winnaar" : "geen";
   const c = costPer(a.spend, a.results);
   return c !== null && c <= target ? "winnaar" : "geen";
 }

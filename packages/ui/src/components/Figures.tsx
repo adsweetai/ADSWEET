@@ -1,13 +1,5 @@
 import { Fragment, type ReactNode } from "react";
-import {
-  AdLabel,
-  PhasePill,
-  StatusBadge,
-  Tag,
-  type AdLabelKind,
-  type Phase,
-  type StatusKind,
-} from "./Badges";
+import { AdLabel, PhasePill, StatusBadge, Tag, type AdLabelKind, type Phase, type StatusKind } from "./Badges";
 import { Icon } from "./Icon";
 
 export interface EuroBlock {
@@ -43,9 +35,7 @@ export function EuroTile({ blocks, caption, tag, note, status, label, minBlock =
               </span>
             ) : null}
             <div
-              className={["as-eurotile__block", i === blocks.length - 1 && "as-eurotile__block--last"]
-                .filter(Boolean)
-                .join(" ")}
+              className={["as-eurotile__block", i === blocks.length - 1 && "as-eurotile__block--last"].filter(Boolean).join(" ")}
               style={{ flexBasis: minBlock }}
             >
               <span className="as-eurotile__k">{b.label}</span>
@@ -140,11 +130,7 @@ export function FunnelBar({ counts, format, missing, label }: FunnelBarProps) {
       {(["top", "middle", "bottom"] as Phase[]).map((p) => {
         const n = counts[p] ?? 0;
         return (
-          <div
-            role="listitem"
-            key={p}
-            className={["as-funnel__cell", n ? `as-phase--${p}` : "as-funnel__cell--missing"].join(" ")}
-          >
+          <div role="listitem" key={p} className={["as-funnel__cell", n ? `as-phase--${p}` : "as-funnel__cell--missing"].join(" ")}>
             <span>{p[0].toUpperCase() + p.slice(1)}</span>
             <b>{n ? format(n) : missing}</b>
           </div>

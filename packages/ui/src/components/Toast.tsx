@@ -24,15 +24,7 @@ export function useToast(): ToastApi {
 }
 
 /** Melding onderaan met "Ongedaan maken". Eén tegelijk; verdwijnt na 6 seconden. */
-export function ToastProvider({
-  children,
-  undoLabel,
-  closeLabel,
-}: {
-  children: ReactNode;
-  undoLabel: string;
-  closeLabel: string;
-}) {
+export function ToastProvider({ children, undoLabel, closeLabel }: { children: ReactNode; undoLabel: string; closeLabel: string }) {
   const [toast, setToast] = useState<ToastOptions | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const close = useCallback(() => {

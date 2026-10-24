@@ -20,26 +20,14 @@ export interface ChoiceCardsProps<T extends string> {
 }
 
 /** Keuzekaarten als radiogroep, met pijltjestoetsen. */
-export function ChoiceCards<T extends string>({
-  label,
-  value,
-  options,
-  onChange,
-  className,
-  columns,
-}: ChoiceCardsProps<T>) {
+export function ChoiceCards<T extends string>({ label, value, options, onChange, className, columns }: ChoiceCardsProps<T>) {
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
   const active = Math.max(
     0,
     options.findIndex((o) => o.value === value),
   );
   const onKey = (e: KeyboardEvent, i: number) => {
-    const dir =
-      e.key === "ArrowRight" || e.key === "ArrowDown"
-        ? 1
-        : e.key === "ArrowLeft" || e.key === "ArrowUp"
-          ? -1
-          : 0;
+    const dir = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
     if (!dir) return;
     e.preventDefault();
     const n = (i + dir + options.length) % options.length;
@@ -74,9 +62,7 @@ export function ChoiceCards<T extends string>({
               <span className="as-choice__title">{o.title}</span>
               {o.sub ? <span className="as-choice__sub">{o.sub}</span> : null}
             </span>
-            <span className="as-choice__dot">
-              {on ? <Icon name="check" size={12} strokeWidth={2} /> : null}
-            </span>
+            <span className="as-choice__dot">{on ? <Icon name="check" size={12} strokeWidth={2} /> : null}</span>
           </button>
         );
       })}
@@ -93,13 +79,7 @@ export interface PillsProps<T extends string> {
   mode?: "pressed" | "radio";
 }
 
-export function Pills<T extends string>({
-  label,
-  value,
-  options,
-  onChange,
-  mode = "pressed",
-}: PillsProps<T>) {
+export function Pills<T extends string>({ label, value, options, onChange, mode = "pressed" }: PillsProps<T>) {
   return (
     <div role={mode === "radio" ? "radiogroup" : "group"} aria-label={label} className="as-pills">
       {options.map((o) => (
@@ -119,21 +99,11 @@ export function Pills<T extends string>({
   );
 }
 
-export function Segmented<T extends string>({
-  label,
-  value,
-  options,
-  onChange,
-}: Omit<PillsProps<T>, "mode">) {
+export function Segmented<T extends string>({ label, value, options, onChange }: Omit<PillsProps<T>, "mode">) {
   return (
     <div role="group" aria-label={label} className="as-segmented">
       {options.map((o) => (
-        <button
-          key={o.value}
-          type="button"
-          aria-pressed={o.value === value}
-          onClick={() => onChange(o.value)}
-        >
+        <button key={o.value} type="button" aria-pressed={o.value === value} onClick={() => onChange(o.value)}>
           {o.label}
         </button>
       ))}

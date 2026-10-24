@@ -173,16 +173,7 @@ export interface Media {
   created_at: IsoDateTime;
 }
 
-export type Provider =
-  | "meta"
-  | "google_ads"
-  | "shopify"
-  | "google_analytics"
-  | "google_drive"
-  | "dropbox"
-  | "canva"
-  | "figma"
-  | "slack";
+export type Provider = "meta" | "google_ads" | "shopify" | "google_analytics" | "google_drive" | "dropbox" | "canva" | "figma" | "slack";
 
 export interface Connection {
   id: Uuid;

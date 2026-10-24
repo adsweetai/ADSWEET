@@ -28,11 +28,7 @@ export function WarningBlock({ title, children, why, proceed }: WarningBlockProp
               </a>
             ) : null}
             {proceed ? (
-              <button
-                type="button"
-                className="as-btn as-btn--secondary as-btn--small"
-                onClick={proceed.onClick}
-              >
+              <button type="button" className="as-btn as-btn--secondary as-btn--small" onClick={proceed.onClick}>
                 {proceed.label}
               </button>
             ) : null}
@@ -44,15 +40,7 @@ export function WarningBlock({ title, children, why, proceed }: WarningBlockProp
 }
 
 /** Tipkaart: lampje, "Tip uit het playbook", één of twee zinnen en "Meer in de Academy". */
-export function TipCard({
-  label,
-  children,
-  more,
-}: {
-  label: ReactNode;
-  children: ReactNode;
-  more?: { label: ReactNode; href: string };
-}) {
+export function TipCard({ label, children, more }: { label: ReactNode; children: ReactNode; more?: { label: ReactNode; href: string } }) {
   return (
     <aside className="as-tipcard">
       <span className="as-tipcard__label">

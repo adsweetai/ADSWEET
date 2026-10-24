@@ -18,9 +18,7 @@ function EyesOpen({ dx = 0, dy = 0 }: { dx?: number; dy?: number }) {
   );
 }
 
-const Arc = ({ x }: { x: number }) => (
-  <path className="as-dotchar__inkline" d={`M${x - 5.5} 51 Q${x} 44.5 ${x + 5.5} 51`} strokeWidth="3.4" />
-);
+const Arc = ({ x }: { x: number }) => <path className="as-dotchar__inkline" d={`M${x - 5.5} 51 Q${x} 44.5 ${x + 5.5} 51`} strokeWidth="3.4" />;
 
 function Mouth({ mood }: { mood: DotMood }) {
   switch (mood) {
@@ -85,15 +83,7 @@ export function DotCharacter({ size = 56, mood = "rust", still, label }: DotChar
         <g className={mood === "viert" ? "hop" : "f"}>
           <g className="sq">
             <circle className="as-dotchar__body" cx="50" cy="50" r="40" />
-            <ellipse
-              className="as-dotchar__shine"
-              cx="36"
-              cy="30"
-              rx="10"
-              ry="6"
-              fillOpacity=".55"
-              transform="rotate(-28 36 30)"
-            />
+            <ellipse className="as-dotchar__shine" cx="36" cy="30" rx="10" ry="6" fillOpacity=".55" transform="rotate(-28 36 30)" />
             <circle className="as-dotchar__cheek" cx="30" cy="60" r="5" fillOpacity=".85" />
             <circle className="as-dotchar__cheek" cx="70" cy="60" r="5" fillOpacity=".85" />
             <Eyes mood={mood} />

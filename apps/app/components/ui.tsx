@@ -28,22 +28,10 @@ export function AppToastProvider({ children }: { children: ReactNode }) {
 }
 
 /** Het waarschuwingsblok bij een afwijking van het playbook. */
-export function PlaybookWarning({
-  reason,
-  whyHref = "/academy",
-  onProceed,
-}: {
-  reason: ReactNode;
-  whyHref?: string;
-  onProceed?: () => void;
-}) {
+export function PlaybookWarning({ reason, whyHref = "/academy", onProceed }: { reason: ReactNode; whyHref?: string; onProceed?: () => void }) {
   const t = useTranslations("ui");
   return (
-    <WarningBlock
-      title={t("warnTitle")}
-      why={{ label: t("why"), href: whyHref }}
-      proceed={onProceed ? { label: t("proceed"), onClick: onProceed } : undefined}
-    >
+    <WarningBlock title={t("warnTitle")} why={{ label: t("why"), href: whyHref }} proceed={onProceed ? { label: t("proceed"), onClick: onProceed } : undefined}>
       {reason}
     </WarningBlock>
   );
@@ -87,25 +75,9 @@ export function ExampleTag() {
 }
 
 /** Paneel "Dit zit in Pro." met "Bekijk de plannen". Geen kleur, geen robijn. */
-export function GatePanel({
-  plan,
-  text,
-  href = "/abonnement",
-  isStatic,
-}: {
-  plan: string;
-  text: ReactNode;
-  href?: string;
-  isStatic?: boolean;
-}) {
+export function GatePanel({ plan, text, href = "/abonnement", isStatic }: { plan: string; text: ReactNode; href?: string; isStatic?: boolean }) {
   const t = useTranslations("ui");
   return (
-    <PlanGatePanel
-      plan={plan}
-      title={t("gateTitle", { plan })}
-      text={text}
-      static={isStatic}
-      action={<ButtonLink href={href}>{t("gateCta")}</ButtonLink>}
-    />
+    <PlanGatePanel plan={plan} title={t("gateTitle", { plan })} text={text} static={isStatic} action={<ButtonLink href={href}>{t("gateCta")}</ButtonLink>} />
   );
 }

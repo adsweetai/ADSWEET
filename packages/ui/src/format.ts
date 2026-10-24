@@ -1,7 +1,6 @@
 // Getallen, bedragen en datums in Belgisch Nederlands: €1.234,56 · €195 · 40% · 2,5 · maandag 7 december · 06:00.
 
-const nf = (min: number, max: number) =>
-  new Intl.NumberFormat("nl-BE", { minimumFractionDigits: min, maximumFractionDigits: max });
+const nf = (min: number, max: number) => new Intl.NumberFormat("nl-BE", { minimumFractionDigits: min, maximumFractionDigits: max });
 
 /** Getal met punten voor duizendtallen en een komma voor decimalen. */
 export function formatNumber(n: number, decimals = 0): string {
@@ -32,20 +31,7 @@ export function formatRoas(roas: number, decimals?: number): string {
   return nf(r2 * 10 === Math.round(r2 * 10) ? 1 : 2, 2).format(r2);
 }
 
-const MONTHS = [
-  "januari",
-  "februari",
-  "maart",
-  "april",
-  "mei",
-  "juni",
-  "juli",
-  "augustus",
-  "september",
-  "oktober",
-  "november",
-  "december",
-];
+const MONTHS = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"];
 const DAYS = ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"];
 
 function parts(iso: string) {

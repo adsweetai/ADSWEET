@@ -32,9 +32,7 @@ export function Steps({ label, steps, current, reached = current, onPick, number
               disabled={locked || !onPick}
               onClick={() => onPick?.(n)}
             >
-              <span className="as-step__mark">
-                {done ? <Icon name="check" size={12} strokeWidth={2} /> : (numbers?.[i] ?? n)}
-              </span>
+              <span className="as-step__mark">{done ? <Icon name="check" size={12} strokeWidth={2} /> : (numbers?.[i] ?? n)}</span>
               <span>{t}</span>
             </button>
           </li>

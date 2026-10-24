@@ -64,9 +64,7 @@ describe("EuroTegel en funnelbalk", () => {
     expect(container.querySelectorAll(".as-eurotile__arrow")).toHaveLength(1);
   });
   it("een ontbrekende fase toont Ontbreekt", () => {
-    render(
-      <FunnelBar counts={{ top: 3, middle: 2, bottom: 0 }} format={(n) => `${n} ads`} missing="Ontbreekt" />,
-    );
+    render(<FunnelBar counts={{ top: 3, middle: 2, bottom: 0 }} format={(n) => `${n} ads`} missing="Ontbreekt" />);
     expect(screen.getByText("Ontbreekt").parentElement?.className).toContain("as-funnel__cell--missing");
   });
 });

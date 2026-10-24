@@ -233,14 +233,8 @@
       ["Logboek", "Elke wijziging aan deze campagne: wie, wat, van wat naar wat en wanneer."]
     ],
     "faq": [
-      [
-        "Moet ik iets kennen van advertenties?",
-        "Nee. AdSweet stelt alles voor en legt elk woord uit. Jij keurt goed."
-      ],
-      [
-        "Betaal ik ook een percentage van mijn advertentiebudget?",
-        "Nee. Je betaalt je plan. Je advertentiebudget betaal je rechtstreeks aan Meta."
-      ],
+      ["Moet ik iets kennen van advertenties?", "Nee. AdSweet stelt alles voor en legt elk woord uit. Jij keurt goed."],
+      ["Betaal ik ook een percentage van mijn advertentiebudget?", "Nee. Je betaalt je plan. Je advertentiebudget betaal je rechtstreeks aan Meta."],
       ["Zet AdSweet zelf advertenties af?", "Nooit. Het zegt wat het ziet, jij klikt."]
     ],
     "tableTitle": "Tabel met haarlijnen · Lisa, laatste 7 dagen",

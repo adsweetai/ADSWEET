@@ -12,21 +12,9 @@ export interface TermExplanation {
 }
 
 /** Uitlegkaartje voor een vakwoord, los of zwevend. */
-export function TermCard({
-  title,
-  text,
-  example,
-  exampleLabel,
-  lesson,
-  floating,
-  id,
-}: TermExplanation & { floating?: boolean; id?: string }) {
+export function TermCard({ title, text, example, exampleLabel, lesson, floating, id }: TermExplanation & { floating?: boolean; id?: string }) {
   return (
-    <span
-      id={id}
-      role={floating ? "tooltip" : undefined}
-      className={["as-termcard", floating && "as-termcard--float"].filter(Boolean).join(" ")}
-    >
+    <span id={id} role={floating ? "tooltip" : undefined} className={["as-termcard", floating && "as-termcard--float"].filter(Boolean).join(" ")}>
       <b className="as-termcard__title">{title}</b>
       <span>{text}</span>
       {example ? (

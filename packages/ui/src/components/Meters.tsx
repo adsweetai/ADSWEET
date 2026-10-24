@@ -92,15 +92,7 @@ export function ProgressBox({
 }
 
 /** Proefperiodebalk: dun, bovenaan. Vanaf dag 27 in Let op. */
-export function TrialBar({
-  text,
-  link,
-  warn,
-}: {
-  text: ReactNode;
-  link: { label: ReactNode; href: string };
-  warn?: boolean;
-}) {
+export function TrialBar({ text, link, warn }: { text: ReactNode; link: { label: ReactNode; href: string }; warn?: boolean }) {
   return (
     <div role="status" className={["as-trialbar", warn && "as-trialbar--warn"].filter(Boolean).join(" ")}>
       <span className="as-trialbar__text">

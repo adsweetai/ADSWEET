@@ -39,10 +39,7 @@ export interface ActionCardProps {
 function Btn({ b, variant }: { b: ActionButton; variant: "primary" | "secondary" }) {
   if (b.href)
     return (
-      <a
-        className={`as-btn as-btn--${variant}${variant === "primary" ? " as-btn--arrow" : ""}`}
-        href={b.href}
-      >
+      <a className={`as-btn as-btn--${variant}${variant === "primary" ? " as-btn--arrow" : ""}`} href={b.href}>
         {b.label}
       </a>
     );

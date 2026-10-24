@@ -14,10 +14,7 @@ export interface PreviewContent {
 
 function Media({ media, ratio }: { media: PreviewContent["media"]; ratio: string }) {
   return (
-    <div
-      className={["as-preview__media", !media?.src && "as-hatch"].filter(Boolean).join(" ")}
-      style={{ aspectRatio: ratio }}
-    >
+    <div className={["as-preview__media", !media?.src && "as-hatch"].filter(Boolean).join(" ")} style={{ aspectRatio: ratio }}>
       {media?.src ? (
         media.kind === "video" ? (
           <video src={media.src} muted playsInline aria-label={media.alt} />
@@ -41,15 +38,7 @@ function Page({ c }: { c: PreviewContent }) {
 }
 
 /** Feed 4:5. Neutraal kader: paginanaam als tekst, beeld, tekst en de call-to-action als pil. Geen iconen van Meta. */
-export function FeedPreview({
-  c,
-  caption,
-  width = 230,
-}: {
-  c: PreviewContent;
-  caption?: ReactNode;
-  width?: number;
-}) {
+export function FeedPreview({ c, caption, width = 230 }: { c: PreviewContent; caption?: ReactNode; width?: number }) {
   return (
     <figure className="as-preview" style={{ width }}>
       <div className="as-preview__feed">
@@ -67,15 +56,7 @@ export function FeedPreview({
 }
 
 /** Stories 9:16 */
-export function StoryPreview({
-  c,
-  caption,
-  width = 170,
-}: {
-  c: PreviewContent;
-  caption?: ReactNode;
-  width?: number;
-}) {
+export function StoryPreview({ c, caption, width = 170 }: { c: PreviewContent; caption?: ReactNode; width?: number }) {
   return (
     <figure className="as-preview" style={{ width }}>
       <div className={["as-preview__tall", !c.media?.src && "as-hatch"].filter(Boolean).join(" ")}>
@@ -92,27 +73,13 @@ export function StoryPreview({
 }
 
 /** Reels 9:16 */
-export function ReelPreview({
-  c,
-  caption,
-  width = 170,
-}: {
-  c: PreviewContent;
-  caption?: ReactNode;
-  width?: number;
-}) {
+export function ReelPreview({ c, caption, width = 170 }: { c: PreviewContent; caption?: ReactNode; width?: number }) {
   return (
     <figure className="as-preview" style={{ width }}>
-      <div
-        className={["as-preview__tall", !c.media?.src && "as-hatch"].filter(Boolean).join(" ")}
-        style={{ justifyContent: "flex-end", gap: 8 }}
-      >
+      <div className={["as-preview__tall", !c.media?.src && "as-hatch"].filter(Boolean).join(" ")} style={{ justifyContent: "flex-end", gap: 8 }}>
         {c.media?.src ? <img src={c.media.src} alt={c.media.alt ?? ""} /> : null}
         {c.media?.src ? null : (
-          <span
-            className="as-preview__center"
-            style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center" }}
-          >
+          <span className="as-preview__center" style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center" }}>
             {c.media?.placeholder}
           </span>
         )}

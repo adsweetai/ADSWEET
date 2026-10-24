@@ -1,14 +1,4 @@
-import {
-  formatDashDate,
-  formatDateTime,
-  formatEuro,
-  formatLongDate,
-  formatMonthCode,
-  formatNumber,
-  formatPercent,
-  formatRoas,
-  formatTime,
-} from "./format";
+import { formatDashDate, formatDateTime, formatEuro, formatLongDate, formatMonthCode, formatNumber, formatPercent, formatRoas, formatTime } from "./format";
 
 describe("bedragen en getallen (nl-BE)", () => {
   it("euro zonder spatie, zonder centen als het kan", () => {

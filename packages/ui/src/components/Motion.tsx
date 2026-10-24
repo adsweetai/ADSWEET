@@ -2,8 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-const reduced = () =>
-  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const reduced = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /** Telt op in 600 ms (ease-out). Bij reduced motion meteen de eindwaarde. */
 export function useCountUp(to: number, from = 0, ms = 600): number {
@@ -27,15 +26,7 @@ export function useCountUp(to: number, from = 0, ms = 600): number {
   return v;
 }
 
-export function CountUp({
-  to,
-  from = 0,
-  format = String,
-}: {
-  to: number;
-  from?: number;
-  format?: (n: number) => string;
-}) {
+export function CountUp({ to, from = 0, format = String }: { to: number; from?: number; format?: (n: number) => string }) {
   const v = useCountUp(to, from);
   return <>{format(v)}</>;
 }
@@ -63,10 +54,7 @@ export function Reveal({
   className?: string;
 }) {
   return (
-    <Tag
-      className={["as-reveal", className].filter(Boolean).join(" ")}
-      style={{ animationDelay: `${index * 60}ms` }}
-    >
+    <Tag className={["as-reveal", className].filter(Boolean).join(" ")} style={{ animationDelay: `${index * 60}ms` }}>
       {children}
     </Tag>
   );

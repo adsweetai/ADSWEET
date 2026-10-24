@@ -49,18 +49,7 @@ function Inner({ variant = "primary", arrow, locked, icon, children }: Common) {
 
 export type ButtonProps = Common & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children">;
 
-export function Button({
-  variant,
-  size,
-  arrow,
-  locked,
-  block,
-  icon,
-  children,
-  className,
-  type = "button",
-  ...rest
-}: ButtonProps) {
+export function Button({ variant, size, arrow, locked, block, icon, children, className, type = "button", ...rest }: ButtonProps) {
   const c = { variant, size, arrow, locked, block, icon, children };
   return (
     <button type={type} className={classes(c, className)} {...rest}>
@@ -71,17 +60,7 @@ export function Button({
 
 export type ButtonLinkProps = Common & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "children">;
 
-export function ButtonLink({
-  variant,
-  size,
-  arrow,
-  locked,
-  block,
-  icon,
-  children,
-  className,
-  ...rest
-}: ButtonLinkProps) {
+export function ButtonLink({ variant, size, arrow, locked, block, icon, children, className, ...rest }: ButtonLinkProps) {
   const c = { variant, size, arrow, locked, block, icon, children };
   return (
     <a className={classes(c, className)} {...rest}>
@@ -99,11 +78,7 @@ export interface TextButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonEle
 /** Tekstknop: tekst met een haarlijn eronder. */
 export function TextButton({ arrow, icon, children, className, type = "button", ...rest }: TextButtonProps) {
   return (
-    <button
-      type={type}
-      className={["as-textbtn", arrow && "as-textbtn--arrow", className].filter(Boolean).join(" ")}
-      {...rest}
-    >
+    <button type={type} className={["as-textbtn", arrow && "as-textbtn--arrow", className].filter(Boolean).join(" ")} {...rest}>
       {icon ? <Icon name={icon} size={14} /> : null}
       {children}
       {arrow ? <Icon name="arrow" size={14} /> : null}
@@ -118,10 +93,7 @@ export interface TextLinkProps extends Omit<AnchorHTMLAttributes<HTMLAnchorEleme
 
 export function TextLink({ arrow, children, className, ...rest }: TextLinkProps) {
   return (
-    <a
-      className={["as-textbtn", arrow && "as-textbtn--arrow", className].filter(Boolean).join(" ")}
-      {...rest}
-    >
+    <a className={["as-textbtn", arrow && "as-textbtn--arrow", className].filter(Boolean).join(" ")} {...rest}>
       {children}
       {arrow ? <Icon name="arrow" size={14} /> : null}
     </a>
@@ -135,15 +107,7 @@ export interface IconButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonEle
   size?: number;
 }
 
-export function IconButton({
-  icon,
-  label,
-  plain,
-  size = 18,
-  className,
-  type = "button",
-  ...rest
-}: IconButtonProps) {
+export function IconButton({ icon, label, plain, size = 18, className, type = "button", ...rest }: IconButtonProps) {
   return (
     <button
       type={type}

@@ -1,10 +1,4 @@
-import {
-  useId,
-  type InputHTMLAttributes,
-  type ReactNode,
-  type SelectHTMLAttributes,
-  type TextareaHTMLAttributes,
-} from "react";
+import { useId, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes, type TextareaHTMLAttributes } from "react";
 
 interface FieldShell {
   label?: ReactNode;
@@ -14,14 +8,7 @@ interface FieldShell {
   className?: string;
 }
 
-function Shell({
-  id,
-  label,
-  help,
-  error,
-  className,
-  children,
-}: FieldShell & { id: string; children: ReactNode }) {
+function Shell({ id, label, help, error, className, children }: FieldShell & { id: string; children: ReactNode }) {
   return (
     <label className={["as-field", className].filter(Boolean).join(" ")} htmlFor={id}>
       {label ? <span className="as-field__label">{label}</span> : null}

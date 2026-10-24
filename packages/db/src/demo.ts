@@ -31,17 +31,11 @@ export async function createDemoDatabase(options: { seed?: boolean; root?: strin
  * Voert `fn` uit als een ingelogde gebruiker (rol authenticated + JWT-claims), zodat RLS geldt zoals bij Supabase.
  * Zonder gebruiker draait `fn` als service role en gelden de rechten niet.
  */
-export async function asUser<T>(
-  db: DemoDb,
-  userId: string | null,
-  fn: (tx: DemoTx) => Promise<T>,
-): Promise<T> {
+export async function asUser<T>(db: DemoDb, userId: string | null, fn: (tx: DemoTx) => Promise<T>): Promise<T> {
   return db.transaction(async (tx) => {
     if (userId) {
       await tx.exec("set local role authenticated");
-      await tx.query("select set_config('request.jwt.claims', $1, true)", [
-        JSON.stringify({ sub: userId, role: "authenticated" }),
-      ]);
+      await tx.query("select set_config('request.jwt.claims', $1, true)", [JSON.stringify({ sub: userId, role: "authenticated" })]);
     }
     return fn(tx);
   });

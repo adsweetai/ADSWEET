@@ -43,15 +43,7 @@ import {
   type DotMood,
   type PreviewContent,
 } from "@adsweet/ui";
-import {
-  ExampleTag,
-  GatePanel,
-  Label,
-  PlaybookTip,
-  PlaybookWarning,
-  Proposal,
-  Status,
-} from "@/components/ui";
+import { ExampleTag, GatePanel, Label, PlaybookTip, PlaybookWarning, Proposal, Status } from "@/components/ui";
 
 type Mode = "beide" | "light" | "dark";
 
@@ -123,18 +115,7 @@ function Column({ theme }: { theme: "light" | "dark" }) {
     media: { placeholder: t("previewFeedMedia") },
   };
 
-  const rows: [
-    string,
-    string,
-    string,
-    string,
-    number,
-    number,
-    number,
-    string,
-    string,
-    "winnaar" | "geen" | "verliezer" | "vroeg",
-  ][] = [
+  const rows: [string, string, string, string, number, number, number, string, string, "winnaar" | "geen" | "verliezer" | "vroeg"][] = [
     ["A1", "Kaars wordt aangestoken", t("video"), "Top", 82, 5, 290, "3,54", "€16,40", "winnaar"],
     ["A2", "Zo gieten we ze", t("video"), "Middle", 71, 4, 232, "3,27", "€17,75", "winnaar"],
     ["A3", "Geschenkdoos", t("photo"), "Bottom", 48, 2, 116, "2,42", "€24,00", "geen"],
@@ -158,10 +139,7 @@ function Column({ theme }: { theme: "light" | "dark" }) {
         }}
       >
         {deviates && !accepted[key] ? (
-          <PlaybookWarning
-            reason={key === "cbo" ? t("warnCbo") : t("warnExtra")}
-            onProceed={() => setAccepted({ ...accepted, [key]: true })}
-          />
+          <PlaybookWarning reason={key === "cbo" ? t("warnCbo") : t("warnExtra")} onProceed={() => setAccepted({ ...accepted, [key]: true })} />
         ) : null}
       </SwitchRow>
     );
@@ -214,13 +192,7 @@ function Column({ theme }: { theme: "light" | "dark" }) {
               [16, 16, 3],
             ].map(([n, s, r]) => (
               <figure key={n} className="ov-stack" style={{ margin: 0, gap: 8 }}>
-                <img
-                  src={`/icon/app-icon-${n}.png`}
-                  alt={`App-icoon ${n}`}
-                  width={s}
-                  height={s}
-                  style={{ borderRadius: r, display: "block" }}
-                />
+                <img src={`/icon/app-icon-${n}.png`} alt={`App-icoon ${n}`} width={s} height={s} style={{ borderRadius: r, display: "block" }} />
                 <figcaption className="as-small" style={{ fontSize: 12.5 }}>
                   {n}
                 </figcaption>
@@ -235,9 +207,7 @@ function Column({ theme }: { theme: "light" | "dark" }) {
           <div className="ov-swatches">
             {Object.entries(t.raw("swatchUse") as Record<string, string>).map(([n, u]) => (
               <div key={n} className="ov-swatch">
-                <div
-                  style={{ height: 56, background: `var(--${n})`, borderBottom: "1px solid var(--line)" }}
-                />
+                <div style={{ height: 56, background: `var(--${n})`, borderBottom: "1px solid var(--line)" }} />
                 <div className="ov-stack" style={{ padding: "10px 12px 12px", gap: 2 }}>
                   <b style={{ fontWeight: 500 }}>{n}</b>
                   <span className="as-small" style={{ fontSize: 12.5 }}>
@@ -391,10 +361,7 @@ function Column({ theme }: { theme: "light" | "dark" }) {
           <div className="ov-fields ov-top">
             <Input label={t("fSite")} placeholder={t("fSitePh")} />
             <Input label={t("fAov")} prefix="€" inputMode="decimal" defaultValue="58" />
-            <Select
-              label={t("fLang")}
-              options={(t.raw("langs") as string[]).map((l) => ({ value: l, label: l }))}
-            />
+            <Select label={t("fLang")} options={(t.raw("langs") as string[]).map((l) => ({ value: l, label: l }))} />
           </div>
           <div className="ov-top" style={{ paddingTop: 8 }}>
             {switchRow("cbo", t("swCbo"), t("swCboSub"))}
@@ -427,20 +394,12 @@ function Column({ theme }: { theme: "light" | "dark" }) {
           <div className="ov-stack" style={{ gap: 16 }}>
             <div className="ov-card" style={{ padding: "24px 24px 20px", gap: 16 }}>
               <span style={{ fontSize: 13, fontWeight: 500 }}>{t("tabsLabel")}</span>
-              <Tabs
-                label={t("tabsLabel")}
-                value={tab}
-                onChange={setTab}
-                items={tabs.map(([l], i) => ({ value: String(i), label: l }))}
-              />
+              <Tabs label={t("tabsLabel")} value={tab} onChange={setTab} items={tabs.map(([l], i) => ({ value: String(i), label: l }))} />
               <p className="as-small" style={{ margin: 0, fontSize: 14, minHeight: 42 }}>
                 {tabs[Number(tab)][1]}
               </p>
             </div>
-            <Accordion
-              defaultOpen={0}
-              items={(t.raw("faq") as [string, string][]).map(([q, a]) => ({ q, a }))}
-            />
+            <Accordion defaultOpen={0} items={(t.raw("faq") as [string, string][]).map(([q, a]) => ({ q, a }))} />
           </div>
         </div>
         <div className="ov-card ov-flush">
@@ -532,16 +491,12 @@ function Column({ theme }: { theme: "light" | "dark" }) {
               help={budgetLow ? undefined : t("budgetOk")}
             />
           </div>
-          {budgetLow && !budgetOk ? (
-            <PlaybookWarning reason={t("warnBudget")} onProceed={() => setBudgetOk(true)} />
-          ) : null}
+          {budgetLow && !budgetOk ? <PlaybookWarning reason={t("warnBudget")} onProceed={() => setBudgetOk(true)} /> : null}
         </div>
         <div className="ov-two">
           <PlaybookTip>{t("tipBudget")}</PlaybookTip>
           <div className="ov-card" style={{ padding: 18, gap: 10, borderRadius: 14 }}>
-            <span style={{ fontSize: 12.5, fontWeight: 500, color: "var(--ink-muted)" }}>
-              {t("termCaption")}
-            </span>
+            <span style={{ fontSize: 12.5, fontWeight: 500, color: "var(--ink-muted)" }}>{t("termCaption")}</span>
             <p style={{ margin: 0, fontSize: 14.5 }}>
               {t("termBefore")}{" "}
               <Term
@@ -697,19 +652,11 @@ function Column({ theme }: { theme: "light" | "dark" }) {
         <div className="ov-two">
           <div className="ov-stack" style={{ gap: 8 }}>
             <span className="as-small">{t("funnelLisa")}</span>
-            <FunnelBar
-              counts={{ top: 2, middle: 2, bottom: 1 }}
-              format={(n) => tu("ads", { count: n })}
-              missing={tu("missing")}
-            />
+            <FunnelBar counts={{ top: 2, middle: 2, bottom: 1 }} format={(n) => tu("ads", { count: n })} missing={tu("missing")} />
           </div>
           <div className="ov-stack" style={{ gap: 8 }}>
             <span className="as-small">{t("funnelMissing")}</span>
-            <FunnelBar
-              counts={{ top: 3, middle: 2, bottom: 0 }}
-              format={(n) => tu("ads", { count: n })}
-              missing={tu("missing")}
-            />
+            <FunnelBar counts={{ top: 3, middle: 2, bottom: 0 }} format={(n) => tu("ads", { count: n })} missing={tu("missing")} />
           </div>
         </div>
       </Section>
@@ -717,14 +664,8 @@ function Column({ theme }: { theme: "light" | "dark" }) {
       <Section title={t("s09")}>
         <div className="as-previews">
           <FeedPreview c={preview} caption={tu("placements.feed")} />
-          <StoryPreview
-            c={{ ...preview, media: { placeholder: t("previewTallMedia") } }}
-            caption={tu("placements.stories")}
-          />
-          <ReelPreview
-            c={{ ...preview, text: t("previewShort"), media: { placeholder: t("previewTallMedia") } }}
-            caption={tu("placements.reels")}
-          />
+          <StoryPreview c={{ ...preview, media: { placeholder: t("previewTallMedia") } }} caption={tu("placements.stories")} />
+          <ReelPreview c={{ ...preview, text: t("previewShort"), media: { placeholder: t("previewTallMedia") } }} caption={tu("placements.reels")} />
         </div>
         <p className="as-small" style={{ margin: 0 }}>
           {t("previewNote")}
@@ -733,14 +674,7 @@ function Column({ theme }: { theme: "light" | "dark" }) {
 
       <Section title={t("s10")}>
         <div className="ov-card" style={{ padding: 24, gap: 10 }}>
-          <CreditsMeter
-            left={18}
-            total={50}
-            title={t("credits")}
-            aside={t("creditsUsed")}
-            note={t("creditsNote")}
-            label={t("creditsAria")}
-          />
+          <CreditsMeter left={18} total={50} title={t("credits")} aside={t("creditsUsed")} note={t("creditsNote")} label={t("creditsAria")} />
         </div>
         <div className="ov-flushbox">
           <TrialBar text={t("trial")} link={{ label: t("trialManage"), href: "#" }} />
@@ -764,10 +698,7 @@ function Column({ theme }: { theme: "light" | "dark" }) {
       <Section title={t("s11")}>
         <div className="ov-card ov-row ov-between" style={{ padding: "16px 20px" }}>
           <span style={{ fontSize: 14 }}>{t("toastDemo")}</span>
-          <Button
-            variant="secondary"
-            onClick={() => toast.show({ message: t("toastOff"), undo: () => undefined })}
-          >
+          <Button variant="secondary" onClick={() => toast.show({ message: t("toastOff"), undo: () => undefined })}>
             {t("toastShow")}
           </Button>
         </div>
@@ -779,12 +710,7 @@ function Column({ theme }: { theme: "light" | "dark" }) {
             </span>
           </div>
           <div className="ov-stack" style={{ gap: 16 }}>
-            <ErrorState
-              badge={tu("status.act")}
-              title={t("errTitle")}
-              text={t("errText")}
-              action={<Button variant="secondary">{t("errRetry")}</Button>}
-            />
+            <ErrorState badge={tu("status.act")} title={t("errTitle")} text={t("errText")} action={<Button variant="secondary">{t("errRetry")}</Button>} />
             <div className="as-state">
               <Loading>{t("loading")}</Loading>
               <span className="as-small" style={{ fontSize: 12.5 }}>
@@ -827,28 +753,13 @@ function Column({ theme }: { theme: "light" | "dark" }) {
           <div className="ov-dotintro">
             <span className="as-small">{t("dotIntro")}</span>
             <div className="ov-row ov-wrap" style={{ gap: 8 }}>
-              <button
-                type="button"
-                className="as-pill"
-                aria-pressed={dot === "praat"}
-                onClick={() => setDot("praat")}
-              >
+              <button type="button" className="as-pill" aria-pressed={dot === "praat"} onClick={() => setDot("praat")}>
                 {t("dotTalk")}
               </button>
-              <button
-                type="button"
-                className="as-pill"
-                aria-pressed={dot === "denkt"}
-                onClick={() => setDot("denkt")}
-              >
+              <button type="button" className="as-pill" aria-pressed={dot === "denkt"} onClick={() => setDot("denkt")}>
                 {t("dotThink")}
               </button>
-              <button
-                type="button"
-                className="as-pill"
-                aria-pressed={dot === "rust"}
-                onClick={() => setDot("rust")}
-              >
+              <button type="button" className="as-pill" aria-pressed={dot === "rust"} onClick={() => setDot("rust")}>
                 {t("dotRest")}
               </button>
             </div>
@@ -900,10 +811,7 @@ function Column({ theme }: { theme: "light" | "dark" }) {
             <span className="as-small">{t("motionNote")}</span>
             <TextButton onClick={() => setRevealKey((k) => k + 1)}>{t("motionPlay")}</TextButton>
           </div>
-          <div
-            key={revealKey}
-            style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 10 }}
-          >
+          <div key={revealKey} style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 10 }}>
             {[
               [t("spent"), "€280"],
               [t("sales"), "11"],
