@@ -48,6 +48,10 @@ insert into public.members (id, user_id, organization_id, role) values
   ('1b7dbc24-4dd4-51c2-b04b-cebf17bb5ab8', '19abad55-f5e7-5544-b396-0a4f77464d9a', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'eigenaar'),
   ('45cb4735-996a-564d-b9d8-6a406fb48ce5', '29cecf81-bdcf-5875-9504-56031f857fc7', '2e277cb5-3269-577e-995e-045289da1567', 'eigenaar');
 
+-- invitations
+insert into public.invitations (id, organization_id, email, role, token, invited_by, expires_at, created_at) values
+  ('3d2dc275-0f20-5a91-9095-7d5e8022c24e', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'teamlid@ateliernoor.voorbeeld', 'beheerder', 'demo-noor-teamlid', '501ce77b-52c3-527f-968e-c7d2bcb4244b', '2026-12-21T23:59:00+01:00', '2026-12-07T08:30:00+01:00');
+
 -- ad_accounts
 insert into public.ad_accounts (id, organization_id, name, currency, status, sort) values
   ('f3beecf7-7597-54a9-ad25-b36cc23d725e', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'Atelier Noor', 'EUR', 'actief', 0),
@@ -642,3 +646,7 @@ insert into public.credits_ledger (id, organization_id, delta, reason, created_a
   ('885ec67f-ac3b-5d31-a803-825752403cf2', '000cec3c-eaf4-5b93-be25-36e43ab61249', 50, 'proefperiode', '2026-12-07T00:00:00+01:00'),
   ('09b716e3-effc-5455-a0d1-b55b23fb4b0f', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 600, 'maand', '2026-12-01T00:00:00+01:00'),
   ('5b68aa72-6f09-5cd2-906c-afe8fbb19322', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', -210, 'ai_gebruik', '2026-12-06T18:00:00+01:00');
+
+-- discount_codes
+insert into public.discount_codes (id, code, kind, percent_off, max_uses, uses) values
+  ('0f1c7dbe-1352-567a-92dd-1403f593eeac', 'FOUNDING50', 'founding', 30, 50, 1);

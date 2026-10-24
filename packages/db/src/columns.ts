@@ -19,6 +19,8 @@ export const JSONB_COLUMNS = new Set([
   "naming",
   "undo",
   "metadata",
+  "tuning",
+  "found",
 ]);
 
 /** Alle tabellen die de app via de querybouwer mag aanspreken. */

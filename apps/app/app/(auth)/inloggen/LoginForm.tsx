@@ -1,13 +1,26 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState, useState } from "react";
 import { useTranslations } from "next-intl";
+import { FacebookButton } from "@/components/auth/FacebookButton";
 import { requestLoginLink, type LoginState } from "./actions";
 
-export function LoginForm({ next, linkInvalid, demoEmails }: { next?: string; linkInvalid?: boolean; demoEmails: string[] }) {
+export function LoginForm({
+  next,
+  linkInvalid,
+  demoEmails,
+  mailOpen,
+  demo,
+}: {
+  next?: string;
+  linkInvalid?: boolean;
+  demoEmails: string[];
+  mailOpen?: boolean;
+  demo: boolean;
+}) {
   const t = useTranslations("auth");
-  const [open, setOpen] = useState(linkInvalid ?? false);
-  const [fbNote, setFbNote] = useState(false);
+  const [open, setOpen] = useState(linkInvalid || mailOpen || false);
   const [email, setEmail] = useState("");
   const [state, action, pending] = useActionState<LoginState, FormData>(requestLoginLink, {});
   const error = state.error === "ongeldig" ? t("mailInvalid") : state.error === "fout" ? t("mailError") : null;
@@ -15,21 +28,7 @@ export function LoginForm({ next, linkInvalid, demoEmails }: { next?: string; li
   return (
     <>
       <h1 className="au-title">{t("loginTitle")}</h1>
-      <button
-        type="button"
-        className="au-btn"
-        onClick={() => {
-          setFbNote(true);
-          setOpen(true);
-        }}
-      >
-        {t("fb")}
-      </button>
-      {fbNote ? (
-        <p className="au-note" role="status">
-          {t("fbLater")}
-        </p>
-      ) : null}
+      <FacebookButton context="login" demo={demo} next={next ?? "/vandaag"} />
       {linkInvalid ? (
         <p className="au-error" role="alert">
           {t("linkInvalid")}
@@ -89,7 +88,7 @@ export function LoginForm({ next, linkInvalid, demoEmails }: { next?: string; li
         </div>
       ) : null}
       <span className="au-small">
-        {t("newHere")} <a href="/account-maken">{t("signupLink")}</a>
+        {t("newHere")} <Link href="/account-maken">{t("signupLink")}</Link>
       </span>
     </>
   );
