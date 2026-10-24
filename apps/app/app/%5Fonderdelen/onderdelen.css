@@ -1,0 +1,290 @@
+/* /_onderdelen · het componentenoverzicht */
+.ov {
+  min-height: 100vh;
+  background: var(--ground);
+  color: var(--ink);
+}
+.ov-head {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  padding: 16px clamp(20px, 3.4vw, 48px);
+  background: var(--ground);
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+.ov-head__left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+}
+.ov-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 600px), 1fr));
+}
+.ov-col {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+  padding: 48px clamp(20px, 3vw, 44px) 140px;
+  background: var(--ground);
+  color: var(--ink);
+}
+.ov-colhead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.ov-coltitle {
+  margin: 0;
+  font-size: 44px;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+.ov-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ov-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.ov-flush {
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+}
+.ov-flush .as-table th:first-child,
+.ov-flush .as-table td:first-child {
+  padding-left: 24px;
+}
+.ov-row {
+  display: flex;
+  align-items: center;
+}
+.ov-wrap {
+  flex-wrap: wrap;
+}
+.ov-between {
+  justify-content: space-between;
+  gap: 8px 16px;
+  flex-wrap: wrap;
+}
+.ov-stack {
+  display: flex;
+  flex-direction: column;
+}
+.ov-top {
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.ov-two {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+.ov-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  padding-top: 20px;
+}
+.ov-logobox {
+  padding: 40px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 2px;
+}
+.ov-logobox .as-logo {
+  outline: 1px solid var(--line);
+}
+.ov-lines {
+  display: flex;
+  flex-direction: column;
+}
+.ov-lines > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  padding: 11px 0;
+  border-top: 1px solid var(--line);
+}
+.ov-motion > div:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.ov-rules {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+.ov-rules > div {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.ov-swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+.ov-swatch {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.ov-series {
+  border-radius: 12px;
+  padding: 14px;
+  color: var(--on-series);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 92px;
+  font-size: 12.5px;
+}
+.ov-series b {
+  font-size: 15px;
+}
+.ov-robijn {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--robijn);
+  flex: none;
+}
+.ov-chan {
+  width: 22px;
+}
+.ov-hero {
+  margin: 0 0 24px;
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+.ov-hero > span {
+  display: block;
+  font-weight: 300;
+  color: var(--ink-accent);
+  letter-spacing: -0.035em;
+}
+.ov-sweet {
+  color: var(--robijn);
+}
+.ov-typerow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+.ov-typerow .as-eyebrow {
+  margin: 0;
+}
+.ov-done {
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.ov-flushbox {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.ov-flushbox .as-trialbar {
+  justify-content: space-between;
+}
+.ov-gatebox {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.ov-sweetnum {
+  font-size: 56px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.ov-dotstage {
+  position: relative;
+  height: 260px;
+  background: var(--ground);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.ov-dotintro {
+  position: absolute;
+  left: 24px;
+  top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: calc(100% - 48px);
+}
+.ov-dotintro .as-pill {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+.ov-balloon {
+  position: absolute;
+  right: 24px;
+  bottom: 100px;
+  max-width: min(280px, calc(100% - 48px));
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px 16px 4px 16px;
+  box-shadow: var(--shadow-float);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ov-dotbtn {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.ov-dotmob {
+  position: absolute;
+  left: 24px;
+  bottom: 20px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.ov-revealbox {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
