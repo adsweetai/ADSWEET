@@ -87,7 +87,8 @@ export async function sendLoginLink(email: string, next?: string): Promise<{ ok:
       emailRedirectTo: `${env.appUrl}/auth/callback?next=${encodeURIComponent(target)}`,
     },
   });
-  // "Signups not allowed" bij een onbekend adres tonen we niet.
+  // "Signups not allowed" bij een onbekend adres tonen we niet aan de bezoeker, maar wel in het logboek (zonder adres).
+  if (error) console.warn(`Inloglink niet verstuurd: ${error.status ?? ""} ${error.code ?? ""} ${error.message}`.trim());
   if (error && !/signups? not allowed|not found/i.test(error.message)) return { ok: false, error: "fout" };
   return { ok: true };
 }
