@@ -691,3 +691,8 @@ insert into public.academy_progress (user_id, lesson, done_at) values
 -- discount_codes
 insert into public.discount_codes (id, code, kind, percent_off, max_uses, uses) values
   ('0f1c7dbe-1352-567a-92dd-1403f593eeac', 'FOUNDING50', 'founding', 30, 50, 1);
+
+-- calls
+insert into public.calls (id, organization_id, kind, status, created_at) values
+  ('8a0c696e-751c-5387-af61-81a325a1444f', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'onboarding', 'te_plannen', '2026-11-17T10:00:00+01:00'),
+  ('9ac7e0a8-3930-59db-ac17-2d7752c0a0dc', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'kwartaal', 'te_plannen', '2026-12-01T09:00:00+01:00');

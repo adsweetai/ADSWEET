@@ -2,7 +2,6 @@ import "server-only";
 import { getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
 import { must, type Connection, type Goal, type Json } from "@adsweet/db";
-import { PLAYBOOK } from "@adsweet/playbook";
 import { formatDashDate, formatDayMonth, formatEuro, formatLongDate, formatMonthCode, formatPercent } from "@adsweet/ui";
 import { nowIso } from "@/lib/clock";
 import { isDemo } from "@/lib/env";
@@ -15,6 +14,7 @@ import { writeLog } from "./changes";
 import { assertCanEdit, getContext, type AppContext } from "./context";
 import { goalFor } from "./metrics";
 import { chanceToNumber, goalTypeKind, parseNum, readAndSaveWebsite } from "./onboarding";
+import { currentPlaybook } from "./playbook";
 
 // Instellingen (App.dc.html#instellingen-…). Alles wat je hier wijzigt, staat in Supabase: het bedrijfsprofiel,
 // je doelen, de naamgeving, wie betaalt, je meldingen en je tijdzone. Abonnement, team en doorverwijzen hebben
@@ -50,6 +50,8 @@ export interface ProfileVM {
 
 export interface NumbersVM {
   kind: "sales" | "leads" | "none" | "nogoal";
+  /** Verliezer bij x keer het doel zonder resultaat (uit het gepubliceerde playbook). */
+  loserMultiple: number;
   goalType: Goal["type"] | null;
   aov: string;
   margin: string;
@@ -148,6 +150,7 @@ export async function loadSettings(ctx: AppContext, sub: Exclude<SettingsPage, "
         sub,
         numbers: {
           kind,
+          loserMultiple: (await currentPlaybook()).loserMultiple,
           goalType: goal?.type ?? null,
           aov: numText(goal?.aov),
           margin: pctText(goal?.margin),
@@ -268,9 +271,7 @@ async function namingSample(ctx: AppContext): Promise<NamingVM> {
 /** Het gepubliceerde playbook, in gewone taal. De regels komen uit de laatste versie in playbook_versions. */
 export async function playbookRules(): Promise<PlaybookVM> {
   const t = await getTranslations("settings.playbook");
-  const db = await getDb();
-  const v = must(await db.from("playbook_versions").select().eq("status", "gepubliceerd").order("published_at", { ascending: false }).limit(1).maybeSingle());
-  const r = { ...PLAYBOOK, ...((v?.rules ?? {}) as Partial<typeof PLAYBOOK>) };
+  const r = await currentPlaybook();
   const s = r.startStructure;
   return {
     rules: [
@@ -284,9 +285,9 @@ export async function playbookRules(): Promise<PlaybookVM> {
       t("rules.loser", { x: r.loserMultiple }),
       t("rules.scale"),
     ],
-    note: v?.published_at
-      ? t("note", { version: v.version, date: formatLongDate(v.published_at.slice(0, 10), true) })
-      : t("noteNoDate", { version: v?.version ?? "1.0" }),
+    note: r.publishedAt
+      ? t("note", { version: r.version ?? "1.0", date: formatLongDate(r.publishedAt.slice(0, 10), true) })
+      : t("noteNoDate", { version: r.version ?? "1.0" }),
   };
 }
 

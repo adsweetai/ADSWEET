@@ -2,7 +2,7 @@ import "server-only";
 import { cookies } from "next/headers";
 import { getTranslations } from "next-intl/server";
 import { must, type FunnelPhase, type Goal, type Json, type Plan, type SeriesColor, type Targeting } from "@adsweet/db";
-import { PLAYBOOK, breakEvenRoas, leadMax, maxCostPerSale } from "@adsweet/playbook";
+import { breakEvenRoas, leadMax, maxCostPerSale } from "@adsweet/playbook";
 import { formatDayMonth, formatDashDate, formatEuro, formatMonthCode } from "@adsweet/ui";
 import { addDays, nowIso, today } from "@/lib/clock";
 import { isDemo } from "@/lib/env";
@@ -12,6 +12,7 @@ import { mediaUrl, slugify } from "./campaigns";
 import { writeLog } from "./changes";
 import { ORG_COOKIE, assertCanEdit, getContext, type AppContext } from "./context";
 import { demoSiteOf, type Brief } from "./demo-sites";
+import { minDailyBudget } from "./playbook";
 import { recordReferral } from "./referral";
 import { readWebsite, type Found } from "./website";
 
@@ -168,7 +169,7 @@ export async function loadOnboarding(ctx: AppContext, step: number): Promise<Onb
   const demo = demoSiteOf(bp?.website);
   const f = (bp?.found ?? {}) as Partial<Found> & { imageCount?: number };
   const kind = goalTypeKind(goal);
-  const min = kind === "sales" && ctx.org.kind === "webshop" ? PLAYBOOK.minDailyBudget.webshop : PLAYBOOK.minDailyBudget.default;
+  const min = await minDailyBudget(kind === "sales" && ctx.org.kind === "webshop");
   const draftCampaign = campaigns.find((c) => !c.outside_adsweet) ?? null;
   let draft: OnboardingVM["draft"] = null;
   if (draftCampaign) {
@@ -590,7 +591,7 @@ export async function saveFirstCampaign(input: {
   const { ctx, db } = await own();
   const goal = must(await db.from("goals").select().eq("organization_id", ctx.org.id).is("ad_account_id", null).maybeSingle());
   const kind = goalTypeKind(goal);
-  const min = kind === "sales" && ctx.org.kind === "webshop" ? PLAYBOOK.minDailyBudget.webshop : PLAYBOOK.minDailyBudget.default;
+  const min = await minDailyBudget(kind === "sales" && ctx.org.kind === "webshop");
   const budget = Math.round(Number(input.budget) * 100) / 100;
   if (!(budget > 0) || (budget < min && !input.accepted)) return { ok: false as const, error: "budget" };
   const [acc, bp] = await Promise.all([

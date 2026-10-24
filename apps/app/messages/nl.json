@@ -672,7 +672,8 @@
       "uit": "Uit",
       "aan": "Aan"
     },
-    "reset": "Begin opnieuw met de voorbeelddata"
+    "reset": "Begin opnieuw met de voorbeelddata",
+    "resetDone": "De voorbeelddata staat terug."
   },
   "gates": {
     "studio": "Met Pro maakt AdSweet zelf beelden, teksten en videoscripts voor de fase die je mist.",

@@ -1412,6 +1412,11 @@ export function buildSeed(): Seed {
   for (const key of ["lisa", "tom"] as const)
     for (const lesson of ["basis-1", "basis-2", "playbook-1", "gebruiken-1"])
       seed.academy_progress.push({ user_id: userId(key), lesson, done_at: at("2026-11-24", "20:00") });
+  // Calls (Beheer.dc.html#calls): Lisa vroeg een onboardinggesprek, Bram een kwartaalcall. Het moment is nog te plannen.
+  seed.calls.push(
+    { id: seedId("lisa:call:onboarding"), organization_id: ORG_IDS.lisa, kind: "onboarding", status: "te_plannen", created_at: at("2026-11-17", "10:00") },
+    { id: seedId("bram:call:kwartaal"), organization_id: ORG_IDS.bram, kind: "kwartaal", status: "te_plannen", created_at: at("2026-12-01", "09:00") },
+  );
   // Founding members: −30% zolang ze klant blijven, voor de eerste 50 (docs/regels.md).
   seed.discount_codes.push({ id: seedId("discount:founding"), code: "FOUNDING50", kind: "founding", percent_off: 30, max_uses: 50, uses: 1 });
   return seed;

@@ -2,6 +2,7 @@ import "server-only";
 import { getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
 import { must, type Organization, type Plan, type SubscriptionStatus } from "@adsweet/db";
+import { planPrice } from "@adsweet/playbook";
 import { formatDayMonth, formatEuro, formatLongDate } from "@adsweet/ui";
 import { today } from "@/lib/clock";
 import { PLAN_LIMITS, PLAN_NAME, PLAN_ORDER, trialDays } from "@/lib/plans";
@@ -15,13 +16,12 @@ import { demoPanelEnabled } from "./demo-state";
 // betaalpartner (fase 13); hier staan het plan, de status, de facturen en het opzeggen, bewaard in Supabase.
 
 export const SUB_STATES: SubscriptionStatus[] = ["proef", "actief", "mislukt", "opgezegd", "verlopen"];
-export const FOUNDING_OFF = 0.3;
 export const VAT = 0.21;
 /** Jaarlijks betalen: 2 maanden gratis. */
 export const YEAR_MONTHS = 10;
 
 const round2 = (n: number) => Math.round(n * 100) / 100;
-export const priceOf = (plan: Plan, founding: boolean) => round2(PLAN_LIMITS[plan].price * (founding ? 1 - FOUNDING_OFF : 1));
+export const priceOf = (plan: Plan, founding: boolean) => planPrice(plan, founding);
 /** Bedragen zoals in het prototype: €195, €136,50. */
 export const eur = (n: number) => formatEuro(n, Math.round(n) === n ? 0 : 2);
 

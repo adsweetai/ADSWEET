@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, useTransition, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { PLAYBOOK, breakEvenRoas, leadMax, maxCostPerSale } from "@adsweet/playbook";
+import { breakEvenRoas, leadMax, maxCostPerSale } from "@adsweet/playbook";
 import { Button, Input, StatusBadge, Switch, TextButton, formatEuro, formatPercent, useToast } from "@adsweet/ui";
 import { NAMING_TOKENS, fillTemplate, fillUtm, type Naming } from "@/lib/naming";
 import type { AccountsVM, ConnectionRowVM, NamingVM, NumbersVM, PrivacyVM, ProfileVM } from "@/lib/server/settings";
@@ -137,7 +137,7 @@ export function NumbersForm({ vm, canEdit }: { vm: NumbersVM; canEdit: boolean }
   if (vm.kind === "nogoal") return <p className="st-note">{t("noGoal")}</p>;
   if (vm.kind === "none") return <p className="st-note">{t("none", { goal: t(`goals.${vm.goalType === "zaak" ? "zaak" : "anders"}`) })}</p>;
   const F = (k: keyof NumbersVM) => (e: { target: { value: string } }) => setF((x) => ({ ...x, [k]: e.target.value }));
-  const loser = PLAYBOOK.loserMultiple;
+  const loser = vm.loserMultiple;
   let calc = "";
   if (vm.kind === "sales") {
     const m = frac(f.margin);

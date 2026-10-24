@@ -1,0 +1,280 @@
+{
+  "meta": {
+    "title": "AdSweet · Beheer",
+    "description": "Beheer van AdSweet: playbook, versies, klanten en meer. Alleen voor het team van AdSweet."
+  },
+  "common": {
+    "logoAlt": "adsweet",
+    "tag": "Beheer",
+    "navAria": "Beheer",
+    "logout": "Uitloggen",
+    "theme": "Thema",
+    "themeAuto": "Toestel",
+    "themeLight": "Licht",
+    "themeDark": "Nacht",
+    "save": "Bewaar",
+    "cancel": "Annuleer",
+    "missing": "Ontbreekt",
+    "undo": "Ongedaan maken",
+    "close": "Sluiten"
+  },
+  "login": {
+    "title": "Beheer",
+    "text": "Alleen voor het team van AdSweet. Je krijgt een link om in te loggen.",
+    "email": "E-mail",
+    "send": "Stuur me een link",
+    "invalid": "Vul een geldig e-mailadres in.",
+    "sentTitle": "Check je mailbox.",
+    "sentText": "Als dit adres bij AdSweet hoort, staat er een link in je mailbox. Hij werkt 15 minuten.",
+    "demoLink": "Demo: open de link",
+    "again": "Ander adres",
+    "linkError": "Die link werkt niet meer. Vraag een nieuwe aan.",
+    "noAccessTitle": "Geen toegang.",
+    "noAccessText": "Beheer is alleen voor het team van AdSweet. Je bent ingelogd als {email}.",
+    "metaTitle": "Inloggen"
+  },
+  "nav": {
+    "playbook": "Playbook",
+    "versies": "Versies",
+    "strategieen": "Strategieën",
+    "teksten": "Teksten en vertalingen",
+    "academy": "Academy",
+    "klanten": "Klanten",
+    "ai-kosten": "AI-kosten",
+    "kortingscodes": "Kortingscodes",
+    "partners": "Partners",
+    "calls": "Calls",
+    "systeem": "Systeemstatus"
+  },
+  "intro": {
+    "playbook": "Alle regels als gegevens. Elke waarde is bewerkbaar zonder code.",
+    "versies": "Concept en gepubliceerd, met de geschiedenis. Vergelijk het concept met de gepubliceerde versie of zet een oude terug.",
+    "strategieen": "De keuzekaarten van de campagnewizard, per sector en doel.",
+    "teksten": "Alle sleutels in NL, FR en EN.",
+    "academy": "Lessen schrijven, ordenen en publiceren.",
+    "klanten": "Founding members: {n} van {max}.",
+    "ai-kosten": "Gebruik van credits per account, de kost in euro per model en de marge per plan.",
+    "kortingscodes": "Founding members, doorverwijzingen en partners.",
+    "partners": "Aanmeldingen, klanten en commissies.",
+    "calls": "Agenda van onboardinggesprekken en kwartaalcalls.",
+    "systeem": "Koppelingen, API-limieten en geplande taken."
+  },
+  "playbook": {
+    "editing": "Je bewerkt het concept van versie {version}.",
+    "editingNew": "Je maakt een nieuw concept: versie {version}. Nu geldt versie {published}.",
+    "groups": {
+      "start": "Startstructuur · Meta",
+      "budget": "Budgetten",
+      "scale": "Winnaars, verliezers en schalen",
+      "warnings": "Waarschuwingen",
+      "google": "Google Ads"
+    },
+    "cols": ["Regel", "Waarde", "Toelichting"],
+    "fields": {
+      "startStructure": {
+        "campaigns": ["Campagnes bij de start", "met het doel dat bij de zaak past"],
+        "adSets": ["Ad sets", "budget op campagneniveau"],
+        "ads": ["Advertenties", "foto's en video's samen"],
+        "photos": ["Waarvan foto's", ""],
+        "videos": ["Waarvan video's", ""]
+      },
+      "minDailyBudget": {
+        "default": ["Minimum per dag (€)", ""],
+        "webshop": ["Minimum per dag, webshop (€)", ""]
+      },
+      "loserMultiple": ["Verliezer bij (× doel zonder resultaat)", "nooit automatisch afzetten"],
+      "scaleStep": ["Schaalstap (%)", "[schaalstappen PJ] · prototype: +20%"],
+      "newAdSetEveryWeeks": ["Nieuwe ad set elke (weken)", "[x weken, PJ] · prototype: 2 weken"],
+      "funnelSplit": {
+        "top": ["Funnelverdeling: top", "[standaardverdeling PJ] · prototype: 2 top, 2 middle, 1 bottom"],
+        "middle": ["Funnelverdeling: middle", ""],
+        "bottom": ["Funnelverdeling: bottom", ""]
+      },
+      "statusWarnRatio": ["Let op vanaf (% van het doel)", "[drempel PJ] · daaronder Actie nodig"]
+    },
+    "fieldAria": "Waarde voor {label}",
+    "note": "Notitie bij deze versie",
+    "notePh": "bijvoorbeeld: schaalstap en funnelverdeling van PJ",
+    "save": "Bewaar het concept",
+    "saved": "Het concept van versie {version} is bewaard.",
+    "toPublish": "Publiceren doe je in Versies.",
+    "errors": {
+      "range": "Kies een waarde van {min} tot {max}.",
+      "mix": "Foto's en video's samen moeten het aantal advertenties zijn.",
+      "funnel": "Top, middle en bottom samen moeten het aantal advertenties zijn.",
+      "webshop": "Het minimum voor een webshop is minstens het gewone minimum.",
+      "summary": "Kijk de waarden na die rood staan."
+    },
+    "warningsNote": "De teksten van de waarschuwingen staan in Teksten en vertalingen (sleutels die met ui. en wizard. beginnen).",
+    "googleNote": "[Google-playbook PJ] · Nog leeg. Dezelfde secties als Meta zodra het playbook klaar is."
+  },
+  "versions": {
+    "cols": ["Versie", "Status", "Datum", "Notitie", ""],
+    "status": {
+      "concept": "Concept",
+      "gepubliceerd": "Gepubliceerd",
+      "gearchiveerd": "Vervangen"
+    },
+    "publish": "Publiceer versie {version}",
+    "published": "Versie {version} is gepubliceerd. De app gebruikt ze meteen.",
+    "noConcept": "Er is geen concept. Bewerk het playbook om er een te maken.",
+    "compare": "Vergelijk",
+    "compareText": "Vergelijk {a} met {b}: {n, plural, =0 {geen waarden} one {# waarde} other {# waarden}} gewijzigd, 0 regels toegevoegd.",
+    "diffRow": "{label}: {from} → {to}",
+    "restore": "Zet terug",
+    "restoreAria": "Zet versie {version} terug als concept",
+    "restored": "De regels van versie {version} staan nu in het concept {concept}.",
+    "restoredNote": "Teruggezet naar versie {version}"
+  },
+  "strategies": {
+    "cols": ["Strategie", "Sectoren", "Doelen", "Status"],
+    "rows": [
+      ["Vaste campagne", "alle", "verkopen, aanvragen", "ok"],
+      ["Solden", "webshop, lokale zaak", "verkopen", "ok"],
+      ["Black Friday", "webshop", "verkopen", "ok"],
+      ["Feestdagen", "webshop, lokale zaak", "verkopen", "ok"],
+      ["Evenement of opening", "lokale zaak, zelfstandige", "evenement, bereik", "ok"],
+      ["Nieuw product", "webshop", "verkopen", "ok"],
+      ["Catalogus", "webshop", "verkopen", "warn"]
+    ],
+    "status": {
+      "ok": "Actief",
+      "warn": "Later"
+    }
+  },
+  "texts": {
+    "cols": ["Sleutel", "NL", "FR", "EN"],
+    "chips": {
+      "all": "Alle sleutels",
+      "missing": "Alleen ontbrekende vertalingen"
+    },
+    "search": "Zoek een sleutel of tekst",
+    "count": "{count} van {total} sleutels · {missing} zonder vertaling in FR of EN",
+    "more": "Je ziet de eerste {n}. Verfijn je zoekopdracht om de rest te zien.",
+    "note": "Alleen Nederlands in deze versie. FR en EN komen als apps/app/messages/fr.json en en.json."
+  },
+  "academyAdmin": {
+    "cols": ["Traject", "Les", "Status", "Leestijd"],
+    "written": "Concept, PJ keurt goed",
+    "todo": "Te schrijven",
+    "minutes": "4 min",
+    "note": "De lessen staan nu in apps/app/messages/nl.json (academy). Schrijven en publiceren vanuit Beheer: [lessen beheren, later]."
+  },
+  "clients": {
+    "cols": ["Bedrijf", "Plan", "Periode", "Proefdag", "Founding", "Betaalt per maand", "Laatste bezoek", "Koppelingen"],
+    "trialDay": "{day} van 30",
+    "paysFrom": "{price} vanaf {date}",
+    "from": "vanaf {price}",
+    "subStatus": {
+      "opgezegd": "Opgezegd",
+      "verlopen": "Verlopen"
+    },
+    "today": "vandaag",
+    "yesterday": "gisteren",
+    "daysAgo": "{n} dagen geleden",
+    "yes": "ja",
+    "no": "nee",
+    "status": {
+      "ok": "In orde",
+      "payment": "Betaalprobleem",
+      "expired": "Koppeling verlopen",
+      "pixel": "Pixel meet niet",
+      "none": "Niet gekoppeld"
+    },
+    "note": "Klanten van een bureau betalen via het bureau en staan niet apart. Detail per klant (meldingen, logboek, AI-kosten): [detail per klant, later]."
+  },
+  "aicosts": {
+    "cols": ["Account", "Credits gebruikt", "Kost", "Model"],
+    "planTitle": "Marge per plan",
+    "planCols": ["Plan", "Prijs", "Credits", "Kost AI", "Marge"],
+    "used": "{used} van {total}",
+    "costUnknown": "[kost in euro]",
+    "modelUnknown": "[model]",
+    "costPh": "[kost]",
+    "marginPh": "[marge]",
+    "from": "vanaf {price}",
+    "none": "Nog geen accounts met AI-credits."
+  },
+  "codes": {
+    "cols": ["Code", "Soort", "Korting", "Gebruikt"],
+    "kinds": {
+      "founding": "Founding member",
+      "doorverwijzing": "Doorverwijzing",
+      "partner": "Partner"
+    },
+    "founding": "{p}%, zolang klant",
+    "referral": "{m, plural, one {# maand} other {# maanden}} gratis, voor beiden",
+    "partner": "{p}% commissie, 12 maanden",
+    "percent": "{p}%",
+    "none": "–",
+    "used": "{n} van {max}",
+    "new": "Nieuwe code",
+    "fields": {
+      "code": "Code",
+      "kind": "Soort",
+      "percent": "Korting of commissie (%)",
+      "months": "Maanden gratis",
+      "max": "Hoogstens zoveel keer"
+    },
+    "create": "Maak de code",
+    "created": "De code {code} is aangemaakt.",
+    "errors": {
+      "code": "Een code heeft 3 tot 30 letters, cijfers of streepjes.",
+      "kind": "Kies een soort.",
+      "exists": "Die code bestaat al."
+    },
+    "empty": "Nog geen kortingscodes."
+  },
+  "partners": {
+    "cols": ["Partner", "Status", "Klanten", "Commissie per maand", ""],
+    "status": {
+      "aanmelding": "Aanvraag",
+      "actief": "Actief",
+      "gestopt": "Gestopt"
+    },
+    "none": "Nog geen partners. Aanmeldingen komen binnen via de website.",
+    "example": "Voorbeeld: een klant op Pro betaalt {price} per maand, de partner krijgt {month} per maand, {year} over 12 maanden.",
+    "approve": "Keur goed",
+    "approved": "De partner is goedgekeurd en heeft een code."
+  },
+  "calls": {
+    "cols": ["Wanneer", "Klant", "Soort", "Met", "Status", ""],
+    "kinds": {
+      "onboarding": "Onboardinggesprek, eerste 50",
+      "kwartaal": "Kwartaalcall"
+    },
+    "with": "PJ",
+    "status": {
+      "te_plannen": "Te plannen",
+      "gepland": "Gepland",
+      "gedaan": "Gedaan"
+    },
+    "toPlan": "[datum, uur]",
+    "planLabel": "Moment voor {client}",
+    "plan": "Plan in",
+    "planned": "Gepland: {client}.",
+    "done": "Gedaan",
+    "doneToast": "Afgevinkt.",
+    "none": "Geen calls. Klanten vragen ze aan in Hulp.",
+    "planError": "Kies een dag en een uur."
+  },
+  "system": {
+    "cols": ["Onderdeel", "Status", "Laatste run", "Toelichting"],
+    "meta": "Koppeling Meta",
+    "google": "Koppeling Google",
+    "audit": "Dagelijkse audit",
+    "autopilot": "Autopilot",
+    "notifications": "Meldingen",
+    "reports": "Weekrapporten",
+    "ok": "In orde",
+    "expired": "{n} verlopen",
+    "none": "Geen koppelingen",
+    "planned": "Gepland",
+    "limit": "{n, plural, one {# koppeling} other {# koppelingen}} · API-limiet: [gebruik]",
+    "all": "alle accounts",
+    "within": "binnen de grenzen van elke klant",
+    "appMail": "app en mail",
+    "perMail": "per mail",
+    "unknown": "[laatste run]"
+  }
+}
