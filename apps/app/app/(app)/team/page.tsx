@@ -1,29 +1,32 @@
 import { getTranslations } from "next-intl/server";
-import { EmptyPage } from "@/components/EmptyPage";
 import { routeMetadata } from "@/lib/meta";
 import { loadRights } from "@/lib/server/agency";
 import { getContext } from "@/lib/server/context";
+import { loadTeam } from "@/lib/server/team";
+import { SettingsFrame } from "../instellingen/SettingsFrame";
 import { Rights } from "./Rights";
-import "../campagnes/campagnes.css";
+import { Team } from "./Team";
 import "../klanten/klanten.css";
 
 export const generateMetadata = routeMetadata("team");
 
-// Team en rollen. Fase 9: rechten per klant voor een bureau. Teamleden uitnodigen en rollen volgen in fase 10.
+// Team en rollen (App.dc.html#team). Bij een bureau: daaronder de rechten per klant (fase 9).
 export default async function TeamPage() {
   const ctx = await getContext();
-  const rights = await loadRights(ctx);
-  if (!rights) return <EmptyPage />;
+  const [team, rights] = await Promise.all([loadTeam(ctx), loadRights(ctx)]);
   const t = await getTranslations("agency.rights");
   return (
-    <div className="cp">
-      <section className="cp-section">
-        <h2 className="cp-h3">{t("title")}</h2>
-        <p className="as-muted" style={{ margin: 0 }}>
-          {t("intro")}
-        </p>
-        <Rights vm={rights} canEdit={ctx.role === "eigenaar"} />
-      </section>
-    </div>
+    <SettingsFrame current="team">
+      <Team vm={team} />
+      {rights ? (
+        <section className="st-form" aria-labelledby="rights-title">
+          <h3 id="rights-title" className="sb-h3">
+            {t("title")}
+          </h3>
+          <p className="st-note">{t("intro")}</p>
+          <Rights vm={rights} canEdit={ctx.role === "eigenaar"} />
+        </section>
+      ) : null}
+    </SettingsFrame>
   );
 }

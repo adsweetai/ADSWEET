@@ -15,9 +15,9 @@ import {
 import { PLAYBOOK } from "@adsweet/playbook";
 import { formatDashDate, formatEuro, formatMonthCode } from "@adsweet/ui";
 import { addDays, nowIso, today } from "@/lib/clock";
+import { fillTemplate, namingOf, utmFor } from "@/lib/naming";
 import { hasAI } from "@/lib/plans";
 import { getDb, serviceDb } from "./auth";
-import { slugify } from "./campaigns";
 import { assertCanEdit, getContext, type AppContext } from "./context";
 import { writeLog } from "./changes";
 
@@ -50,7 +50,7 @@ async function newAdSet(
       .insert({
         organization_id: ctx.org.id,
         campaign_id: c.id,
-        name: `AS${existing.length + 1} · ${formatDashDate(start)} · ${reason}`,
+        name: fillTemplate(namingOf(ctx.org.naming, ctx.org.name).ad_set, { n: existing.length + 1, datum: formatDashDate(start), reden: reason }),
         reason,
         start_date: start,
         learning: true,
@@ -185,10 +185,11 @@ export async function createCampaign(w: WizardInput): Promise<{ ok: true; id: st
     db.from("business_profiles").select().eq("organization_id", ctx.org.id).maybeSingle().then(must),
   ]);
   const goal = goals.find((g) => g.ad_account_id === ctx.account?.id) ?? goals[0] ?? null;
-  const naming = (ctx.org.naming ?? {}) as { short?: string; utm_source?: string; utm_medium?: string };
-  const short = naming.short ?? ctx.org.name;
+  const naming = namingOf(ctx.org.naming, ctx.org.name);
+  const short = naming.short;
   const stratName = (t.raw(`strategies.${w.strategy}`) as string[])[0];
-  const name = `${short} · ${special ? stratName : "Vast"} · ${tg(w.goal)} · ${formatMonthCode(start)}`;
+  const name = fillTemplate(naming.campaign, { zaak: short, soort: special ? stratName : "Vast", doel: tg(w.goal), maand: formatMonthCode(start) });
+  const utm = utmFor(naming, { zaak: short, soort: w.strategy, doel: w.goal });
   const devNames = devs.map((d) => t(`deviationNames.${d}`));
 
   const campaign = must(
@@ -212,7 +213,7 @@ export async function createCampaign(w: WizardInput): Promise<{ ok: true; id: st
         extras_off: true,
         payer: profile?.payer ?? ctx.org.name,
         beneficiary: profile?.beneficiary ?? ctx.org.name,
-        utm: { source: naming.utm_source ?? "meta", medium: naming.utm_medium ?? "paid_social", campaign: `${slugify(short)}-${w.strategy}-${w.goal}` },
+        utm: { source: utm.source, medium: utm.medium, campaign: utm.campaign },
         created_by: ctx.user.id,
         launched_at: nowIso(),
       })

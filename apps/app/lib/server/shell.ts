@@ -9,6 +9,7 @@ import type { AppContext } from "./context";
 import { glossaryExamples } from "./glossary";
 import { notificationText } from "./notifications";
 import { seenTours, type TourName } from "./tours";
+import { mutedTypes } from "./settings";
 
 export interface ShellAccountItem {
   id: string;
@@ -120,7 +121,8 @@ export async function loadShell(ctx: AppContext): Promise<ShellData> {
 
   // Meldingen voor de bel: de nieuwste vier, en het aantal dat aandacht vraagt.
   const notes = must(await db.from("notifications").select().eq("organization_id", org.id).order("created_at", { ascending: false }).limit(20));
-  const visible = notes.filter((n) => n.type !== "credits_bijna_op" || hasAI(plan));
+  const muted = await mutedTypes(ctx);
+  const visible = notes.filter((n) => (n.type !== "credits_bijna_op" || hasAI(plan)) && !muted.has(n.type));
   const bellItems = await Promise.all(
     visible.slice(0, 4).map(async (n) => {
       const txt = await notificationText(n, day);

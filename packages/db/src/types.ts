@@ -40,6 +40,11 @@ export interface Organization {
   naming: Json;
   /** Onboardingpaneel: { done: number[], skipped: number[] } */
   tuning: Json;
+  /** Wijziging bij de volgende betaling: { plan?, billing_period?, from } */
+  scheduled_change: Json | null;
+  cancel_reason: string | null;
+  referral_code: string | null;
+  deletion_requested_at: IsoDateTime | null;
   created_at: IsoDateTime;
 }
 
@@ -481,6 +486,7 @@ export interface Referral {
   referred_name: string | null;
   signed_up_at: IsoDate | null;
   free_month_from: IsoDate | null;
+  referred_organization_id: Uuid | null;
   created_at: IsoDateTime;
 }
 

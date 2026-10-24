@@ -21,6 +21,7 @@ export const JSONB_COLUMNS = new Set([
   "metadata",
   "tuning",
   "found",
+  "scheduled_change",
 ]);
 
 /** Alle tabellen die de app via de querybouwer mag aanspreken. */

@@ -677,6 +677,17 @@ insert into public.user_tours (user_id, tour, seen_at) values
   ('2f479cfe-9af0-501f-9a86-b4789da0250a', 'campagne', '2026-11-20T09:00:00+01:00'),
   ('2f479cfe-9af0-501f-9a86-b4789da0250a', 'wizard', '2026-11-20T09:00:00+01:00');
 
+-- academy_progress
+insert into public.academy_progress (user_id, lesson, done_at) values
+  ('501ce77b-52c3-527f-968e-c7d2bcb4244b', 'basis-1', '2026-11-24T20:00:00+01:00'),
+  ('501ce77b-52c3-527f-968e-c7d2bcb4244b', 'basis-2', '2026-11-24T20:00:00+01:00'),
+  ('501ce77b-52c3-527f-968e-c7d2bcb4244b', 'playbook-1', '2026-11-24T20:00:00+01:00'),
+  ('501ce77b-52c3-527f-968e-c7d2bcb4244b', 'gebruiken-1', '2026-11-24T20:00:00+01:00'),
+  ('2a25612d-15c5-598c-9ebb-3811c5d90cea', 'basis-1', '2026-11-24T20:00:00+01:00'),
+  ('2a25612d-15c5-598c-9ebb-3811c5d90cea', 'basis-2', '2026-11-24T20:00:00+01:00'),
+  ('2a25612d-15c5-598c-9ebb-3811c5d90cea', 'playbook-1', '2026-11-24T20:00:00+01:00'),
+  ('2a25612d-15c5-598c-9ebb-3811c5d90cea', 'gebruiken-1', '2026-11-24T20:00:00+01:00');
+
 -- discount_codes
 insert into public.discount_codes (id, code, kind, percent_off, max_uses, uses) values
   ('0f1c7dbe-1352-567a-92dd-1403f593eeac', 'FOUNDING50', 'founding', 30, 50, 1);

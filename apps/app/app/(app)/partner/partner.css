@@ -1,0 +1,45 @@
+/* Partnerportaal (App.dc.html#partnerportaal) */
+.pp {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 980px;
+}
+.pp .rf-link {
+  max-width: none;
+}
+.pp-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 10px;
+}
+.pp-kpi {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+}
+.pp-kpi span {
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+.pp-kpi b {
+  font-size: 24px;
+  font-weight: 500;
+}
+.pp-example {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pp-example__label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
