@@ -462,7 +462,7 @@ insert into public.insights_daily (organization_id, campaign_id, ad_id, date, sp
 
 -- playbook_versions
 insert into public.playbook_versions (id, version, status, rules, note, published_at, created_at) values
-  ('f2e05920-ca82-521b-bcf0-b8f9d308bf30', '1.0', 'gepubliceerd', '{"minDailyBudget":{"default":10,"webshop":30},"loserMultiple":3,"startStructure":{"campaigns":1,"adSets":1,"ads":5,"photos":3,"videos":2},"scaleStep":0.2,"newAdSetEveryWeeks":2,"funnelSplit":{"top":2,"middle":2,"bottom":1}}'::jsonb, 'Eerste versie van het playbook.', '2026-11-01T09:00:00+01:00', '2026-11-01T09:00:00+01:00');
+  ('f2e05920-ca82-521b-bcf0-b8f9d308bf30', '1.0', 'gepubliceerd', '{"minDailyBudget":{"default":10,"webshop":30},"loserMultiple":3,"startStructure":{"campaigns":1,"adSets":1,"ads":5,"photos":3,"videos":2},"scaleStep":0.2,"newAdSetEveryWeeks":2,"funnelSplit":{"top":2,"middle":2,"bottom":1},"statusWarnRatio":0.75}'::jsonb, 'Eerste versie van het playbook.', '2026-11-01T09:00:00+01:00', '2026-11-01T09:00:00+01:00');
 
 -- audit_runs
 insert into public.audit_runs (id, organization_id, ran_at, playbook_version, summary) values
