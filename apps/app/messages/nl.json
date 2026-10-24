@@ -68,7 +68,102 @@
     "plan": "Plan",
     "kind": "Soort zaak",
     "role": "Je rol",
-    "clients": "{count, plural, one {# klant} other {# klanten}}"
+    "clients": "{count, plural, one {# klant} other {# klanten}}",
+    "variantsLabel": "Demo: variant van Vandaag",
+    "variants": {
+      "normaal": "Normaal",
+      "dag1": "Dag 1",
+      "rapport": "Zonder verkoopdoel",
+      "leeg": "Geen acties"
+    },
+    "period": {
+      "gisteren": "gisteren",
+      "7d": "de afgelopen 7 dagen",
+      "30d": "de afgelopen 30 dagen",
+      "start": "sinds de start",
+      "zelf": "de afgelopen 7 dagen"
+    },
+    "periodCap": {
+      "gisteren": "Gisteren",
+      "7d": "Laatste 7 dagen",
+      "30d": "Laatste 30 dagen",
+      "start": "Sinds de start",
+      "zelf": "Laatste 7 dagen"
+    },
+    "summarySales": "Je campagne bracht {period} {count, plural, one {# verkoop} other {# verkopen}} op.",
+    "summarySalesLoser": "Je campagne bracht {period} {count, plural, one {# verkoop} other {# verkopen}} op. Eén advertentie houdt je tegen.",
+    "summaryLeads": "Je campagne bracht {period} {count, plural, one {# aanvraag} other {# aanvragen}} op, aan {cpl} per aanvraag. Je doel is {target}.",
+    "summaryLeadsNone": "Je campagne bracht {period} nog geen aanvragen op. Je doel is {target} per aanvraag.",
+    "summaryAccounts": "Je {n} webshops brachten {period} {count, plural, one {# verkoop} other {# verkopen}} op, voor {revenue} omzet. {worst} houdt je tegen.",
+    "summaryAccountsOk": "Je {n} webshops brachten {period} {count, plural, one {# verkoop} other {# verkopen}} op, voor {revenue} omzet.",
+    "summaryEmpty": "Je campagne loopt zoals het moet.",
+    "summaryDay1": "Je advertenties lopen sinds gisteren. Morgen weten we meer.",
+    "summaryReport": "Je campagne voor meer volgers liep {period}. Hier zie je bereik, vertoningen en volgers.",
+    "summaryNoCampaign": "Je hebt nog geen campagne die loopt. Je eerste staat klaar in een paar minuten.",
+    "numbers": {
+      "2": "twee",
+      "3": "drie",
+      "4": "vier",
+      "5": "vijf"
+    },
+    "statusAct": "{n, plural, one {# actie nodig} other {# keer actie nodig}}",
+    "statusWarn": "{n, plural, one {# keer let op} other {# keer let op}}",
+    "statusInfo": "{n, plural, one {# voorstel} other {# voorstellen}}",
+    "tuningTitle": "Stem AdSweet af op je zaak",
+    "tuningText": "Brandguide, documenten en beelden. 8 korte stappen.",
+    "tuningGo": "Ga verder",
+    "sweetSales": "Sweet! {n, plural, one {# nieuwe verkoop} other {# nieuwe verkopen}} sinds gisteren.",
+    "sweetLeads": "Sweet! {n, plural, one {# nieuwe aanvraag} other {# nieuwe aanvragen}} sinds gisteren.",
+    "sweetSalesVisit": "Sweet! {n, plural, one {# nieuwe verkoop} other {# nieuwe verkopen}} sinds je vorige bezoek.",
+    "sweetLeadsVisit": "Sweet! {n, plural, one {# nieuwe aanvraag} other {# nieuwe aanvragen}} sinds je vorige bezoek.",
+    "accTitle": "Al je accounts",
+    "accCols": {
+      "a": "Account",
+      "spend": "Uitgegeven",
+      "sales": "Verkopen",
+      "rev": "Omzet",
+      "roas": "ROAS / break-even",
+      "status": "Status"
+    },
+    "accTotal": "Totaal",
+    "accNote": "{period} · Kies een account om Vandaag van dat account te zien.",
+    "tile": {
+      "spent": "Uitgegeven",
+      "sales": "Verkopen",
+      "revenue": "Omzet",
+      "roas": "ROAS",
+      "leads": "Aanvragen",
+      "cpl": "Kost per aanvraag",
+      "reach": "Bereik",
+      "impressions": "Vertoningen",
+      "followers": "Nieuwe volgers"
+    },
+    "tileCaption": "{period}",
+    "tileCaptionAccount": "{account} · {period}",
+    "breakEven": "Je break-even is {value}",
+    "targetRoas": "Je doel-ROAS is {value}",
+    "goalLead": "Je doel is {value}",
+    "d1Title": "Je campagne zit in de leerfase.",
+    "d1Text": "De eerste dagen zoekt Meta wie je advertenties wil zien. Resultaten schommelen dan, dat is normaal. Laat je campagne in die tijd met rust. Meta keurt deze advertenties nog goed:",
+    "d1Approved": "Goedgekeurd",
+    "d1Review": "Wordt nagekeken",
+    "d1Rejected": "Afgekeurd",
+    "doTitle": "Wat je vandaag best doet",
+    "noneText": "Alles loopt zoals het moet. Niets te doen vandaag.",
+    "good": "Wat goed loopt",
+    "less": "Wat minder loopt",
+    "next": "De volgende audit is morgen om 06:00.",
+    "adSales": "ROAS {roas} · {count, plural, one {# verkoop} other {# verkopen}}",
+    "adSalesNone": "{spend} · 0 verkopen",
+    "adLeads": "{spend} · {count, plural, one {# aanvraag} other {# aanvragen}} · {cpl}",
+    "adLeadsNone": "{spend} · 0 aanvragen",
+    "tips": {
+      "verliezer": "Laat een advertentie niet langer lopen dan 3 keer je doel zonder resultaat.",
+      "winnaar": "Een winnaar schaal je via het budget van de campagne, niet door hem te kopiëren.",
+      "budget": "Laat je budget de eerste week met rust. Elke grote wijziging start de leerfase opnieuw.",
+      "rapport": "Bij een campagne zonder verkoopdoel zijn er geen winnaars of verliezers. Kijk vooral of je bereik groeit.",
+      "upload": "Heb je een video? Gebruik hem. Het playbook start met 2 video's op 5 advertenties."
+    }
   },
   "plans": {
     "starter": "Starter",
@@ -565,5 +660,182 @@
     "concurrenten": "Met Pro zie je wat je concurrenten adverteren en krijg je per fase de boodschap die past.",
     "live": "Met Pro zie je je cijfers live, elke dag, in plaats van één keer per week.",
     "liveCreatives": "Met Pro zie je al je cijfers uit Meta live, tot op het niveau van je creatives."
+  },
+  "cards": {
+    "verliezer": {
+      "titleSales": "{name}, ‘{ad}’ gaf {spend} uit zonder verkoop.",
+      "titleLeads": "{name}, ‘{ad}’ gaf {spend} uit zonder aanvraag.",
+      "statSpent": "Uitgegeven",
+      "statSales": "Verkopen",
+      "statLeads": "Aanvragen",
+      "statLimit": "Grens, 3 × {target}",
+      "text": "Kijk, we zien dat deze ad het niet goed doet. Misschien moet je hem stilaan afzetten.",
+      "explainSales": "Je maximale <term>kost per verkoop</term> is {target}. Drie keer dat is {limit}, en die grens is {state}.",
+      "explainLeads": "Je doel per aanvraag is {target}. Drie keer dat is {limit}, en die grens is {state}.",
+      "passed": "voorbij",
+      "reached": "bereikt",
+      "whySales1": "Orderwaarde {aov} × marge {margin} = {target} per verkoop.",
+      "whySales2": "3 × {target} = {limit}. Deze advertentie gaf {spend} uit, zonder één verkoop.",
+      "whyLeads1": "Je doel per aanvraag is {target}.",
+      "whyLeads2": "3 × {target} = {limit}. Deze advertentie gaf {spend} uit, zonder één aanvraag.",
+      "whyLesson": "Les: winnaars schalen en verliezers afzetten",
+      "button": "Zet hem af",
+      "toast": "‘{ad}’ staat af. Dit staat in je logboek."
+    },
+    "schalen_na_verliezer": {
+      "title": "Zonder deze advertentie zit je campagne op een ROAS van {roas}, boven je break-even van {be}. Verhoog je budget van {from} naar {to} per dag?",
+      "explain": "{spend} uitgegeven voor {revenue} omzet. Een winnaar schaal je via het budget van de campagne: [schaalstappen PJ], hier +{step}.",
+      "button": "Verhoog naar {to}",
+      "toast": "Je budget staat op {to} per dag."
+    },
+    "extra_buiten_app": {
+      "title": "Bij ‘{ad}’ werd muziek aangezet in Ads Manager.",
+      "warn": "Dan past Meta je advertentie zelf aan: muziek, tekst op je beeld, een uitgerekt beeld. Je advertentie ziet er dan niet meer uit zoals jij hem goedkeurde.",
+      "button": "Terug uitzetten",
+      "keep": "Zo laten",
+      "toast": "De muziek staat weer uit.",
+      "toastKeep": "De muziek blijft aan."
+    },
+    "video_beter": {
+      "title": "Je video’s doen het veel beter dan je foto’s: ROAS {video} tegenover {photo}. Maak er deze week nog één.",
+      "explain": "De nieuwe video komt in een nieuwe ad set, zodat je lopende ad set uit de leerfase blijft.",
+      "script": "Laat een script schrijven",
+      "upload": "Upload een video"
+    },
+    "speciaal_moment": {
+      "title": "Over {weeks} week is het Kerstmis. Zal ik een aparte campagne voor de feestdagen klaarzetten?",
+      "tip": "Start je campagne voor de feestdagen een paar weken op voorhand. Zo is ze uit de leerfase als het druk wordt.",
+      "button": "Zet klaar"
+    },
+    "vermoeidheid": {
+      "title": "Je beste video wordt minder aangeklikt: CTR van {from} naar {to}. Mensen hebben hem al gemiddeld {freq} keer gezien.",
+      "tip": "Creative-vermoeidheid: mensen hebben je advertentie te vaak gezien en klikken minder. Een nieuwe versie in een nieuwe ad set helpt.",
+      "button": "Bekijk"
+    },
+    "betaalprobleem": {
+      "title": "Meta kon je laatste betaling niet afschrijven. Als dat zo blijft, stoppen je advertenties.",
+      "explain": "Kijk de betaalmethode in je advertentieaccount bij Meta na. AdSweet kan dat niet voor je doen.",
+      "button": "Zo los je het op"
+    },
+    "beste_video": {
+      "title": "Je video ‘{ad}’ doet het het best. Heb je nog zo’n video?",
+      "explain": "{cpl} per aanvraag, ruim onder je doel van {target}. Een nieuwe video komt in een nieuwe ad set, zodat je lopende ad set uit de leerfase blijft.",
+      "upload": "Upload een video",
+      "script": "Laat een script schrijven"
+    },
+    "account_onder_break_even": {
+      "titleAct": "{name}, {account} gaf {spend} uit voor {revenue} omzet.",
+      "titleWarn": "{account} zit op een ROAS van {roas}, onder je break-even van {be}.",
+      "statRoas": "ROAS",
+      "statBe": "Break-even",
+      "statSales": "Verkopen",
+      "explain": "Bij {margin} marge verdien je pas vanaf een ROAS van {be}. Bekijk welke advertenties niets opleveren.",
+      "explainNote": "Bij {margin} marge verdien je pas vanaf een ROAS van {be}. Bekijk welke advertenties van {note} niets opleveren.",
+      "button": "Bekijk {account}"
+    },
+    "account_schalen": {
+      "title": "{account} zit ruim boven je break-even: {roas} tegenover {be}. Verhoog het budget?",
+      "explain": "Met [schaalstappen PJ], in het prototype +{step}.",
+      "button": "Verhoog met {step}",
+      "toast": "Het budget van {account} gaat {step} omhoog."
+    },
+    "later": "Later",
+    "laterToast": "Verplaatst naar morgen.",
+    "error": "Dat lukte niet. Probeer het opnieuw.",
+    "readOnly": "Je kan alleen kijken. Vraag de eigenaar om dit te doen."
+  },
+  "logbook": {
+    "filters": {
+      "who": "Wie",
+      "campaign": "Campagne",
+      "kind": "Soort wijziging"
+    },
+    "whoOptions": {
+      "alle": "Iedereen",
+      "jij": "Jij",
+      "team": "Teamlid",
+      "autopilot": "AdSweet-autopilot",
+      "buiten": "Buiten AdSweet"
+    },
+    "allCampaigns": "Alle campagnes",
+    "kindOptions": {
+      "alles": "Alles",
+      "budget": "Budget",
+      "advertenties": "Advertenties",
+      "instellingen": "Instellingen",
+      "audit": "Audit"
+    },
+    "actor": {
+      "adsweet": "AdSweet",
+      "outside": "Buiten AdSweet",
+      "autopilot": "AdSweet-autopilot",
+      "assistant": "{name} via Dot"
+    },
+    "undo": "Terugdraaien",
+    "undone": "Teruggedraaid",
+    "undoneToast": "Teruggedraaid: {what}",
+    "timeUnknown": "{date} [tijd]",
+    "empty": "Nog geen wijzigingen.",
+    "entries": {
+      "adOff": "Advertentie ‘{ad}’ afgezet",
+      "adOn": "Advertentie ‘{ad}’ terug aangezet",
+      "budgetUp": "Budget vaste campagne verhoogd",
+      "budgetAccount": "Budget {account} verhoogd met {step}",
+      "musicOff": "Muziek uitgezet bij ‘{ad}’",
+      "activeOff": "Actief → Uit",
+      "onOff": "Aan → Uit",
+      "perDay": "{from} → {to} per dag",
+      "budgetPlaceholder": "[budget] → [budget + {step}]"
+    }
+  },
+  "notificationsPage": {
+    "filters": {
+      "alles": "Alles",
+      "act": "Actie nodig",
+      "warn": "Let op"
+    },
+    "filterLabel": "Filter",
+    "channels": "{when} · app en mail",
+    "what": "Wat er gebeurde",
+    "mean": "Wat het betekent",
+    "todo": "Wat je doet",
+    "empty": "Geen meldingen."
+  },
+  "report": {
+    "back": "Inzichten",
+    "meta": "{day} · week van {from} tot en met {to}",
+    "metaExample": "{day} · week van {from} tot en met {to} · Voorbeeld",
+    "thisWeek": "Deze week",
+    "lastWeek": "Vorige week",
+    "best": "Beste advertentie",
+    "worst": "Slechtste advertentie",
+    "didTitle": "Wat AdSweet deze week deed of voorstelde",
+    "tipTitle": "Tip voor volgende week.",
+    "sumSales": "{name}, je week in het kort. Je gaf {spend} uit en verkocht {count, plural, one {# keer} other {# keer}}, voor {revenue}. Je ROAS is {roas}, {relation} je break-even van {be}. Vorige week: {last}.",
+    "sumLeads": "{name}, je week in het kort. Je gaf {spend} uit en kreeg {count, plural, one {# aanvraag} other {# aanvragen}}, {cpl} per aanvraag. Je doel is {target}. Vorige week waren het {lastCount, plural, one {# aanvraag} other {# aanvragen}} aan {lastCpl}.",
+    "lastUnknown": "[cijfers vorige week]",
+    "below": "net onder",
+    "farBelow": "onder",
+    "above": "boven",
+    "bestSales": "{spend}, {count, plural, one {# verkoop} other {# verkopen}}, ROAS {roas}",
+    "worstSales": "{spend}, 0 verkopen",
+    "bestLeads": "{spend}, {count, plural, one {# aanvraag} other {# aanvragen}}, {cpl} per aanvraag",
+    "worstLeads": "{spend}, 0 aanvragen. Sinds de start {total}, de grens van 3 × {target}.",
+    "did": {
+      "verliezer": "Voorgesteld: ‘{ad}’ afzetten.",
+      "extra_buiten_app": "Gemeld: muziek aangezet bij ‘{ad}’, buiten AdSweet.",
+      "speciaal_moment": "Voorgesteld: een campagne voor de feestdagen.",
+      "betaalprobleem": "Gemeld: Meta kon je laatste betaling niet afschrijven."
+    },
+    "tips": {
+      "vermoeidheid": "Je beste video wordt minder aangeklikt. Maak er een nieuwe versie van, in een nieuwe ad set.",
+      "beste_video": "Heb je nog zo’n voor-en-na-video? Zet hem in een nieuwe ad set, naast je winnaar.",
+      "default": "Laat je budget de eerste week met rust. Elke grote wijziging start de leerfase opnieuw."
+    },
+    "placeholders": {
+      "amount": "[bedrag]",
+      "count": "[aantal]",
+      "roas": "[ROAS]"
+    }
   }
 }

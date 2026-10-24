@@ -5,6 +5,8 @@ export const PLAYBOOK = {
   scaleStep: 0.2, // [schaalstappen PJ]
   newAdSetEveryWeeks: 2, // [x weken, PJ]
   funnelSplit: { top: 2, middle: 2, bottom: 1 }, // [standaardverdeling PJ]
+  // Statusbadge naast de EuroTegel: In orde vanaf het doel, Let op tot 75% ervan, daaronder Actie nodig. [drempel PJ]
+  statusWarnRatio: 0.75,
 } as const;
 
 export const maxCostPerSale = (aov: number, margin: number) => aov * margin;
@@ -26,4 +28,22 @@ export function labelAd(
   if (goal.kind === "sales") return roas(a.revenue ?? 0, a.spend) >= breakEvenRoas(goal.margin) ? "winnaar" : "geen";
   const c = costPer(a.spend, a.results);
   return c !== null && c <= target ? "winnaar" : "geen";
+}
+
+export type Status = "ok" | "warn" | "act";
+
+/** Grens voor een verliezer: 3 keer de maximale kost per verkoop of het doel per aanvraag. */
+export const loserLimit = (target: number) => PLAYBOOK.loserMultiple * target;
+
+/** Webshop: ROAS tegenover de break-even (of de eigen doel-ROAS). */
+export function salesStatus(roasValue: number, target: number): Status {
+  if (roasValue >= target) return "ok";
+  return roasValue >= target * PLAYBOOK.statusWarnRatio ? "warn" : "act";
+}
+
+/** Aanvragen: kost per aanvraag tegenover het doel. Zonder aanvragen is het Actie nodig zodra er uitgegeven is. */
+export function leadsStatus(cpl: number | null, target: number): Status {
+  if (cpl === null) return "act";
+  if (cpl <= target) return "ok";
+  return cpl <= target / PLAYBOOK.statusWarnRatio ? "warn" : "act";
 }

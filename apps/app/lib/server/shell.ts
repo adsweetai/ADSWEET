@@ -107,7 +107,7 @@ export async function loadShell(ctx: AppContext): Promise<ShellData> {
       active: a.id === ctx.account?.id,
       kind: "account" as const,
     }));
-    if (multi) list.unshift({ id: "", name: t("allAccounts"), sub: "", active: !ctx.account, kind: "all" });
+    if (multi) list.unshift({ id: "", name: t("allAccounts"), sub: "", active: false, kind: "all" });
     name = ctx.account?.name ?? ctx.adAccounts[0]?.name ?? org.name;
     sub = ctx.account?.currency ?? "EUR";
   }

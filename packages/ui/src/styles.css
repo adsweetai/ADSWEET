@@ -1576,20 +1576,70 @@ a.as-adcard:hover {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
-.as-sweet__dot {
+.as-sweet--box {
+  overflow: hidden;
+  padding: 16px 20px;
+  background: var(--roos);
+  color: var(--on-series);
+  border-radius: var(--radius-block);
+  max-width: 760px;
+}
+.as-sweet__mark {
   position: relative;
   width: 8px;
   height: 8px;
+  flex: none;
+}
+.as-sweet__dot {
+  position: absolute;
+  inset: 0;
   border-radius: 50%;
   background: var(--robijn);
-  flex: none;
   animation: as-pulse 900ms var(--ease) 1;
+}
+.as-sweet__bit {
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  opacity: 0;
+  animation: as-confetti 900ms var(--ease) 1 both;
 }
 .as-sweet__text {
   font-size: 16px;
   font-weight: 500;
+}
+.as-bg-snoep--roos {
+  background: var(--snoep-roos);
+}
+.as-bg-snoep--citroen {
+  background: var(--snoep-citroen);
+}
+.as-bg-snoep--munt {
+  background: var(--snoep-munt);
+}
+.as-bg-snoep--bes {
+  background: var(--snoep-bes);
+}
+.as-bg-snoep--hemel {
+  background: var(--snoep-hemel);
+}
+.as-bg-snoep--perzik {
+  background: var(--snoep-perzik);
+}
+@keyframes as-confetti {
+  0% {
+    transform: translate(0, 0) scale(0.4) rotate(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(1) rotate(var(--r));
+    opacity: 0;
+  }
 }
 
 /* ---------- Dot ---------- */

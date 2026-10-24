@@ -31,11 +31,39 @@ export function CountUp({ to, from = 0, format = String }: { to: number; from?: 
   return <>{format(v)}</>;
 }
 
-/** Sweetmoment: het robijn punt pulseert één keer, met één zin. Verder niets. */
-export function SweetMoment({ children, replayKey = 0 }: { children: ReactNode; replayKey?: number }) {
+// Snoeppartikels rond het punt: [kleur, dx, dy, draaiing] (App.dc.html).
+const CONFETTI: [string, number, number, number][] = [
+  ["roos", -26, -18, 120],
+  ["citroen", 22, -22, -90],
+  ["munt", 30, 10, 200],
+  ["bes", -20, 18, -160],
+  ["hemel", 6, -30, 80],
+  ["perzik", -32, 4, 140],
+  ["roos", 18, 24, -60],
+];
+
+/** Sweetmoment: het robijn punt pulseert één keer en een handvol snoep springt eruit, met één zin. Verder niets. */
+export function SweetMoment({ children, replayKey = 0, box }: { children: ReactNode; replayKey?: number; box?: boolean }) {
   return (
-    <div role="status" className="as-sweet">
-      <span key={replayKey} className="as-sweet__dot" aria-hidden="true" />
+    <div role="status" data-theme={box ? "light" : undefined} className={["as-sweet", box && "as-sweet--box"].filter(Boolean).join(" ")}>
+      <span key={replayKey} className="as-sweet__mark" aria-hidden="true">
+        <span className="as-sweet__dot" />
+        {CONFETTI.map(([c, dx, dy, r], i) => (
+          <span
+            key={i}
+            className={`as-sweet__bit as-bg-snoep--${c}`}
+            style={{
+              width: i % 2 ? 6 : 5,
+              height: i % 2 ? 6 : 8,
+              borderRadius: i % 3 ? "50%" : 2,
+              ["--dx" as string]: `${dx}px`,
+              ["--dy" as string]: `${dy}px`,
+              ["--r" as string]: `${r}deg`,
+              animationDelay: `${80 + i * 30}ms`,
+            }}
+          />
+        ))}
+      </span>
       <span className="as-sweet__text">{children}</span>
     </div>
   );
