@@ -1,1 +1,53 @@
-/* Onderdelen van het designsysteem. Wordt in fase 2 gevuld. */
+/* AdSweet · onderdelen van het designsysteem. Alleen tokens uit tokens.css, geen losse kleuren. */
+
+/* Woordmerk */
+.as-logo {
+  display: inline-flex;
+  align-items: center;
+}
+.as-logo img {
+  height: 100%;
+  width: auto;
+}
+.as-logo__light {
+  display: var(--show-light);
+}
+.as-logo__dark {
+  display: var(--show-dark);
+}
+
+/* Stilstaande sculptuur */
+.as-sculpture {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.as-sculpture img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 100%);
+  animation: as-fade var(--t-fast) var(--ease);
+}
+
+@keyframes as-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes as-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

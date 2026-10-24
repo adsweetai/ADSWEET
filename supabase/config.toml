@@ -1,0 +1,53 @@
+# Lokale Supabase voor AdSweet (`pnpm dlx supabase start`). Zie docs/koppelingen.md voor het echte project.
+project_id = "adsweet"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 17
+
+[db.seed]
+enabled = true
+sql_paths = ["../packages/db/seed.sql"]
+
+[studio]
+enabled = true
+port = 54323
+
+[inbucket]
+enabled = true
+port = 54324
+
+[storage]
+enabled = true
+file_size_limit = "50MiB"
+
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["http://localhost:3000/auth/callback"]
+jwt_expiry = 3600
+enable_refresh_token_rotation = true
+enable_signup = true
+
+[auth.email]
+enable_signup = true
+enable_confirmations = false
+double_confirm_changes = true
+# "De link werkt 15 minuten."
+otp_expiry = 900
+max_frequency = "30s"
+
+# Doorgaan met Facebook. In productie de officiële knop van Meta gebruiken.
+[auth.external.facebook]
+enabled = false
+client_id = "env(META_APP_ID)"
+secret = "env(META_APP_SECRET)"
+redirect_uri = ""

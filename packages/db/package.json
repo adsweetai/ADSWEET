@@ -1,0 +1,26 @@
+{
+  "name": "@adsweet/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./server": "./src/server.ts",
+    "./fixtures": "./src/fixtures/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint src scripts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "gen:seed": "tsx scripts/gen-seed.ts"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.3.0"
+  },
+  "devDependencies": {
+    "@adsweet/playbook": "workspace:*",
+    "@types/node": "^22.18.0",
+    "tsx": "^4.20.0",
+    "vitest": "^3.2.4"
+  }
+}
