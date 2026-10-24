@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import {
@@ -543,9 +544,9 @@ function Column({ theme }: { theme: "light" | "dark" }) {
                 <>
                   <span>{t("a4Why1")}</span>
                   <span>{t("a4Why2")}</span>
-                  <a className="as-link" href="/academy">
+                  <Link className="as-link" href="/academy">
                     {t("a4WhyLesson")}
-                  </a>
+                  </Link>
                 </>
               ),
             }}

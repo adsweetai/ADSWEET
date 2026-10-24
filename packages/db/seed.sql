@@ -29,14 +29,14 @@ insert into public.organizations (id, name, kind, plan, billing_period, subscrip
   ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'Veld & Vuur', 'webshop', 'scale', 'maandelijks', 'actief', false, 'roos', 11, true, 8, '2026-10-01T09:00:00+01:00'),
   ('2e277cb5-3269-577e-995e-045289da1567', 'Bureau Kompas', 'bureau', 'agency', 'maandelijks', 'actief', false, 'lavendel', 11, true, 8, '2026-09-01T09:00:00+01:00');
 insert into public.organizations (id, name, kind, plan, billing_period, subscription_status, trial_started_at, trial_ends_at, founding, color, onboarding_step, onboarding_done, tuning_step, naming, created_at, agency_parent_id, agency_owner_user_id) values
-  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'Atelier Noor', 'webshop', 'agency', 'maandelijks', 'actief', null, null, false, 'roos', 11, true, 8, '{"campaign":"{zaak} · {soort} · {doel} · {maand}","ad_set":"AS{n} · {datum} · {reden}","ad":"{code} · {fase} · {soort} · {naam}"}'::jsonb, '2026-11-16T09:12:00+01:00', '2e277cb5-3269-577e-995e-045289da1567', '29cecf81-bdcf-5875-9504-56031f857fc7');
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'Atelier Noor', 'webshop', 'agency', 'maandelijks', 'actief', null, null, false, 'roos', 11, true, 8, '{"campaign":"{zaak} · {soort} · {doel} · {maand}","ad_set":"AS{n} · {datum} · {reden}","ad":"{code} · {fase} · {soort} · {naam}"}'::jsonb, '2026-09-02T10:00:00+01:00', '2e277cb5-3269-577e-995e-045289da1567', '29cecf81-bdcf-5875-9504-56031f857fc7');
 insert into public.organizations (id, name, kind, plan, billing_period, subscription_status, trial_started_at, trial_ends_at, founding, color, onboarding_step, onboarding_done, tuning_step, created_at, agency_parent_id, agency_owner_user_id) values
-  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'Peeters Dakwerken', 'dienstverlener', 'agency', 'maandelijks', 'actief', null, null, false, 'staal', 11, true, 8, '2026-11-15T08:30:00+01:00', '2e277cb5-3269-577e-995e-045289da1567', '29cecf81-bdcf-5875-9504-56031f857fc7'),
-  ('2becb956-a2a9-5de5-93fb-04c85931bbc3', 'Salon Mila', 'lokaal', 'agency', 'maandelijks', 'actief', null, null, false, 'tarwe', 11, true, 1, '2026-12-06T19:02:00+01:00', '2e277cb5-3269-577e-995e-045289da1567', null);
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'Peeters Dakwerken', 'dienstverlener', 'agency', 'maandelijks', 'actief', null, null, false, 'staal', 11, true, 8, '2026-09-03T10:00:00+01:00', '2e277cb5-3269-577e-995e-045289da1567', '29cecf81-bdcf-5875-9504-56031f857fc7'),
+  ('2becb956-a2a9-5de5-93fb-04c85931bbc3', 'Salon Mila', 'lokaal', 'agency', 'maandelijks', 'actief', null, null, false, 'tarwe', 11, true, 1, '2026-09-04T10:00:00+01:00', '2e277cb5-3269-577e-995e-045289da1567', null);
 insert into public.organizations (id, name, kind, color, onboarding_step, onboarding_done, tuning_step, created_at, plan, subscription_status, trial_started_at, trial_ends_at, founding, agency_parent_id, agency_owner_user_id) values
-  ('c88e4fe4-7497-5e64-b444-200fa4787481', 'Veld & Vuur', 'webshop', 'roos', 11, true, 8, '2026-10-01T09:00:00+01:00', 'agency', 'actief', null, null, false, '2e277cb5-3269-577e-995e-045289da1567', null),
-  ('5004023d-f3bf-50ab-bd55-3e9bae53a8d2', 'Trapkracht', 'webshop', 'roos', 11, true, 8, '2026-10-01T09:00:00+01:00', 'agency', 'actief', null, null, false, '2e277cb5-3269-577e-995e-045289da1567', null),
-  ('64c1087b-9617-5d27-8631-b28a74ba0f17', 'Proefshop', 'webshop', 'roos', 11, true, 8, '2026-10-01T09:00:00+01:00', 'agency', 'actief', null, null, false, '2e277cb5-3269-577e-995e-045289da1567', '29cecf81-bdcf-5875-9504-56031f857fc7');
+  ('c88e4fe4-7497-5e64-b444-200fa4787481', 'Veld & Vuur', 'webshop', 'roos', 11, true, 8, '2026-09-05T10:00:00+01:00', 'agency', 'actief', null, null, false, '2e277cb5-3269-577e-995e-045289da1567', null),
+  ('5004023d-f3bf-50ab-bd55-3e9bae53a8d2', 'Trapkracht', 'webshop', 'roos', 11, true, 8, '2026-09-06T10:00:00+01:00', 'agency', 'actief', null, null, false, '2e277cb5-3269-577e-995e-045289da1567', null),
+  ('64c1087b-9617-5d27-8631-b28a74ba0f17', 'Proefshop', 'webshop', 'roos', 11, true, 8, '2026-09-07T10:00:00+01:00', 'agency', 'actief', null, null, false, '2e277cb5-3269-577e-995e-045289da1567', '29cecf81-bdcf-5875-9504-56031f857fc7');
 
 -- members
 insert into public.members (id, user_id, organization_id, role) values
@@ -531,14 +531,69 @@ insert into public.log_entries (id, organization_id, at, time_known, actor, acto
 
 -- notifications
 insert into public.notifications (id, organization_id, type, severity, payload, href, created_at) values
+  ('ad2d7444-bdb7-5d75-ad6b-d2d01a25b2f4', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'kosten_hoger', 'act', '{"example":true}'::jsonb, '/advertenties', '2026-11-05T06:00:00+01:00'),
+  ('10a32c7a-84c1-58bc-9e47-2b5624d6fc81', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'afgekeurd', 'act', '{"example":true}'::jsonb, '/advertenties/maken', '2026-11-04T06:00:00+01:00'),
+  ('d2fea948-20b4-58ad-828b-5f62e80190a8', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'pixel', 'act', '{"example":true}'::jsonb, '/academy', '2026-11-03T06:00:00+01:00'),
+  ('e6b5e137-ae56-5d35-b888-9e353e70a3b0', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'budget_minimum', 'warn', '{"example":true}'::jsonb, '/campagnes', '2026-11-02T06:00:00+01:00'),
+  ('b13d377f-21e6-5144-bbad-8fd465b51f11', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'koppeling_verlopen', 'act', '{"example":true}'::jsonb, '/instellingen/koppelingen', '2026-11-01T06:00:00+01:00'),
   ('298b8618-a82f-5fdf-af3e-9d90dd4e2a6e', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'buiten_app', 'warn', '{"ad_name":"Zo gieten we ze","extra":"muziek","date":"2026-12-05"}'::jsonb, '/vandaag', '2026-12-05T14:12:00+01:00'),
   ('283e4532-f7a3-50d2-8151-885bade76ae4', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'vermoeidheid', 'warn', '{"ctr_from":2.1,"ctr_to":1.4,"frequency":2.8}'::jsonb, '/advertenties', '2026-12-07T06:00:00+01:00'),
   ('a6381cde-203e-54c8-8374-6f4f88a648ad', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'proef_bijna_om', 'warn', '{"days_left":8,"pay_date":"2026-12-16","amount":136.5}'::jsonb, '/abonnement', '2026-12-07T06:00:00+01:00'),
   ('1d2162be-1a9d-515b-a445-17f5c43aef2e', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'credits_bijna_op', 'warn', '{"left":18,"total":50,"trial":true}'::jsonb, '/studio', '2026-12-06T06:00:00+01:00'),
+  ('241a35d3-f79d-5ff6-b0a3-2025b7f8253f', '0e180a64-ba81-583b-a8f4-7685eaf8807d', 'kosten_hoger', 'act', '{"example":true}'::jsonb, '/advertenties', '2026-11-05T06:00:00+01:00'),
+  ('b36fe339-25ef-5db4-9606-1586ad71822f', '0e180a64-ba81-583b-a8f4-7685eaf8807d', 'afgekeurd', 'act', '{"example":true}'::jsonb, '/advertenties/maken', '2026-11-04T06:00:00+01:00'),
+  ('77f098a5-2936-5866-a9a1-e7cb260084eb', '0e180a64-ba81-583b-a8f4-7685eaf8807d', 'pixel', 'act', '{"example":true}'::jsonb, '/academy', '2026-11-03T06:00:00+01:00'),
+  ('e0c113a3-5a88-530a-b541-1d30f7674af1', '0e180a64-ba81-583b-a8f4-7685eaf8807d', 'budget_minimum', 'warn', '{"example":true}'::jsonb, '/campagnes', '2026-11-02T06:00:00+01:00'),
+  ('43635229-a924-5fa8-8fe8-ef451af1473f', '0e180a64-ba81-583b-a8f4-7685eaf8807d', 'koppeling_verlopen', 'act', '{"example":true}'::jsonb, '/instellingen/koppelingen', '2026-11-01T06:00:00+01:00'),
   ('1777492a-d5fc-55a9-90e9-231bb0f6f62e', '0e180a64-ba81-583b-a8f4-7685eaf8807d', 'betaalprobleem', 'act', '{}'::jsonb, '/hulp', '2026-12-07T06:00:00+01:00'),
+  ('153d6c89-927a-564e-b35c-b81daa442e8a', '000cec3c-eaf4-5b93-be25-36e43ab61249', 'kosten_hoger', 'act', '{"example":true}'::jsonb, '/advertenties', '2026-11-05T06:00:00+01:00'),
+  ('e9b07a73-a0fe-5bb5-8620-55d7900e2b2d', '000cec3c-eaf4-5b93-be25-36e43ab61249', 'afgekeurd', 'act', '{"example":true}'::jsonb, '/advertenties/maken', '2026-11-04T06:00:00+01:00'),
+  ('a3840fb7-607d-5a02-b335-35fdb8b46543', '000cec3c-eaf4-5b93-be25-36e43ab61249', 'pixel', 'act', '{"example":true}'::jsonb, '/academy', '2026-11-03T06:00:00+01:00'),
+  ('fc470f5c-ba57-5734-baeb-c99dc4ad6efc', '000cec3c-eaf4-5b93-be25-36e43ab61249', 'budget_minimum', 'warn', '{"example":true}'::jsonb, '/campagnes', '2026-11-02T06:00:00+01:00'),
+  ('ad0c2aa6-7915-5b28-8225-0ce285d3160e', '000cec3c-eaf4-5b93-be25-36e43ab61249', 'koppeling_verlopen', 'act', '{"example":true}'::jsonb, '/instellingen/koppelingen', '2026-11-01T06:00:00+01:00'),
+  ('4728e9ea-eb6b-5ef2-ad08-92a1284d77e5', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'kosten_hoger', 'act', '{"example":true}'::jsonb, '/advertenties', '2026-11-05T06:00:00+01:00'),
+  ('ddba907c-4701-5fce-aed3-5d6e31a3bd62', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'afgekeurd', 'act', '{"example":true}'::jsonb, '/advertenties/maken', '2026-11-04T06:00:00+01:00'),
+  ('777bc6e2-f7a1-59ed-a2f6-b7d05de90d6a', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'pixel', 'act', '{"example":true}'::jsonb, '/academy', '2026-11-03T06:00:00+01:00'),
+  ('c670cbb4-5670-5a78-9d28-6d21a469648c', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'budget_minimum', 'warn', '{"example":true}'::jsonb, '/campagnes', '2026-11-02T06:00:00+01:00'),
+  ('669b79d8-778c-50f7-9691-5745ab8a73b1', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'koppeling_verlopen', 'act', '{"example":true}'::jsonb, '/instellingen/koppelingen', '2026-11-01T06:00:00+01:00'),
+  ('628da2d4-47e5-527d-863a-a907eacca8d6', '2e277cb5-3269-577e-995e-045289da1567', 'kosten_hoger', 'act', '{"example":true}'::jsonb, '/advertenties', '2026-11-05T06:00:00+01:00'),
+  ('158b61cd-c66c-5b4b-bc9e-4346171a7746', '2e277cb5-3269-577e-995e-045289da1567', 'afgekeurd', 'act', '{"example":true}'::jsonb, '/advertenties/maken', '2026-11-04T06:00:00+01:00'),
+  ('c8dddf14-65aa-51cf-bbe1-873dd290ff74', '2e277cb5-3269-577e-995e-045289da1567', 'pixel', 'act', '{"example":true}'::jsonb, '/academy', '2026-11-03T06:00:00+01:00'),
+  ('3dbe2fe9-ff31-54b0-900f-c9b0d266e207', '2e277cb5-3269-577e-995e-045289da1567', 'budget_minimum', 'warn', '{"example":true}'::jsonb, '/campagnes', '2026-11-02T06:00:00+01:00'),
+  ('f700ddd8-1382-5609-bae7-16102201aca1', '2e277cb5-3269-577e-995e-045289da1567', 'koppeling_verlopen', 'act', '{"example":true}'::jsonb, '/instellingen/koppelingen', '2026-11-01T06:00:00+01:00'),
+  ('68ce707c-e523-5fc3-9312-84b76cbe0e4d', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'kosten_hoger', 'act', '{"example":true}'::jsonb, '/advertenties', '2026-11-05T06:00:00+01:00'),
+  ('8c6111fc-5b96-5b2e-9ed8-f411900beb72', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'afgekeurd', 'act', '{"example":true}'::jsonb, '/advertenties/maken', '2026-11-04T06:00:00+01:00'),
+  ('cef32170-f3a0-5ac2-be7a-a8717630b84a', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'pixel', 'act', '{"example":true}'::jsonb, '/academy', '2026-11-03T06:00:00+01:00'),
+  ('99b2ec16-01f2-58a4-990e-7b740dde077e', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'budget_minimum', 'warn', '{"example":true}'::jsonb, '/campagnes', '2026-11-02T06:00:00+01:00'),
+  ('5ffc094b-516a-59dc-bd98-52859d96ece3', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'koppeling_verlopen', 'act', '{"example":true}'::jsonb, '/instellingen/koppelingen', '2026-11-01T06:00:00+01:00'),
   ('46762350-5e57-5bf2-9d69-2c0cc47978d5', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'buiten_app', 'warn', '{"ad_name":"Zo gieten we ze","extra":"muziek","date":"2026-12-05"}'::jsonb, '/vandaag', '2026-12-05T14:12:00+01:00'),
   ('313a66a7-0fca-5a15-9cc7-f458963670a0', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'vermoeidheid', 'warn', '{"ctr_from":2.1,"ctr_to":1.4,"frequency":2.8}'::jsonb, '/advertenties', '2026-12-07T06:00:00+01:00'),
-  ('6155a656-b8cc-5744-9167-ff7d9c9bd9da', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'betaalprobleem', 'act', '{}'::jsonb, '/hulp', '2026-12-07T06:00:00+01:00');
+  ('7efe4e94-4918-51de-94b4-12158268ed44', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'kosten_hoger', 'act', '{"example":true}'::jsonb, '/advertenties', '2026-11-05T06:00:00+01:00'),
+  ('2078cda0-2f2a-5179-9090-308012f1feb0', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'afgekeurd', 'act', '{"example":true}'::jsonb, '/advertenties/maken', '2026-11-04T06:00:00+01:00'),
+  ('95474ebf-790a-5d4d-9529-33de8129ff37', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'pixel', 'act', '{"example":true}'::jsonb, '/academy', '2026-11-03T06:00:00+01:00'),
+  ('637221cd-045a-5e3c-afab-4f18e77d3b66', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'budget_minimum', 'warn', '{"example":true}'::jsonb, '/campagnes', '2026-11-02T06:00:00+01:00'),
+  ('75fc76f4-3362-5802-b56b-e56baaaa56d3', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'koppeling_verlopen', 'act', '{"example":true}'::jsonb, '/instellingen/koppelingen', '2026-11-01T06:00:00+01:00'),
+  ('6155a656-b8cc-5744-9167-ff7d9c9bd9da', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'betaalprobleem', 'act', '{}'::jsonb, '/hulp', '2026-12-07T06:00:00+01:00'),
+  ('ef848fb9-afbe-5761-9971-2b1326b7a057', '2becb956-a2a9-5de5-93fb-04c85931bbc3', 'kosten_hoger', 'act', '{"example":true}'::jsonb, '/advertenties', '2026-11-05T06:00:00+01:00'),
+  ('0e99ee4c-1e4e-5920-89a1-35a81b96ddc5', '2becb956-a2a9-5de5-93fb-04c85931bbc3', 'afgekeurd', 'act', '{"example":true}'::jsonb, '/advertenties/maken', '2026-11-04T06:00:00+01:00'),
+  ('7b4f5335-010a-52c5-826f-339f560fae98', '2becb956-a2a9-5de5-93fb-04c85931bbc3', 'pixel', 'act', '{"example":true}'::jsonb, '/academy', '2026-11-03T06:00:00+01:00'),
+  ('10b50a3f-a1fe-5a15-b8fa-a231f96ac5e3', '2becb956-a2a9-5de5-93fb-04c85931bbc3', 'budget_minimum', 'warn', '{"example":true}'::jsonb, '/campagnes', '2026-11-02T06:00:00+01:00'),
+  ('51394571-0d06-560e-a917-09463cc17e46', '2becb956-a2a9-5de5-93fb-04c85931bbc3', 'koppeling_verlopen', 'act', '{"example":true}'::jsonb, '/instellingen/koppelingen', '2026-11-01T06:00:00+01:00'),
+  ('bb416242-032f-5641-aeb3-c15b76a4c4b6', 'c88e4fe4-7497-5e64-b444-200fa4787481', 'kosten_hoger', 'act', '{"example":true}'::jsonb, '/advertenties', '2026-11-05T06:00:00+01:00'),
+  ('ce012e7c-7740-5a8e-a666-1ef46be4cfb5', 'c88e4fe4-7497-5e64-b444-200fa4787481', 'afgekeurd', 'act', '{"example":true}'::jsonb, '/advertenties/maken', '2026-11-04T06:00:00+01:00'),
+  ('472322d9-ac59-5a61-bf6f-630a4854c6de', 'c88e4fe4-7497-5e64-b444-200fa4787481', 'pixel', 'act', '{"example":true}'::jsonb, '/academy', '2026-11-03T06:00:00+01:00'),
+  ('4106b584-2837-5bbf-a4cb-d343535b78d3', 'c88e4fe4-7497-5e64-b444-200fa4787481', 'budget_minimum', 'warn', '{"example":true}'::jsonb, '/campagnes', '2026-11-02T06:00:00+01:00'),
+  ('e55c8623-279e-5f60-bf96-6050762adb17', 'c88e4fe4-7497-5e64-b444-200fa4787481', 'koppeling_verlopen', 'act', '{"example":true}'::jsonb, '/instellingen/koppelingen', '2026-11-01T06:00:00+01:00'),
+  ('9320cb0d-6d49-58a8-ad43-dc2ad37061c5', '5004023d-f3bf-50ab-bd55-3e9bae53a8d2', 'kosten_hoger', 'act', '{"example":true}'::jsonb, '/advertenties', '2026-11-05T06:00:00+01:00'),
+  ('c327423e-02a2-5204-b0b1-e2667bec8648', '5004023d-f3bf-50ab-bd55-3e9bae53a8d2', 'afgekeurd', 'act', '{"example":true}'::jsonb, '/advertenties/maken', '2026-11-04T06:00:00+01:00'),
+  ('24db24de-8bac-5ca7-8903-40b645de27ca', '5004023d-f3bf-50ab-bd55-3e9bae53a8d2', 'pixel', 'act', '{"example":true}'::jsonb, '/academy', '2026-11-03T06:00:00+01:00'),
+  ('1510a449-ef3e-5632-bcc1-68502b27ad83', '5004023d-f3bf-50ab-bd55-3e9bae53a8d2', 'budget_minimum', 'warn', '{"example":true}'::jsonb, '/campagnes', '2026-11-02T06:00:00+01:00'),
+  ('54a24cd5-8bd6-5267-a2e9-0aaf32a08719', '5004023d-f3bf-50ab-bd55-3e9bae53a8d2', 'koppeling_verlopen', 'act', '{"example":true}'::jsonb, '/instellingen/koppelingen', '2026-11-01T06:00:00+01:00'),
+  ('083c6848-2462-532b-9221-e83d0831c14e', '64c1087b-9617-5d27-8631-b28a74ba0f17', 'kosten_hoger', 'act', '{"example":true}'::jsonb, '/advertenties', '2026-11-05T06:00:00+01:00'),
+  ('f913c8a7-2620-5574-9864-620a0beb2a91', '64c1087b-9617-5d27-8631-b28a74ba0f17', 'afgekeurd', 'act', '{"example":true}'::jsonb, '/advertenties/maken', '2026-11-04T06:00:00+01:00'),
+  ('259ff532-5695-512c-838f-f89634a51b1a', '64c1087b-9617-5d27-8631-b28a74ba0f17', 'pixel', 'act', '{"example":true}'::jsonb, '/academy', '2026-11-03T06:00:00+01:00'),
+  ('c709024f-932a-5f3a-96ff-af1af11a412f', '64c1087b-9617-5d27-8631-b28a74ba0f17', 'budget_minimum', 'warn', '{"example":true}'::jsonb, '/campagnes', '2026-11-02T06:00:00+01:00'),
+  ('0435c9ea-c3b9-5425-a0ed-a69005718599', '64c1087b-9617-5d27-8631-b28a74ba0f17', 'koppeling_verlopen', 'act', '{"example":true}'::jsonb, '/instellingen/koppelingen', '2026-11-01T06:00:00+01:00');
 
 -- autopilot_settings
 insert into public.autopilot_settings (organization_id, mode, limits) values

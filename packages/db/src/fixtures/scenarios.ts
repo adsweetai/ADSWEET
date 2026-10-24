@@ -48,6 +48,8 @@ interface ScenarioOptions {
   owner?: DemoUserKey;
   agencyParentId?: string;
   agencyOwner?: DemoUserKey | null;
+  /** Volgorde in het klantenoverzicht van het bureau. */
+  clientIndex?: number;
 }
 
 function addUser(seed: Seed, key: DemoUserKey) {
@@ -55,6 +57,28 @@ function addUser(seed: Seed, key: DemoUserKey) {
   const u = DEMO_USERS[key];
   const user: SeedUser = { id: userId(key), email: u.email, first_name: u.first_name, full_name: null };
   seed.users.push(user);
+}
+
+/** Voorbeelden van de andere soorten meldingen (prototype: "voorbeeld"), met plaatshouders. */
+function addExampleNotes(seed: Seed, k: string, orgId: string) {
+  const examples: [string, "act" | "warn", string][] = [
+    ["kosten_hoger", "act", "/advertenties"],
+    ["afgekeurd", "act", "/advertenties/maken"],
+    ["pixel", "act", "/academy"],
+    ["budget_minimum", "warn", "/campagnes"],
+    ["koppeling_verlopen", "act", "/instellingen/koppelingen"],
+  ];
+  examples.forEach(([type, severity, href], i) =>
+    seed.notifications.push({
+      id: seedId(`${k}:note:voorbeeld:${type}`),
+      organization_id: orgId,
+      type,
+      severity,
+      payload: { example: true },
+      href,
+      created_at: at(`2026-11-0${5 - i}`, "06:00"),
+    }),
+  );
 }
 
 function orgBase(opts: ScenarioOptions) {
@@ -67,6 +91,7 @@ function orgBase(opts: ScenarioOptions) {
         founding: false,
         agency_parent_id: opts.agencyParentId,
         agency_owner_user_id: opts.agencyOwner ? userId(opts.agencyOwner) : null,
+        created_at: at(`2026-09-0${(opts.clientIndex ?? 0) + 2}`, "10:00"),
       }
     : {};
 }
@@ -205,6 +230,7 @@ export function buildLisa(seed: Seed, opts: ScenarioOptions) {
     ...orgBase(opts),
   });
   addOwner(seed, opts, orgId);
+  addExampleNotes(seed, opts.key, orgId);
   seed.ad_accounts.push({
     id: accId,
     organization_id: orgId,
@@ -635,6 +661,7 @@ export function buildTom(seed: Seed, opts: ScenarioOptions) {
     ...orgBase(opts),
   });
   addOwner(seed, opts, orgId);
+  addExampleNotes(seed, opts.key, orgId);
   seed.ad_accounts.push({
     id: accId,
     organization_id: orgId,
@@ -863,6 +890,7 @@ export function buildSarah(seed: Seed, opts: ScenarioOptions) {
     ...orgBase(opts),
   });
   addOwner(seed, opts, orgId);
+  addExampleNotes(seed, opts.key, orgId);
   seed.ad_accounts.push({
     id: accId,
     organization_id: orgId,
@@ -1161,6 +1189,7 @@ export function buildBram(seed: Seed, opts: ScenarioOptions) {
     created_at: at("2026-10-01", "09:00"),
   });
   addOwner(seed, opts, orgId);
+  addExampleNotes(seed, opts.key, orgId);
   seed.business_profiles.push({ organization_id: orgId, sells: "Drie webshops" });
   seed.autopilot_settings.push({ organization_id: orgId, mode: "vraag", limits: {} });
   const runId = seedId(`${k}:audit:20261207`);
@@ -1215,6 +1244,7 @@ function buildBramClient(seed: Seed, opts: ScenarioOptions, acc: BramAccount) {
     ...orgBase(opts),
   });
   seed.business_profiles.push({ organization_id: orgId });
+  addExampleNotes(seed, k, orgId);
   seed.autopilot_settings.push({ organization_id: orgId, mode: "vraag", limits: {} });
   const runId = seedId(`${k}:audit:20261207`);
   seed.audit_runs.push({
@@ -1250,13 +1280,16 @@ export function buildEva(seed: Seed) {
     created_at: at("2026-09-01", "09:00"),
   });
   addOwner(seed, { key: k, owner: "eva" }, orgId);
+  addExampleNotes(seed, k, orgId);
   seed.autopilot_settings.push({ organization_id: orgId, mode: "vraag", limits: {} });
 
   // Wie volgt op: Eva of [teamlid] (plaatshouder, geen naam verzinnen).
+  let index = 0;
   const client = (key: string, owner: DemoUserKey | null) => ({
     key: `kompas:${key}`,
     agencyParentId: orgId,
     agencyOwner: owner,
+    clientIndex: index++,
   });
   buildLisa(seed, client("lisa", "eva"));
   buildTom(seed, client("tom", "eva"));
