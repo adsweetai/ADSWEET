@@ -3,14 +3,73 @@
     "title": "AdSweet",
     "description": "Meer klanten uit Facebook en Instagram. Hit the sweet spot."
   },
-  "start": {
-    "eyebrow": "Fase 0",
-    "title": "AdSweet",
-    "accent": "Hit the sweet spot.",
-    "text": "De basis staat klaar: de juiste letter, de juiste kleuren, in licht en nacht.",
+  "common": {
+    "logoAlt": "adsweet",
+    "toWebsite": "AdSweet, naar de website",
+    "language": "Taal",
+    "languageLater": "Komt later",
+    "privacy": "Privacy",
+    "slogan": "Hit the <sweet>sweet</sweet> spot.",
+    "example": "Voorbeeld",
     "theme": "Thema",
     "themeAuto": "Toestel",
     "themeLight": "Licht",
     "themeDark": "Nacht"
+  },
+  "auth": {
+    "signupTitle": "Maak je account.",
+    "fb": "Doorgaan met Facebook",
+    "signupNote": "Met je Facebook-account log je in en koppel je straks je advertenties.",
+    "terms": "Ik ga akkoord met de <terms>voorwaarden</terms> en het <privacy>privacybeleid</privacy>.",
+    "haveAccount": "Heb je al een account?",
+    "loginLink": "Inloggen",
+    "loginTitle": "Welkom terug.",
+    "mailBtn": "Inloggen met e-mail",
+    "mailLabel": "E-mail",
+    "mailPlaceholder": "jij@jouwzaak.be",
+    "mailSend": "Stuur me een link",
+    "mailNote": "Voor teamleden die geen Facebook gebruiken.",
+    "mailInvalid": "Dit is geen geldig e-mailadres.",
+    "mailError": "Het lukte niet om de link te sturen. Probeer het zo opnieuw.",
+    "linkInvalid": "Deze link werkt niet meer. Vraag een nieuwe aan.",
+    "newHere": "Nieuw bij AdSweet?",
+    "signupLink": "Maak je account",
+    "checkTitle": "Check je mailbox.",
+    "checkText": "De link werkt 15 minuten.",
+    "checkDemo": "Demo: open de link",
+    "checkDemoNone": "Demo: dit adres hoort bij geen account. Gebruik een van de voorbeeldaccounts hieronder.",
+    "demoAccounts": "Demo: voorbeeldaccounts",
+    "demoAccountsNote": "Er gaan geen echte mails uit. Na het versturen staat de link op de volgende pagina.",
+    "fbLater": "Doorgaan met Facebook werkt zodra de koppeling met Meta klaar is. Log voorlopig in met je e-mail."
+  },
+  "nav": {
+    "vandaag": "Vandaag",
+    "logout": "Uitloggen"
+  },
+  "today": {
+    "greeting": "Goeiemorgen, {name}",
+    "org": "Je organisatie",
+    "plan": "Plan",
+    "kind": "Soort zaak",
+    "role": "Je rol",
+    "clients": "{count, plural, one {# klant} other {# klanten}}"
+  },
+  "plans": {
+    "starter": "Starter",
+    "pro": "Pro",
+    "scale": "Scale",
+    "agency": "Agency"
+  },
+  "kinds": {
+    "webshop": "Webshop",
+    "dienstverlener": "Dienstverlener",
+    "lokaal": "Lokale zaak",
+    "zelfstandige": "Zelfstandige",
+    "bureau": "Bureau"
+  },
+  "roles": {
+    "eigenaar": "Eigenaar",
+    "beheerder": "Beheerder",
+    "lezer": "Lezer"
   }
 }

@@ -1,0 +1,567 @@
+-- AdSweet · voorbeelddata (Lisa, Tom, Sarah, Bram, Eva). Gegenereerd door `pnpm --filter @adsweet/db gen:seed`.
+-- Niet met de hand aanpassen: wijzig packages/db/src/fixtures en genereer opnieuw.
+
+-- Gebruikers (inloggen met een link per mail; geen wachtwoord)
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at, confirmation_token, email_change, email_change_token_new, recovery_token) values ('00000000-0000-0000-0000-000000000000', '501ce77b-52c3-527f-968e-c7d2bcb4244b', 'authenticated', 'authenticated', 'lisa@ateliernoor.voorbeeld', '', now(), '{"provider":"email","providers":["email"]}', '{"first_name":"Lisa"}', now(), now(), '', '', '', '');
+insert into auth.identities (provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at) values ('501ce77b-52c3-527f-968e-c7d2bcb4244b', '501ce77b-52c3-527f-968e-c7d2bcb4244b', '{"sub":"501ce77b-52c3-527f-968e-c7d2bcb4244b","email":"lisa@ateliernoor.voorbeeld","email_verified":true}', 'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at, confirmation_token, email_change, email_change_token_new, recovery_token) values ('00000000-0000-0000-0000-000000000000', '2a25612d-15c5-598c-9ebb-3811c5d90cea', 'authenticated', 'authenticated', 'tom@peetersdakwerken.voorbeeld', '', now(), '{"provider":"email","providers":["email"]}', '{"first_name":"Tom"}', now(), now(), '', '', '', '');
+insert into auth.identities (provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at) values ('2a25612d-15c5-598c-9ebb-3811c5d90cea', '2a25612d-15c5-598c-9ebb-3811c5d90cea', '{"sub":"2a25612d-15c5-598c-9ebb-3811c5d90cea","email":"tom@peetersdakwerken.voorbeeld","email_verified":true}', 'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at, confirmation_token, email_change, email_change_token_new, recovery_token) values ('00000000-0000-0000-0000-000000000000', '3ad669f9-c749-5212-aef9-6b10ada48af0', 'authenticated', 'authenticated', 'sarah@salonmila.voorbeeld', '', now(), '{"provider":"email","providers":["email"]}', '{"first_name":"Sarah"}', now(), now(), '', '', '', '');
+insert into auth.identities (provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at) values ('3ad669f9-c749-5212-aef9-6b10ada48af0', '3ad669f9-c749-5212-aef9-6b10ada48af0', '{"sub":"3ad669f9-c749-5212-aef9-6b10ada48af0","email":"sarah@salonmila.voorbeeld","email_verified":true}', 'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at, confirmation_token, email_change, email_change_token_new, recovery_token) values ('00000000-0000-0000-0000-000000000000', '19abad55-f5e7-5544-b396-0a4f77464d9a', 'authenticated', 'authenticated', 'bram@veldenvuur.voorbeeld', '', now(), '{"provider":"email","providers":["email"]}', '{"first_name":"Bram"}', now(), now(), '', '', '', '');
+insert into auth.identities (provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at) values ('19abad55-f5e7-5544-b396-0a4f77464d9a', '19abad55-f5e7-5544-b396-0a4f77464d9a', '{"sub":"19abad55-f5e7-5544-b396-0a4f77464d9a","email":"bram@veldenvuur.voorbeeld","email_verified":true}', 'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at, confirmation_token, email_change, email_change_token_new, recovery_token) values ('00000000-0000-0000-0000-000000000000', '29cecf81-bdcf-5875-9504-56031f857fc7', 'authenticated', 'authenticated', 'eva@bureaukompas.voorbeeld', '', now(), '{"provider":"email","providers":["email"]}', '{"first_name":"Eva"}', now(), now(), '', '', '', '');
+insert into auth.identities (provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at) values ('29cecf81-bdcf-5875-9504-56031f857fc7', '29cecf81-bdcf-5875-9504-56031f857fc7', '{"sub":"29cecf81-bdcf-5875-9504-56031f857fc7","email":"eva@bureaukompas.voorbeeld","email_verified":true}', 'email', now(), now(), now());
+insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at, confirmation_token, email_change, email_change_token_new, recovery_token) values ('00000000-0000-0000-0000-000000000000', 'fe569d06-2960-5533-afc0-df01de96ec27', 'authenticated', 'authenticated', 'team@adsweet.voorbeeld', '', now(), '{"provider":"email","providers":["email"]}', '{"first_name":"AdSweet"}', now(), now(), '', '', '', '');
+insert into auth.identities (provider_id, user_id, identity_data, provider, last_sign_in_at, created_at, updated_at) values ('fe569d06-2960-5533-afc0-df01de96ec27', 'fe569d06-2960-5533-afc0-df01de96ec27', '{"sub":"fe569d06-2960-5533-afc0-df01de96ec27","email":"team@adsweet.voorbeeld","email_verified":true}', 'email', now(), now(), now());
+
+-- adsweet_admins
+insert into public.adsweet_admins (user_id) values
+  ('fe569d06-2960-5533-afc0-df01de96ec27');
+
+-- organizations
+insert into public.organizations (id, name, kind, plan, billing_period, subscription_status, trial_started_at, trial_ends_at, founding, color, onboarding_step, onboarding_done, tuning_step, naming, created_at) values
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'Atelier Noor', 'webshop', 'pro', 'maandelijks', 'proef', '2026-11-16', '2026-12-16', true, 'roos', 11, true, 8, '{"campaign":"{zaak} · {soort} · {doel} · {maand}","ad_set":"AS{n} · {datum} · {reden}","ad":"{code} · {fase} · {soort} · {naam}"}'::jsonb, '2026-11-16T09:12:00+01:00');
+insert into public.organizations (id, name, kind, plan, billing_period, subscription_status, trial_started_at, trial_ends_at, founding, color, onboarding_step, onboarding_done, tuning_step, created_at) values
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', 'Peeters Dakwerken', 'dienstverlener', 'starter', 'maandelijks', 'proef', '2026-11-15', '2026-12-15', false, 'staal', 11, true, 8, '2026-11-15T08:30:00+01:00'),
+  ('000cec3c-eaf4-5b93-be25-36e43ab61249', 'Salon Mila', 'lokaal', 'pro', 'maandelijks', 'proef', '2026-12-07', '2027-01-06', false, 'tarwe', 11, true, 1, '2026-12-06T19:02:00+01:00');
+insert into public.organizations (id, name, kind, plan, billing_period, subscription_status, founding, color, onboarding_step, onboarding_done, tuning_step, created_at) values
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'Veld & Vuur', 'webshop', 'scale', 'maandelijks', 'actief', false, 'roos', 11, true, 8, '2026-10-01T09:00:00+01:00'),
+  ('2e277cb5-3269-577e-995e-045289da1567', 'Bureau Kompas', 'bureau', 'agency', 'maandelijks', 'actief', false, 'lavendel', 11, true, 8, '2026-09-01T09:00:00+01:00');
+insert into public.organizations (id, name, kind, plan, billing_period, subscription_status, trial_started_at, trial_ends_at, founding, color, onboarding_step, onboarding_done, tuning_step, naming, created_at, agency_parent_id, agency_owner_user_id) values
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'Atelier Noor', 'webshop', 'agency', 'maandelijks', 'actief', null, null, false, 'roos', 11, true, 8, '{"campaign":"{zaak} · {soort} · {doel} · {maand}","ad_set":"AS{n} · {datum} · {reden}","ad":"{code} · {fase} · {soort} · {naam}"}'::jsonb, '2026-11-16T09:12:00+01:00', '2e277cb5-3269-577e-995e-045289da1567', '29cecf81-bdcf-5875-9504-56031f857fc7');
+insert into public.organizations (id, name, kind, plan, billing_period, subscription_status, trial_started_at, trial_ends_at, founding, color, onboarding_step, onboarding_done, tuning_step, created_at, agency_parent_id, agency_owner_user_id) values
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'Peeters Dakwerken', 'dienstverlener', 'agency', 'maandelijks', 'actief', null, null, false, 'staal', 11, true, 8, '2026-11-15T08:30:00+01:00', '2e277cb5-3269-577e-995e-045289da1567', '29cecf81-bdcf-5875-9504-56031f857fc7'),
+  ('2becb956-a2a9-5de5-93fb-04c85931bbc3', 'Salon Mila', 'lokaal', 'agency', 'maandelijks', 'actief', null, null, false, 'tarwe', 11, true, 1, '2026-12-06T19:02:00+01:00', '2e277cb5-3269-577e-995e-045289da1567', null);
+insert into public.organizations (id, name, kind, color, onboarding_step, onboarding_done, tuning_step, created_at, plan, subscription_status, trial_started_at, trial_ends_at, founding, agency_parent_id, agency_owner_user_id) values
+  ('c88e4fe4-7497-5e64-b444-200fa4787481', 'Veld & Vuur', 'webshop', 'roos', 11, true, 8, '2026-10-01T09:00:00+01:00', 'agency', 'actief', null, null, false, '2e277cb5-3269-577e-995e-045289da1567', null),
+  ('5004023d-f3bf-50ab-bd55-3e9bae53a8d2', 'Trapkracht', 'webshop', 'roos', 11, true, 8, '2026-10-01T09:00:00+01:00', 'agency', 'actief', null, null, false, '2e277cb5-3269-577e-995e-045289da1567', null),
+  ('64c1087b-9617-5d27-8631-b28a74ba0f17', 'Proefshop', 'webshop', 'roos', 11, true, 8, '2026-10-01T09:00:00+01:00', 'agency', 'actief', null, null, false, '2e277cb5-3269-577e-995e-045289da1567', '29cecf81-bdcf-5875-9504-56031f857fc7');
+
+-- members
+insert into public.members (id, user_id, organization_id, role) values
+  ('659e069c-0d81-57d7-9015-40a2be236e6a', '501ce77b-52c3-527f-968e-c7d2bcb4244b', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'eigenaar'),
+  ('eb70e629-1e3d-5528-9fe2-aea3e5ab5c7f', '2a25612d-15c5-598c-9ebb-3811c5d90cea', '0e180a64-ba81-583b-a8f4-7685eaf8807d', 'eigenaar'),
+  ('749d845d-6cd8-576e-8c02-30d688a6c97e', '3ad669f9-c749-5212-aef9-6b10ada48af0', '000cec3c-eaf4-5b93-be25-36e43ab61249', 'eigenaar'),
+  ('1b7dbc24-4dd4-51c2-b04b-cebf17bb5ab8', '19abad55-f5e7-5544-b396-0a4f77464d9a', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'eigenaar'),
+  ('45cb4735-996a-564d-b9d8-6a406fb48ce5', '29cecf81-bdcf-5875-9504-56031f857fc7', '2e277cb5-3269-577e-995e-045289da1567', 'eigenaar');
+
+-- ad_accounts
+insert into public.ad_accounts (id, organization_id, name, currency, status, sort) values
+  ('f3beecf7-7597-54a9-ad25-b36cc23d725e', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'Atelier Noor', 'EUR', 'actief', 0),
+  ('96b475a9-e8f2-54cb-8911-6070831c909b', '000cec3c-eaf4-5b93-be25-36e43ab61249', 'Salon Mila', 'EUR', 'actief', 0),
+  ('74adb8fe-ebfb-5efd-8c93-ffe2d3f462e1', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'Veld & Vuur', 'EUR', 'actief', 0),
+  ('9f569474-6848-5109-99e1-51f2a10c2c3a', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'Trapkracht', 'EUR', 'actief', 1),
+  ('a1097839-ccc0-55ef-94e3-10a7b894fed9', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'Proefshop', 'EUR', 'actief', 2),
+  ('a938e495-8107-5eaf-858e-401b6728e6b3', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'Atelier Noor', 'EUR', 'actief', 0),
+  ('3dd2ef09-1d9d-5f87-b950-17cc8963d920', '2becb956-a2a9-5de5-93fb-04c85931bbc3', 'Salon Mila', 'EUR', 'actief', 0),
+  ('cbec5514-d973-5b27-9f68-108bfecd9b63', 'c88e4fe4-7497-5e64-b444-200fa4787481', 'Veld & Vuur', 'EUR', 'actief', 0),
+  ('dc2dba98-fba8-5d4d-ab15-00725da9f43e', '5004023d-f3bf-50ab-bd55-3e9bae53a8d2', 'Trapkracht', 'EUR', 'actief', 0),
+  ('f7809f32-e222-5275-8c51-f21014a613c3', '64c1087b-9617-5d27-8631-b28a74ba0f17', 'Proefshop', 'EUR', 'actief', 0);
+insert into public.ad_accounts (id, organization_id, name, currency, status, payment_method_ok, sort) values
+  ('48f7a50e-33f4-5b01-9113-2ae3f98e5dc7', '0e180a64-ba81-583b-a8f4-7685eaf8807d', 'Peeters Dakwerken', 'EUR', 'betaalprobleem', false, 0),
+  ('7b093dc9-46f9-5389-9314-b3856cea7f6b', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'Peeters Dakwerken', 'EUR', 'betaalprobleem', false, 0);
+
+-- business_profiles
+insert into public.business_profiles (organization_id, website, sells, offers, tone, tone_example, region, colors, contact, payer, beneficiary) values
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'ateliernoor.voorbeeld', 'Handgemaakte kaarsen en geschenkdozen', '[]'::jsonb, '{"warm","ambachtelijk","rustig"}', 'Elke kaars gieten we met de hand.', 'België · [adres]', '{"#3A2E2A","#EDE3D6"}', '{"delivery":"webshop, levering in België"}'::jsonb, 'Atelier Noor', 'Atelier Noor'),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'ateliernoor.voorbeeld', 'Handgemaakte kaarsen en geschenkdozen', '[]'::jsonb, '{"warm","ambachtelijk","rustig"}', 'Elke kaars gieten we met de hand.', 'België · [adres]', '{"#3A2E2A","#EDE3D6"}', '{"delivery":"webshop, levering in België"}'::jsonb, 'Atelier Noor', 'Atelier Noor');
+insert into public.business_profiles (organization_id, website, sells, region, payer, beneficiary) values
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', 'peetersdakwerken.voorbeeld', 'Dakwerken', 'Limburg en Antwerpen', 'Peeters Dakwerken', 'Peeters Dakwerken'),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'peetersdakwerken.voorbeeld', 'Dakwerken', 'Limburg en Antwerpen', 'Peeters Dakwerken', 'Peeters Dakwerken');
+insert into public.business_profiles (organization_id, website, sells, offers, tone, tone_example, region, colors, payer, beneficiary) values
+  ('000cec3c-eaf4-5b93-be25-36e43ab61249', 'salonmila.voorbeeld', 'Kapsalon', '[{"name":"Knippen dames","price":"€48"},{"name":"Kleuren","price":"vanaf €75"},{"name":"Balayage","price":"vanaf €120"}]'::jsonb, '{"warm","persoonlijk","rustig"}', 'Bij ons neem je even de tijd voor jezelf.', 'Hasselt · [adres] · [telefoon]', '{"#3D4A3F","#E8DCCB"}', 'Salon Mila', 'Salon Mila'),
+  ('2becb956-a2a9-5de5-93fb-04c85931bbc3', 'salonmila.voorbeeld', 'Kapsalon', '[{"name":"Knippen dames","price":"€48"},{"name":"Kleuren","price":"vanaf €75"},{"name":"Balayage","price":"vanaf €120"}]'::jsonb, '{"warm","persoonlijk","rustig"}', 'Bij ons neem je even de tijd voor jezelf.', 'Hasselt · [adres] · [telefoon]', '{"#3D4A3F","#E8DCCB"}', 'Salon Mila', 'Salon Mila');
+insert into public.business_profiles (organization_id, sells) values
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'Drie webshops');
+insert into public.business_profiles (organization_id) values
+  ('c88e4fe4-7497-5e64-b444-200fa4787481'),
+  ('5004023d-f3bf-50ab-bd55-3e9bae53a8d2'),
+  ('64c1087b-9617-5d27-8631-b28a74ba0f17');
+
+-- goals
+insert into public.goals (id, organization_id, type, aov, margin, target_roas, targeting) values
+  ('e57e2755-cd26-5618-994e-773bd2d32599', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'verkopen', 58, 0.4, null, '{"area":"land","region":"België","countries":["België"],"languages":["Nederlands"],"age_min":25,"age_max":65}'::jsonb),
+  ('0e457d54-1049-562f-be86-6432f469c493', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'verkopen', 58, 0.4, null, '{"area":"land","region":"België","countries":["België"],"languages":["Nederlands"],"age_min":25,"age_max":65}'::jsonb);
+insert into public.goals (id, organization_id, type, target_cpl, clv, margin, close_rate, targeting) values
+  ('857803a7-2013-5c13-8889-937255adf2bf', '0e180a64-ba81-583b-a8f4-7685eaf8807d', 'aanvragen', 20, 2000, 0.25, 0.04, '{"area":"prov","region":"Limburg en Antwerpen","countries":["België"],"languages":["Nederlands"],"age_min":18,"age_max":null}'::jsonb),
+  ('8953be0a-669d-5f83-9ef4-04138b1854df', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'aanvragen', 20, 2000, 0.25, 0.04, '{"area":"prov","region":"Limburg en Antwerpen","countries":["België"],"languages":["Nederlands"],"age_min":18,"age_max":null}'::jsonb);
+insert into public.goals (id, organization_id, type, zaak_mode, target_cpl, clv, margin, close_rate, targeting) values
+  ('b1d29392-86a1-5cef-bb8f-d4fd70b7a9c2', '000cec3c-eaf4-5b93-be25-36e43ab61249', 'zaak', 'aanvragen', 15, 360, 0.5, 0.25, '{"area":"radius","region":"Hasselt","radius_km":15,"countries":["België"],"languages":["Nederlands"],"age_min":18,"age_max":null}'::jsonb),
+  ('b0dc3876-22b1-5b46-8b32-ebe734dc069b', '2becb956-a2a9-5de5-93fb-04c85931bbc3', 'zaak', 'aanvragen', 15, 360, 0.5, 0.25, '{"area":"radius","region":"Hasselt","radius_km":15,"countries":["België"],"languages":["Nederlands"],"age_min":18,"age_max":null}'::jsonb);
+insert into public.goals (id, organization_id, ad_account_id, type, aov, margin, targeting) values
+  ('cee87a0d-26e9-5a6c-8523-5f3397193e5f', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', '74adb8fe-ebfb-5efd-8c93-ffe2d3f462e1', 'verkopen', 84, 0.35, '{}'::jsonb),
+  ('d382add0-dace-5c91-aa99-d15217b17cc1', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', '9f569474-6848-5109-99e1-51f2a10c2c3a', 'verkopen', 61, 0.45, '{}'::jsonb),
+  ('b172619c-82ff-5aae-8c79-e45d6ca23f70', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'a1097839-ccc0-55ef-94e3-10a7b894fed9', 'verkopen', 45, 0.5, '{}'::jsonb),
+  ('374f54f8-e41c-57af-996a-5084fa8a40c9', 'c88e4fe4-7497-5e64-b444-200fa4787481', 'cbec5514-d973-5b27-9f68-108bfecd9b63', 'verkopen', 84, 0.35, '{}'::jsonb),
+  ('47cca86c-e2b9-5338-abde-86839672b929', '5004023d-f3bf-50ab-bd55-3e9bae53a8d2', 'dc2dba98-fba8-5d4d-ab15-00725da9f43e', 'verkopen', 61, 0.45, '{}'::jsonb),
+  ('13b8a54c-ba25-54b5-87d6-8f9d95e34988', '64c1087b-9617-5d27-8631-b28a74ba0f17', 'f7809f32-e222-5275-8c51-f21014a613c3', 'verkopen', 45, 0.5, '{}'::jsonb);
+
+-- connections
+insert into public.connections (id, organization_id, ad_account_id, provider, status, connected_at, page_name, ig_name, pixel_name, pixel_ok) values
+  ('9962a066-10fe-5c6c-92d0-2c6d47afc01e', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f3beecf7-7597-54a9-ad25-b36cc23d725e', 'meta', 'gekoppeld', '2026-11-16T09:20:00+01:00', 'Atelier Noor', '@ateliernoor', 'Atelier Noor pixel', true),
+  ('1853d051-69f4-5c9a-9a08-971334408d52', '0e180a64-ba81-583b-a8f4-7685eaf8807d', '48f7a50e-33f4-5b01-9113-2ae3f98e5dc7', 'meta', 'gekoppeld', '2026-11-15T08:41:00+01:00', 'Peeters Dakwerken', '@peetersdakwerken', 'Peeters Dakwerken pixel', true),
+  ('140497b7-d90e-511f-aabe-8ce49d3cb76f', '000cec3c-eaf4-5b93-be25-36e43ab61249', '96b475a9-e8f2-54cb-8911-6070831c909b', 'meta', 'gekoppeld', '2026-12-06T19:20:00+01:00', 'Salon Mila', '@salonmila', 'Salon Mila pixel', true),
+  ('45369f00-562f-5165-b146-3df7657a1f4e', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'a938e495-8107-5eaf-858e-401b6728e6b3', 'meta', 'gekoppeld', '2026-11-16T09:20:00+01:00', 'Atelier Noor', '@ateliernoor', 'Atelier Noor pixel', true),
+  ('a12e4fdd-ea07-5a16-bb35-0aff2faa8cb8', '2375742c-72bd-571b-bb5d-140b0b325ba7', '7b093dc9-46f9-5389-9314-b3856cea7f6b', 'meta', 'gekoppeld', '2026-11-15T08:41:00+01:00', 'Peeters Dakwerken', '@peetersdakwerken', 'Peeters Dakwerken pixel', true),
+  ('e8be4c00-e690-5dcf-a9e2-1c1ca20704cb', '2becb956-a2a9-5de5-93fb-04c85931bbc3', '3dd2ef09-1d9d-5f87-b950-17cc8963d920', 'meta', 'gekoppeld', '2026-12-06T19:20:00+01:00', 'Salon Mila', '@salonmila', 'Salon Mila pixel', true);
+insert into public.connections (id, organization_id, ad_account_id, provider, status, connected_at, page_name, pixel_name, pixel_ok) values
+  ('1fc36c3d-316c-5737-a563-df8614999561', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', '74adb8fe-ebfb-5efd-8c93-ffe2d3f462e1', 'meta', 'gekoppeld', '2026-10-01T10:00:00+01:00', 'Veld & Vuur', 'Veld & Vuur pixel', true),
+  ('887da771-e43a-595a-8f33-e99f3170ca32', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', '9f569474-6848-5109-99e1-51f2a10c2c3a', 'meta', 'gekoppeld', '2026-10-01T10:00:00+01:00', 'Trapkracht', 'Trapkracht pixel', true),
+  ('d91e7fc1-6ba2-593e-9f9b-e976f6befee3', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'a1097839-ccc0-55ef-94e3-10a7b894fed9', 'meta', 'gekoppeld', '2026-10-01T10:00:00+01:00', 'Proefshop', 'Proefshop pixel', true),
+  ('9edd9952-d18e-5358-a9d1-767ca5e0cca8', 'c88e4fe4-7497-5e64-b444-200fa4787481', 'cbec5514-d973-5b27-9f68-108bfecd9b63', 'meta', 'gekoppeld', '2026-10-01T10:00:00+01:00', 'Veld & Vuur', 'Veld & Vuur pixel', true),
+  ('efb27d6b-ae44-54ed-adc2-07468b28c7de', '5004023d-f3bf-50ab-bd55-3e9bae53a8d2', 'dc2dba98-fba8-5d4d-ab15-00725da9f43e', 'meta', 'gekoppeld', '2026-10-01T10:00:00+01:00', 'Trapkracht', 'Trapkracht pixel', true),
+  ('9ff86000-1145-5cd9-b0d8-92da2404d8ca', '64c1087b-9617-5d27-8631-b28a74ba0f17', 'f7809f32-e222-5275-8c51-f21014a613c3', 'meta', 'gekoppeld', '2026-10-01T10:00:00+01:00', 'Proefshop', 'Proefshop pixel', true);
+
+-- campaigns
+insert into public.campaigns (id, organization_id, ad_account_id, name, kind, goal, status, daily_budget, start_date, targeting, payer, beneficiary, utm, launched_at, created_at) values
+  ('f167e51e-1a66-541b-9261-bfcbc7f0ee16', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f3beecf7-7597-54a9-ad25-b36cc23d725e', 'Noor · Vast · Verkopen · nov26', 'vast', 'verkopen', 'actief', 40, '2026-11-17', '{"area":"land","region":"België","countries":["België"],"languages":["Nederlands"],"age_min":25,"age_max":65}'::jsonb, 'Atelier Noor', 'Atelier Noor', '{"source":"meta","medium":"paid_social","campaign":"noor-vast-verkopen"}'::jsonb, '2026-11-17T10:05:00+01:00', '2026-11-17T10:05:00+01:00'),
+  ('45d67cbd-cc04-5483-a3a5-690060f2cce5', '0e180a64-ba81-583b-a8f4-7685eaf8807d', '48f7a50e-33f4-5b01-9113-2ae3f98e5dc7', 'Peeters · Vast · Aanvragen · nov26', 'vast', 'aanvragen', 'actief', 15, '2026-11-23', '{"area":"prov","region":"Limburg en Antwerpen","countries":["België"],"languages":["Nederlands"],"age_min":18,"age_max":null}'::jsonb, 'Peeters Dakwerken', 'Peeters Dakwerken', '{"source":"meta","medium":"paid_social","campaign":"peeters-vast-aanvragen"}'::jsonb, '2026-11-23T00:00:00+01:00', '2026-11-23T00:00:00+01:00'),
+  ('4ea0a913-7a6c-59cd-90fb-b77e5b555e41', '000cec3c-eaf4-5b93-be25-36e43ab61249', '96b475a9-e8f2-54cb-8911-6070831c909b', 'Mila · Vast · Afspraken · dec26', 'vast', 'aanvragen', 'leerfase', 12, '2026-12-06', '{"area":"radius","region":"Hasselt","radius_km":15,"countries":["België"],"languages":["Nederlands"],"age_min":18,"age_max":null}'::jsonb, 'Salon Mila', 'Salon Mila', '{"source":"meta","medium":"paid_social","campaign":"mila-vast-afspraken"}'::jsonb, '2026-12-06T19:40:00+01:00', '2026-12-06T19:40:00+01:00'),
+  ('49c57bee-e707-5132-b97f-9087c1e4c5f9', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'a938e495-8107-5eaf-858e-401b6728e6b3', 'Noor · Vast · Verkopen · nov26', 'vast', 'verkopen', 'actief', 40, '2026-11-17', '{"area":"land","region":"België","countries":["België"],"languages":["Nederlands"],"age_min":25,"age_max":65}'::jsonb, 'Atelier Noor', 'Atelier Noor', '{"source":"meta","medium":"paid_social","campaign":"noor-vast-verkopen"}'::jsonb, '2026-11-17T10:05:00+01:00', '2026-11-17T10:05:00+01:00'),
+  ('ac108702-d6db-5427-9934-fba4d4624e7c', '2375742c-72bd-571b-bb5d-140b0b325ba7', '7b093dc9-46f9-5389-9314-b3856cea7f6b', 'Peeters · Vast · Aanvragen · nov26', 'vast', 'aanvragen', 'actief', 15, '2026-11-23', '{"area":"prov","region":"Limburg en Antwerpen","countries":["België"],"languages":["Nederlands"],"age_min":18,"age_max":null}'::jsonb, 'Peeters Dakwerken', 'Peeters Dakwerken', '{"source":"meta","medium":"paid_social","campaign":"peeters-vast-aanvragen"}'::jsonb, '2026-11-23T00:00:00+01:00', '2026-11-23T00:00:00+01:00'),
+  ('82bf6dab-dd5c-5391-884b-c17a0c31ed96', '2becb956-a2a9-5de5-93fb-04c85931bbc3', '3dd2ef09-1d9d-5f87-b950-17cc8963d920', 'Mila · Vast · Afspraken · dec26', 'vast', 'aanvragen', 'leerfase', 12, '2026-12-06', '{"area":"radius","region":"Hasselt","radius_km":15,"countries":["België"],"languages":["Nederlands"],"age_min":18,"age_max":null}'::jsonb, 'Salon Mila', 'Salon Mila', '{"source":"meta","medium":"paid_social","campaign":"mila-vast-afspraken"}'::jsonb, '2026-12-06T19:40:00+01:00', '2026-12-06T19:40:00+01:00');
+insert into public.campaigns (id, organization_id, ad_account_id, name, kind, goal, status, daily_budget, start_date, end_date, targeting, payer, beneficiary, utm, launched_at, created_at) values
+  ('16ef80f9-d3ae-5132-afa8-d7ffdca83c1d', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f3beecf7-7597-54a9-ad25-b36cc23d725e', 'Black Friday', 'bf', 'verkopen', 'afgelopen', 45, '2026-11-27', '2026-11-30', '{"area":"land","region":"België","countries":["België"],"languages":["Nederlands"],"age_min":25,"age_max":65}'::jsonb, 'Atelier Noor', 'Atelier Noor', '{"source":"meta","medium":"paid_social","campaign":"noor-bf-verkopen"}'::jsonb, '2026-11-26T20:41:00+01:00', '2026-11-26T20:41:00+01:00'),
+  ('0c1d3018-f5bf-528d-916e-9b2d3d86f923', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'a938e495-8107-5eaf-858e-401b6728e6b3', 'Black Friday', 'bf', 'verkopen', 'afgelopen', 45, '2026-11-27', '2026-11-30', '{"area":"land","region":"België","countries":["België"],"languages":["Nederlands"],"age_min":25,"age_max":65}'::jsonb, 'Atelier Noor', 'Atelier Noor', '{"source":"meta","medium":"paid_social","campaign":"noor-bf-verkopen"}'::jsonb, '2026-11-26T20:41:00+01:00', '2026-11-26T20:41:00+01:00');
+insert into public.campaigns (id, organization_id, ad_account_id, name, kind, goal, status, daily_budget, budget_level, outside_adsweet, deviations, created_at) values
+  ('8a7ff0e4-0b94-5a49-8752-65fbded9d3cd', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f3beecf7-7597-54a9-ad25-b36cc23d725e', 'Voorjaar 2026 (voorbeeld)', 'vast', 'verkopen', 'gepauzeerd', null, 'adset', true, '{"budget per ad set","interesses in 2 ad sets"}', '2026-03-01T12:00:00+01:00'),
+  ('606dcd21-2953-51ad-8657-1bf2d58ce39b', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'a938e495-8107-5eaf-858e-401b6728e6b3', 'Voorjaar 2026 (voorbeeld)', 'vast', 'verkopen', 'gepauzeerd', null, 'adset', true, '{"budget per ad set","interesses in 2 ad sets"}', '2026-03-01T12:00:00+01:00');
+insert into public.campaigns (id, organization_id, ad_account_id, name, kind, goal, status, daily_budget, start_date, utm) values
+  ('e53fca42-ac14-5854-af26-2c26cbb0ad1f', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', '74adb8fe-ebfb-5efd-8c93-ffe2d3f462e1', 'Veld & Vuur · Vast · Verkopen', 'vast', 'verkopen', 'actief', null, null, '{"source":"meta","medium":"paid_social"}'::jsonb),
+  ('c7fed9fe-0a49-50a8-95c4-8c11a3b97607', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', '9f569474-6848-5109-99e1-51f2a10c2c3a', 'Trapkracht · Vast · Verkopen', 'vast', 'verkopen', 'actief', null, null, '{"source":"meta","medium":"paid_social"}'::jsonb),
+  ('d855f837-047e-5e75-990c-6da6a1b6eef5', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'a1097839-ccc0-55ef-94e3-10a7b894fed9', 'Proefshop · Vast · Verkopen', 'vast', 'verkopen', 'actief', null, null, '{"source":"meta","medium":"paid_social"}'::jsonb),
+  ('8d6214b0-9e24-51bb-a4bf-9df4fa724265', 'c88e4fe4-7497-5e64-b444-200fa4787481', 'cbec5514-d973-5b27-9f68-108bfecd9b63', 'Veld & Vuur · Vast · Verkopen', 'vast', 'verkopen', 'actief', null, null, '{"source":"meta","medium":"paid_social"}'::jsonb),
+  ('252e1303-764b-5758-a23b-90e7134f102a', '5004023d-f3bf-50ab-bd55-3e9bae53a8d2', 'dc2dba98-fba8-5d4d-ab15-00725da9f43e', 'Trapkracht · Vast · Verkopen', 'vast', 'verkopen', 'actief', null, null, '{"source":"meta","medium":"paid_social"}'::jsonb),
+  ('fed9957c-7070-5087-b11b-c2a3a1bc4743', '64c1087b-9617-5d27-8631-b28a74ba0f17', 'f7809f32-e222-5275-8c51-f21014a613c3', 'Proefshop · Vast · Verkopen', 'vast', 'verkopen', 'actief', null, null, '{"source":"meta","medium":"paid_social"}'::jsonb);
+
+-- ad_sets
+insert into public.ad_sets (id, organization_id, campaign_id, name, reason, start_date, learning, locked, status) values
+  ('a9d291f4-786a-52ff-a355-7d65f55a3fed', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'AS1 · 17-11-2026 · start', 'start', '2026-11-17', false, true, 'actief'),
+  ('a6ff4c82-1000-535d-88cc-fb62ee20d615', '0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'AS1 · 23-11-2026 · start', 'start', '2026-11-23', false, true, 'actief'),
+  ('6a4a77f6-cbc3-549a-9e73-a13d4e68e153', '000cec3c-eaf4-5b93-be25-36e43ab61249', '4ea0a913-7a6c-59cd-90fb-b77e5b555e41', 'AS1 · 06-12-2026 · start', 'start', '2026-12-06', true, true, 'actief'),
+  ('e7e264be-e53f-5fbf-a9e9-d25d965f8eb9', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'AS1 · 17-11-2026 · start', 'start', '2026-11-17', false, true, 'actief'),
+  ('37242859-3822-5d1e-b58f-d8230e5444f1', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'AS1 · 23-11-2026 · start', 'start', '2026-11-23', false, true, 'actief'),
+  ('c9d70104-d7fe-5217-9fe0-3a6846a3bebd', '2becb956-a2a9-5de5-93fb-04c85931bbc3', '82bf6dab-dd5c-5391-884b-c17a0c31ed96', 'AS1 · 06-12-2026 · start', 'start', '2026-12-06', true, true, 'actief');
+
+-- ads
+insert into public.ads (id, organization_id, campaign_id, ad_set_id, code, name, kind, phase, primary_text, headline, description, cta, variants, extras, label, status, review_status, started_at) values
+  ('5cdcb412-0443-53c8-bc48-eff3af9d42ab', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'a9d291f4-786a-52ff-a355-7d65f55a3fed', 'A1', 'Kaars wordt aangestoken', 'video', 'top', 'Elke kaars gieten we met de hand, in kleine reeksen.', 'Handgemaakte kaarsen', 'Levering in België', 'Meer informatie', '{"primary_text":["Elke kaars gieten we met de hand, in kleine reeksen.","Zacht licht voor lange avonden.","Handgemaakte kaarsen uit ons atelier."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'winnaar', 'actief', 'goedgekeurd', '2026-11-17'),
+  ('2d46ed9c-8d32-598a-8163-f04f62607d5c', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'a9d291f4-786a-52ff-a355-7d65f55a3fed', 'A2', 'Zo gieten we ze', 'video', 'middle', 'Elke kaars gieten we met de hand, in kleine reeksen.', 'Handgemaakte kaarsen', 'Levering in België', 'Meer informatie', '{"primary_text":["Elke kaars gieten we met de hand, in kleine reeksen.","Zacht licht voor lange avonden.","Handgemaakte kaarsen uit ons atelier."]}'::jsonb, '{"muziek":true,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'winnaar', 'actief', 'goedgekeurd', '2026-11-17'),
+  ('d50dc909-0694-5bd5-8bb6-0cf2d09aa53e', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'a9d291f4-786a-52ff-a355-7d65f55a3fed', 'A3', 'Geschenkdoos', 'foto', 'bottom', 'Elke kaars gieten we met de hand, in kleine reeksen.', 'Handgemaakte kaarsen', 'Levering in België', 'Nu kopen', '{"primary_text":["Elke kaars gieten we met de hand, in kleine reeksen.","Zacht licht voor lange avonden.","Handgemaakte kaarsen uit ons atelier."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'geen', 'actief', 'goedgekeurd', '2026-11-17'),
+  ('2c370d0a-0b02-5aa6-b1da-5da390e5f90a', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'a9d291f4-786a-52ff-a355-7d65f55a3fed', 'A4', 'Sfeerbeeld woonkamer', 'foto', 'top', 'Elke kaars gieten we met de hand, in kleine reeksen.', 'Handgemaakte kaarsen', 'Levering in België', 'Meer informatie', '{"primary_text":["Elke kaars gieten we met de hand, in kleine reeksen.","Zacht licht voor lange avonden.","Handgemaakte kaarsen uit ons atelier."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'verliezer', 'actief', 'goedgekeurd', '2026-11-17'),
+  ('d3a0f6f9-3f35-5167-9d0a-83e1c9239dff', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'a9d291f4-786a-52ff-a355-7d65f55a3fed', 'A5', 'Klantreview', 'foto', 'middle', 'Elke kaars gieten we met de hand, in kleine reeksen.', 'Handgemaakte kaarsen', 'Levering in België', 'Meer informatie', '{"primary_text":["Elke kaars gieten we met de hand, in kleine reeksen.","Zacht licht voor lange avonden.","Handgemaakte kaarsen uit ons atelier."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'vroeg', 'actief', 'goedgekeurd', '2026-11-17'),
+  ('1eb3261a-0e55-547c-ad67-cb1e2ba93fd1', '0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'a6ff4c82-1000-535d-88cc-fb62ee20d615', 'B1', 'Voor en na', 'video', 'top', 'Zo zag het dak eruit, en zo ziet het er nu uit.', 'Peeters Dakwerken', 'Gratis dakinspectie', 'Meer informatie', '{"primary_text":["Zo zag het dak eruit, en zo ziet het er nu uit.","Een nieuw dak zonder zorgen, van inspectie tot oplevering.","Vraag een gratis dakinspectie aan in Limburg of Antwerpen."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'winnaar', 'actief', 'goedgekeurd', '2026-11-23'),
+  ('377172cc-1c12-5a6c-91f3-7c3e0f80e461', '0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'a6ff4c82-1000-535d-88cc-fb62ee20d615', 'B2', 'Gratis dakinspectie', 'foto', 'bottom', 'Zo zag het dak eruit, en zo ziet het er nu uit.', 'Peeters Dakwerken', 'Gratis dakinspectie', 'Offerte aanvragen', '{"primary_text":["Zo zag het dak eruit, en zo ziet het er nu uit.","Een nieuw dak zonder zorgen, van inspectie tot oplevering.","Vraag een gratis dakinspectie aan in Limburg of Antwerpen."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'winnaar', 'actief', 'goedgekeurd', '2026-11-23'),
+  ('bf7695f4-894f-5f1b-ba8b-2df5c8073026', '0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'a6ff4c82-1000-535d-88cc-fb62ee20d615', 'B3', 'Ons team aan het werk', 'foto', 'top', 'Zo zag het dak eruit, en zo ziet het er nu uit.', 'Peeters Dakwerken', 'Gratis dakinspectie', 'Meer informatie', '{"primary_text":["Zo zag het dak eruit, en zo ziet het er nu uit.","Een nieuw dak zonder zorgen, van inspectie tot oplevering.","Vraag een gratis dakinspectie aan in Limburg of Antwerpen."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'verliezer', 'actief', 'goedgekeurd', '2026-11-23'),
+  ('e28637bd-a9cf-5002-96fe-ed8eca749c91', '0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'a6ff4c82-1000-535d-88cc-fb62ee20d615', 'B4', 'Een klant vertelt', 'video', 'middle', 'Zo zag het dak eruit, en zo ziet het er nu uit.', 'Peeters Dakwerken', 'Gratis dakinspectie', 'Meer informatie', '{"primary_text":["Zo zag het dak eruit, en zo ziet het er nu uit.","Een nieuw dak zonder zorgen, van inspectie tot oplevering.","Vraag een gratis dakinspectie aan in Limburg of Antwerpen."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'geen', 'actief', 'goedgekeurd', '2026-11-23'),
+  ('c2316d5f-c4e5-57b0-9cf3-403cb999c7ce', '0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'a6ff4c82-1000-535d-88cc-fb62ee20d615', 'B5', 'Werkwijze in 4 stappen', 'foto', 'middle', 'Zo zag het dak eruit, en zo ziet het er nu uit.', 'Peeters Dakwerken', 'Gratis dakinspectie', 'Meer informatie', '{"primary_text":["Zo zag het dak eruit, en zo ziet het er nu uit.","Een nieuw dak zonder zorgen, van inspectie tot oplevering.","Vraag een gratis dakinspectie aan in Limburg of Antwerpen."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'vroeg', 'actief', 'goedgekeurd', '2026-11-23'),
+  ('0578d0e4-ff21-5f6a-8314-ebfbcc68b54d', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'e7e264be-e53f-5fbf-a9e9-d25d965f8eb9', 'A1', 'Kaars wordt aangestoken', 'video', 'top', 'Elke kaars gieten we met de hand, in kleine reeksen.', 'Handgemaakte kaarsen', 'Levering in België', 'Meer informatie', '{"primary_text":["Elke kaars gieten we met de hand, in kleine reeksen.","Zacht licht voor lange avonden.","Handgemaakte kaarsen uit ons atelier."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'winnaar', 'actief', 'goedgekeurd', '2026-11-17'),
+  ('792f18b6-7882-54a7-881a-7086a4d12ff8', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'e7e264be-e53f-5fbf-a9e9-d25d965f8eb9', 'A2', 'Zo gieten we ze', 'video', 'middle', 'Elke kaars gieten we met de hand, in kleine reeksen.', 'Handgemaakte kaarsen', 'Levering in België', 'Meer informatie', '{"primary_text":["Elke kaars gieten we met de hand, in kleine reeksen.","Zacht licht voor lange avonden.","Handgemaakte kaarsen uit ons atelier."]}'::jsonb, '{"muziek":true,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'winnaar', 'actief', 'goedgekeurd', '2026-11-17'),
+  ('c5012fc6-2253-57d7-951c-667cab936ab2', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'e7e264be-e53f-5fbf-a9e9-d25d965f8eb9', 'A3', 'Geschenkdoos', 'foto', 'bottom', 'Elke kaars gieten we met de hand, in kleine reeksen.', 'Handgemaakte kaarsen', 'Levering in België', 'Nu kopen', '{"primary_text":["Elke kaars gieten we met de hand, in kleine reeksen.","Zacht licht voor lange avonden.","Handgemaakte kaarsen uit ons atelier."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'geen', 'actief', 'goedgekeurd', '2026-11-17'),
+  ('0be6a8b8-8b15-5260-b52c-ddfa64f3018c', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'e7e264be-e53f-5fbf-a9e9-d25d965f8eb9', 'A4', 'Sfeerbeeld woonkamer', 'foto', 'top', 'Elke kaars gieten we met de hand, in kleine reeksen.', 'Handgemaakte kaarsen', 'Levering in België', 'Meer informatie', '{"primary_text":["Elke kaars gieten we met de hand, in kleine reeksen.","Zacht licht voor lange avonden.","Handgemaakte kaarsen uit ons atelier."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'verliezer', 'actief', 'goedgekeurd', '2026-11-17'),
+  ('c38a0bb0-ebb0-5b26-9c4b-aae5e6a6a19a', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'e7e264be-e53f-5fbf-a9e9-d25d965f8eb9', 'A5', 'Klantreview', 'foto', 'middle', 'Elke kaars gieten we met de hand, in kleine reeksen.', 'Handgemaakte kaarsen', 'Levering in België', 'Meer informatie', '{"primary_text":["Elke kaars gieten we met de hand, in kleine reeksen.","Zacht licht voor lange avonden.","Handgemaakte kaarsen uit ons atelier."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'vroeg', 'actief', 'goedgekeurd', '2026-11-17'),
+  ('a159547c-1281-5e06-89d3-5ea0dfea3cdd', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', '37242859-3822-5d1e-b58f-d8230e5444f1', 'B1', 'Voor en na', 'video', 'top', 'Zo zag het dak eruit, en zo ziet het er nu uit.', 'Peeters Dakwerken', 'Gratis dakinspectie', 'Meer informatie', '{"primary_text":["Zo zag het dak eruit, en zo ziet het er nu uit.","Een nieuw dak zonder zorgen, van inspectie tot oplevering.","Vraag een gratis dakinspectie aan in Limburg of Antwerpen."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'winnaar', 'actief', 'goedgekeurd', '2026-11-23'),
+  ('c2758041-4dfb-5034-8705-47e4cd78ca4b', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', '37242859-3822-5d1e-b58f-d8230e5444f1', 'B2', 'Gratis dakinspectie', 'foto', 'bottom', 'Zo zag het dak eruit, en zo ziet het er nu uit.', 'Peeters Dakwerken', 'Gratis dakinspectie', 'Offerte aanvragen', '{"primary_text":["Zo zag het dak eruit, en zo ziet het er nu uit.","Een nieuw dak zonder zorgen, van inspectie tot oplevering.","Vraag een gratis dakinspectie aan in Limburg of Antwerpen."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'winnaar', 'actief', 'goedgekeurd', '2026-11-23'),
+  ('f763e699-cbee-55eb-a672-bed03839c28c', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', '37242859-3822-5d1e-b58f-d8230e5444f1', 'B3', 'Ons team aan het werk', 'foto', 'top', 'Zo zag het dak eruit, en zo ziet het er nu uit.', 'Peeters Dakwerken', 'Gratis dakinspectie', 'Meer informatie', '{"primary_text":["Zo zag het dak eruit, en zo ziet het er nu uit.","Een nieuw dak zonder zorgen, van inspectie tot oplevering.","Vraag een gratis dakinspectie aan in Limburg of Antwerpen."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'verliezer', 'actief', 'goedgekeurd', '2026-11-23'),
+  ('c81a582d-f2e4-54ae-9466-fd368e4ceec2', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', '37242859-3822-5d1e-b58f-d8230e5444f1', 'B4', 'Een klant vertelt', 'video', 'middle', 'Zo zag het dak eruit, en zo ziet het er nu uit.', 'Peeters Dakwerken', 'Gratis dakinspectie', 'Meer informatie', '{"primary_text":["Zo zag het dak eruit, en zo ziet het er nu uit.","Een nieuw dak zonder zorgen, van inspectie tot oplevering.","Vraag een gratis dakinspectie aan in Limburg of Antwerpen."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'geen', 'actief', 'goedgekeurd', '2026-11-23'),
+  ('f04275ce-43c5-5ba2-9c37-c4c009d7a3dd', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', '37242859-3822-5d1e-b58f-d8230e5444f1', 'B5', 'Werkwijze in 4 stappen', 'foto', 'middle', 'Zo zag het dak eruit, en zo ziet het er nu uit.', 'Peeters Dakwerken', 'Gratis dakinspectie', 'Meer informatie', '{"primary_text":["Zo zag het dak eruit, en zo ziet het er nu uit.","Een nieuw dak zonder zorgen, van inspectie tot oplevering.","Vraag een gratis dakinspectie aan in Limburg of Antwerpen."]}'::jsonb, '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'vroeg', 'actief', 'goedgekeurd', '2026-11-23');
+insert into public.ads (id, organization_id, campaign_id, ad_set_id, code, name, kind, phase, extras, label, status, review_status, started_at) values
+  ('3298b766-099b-5fd4-a1b8-333f20064091', '000cec3c-eaf4-5b93-be25-36e43ab61249', '4ea0a913-7a6c-59cd-90fb-b77e5b555e41', '6a4a77f6-cbc3-549a-9e73-a13d4e68e153', 'A1', 'Advertentie 1', 'video', 'top', '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'vroeg', 'actief', 'goedgekeurd', '2026-12-06'),
+  ('285560c9-f385-5139-a4d5-ab45f3f3821c', '000cec3c-eaf4-5b93-be25-36e43ab61249', '4ea0a913-7a6c-59cd-90fb-b77e5b555e41', '6a4a77f6-cbc3-549a-9e73-a13d4e68e153', 'A2', 'Advertentie 2', 'foto', 'top', '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'vroeg', 'actief', 'goedgekeurd', '2026-12-06'),
+  ('5d905ffa-fee3-5eb0-b86e-6db87eb669ad', '000cec3c-eaf4-5b93-be25-36e43ab61249', '4ea0a913-7a6c-59cd-90fb-b77e5b555e41', '6a4a77f6-cbc3-549a-9e73-a13d4e68e153', 'A3', 'Advertentie 3', 'video', 'middle', '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'vroeg', 'actief', 'goedgekeurd', '2026-12-06'),
+  ('db83e5c8-fd08-5a98-a36e-e01962822f45', '000cec3c-eaf4-5b93-be25-36e43ab61249', '4ea0a913-7a6c-59cd-90fb-b77e5b555e41', '6a4a77f6-cbc3-549a-9e73-a13d4e68e153', 'A4', 'Advertentie 4', 'foto', 'middle', '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'vroeg', 'in_review', 'wordt_nagekeken', '2026-12-06'),
+  ('6242dcc6-16e1-5388-900f-2304472271ab', '000cec3c-eaf4-5b93-be25-36e43ab61249', '4ea0a913-7a6c-59cd-90fb-b77e5b555e41', '6a4a77f6-cbc3-549a-9e73-a13d4e68e153', 'A5', 'Advertentie 5', 'foto', 'bottom', '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'vroeg', 'actief', 'goedgekeurd', '2026-12-06'),
+  ('5d4f7ccb-7964-522b-934b-a6924e180d5d', '2becb956-a2a9-5de5-93fb-04c85931bbc3', '82bf6dab-dd5c-5391-884b-c17a0c31ed96', 'c9d70104-d7fe-5217-9fe0-3a6846a3bebd', 'A1', 'Advertentie 1', 'video', 'top', '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'vroeg', 'actief', 'goedgekeurd', '2026-12-06'),
+  ('a827e619-d063-5811-8f21-0189928354b9', '2becb956-a2a9-5de5-93fb-04c85931bbc3', '82bf6dab-dd5c-5391-884b-c17a0c31ed96', 'c9d70104-d7fe-5217-9fe0-3a6846a3bebd', 'A2', 'Advertentie 2', 'foto', 'top', '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'vroeg', 'actief', 'goedgekeurd', '2026-12-06'),
+  ('2e6c4dc7-adcc-5a7d-9bf6-38df6cec0916', '2becb956-a2a9-5de5-93fb-04c85931bbc3', '82bf6dab-dd5c-5391-884b-c17a0c31ed96', 'c9d70104-d7fe-5217-9fe0-3a6846a3bebd', 'A3', 'Advertentie 3', 'video', 'middle', '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'vroeg', 'actief', 'goedgekeurd', '2026-12-06'),
+  ('90b7e8d9-1a71-539d-8e22-328876df2627', '2becb956-a2a9-5de5-93fb-04c85931bbc3', '82bf6dab-dd5c-5391-884b-c17a0c31ed96', 'c9d70104-d7fe-5217-9fe0-3a6846a3bebd', 'A4', 'Advertentie 4', 'foto', 'middle', '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'vroeg', 'in_review', 'wordt_nagekeken', '2026-12-06'),
+  ('c968b8c6-b312-5f2b-a22e-0647edd5d882', '2becb956-a2a9-5de5-93fb-04c85931bbc3', '82bf6dab-dd5c-5391-884b-c17a0c31ed96', 'c9d70104-d7fe-5217-9fe0-3a6846a3bebd', 'A5', 'Advertentie 5', 'foto', 'bottom', '{"muziek":false,"tekst_op_beeld":false,"beelduitbreiding":false,"varianten":false}'::jsonb, 'vroeg', 'actief', 'goedgekeurd', '2026-12-06');
+
+-- insights_daily
+insert into public.insights_daily (organization_id, campaign_id, ad_id, date, spend, purchases, revenue, leads, impressions, reach, clicks, link_clicks) values
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '5cdcb412-0443-53c8-bc48-eff3af9d42ab', '2026-11-30', 11.71, 1, 58, null, 1428, 510, null, 20),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '5cdcb412-0443-53c8-bc48-eff3af9d42ab', '2026-12-01', 11.71, 0, 0, null, 1428, 510, null, 20),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '5cdcb412-0443-53c8-bc48-eff3af9d42ab', '2026-12-02', 11.71, 1, 58, null, 1428, 510, null, 20),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '5cdcb412-0443-53c8-bc48-eff3af9d42ab', '2026-12-03', 11.71, 1, 58, null, 1429, 510, null, 20),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '5cdcb412-0443-53c8-bc48-eff3af9d42ab', '2026-12-04', 11.72, 0, 0, null, 1429, 510, null, 20),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '5cdcb412-0443-53c8-bc48-eff3af9d42ab', '2026-12-05', 11.72, 1, 58, null, 1429, 511, null, 20),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '5cdcb412-0443-53c8-bc48-eff3af9d42ab', '2026-12-06', 11.72, 1, 58, null, 1429, 511, null, 20),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '2d46ed9c-8d32-598a-8163-f04f62607d5c', '2026-11-30', 10.14, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '2d46ed9c-8d32-598a-8163-f04f62607d5c', '2026-12-01', 10.14, 1, 58, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '2d46ed9c-8d32-598a-8163-f04f62607d5c', '2026-12-02', 10.14, 1, 58, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '2d46ed9c-8d32-598a-8163-f04f62607d5c', '2026-12-03', 10.14, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '2d46ed9c-8d32-598a-8163-f04f62607d5c', '2026-12-04', 10.14, 1, 58, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '2d46ed9c-8d32-598a-8163-f04f62607d5c', '2026-12-05', 10.15, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '2d46ed9c-8d32-598a-8163-f04f62607d5c', '2026-12-06', 10.15, 1, 58, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'd50dc909-0694-5bd5-8bb6-0cf2d09aa53e', '2026-11-30', 6.85, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'd50dc909-0694-5bd5-8bb6-0cf2d09aa53e', '2026-12-01', 6.85, 1, 58, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'd50dc909-0694-5bd5-8bb6-0cf2d09aa53e', '2026-12-02', 6.86, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'd50dc909-0694-5bd5-8bb6-0cf2d09aa53e', '2026-12-03', 6.86, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'd50dc909-0694-5bd5-8bb6-0cf2d09aa53e', '2026-12-04', 6.86, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'd50dc909-0694-5bd5-8bb6-0cf2d09aa53e', '2026-12-05', 6.86, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'd50dc909-0694-5bd5-8bb6-0cf2d09aa53e', '2026-12-06', 6.86, 1, 58, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '2c370d0a-0b02-5aa6-b1da-5da390e5f90a', '2026-11-30', 10.28, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '2c370d0a-0b02-5aa6-b1da-5da390e5f90a', '2026-12-01', 10.28, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '2c370d0a-0b02-5aa6-b1da-5da390e5f90a', '2026-12-02', 10.28, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '2c370d0a-0b02-5aa6-b1da-5da390e5f90a', '2026-12-03', 10.29, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '2c370d0a-0b02-5aa6-b1da-5da390e5f90a', '2026-12-04', 10.29, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '2c370d0a-0b02-5aa6-b1da-5da390e5f90a', '2026-12-05', 10.29, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '2c370d0a-0b02-5aa6-b1da-5da390e5f90a', '2026-12-06', 10.29, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'd3a0f6f9-3f35-5167-9d0a-83e1c9239dff', '2026-11-30', 1, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'd3a0f6f9-3f35-5167-9d0a-83e1c9239dff', '2026-12-01', 1, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'd3a0f6f9-3f35-5167-9d0a-83e1c9239dff', '2026-12-02', 1, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'd3a0f6f9-3f35-5167-9d0a-83e1c9239dff', '2026-12-03', 1, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'd3a0f6f9-3f35-5167-9d0a-83e1c9239dff', '2026-12-04', 1, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'd3a0f6f9-3f35-5167-9d0a-83e1c9239dff', '2026-12-05', 1, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'd3a0f6f9-3f35-5167-9d0a-83e1c9239dff', '2026-12-06', 1, 0, 0, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', null, '2026-11-30', 0, null, null, null, 3828, null, 58, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', null, '2026-12-01', 0, null, null, null, 3828, null, 59, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', null, '2026-12-02', 0, null, null, null, 3828, null, 59, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', null, '2026-12-03', 0, null, null, null, 3829, null, 59, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', null, '2026-12-04', 0, null, null, null, 3829, null, 59, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', null, '2026-12-05', 0, null, null, null, 3829, null, 59, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', null, '2026-12-06', 0, null, null, null, 3829, null, 59, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', '16ef80f9-d3ae-5132-afa8-d7ffdca83c1d', null, '2026-11-27', 45, 2, 116, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', '16ef80f9-d3ae-5132-afa8-d7ffdca83c1d', null, '2026-11-28', 45, 2, 116, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', '16ef80f9-d3ae-5132-afa8-d7ffdca83c1d', null, '2026-11-29', 45, 2, 116, null, null, null, null, null),
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', '16ef80f9-d3ae-5132-afa8-d7ffdca83c1d', null, '2026-11-30', 45, 3, 174, null, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '1eb3261a-0e55-547c-ad67-cb1e2ba93fd1', '2026-11-23', 4.28, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '1eb3261a-0e55-547c-ad67-cb1e2ba93fd1', '2026-11-24', 4.28, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '1eb3261a-0e55-547c-ad67-cb1e2ba93fd1', '2026-11-25', 4.28, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '1eb3261a-0e55-547c-ad67-cb1e2ba93fd1', '2026-11-26', 4.29, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '1eb3261a-0e55-547c-ad67-cb1e2ba93fd1', '2026-11-27', 4.29, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '1eb3261a-0e55-547c-ad67-cb1e2ba93fd1', '2026-11-28', 4.29, null, null, 1, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '1eb3261a-0e55-547c-ad67-cb1e2ba93fd1', '2026-11-29', 4.29, null, null, 1, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '1eb3261a-0e55-547c-ad67-cb1e2ba93fd1', '2026-11-30', 4.85, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '1eb3261a-0e55-547c-ad67-cb1e2ba93fd1', '2026-12-01', 4.85, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '1eb3261a-0e55-547c-ad67-cb1e2ba93fd1', '2026-12-02', 4.86, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '1eb3261a-0e55-547c-ad67-cb1e2ba93fd1', '2026-12-03', 4.86, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '1eb3261a-0e55-547c-ad67-cb1e2ba93fd1', '2026-12-04', 4.86, null, null, 1, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '1eb3261a-0e55-547c-ad67-cb1e2ba93fd1', '2026-12-05', 4.86, null, null, 1, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '1eb3261a-0e55-547c-ad67-cb1e2ba93fd1', '2026-12-06', 4.86, null, null, 1, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '377172cc-1c12-5a6c-91f3-7c3e0f80e461', '2026-11-23', 3.28, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '377172cc-1c12-5a6c-91f3-7c3e0f80e461', '2026-11-24', 3.28, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '377172cc-1c12-5a6c-91f3-7c3e0f80e461', '2026-11-25', 3.28, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '377172cc-1c12-5a6c-91f3-7c3e0f80e461', '2026-11-26', 3.29, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '377172cc-1c12-5a6c-91f3-7c3e0f80e461', '2026-11-27', 3.29, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '377172cc-1c12-5a6c-91f3-7c3e0f80e461', '2026-11-28', 3.29, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '377172cc-1c12-5a6c-91f3-7c3e0f80e461', '2026-11-29', 3.29, null, null, 1, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '377172cc-1c12-5a6c-91f3-7c3e0f80e461', '2026-11-30', 3.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '377172cc-1c12-5a6c-91f3-7c3e0f80e461', '2026-12-01', 3.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '377172cc-1c12-5a6c-91f3-7c3e0f80e461', '2026-12-02', 3.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '377172cc-1c12-5a6c-91f3-7c3e0f80e461', '2026-12-03', 3.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '377172cc-1c12-5a6c-91f3-7c3e0f80e461', '2026-12-04', 3.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '377172cc-1c12-5a6c-91f3-7c3e0f80e461', '2026-12-05', 3.57, null, null, 1, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '377172cc-1c12-5a6c-91f3-7c3e0f80e461', '2026-12-06', 3.58, null, null, 1, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'bf7695f4-894f-5f1b-ba8b-2df5c8073026', '2026-11-23', 4.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'bf7695f4-894f-5f1b-ba8b-2df5c8073026', '2026-11-24', 4.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'bf7695f4-894f-5f1b-ba8b-2df5c8073026', '2026-11-25', 4.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'bf7695f4-894f-5f1b-ba8b-2df5c8073026', '2026-11-26', 4.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'bf7695f4-894f-5f1b-ba8b-2df5c8073026', '2026-11-27', 4.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'bf7695f4-894f-5f1b-ba8b-2df5c8073026', '2026-11-28', 4.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'bf7695f4-894f-5f1b-ba8b-2df5c8073026', '2026-11-29', 4.58, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'bf7695f4-894f-5f1b-ba8b-2df5c8073026', '2026-11-30', 4, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'bf7695f4-894f-5f1b-ba8b-2df5c8073026', '2026-12-01', 4, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'bf7695f4-894f-5f1b-ba8b-2df5c8073026', '2026-12-02', 4, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'bf7695f4-894f-5f1b-ba8b-2df5c8073026', '2026-12-03', 4, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'bf7695f4-894f-5f1b-ba8b-2df5c8073026', '2026-12-04', 4, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'bf7695f4-894f-5f1b-ba8b-2df5c8073026', '2026-12-05', 4, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'bf7695f4-894f-5f1b-ba8b-2df5c8073026', '2026-12-06', 4, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'e28637bd-a9cf-5002-96fe-ed8eca749c91', '2026-11-23', 2.28, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'e28637bd-a9cf-5002-96fe-ed8eca749c91', '2026-11-24', 2.28, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'e28637bd-a9cf-5002-96fe-ed8eca749c91', '2026-11-25', 2.28, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'e28637bd-a9cf-5002-96fe-ed8eca749c91', '2026-11-26', 2.29, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'e28637bd-a9cf-5002-96fe-ed8eca749c91', '2026-11-27', 2.29, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'e28637bd-a9cf-5002-96fe-ed8eca749c91', '2026-11-28', 2.29, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'e28637bd-a9cf-5002-96fe-ed8eca749c91', '2026-11-29', 2.29, null, null, 1, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'e28637bd-a9cf-5002-96fe-ed8eca749c91', '2026-11-30', 2, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'e28637bd-a9cf-5002-96fe-ed8eca749c91', '2026-12-01', 2, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'e28637bd-a9cf-5002-96fe-ed8eca749c91', '2026-12-02', 2, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'e28637bd-a9cf-5002-96fe-ed8eca749c91', '2026-12-03', 2, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'e28637bd-a9cf-5002-96fe-ed8eca749c91', '2026-12-04', 2, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'e28637bd-a9cf-5002-96fe-ed8eca749c91', '2026-12-05', 2, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'e28637bd-a9cf-5002-96fe-ed8eca749c91', '2026-12-06', 2, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'c2316d5f-c4e5-57b0-9cf3-403cb999c7ce', '2026-11-23', 0.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'c2316d5f-c4e5-57b0-9cf3-403cb999c7ce', '2026-11-24', 0.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'c2316d5f-c4e5-57b0-9cf3-403cb999c7ce', '2026-11-25', 0.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'c2316d5f-c4e5-57b0-9cf3-403cb999c7ce', '2026-11-26', 0.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'c2316d5f-c4e5-57b0-9cf3-403cb999c7ce', '2026-11-27', 0.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'c2316d5f-c4e5-57b0-9cf3-403cb999c7ce', '2026-11-28', 0.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'c2316d5f-c4e5-57b0-9cf3-403cb999c7ce', '2026-11-29', 0.58, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'c2316d5f-c4e5-57b0-9cf3-403cb999c7ce', '2026-11-30', 0.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'c2316d5f-c4e5-57b0-9cf3-403cb999c7ce', '2026-12-01', 0.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'c2316d5f-c4e5-57b0-9cf3-403cb999c7ce', '2026-12-02', 0.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'c2316d5f-c4e5-57b0-9cf3-403cb999c7ce', '2026-12-03', 0.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'c2316d5f-c4e5-57b0-9cf3-403cb999c7ce', '2026-12-04', 0.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'c2316d5f-c4e5-57b0-9cf3-403cb999c7ce', '2026-12-05', 0.57, null, null, 0, null, null, null, null),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'c2316d5f-c4e5-57b0-9cf3-403cb999c7ce', '2026-12-06', 0.58, null, null, 0, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'e53fca42-ac14-5854-af26-2c26cbb0ad1f', null, '2026-11-30', 60, 2, 168, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'e53fca42-ac14-5854-af26-2c26cbb0ad1f', null, '2026-12-01', 60, 2, 168, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'e53fca42-ac14-5854-af26-2c26cbb0ad1f', null, '2026-12-02', 60, 2, 168, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'e53fca42-ac14-5854-af26-2c26cbb0ad1f', null, '2026-12-03', 60, 3, 252, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'e53fca42-ac14-5854-af26-2c26cbb0ad1f', null, '2026-12-04', 60, 3, 252, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'e53fca42-ac14-5854-af26-2c26cbb0ad1f', null, '2026-12-05', 60, 3, 252, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'e53fca42-ac14-5854-af26-2c26cbb0ad1f', null, '2026-12-06', 60, 3, 252, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'c7fed9fe-0a49-50a8-95c4-8c11a3b97607', null, '2026-11-30', 40, 1, 61, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'c7fed9fe-0a49-50a8-95c4-8c11a3b97607', null, '2026-12-01', 40, 1, 61, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'c7fed9fe-0a49-50a8-95c4-8c11a3b97607', null, '2026-12-02', 40, 1, 61, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'c7fed9fe-0a49-50a8-95c4-8c11a3b97607', null, '2026-12-03', 40, 1, 61, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'c7fed9fe-0a49-50a8-95c4-8c11a3b97607', null, '2026-12-04', 40, 1, 61, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'c7fed9fe-0a49-50a8-95c4-8c11a3b97607', null, '2026-12-05', 40, 2, 122, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'c7fed9fe-0a49-50a8-95c4-8c11a3b97607', null, '2026-12-06', 40, 2, 122, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'd855f837-047e-5e75-990c-6da6a1b6eef5', null, '2026-11-30', 20, 0, 0, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'd855f837-047e-5e75-990c-6da6a1b6eef5', null, '2026-12-01', 20, 0, 0, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'd855f837-047e-5e75-990c-6da6a1b6eef5', null, '2026-12-02', 20, 0, 0, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'd855f837-047e-5e75-990c-6da6a1b6eef5', null, '2026-12-03', 20, 0, 0, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'd855f837-047e-5e75-990c-6da6a1b6eef5', null, '2026-12-04', 20, 0, 0, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'd855f837-047e-5e75-990c-6da6a1b6eef5', null, '2026-12-05', 20, 1, 45, null, null, null, null, null),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'd855f837-047e-5e75-990c-6da6a1b6eef5', null, '2026-12-06', 20, 1, 45, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '0578d0e4-ff21-5f6a-8314-ebfbcc68b54d', '2026-11-30', 11.71, 1, 58, null, 1428, 510, null, 20),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '0578d0e4-ff21-5f6a-8314-ebfbcc68b54d', '2026-12-01', 11.71, 0, 0, null, 1428, 510, null, 20),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '0578d0e4-ff21-5f6a-8314-ebfbcc68b54d', '2026-12-02', 11.71, 1, 58, null, 1428, 510, null, 20),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '0578d0e4-ff21-5f6a-8314-ebfbcc68b54d', '2026-12-03', 11.71, 1, 58, null, 1429, 510, null, 20),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '0578d0e4-ff21-5f6a-8314-ebfbcc68b54d', '2026-12-04', 11.72, 0, 0, null, 1429, 510, null, 20),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '0578d0e4-ff21-5f6a-8314-ebfbcc68b54d', '2026-12-05', 11.72, 1, 58, null, 1429, 511, null, 20),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '0578d0e4-ff21-5f6a-8314-ebfbcc68b54d', '2026-12-06', 11.72, 1, 58, null, 1429, 511, null, 20),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '792f18b6-7882-54a7-881a-7086a4d12ff8', '2026-11-30', 10.14, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '792f18b6-7882-54a7-881a-7086a4d12ff8', '2026-12-01', 10.14, 1, 58, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '792f18b6-7882-54a7-881a-7086a4d12ff8', '2026-12-02', 10.14, 1, 58, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '792f18b6-7882-54a7-881a-7086a4d12ff8', '2026-12-03', 10.14, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '792f18b6-7882-54a7-881a-7086a4d12ff8', '2026-12-04', 10.14, 1, 58, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '792f18b6-7882-54a7-881a-7086a4d12ff8', '2026-12-05', 10.15, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '792f18b6-7882-54a7-881a-7086a4d12ff8', '2026-12-06', 10.15, 1, 58, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'c5012fc6-2253-57d7-951c-667cab936ab2', '2026-11-30', 6.85, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'c5012fc6-2253-57d7-951c-667cab936ab2', '2026-12-01', 6.85, 1, 58, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'c5012fc6-2253-57d7-951c-667cab936ab2', '2026-12-02', 6.86, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'c5012fc6-2253-57d7-951c-667cab936ab2', '2026-12-03', 6.86, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'c5012fc6-2253-57d7-951c-667cab936ab2', '2026-12-04', 6.86, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'c5012fc6-2253-57d7-951c-667cab936ab2', '2026-12-05', 6.86, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'c5012fc6-2253-57d7-951c-667cab936ab2', '2026-12-06', 6.86, 1, 58, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '0be6a8b8-8b15-5260-b52c-ddfa64f3018c', '2026-11-30', 10.28, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '0be6a8b8-8b15-5260-b52c-ddfa64f3018c', '2026-12-01', 10.28, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '0be6a8b8-8b15-5260-b52c-ddfa64f3018c', '2026-12-02', 10.28, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '0be6a8b8-8b15-5260-b52c-ddfa64f3018c', '2026-12-03', 10.29, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '0be6a8b8-8b15-5260-b52c-ddfa64f3018c', '2026-12-04', 10.29, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '0be6a8b8-8b15-5260-b52c-ddfa64f3018c', '2026-12-05', 10.29, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '0be6a8b8-8b15-5260-b52c-ddfa64f3018c', '2026-12-06', 10.29, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'c38a0bb0-ebb0-5b26-9c4b-aae5e6a6a19a', '2026-11-30', 1, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'c38a0bb0-ebb0-5b26-9c4b-aae5e6a6a19a', '2026-12-01', 1, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'c38a0bb0-ebb0-5b26-9c4b-aae5e6a6a19a', '2026-12-02', 1, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'c38a0bb0-ebb0-5b26-9c4b-aae5e6a6a19a', '2026-12-03', 1, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'c38a0bb0-ebb0-5b26-9c4b-aae5e6a6a19a', '2026-12-04', 1, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'c38a0bb0-ebb0-5b26-9c4b-aae5e6a6a19a', '2026-12-05', 1, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'c38a0bb0-ebb0-5b26-9c4b-aae5e6a6a19a', '2026-12-06', 1, 0, 0, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', null, '2026-11-30', 0, null, null, null, 3828, null, 58, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', null, '2026-12-01', 0, null, null, null, 3828, null, 59, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', null, '2026-12-02', 0, null, null, null, 3828, null, 59, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', null, '2026-12-03', 0, null, null, null, 3829, null, 59, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', null, '2026-12-04', 0, null, null, null, 3829, null, 59, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', null, '2026-12-05', 0, null, null, null, 3829, null, 59, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '49c57bee-e707-5132-b97f-9087c1e4c5f9', null, '2026-12-06', 0, null, null, null, 3829, null, 59, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '0c1d3018-f5bf-528d-916e-9b2d3d86f923', null, '2026-11-27', 45, 2, 116, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '0c1d3018-f5bf-528d-916e-9b2d3d86f923', null, '2026-11-28', 45, 2, 116, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '0c1d3018-f5bf-528d-916e-9b2d3d86f923', null, '2026-11-29', 45, 2, 116, null, null, null, null, null),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', '0c1d3018-f5bf-528d-916e-9b2d3d86f923', null, '2026-11-30', 45, 3, 174, null, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'a159547c-1281-5e06-89d3-5ea0dfea3cdd', '2026-11-23', 4.28, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'a159547c-1281-5e06-89d3-5ea0dfea3cdd', '2026-11-24', 4.28, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'a159547c-1281-5e06-89d3-5ea0dfea3cdd', '2026-11-25', 4.28, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'a159547c-1281-5e06-89d3-5ea0dfea3cdd', '2026-11-26', 4.29, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'a159547c-1281-5e06-89d3-5ea0dfea3cdd', '2026-11-27', 4.29, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'a159547c-1281-5e06-89d3-5ea0dfea3cdd', '2026-11-28', 4.29, null, null, 1, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'a159547c-1281-5e06-89d3-5ea0dfea3cdd', '2026-11-29', 4.29, null, null, 1, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'a159547c-1281-5e06-89d3-5ea0dfea3cdd', '2026-11-30', 4.85, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'a159547c-1281-5e06-89d3-5ea0dfea3cdd', '2026-12-01', 4.85, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'a159547c-1281-5e06-89d3-5ea0dfea3cdd', '2026-12-02', 4.86, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'a159547c-1281-5e06-89d3-5ea0dfea3cdd', '2026-12-03', 4.86, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'a159547c-1281-5e06-89d3-5ea0dfea3cdd', '2026-12-04', 4.86, null, null, 1, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'a159547c-1281-5e06-89d3-5ea0dfea3cdd', '2026-12-05', 4.86, null, null, 1, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'a159547c-1281-5e06-89d3-5ea0dfea3cdd', '2026-12-06', 4.86, null, null, 1, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c2758041-4dfb-5034-8705-47e4cd78ca4b', '2026-11-23', 3.28, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c2758041-4dfb-5034-8705-47e4cd78ca4b', '2026-11-24', 3.28, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c2758041-4dfb-5034-8705-47e4cd78ca4b', '2026-11-25', 3.28, null, null, 0, null, null, null, null);
+insert into public.insights_daily (organization_id, campaign_id, ad_id, date, spend, purchases, revenue, leads, impressions, reach, clicks, link_clicks) values
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c2758041-4dfb-5034-8705-47e4cd78ca4b', '2026-11-26', 3.29, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c2758041-4dfb-5034-8705-47e4cd78ca4b', '2026-11-27', 3.29, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c2758041-4dfb-5034-8705-47e4cd78ca4b', '2026-11-28', 3.29, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c2758041-4dfb-5034-8705-47e4cd78ca4b', '2026-11-29', 3.29, null, null, 1, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c2758041-4dfb-5034-8705-47e4cd78ca4b', '2026-11-30', 3.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c2758041-4dfb-5034-8705-47e4cd78ca4b', '2026-12-01', 3.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c2758041-4dfb-5034-8705-47e4cd78ca4b', '2026-12-02', 3.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c2758041-4dfb-5034-8705-47e4cd78ca4b', '2026-12-03', 3.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c2758041-4dfb-5034-8705-47e4cd78ca4b', '2026-12-04', 3.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c2758041-4dfb-5034-8705-47e4cd78ca4b', '2026-12-05', 3.57, null, null, 1, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c2758041-4dfb-5034-8705-47e4cd78ca4b', '2026-12-06', 3.58, null, null, 1, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f763e699-cbee-55eb-a672-bed03839c28c', '2026-11-23', 4.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f763e699-cbee-55eb-a672-bed03839c28c', '2026-11-24', 4.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f763e699-cbee-55eb-a672-bed03839c28c', '2026-11-25', 4.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f763e699-cbee-55eb-a672-bed03839c28c', '2026-11-26', 4.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f763e699-cbee-55eb-a672-bed03839c28c', '2026-11-27', 4.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f763e699-cbee-55eb-a672-bed03839c28c', '2026-11-28', 4.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f763e699-cbee-55eb-a672-bed03839c28c', '2026-11-29', 4.58, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f763e699-cbee-55eb-a672-bed03839c28c', '2026-11-30', 4, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f763e699-cbee-55eb-a672-bed03839c28c', '2026-12-01', 4, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f763e699-cbee-55eb-a672-bed03839c28c', '2026-12-02', 4, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f763e699-cbee-55eb-a672-bed03839c28c', '2026-12-03', 4, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f763e699-cbee-55eb-a672-bed03839c28c', '2026-12-04', 4, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f763e699-cbee-55eb-a672-bed03839c28c', '2026-12-05', 4, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f763e699-cbee-55eb-a672-bed03839c28c', '2026-12-06', 4, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c81a582d-f2e4-54ae-9466-fd368e4ceec2', '2026-11-23', 2.28, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c81a582d-f2e4-54ae-9466-fd368e4ceec2', '2026-11-24', 2.28, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c81a582d-f2e4-54ae-9466-fd368e4ceec2', '2026-11-25', 2.28, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c81a582d-f2e4-54ae-9466-fd368e4ceec2', '2026-11-26', 2.29, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c81a582d-f2e4-54ae-9466-fd368e4ceec2', '2026-11-27', 2.29, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c81a582d-f2e4-54ae-9466-fd368e4ceec2', '2026-11-28', 2.29, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c81a582d-f2e4-54ae-9466-fd368e4ceec2', '2026-11-29', 2.29, null, null, 1, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c81a582d-f2e4-54ae-9466-fd368e4ceec2', '2026-11-30', 2, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c81a582d-f2e4-54ae-9466-fd368e4ceec2', '2026-12-01', 2, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c81a582d-f2e4-54ae-9466-fd368e4ceec2', '2026-12-02', 2, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c81a582d-f2e4-54ae-9466-fd368e4ceec2', '2026-12-03', 2, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c81a582d-f2e4-54ae-9466-fd368e4ceec2', '2026-12-04', 2, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c81a582d-f2e4-54ae-9466-fd368e4ceec2', '2026-12-05', 2, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'c81a582d-f2e4-54ae-9466-fd368e4ceec2', '2026-12-06', 2, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f04275ce-43c5-5ba2-9c37-c4c009d7a3dd', '2026-11-23', 0.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f04275ce-43c5-5ba2-9c37-c4c009d7a3dd', '2026-11-24', 0.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f04275ce-43c5-5ba2-9c37-c4c009d7a3dd', '2026-11-25', 0.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f04275ce-43c5-5ba2-9c37-c4c009d7a3dd', '2026-11-26', 0.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f04275ce-43c5-5ba2-9c37-c4c009d7a3dd', '2026-11-27', 0.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f04275ce-43c5-5ba2-9c37-c4c009d7a3dd', '2026-11-28', 0.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f04275ce-43c5-5ba2-9c37-c4c009d7a3dd', '2026-11-29', 0.58, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f04275ce-43c5-5ba2-9c37-c4c009d7a3dd', '2026-11-30', 0.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f04275ce-43c5-5ba2-9c37-c4c009d7a3dd', '2026-12-01', 0.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f04275ce-43c5-5ba2-9c37-c4c009d7a3dd', '2026-12-02', 0.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f04275ce-43c5-5ba2-9c37-c4c009d7a3dd', '2026-12-03', 0.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f04275ce-43c5-5ba2-9c37-c4c009d7a3dd', '2026-12-04', 0.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f04275ce-43c5-5ba2-9c37-c4c009d7a3dd', '2026-12-05', 0.57, null, null, 0, null, null, null, null),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f04275ce-43c5-5ba2-9c37-c4c009d7a3dd', '2026-12-06', 0.58, null, null, 0, null, null, null, null),
+  ('c88e4fe4-7497-5e64-b444-200fa4787481', '8d6214b0-9e24-51bb-a4bf-9df4fa724265', null, '2026-11-30', 60, 2, 168, null, null, null, null, null),
+  ('c88e4fe4-7497-5e64-b444-200fa4787481', '8d6214b0-9e24-51bb-a4bf-9df4fa724265', null, '2026-12-01', 60, 2, 168, null, null, null, null, null),
+  ('c88e4fe4-7497-5e64-b444-200fa4787481', '8d6214b0-9e24-51bb-a4bf-9df4fa724265', null, '2026-12-02', 60, 2, 168, null, null, null, null, null),
+  ('c88e4fe4-7497-5e64-b444-200fa4787481', '8d6214b0-9e24-51bb-a4bf-9df4fa724265', null, '2026-12-03', 60, 3, 252, null, null, null, null, null),
+  ('c88e4fe4-7497-5e64-b444-200fa4787481', '8d6214b0-9e24-51bb-a4bf-9df4fa724265', null, '2026-12-04', 60, 3, 252, null, null, null, null, null),
+  ('c88e4fe4-7497-5e64-b444-200fa4787481', '8d6214b0-9e24-51bb-a4bf-9df4fa724265', null, '2026-12-05', 60, 3, 252, null, null, null, null, null),
+  ('c88e4fe4-7497-5e64-b444-200fa4787481', '8d6214b0-9e24-51bb-a4bf-9df4fa724265', null, '2026-12-06', 60, 3, 252, null, null, null, null, null),
+  ('5004023d-f3bf-50ab-bd55-3e9bae53a8d2', '252e1303-764b-5758-a23b-90e7134f102a', null, '2026-11-30', 40, 1, 61, null, null, null, null, null),
+  ('5004023d-f3bf-50ab-bd55-3e9bae53a8d2', '252e1303-764b-5758-a23b-90e7134f102a', null, '2026-12-01', 40, 1, 61, null, null, null, null, null),
+  ('5004023d-f3bf-50ab-bd55-3e9bae53a8d2', '252e1303-764b-5758-a23b-90e7134f102a', null, '2026-12-02', 40, 1, 61, null, null, null, null, null),
+  ('5004023d-f3bf-50ab-bd55-3e9bae53a8d2', '252e1303-764b-5758-a23b-90e7134f102a', null, '2026-12-03', 40, 1, 61, null, null, null, null, null),
+  ('5004023d-f3bf-50ab-bd55-3e9bae53a8d2', '252e1303-764b-5758-a23b-90e7134f102a', null, '2026-12-04', 40, 1, 61, null, null, null, null, null),
+  ('5004023d-f3bf-50ab-bd55-3e9bae53a8d2', '252e1303-764b-5758-a23b-90e7134f102a', null, '2026-12-05', 40, 2, 122, null, null, null, null, null),
+  ('5004023d-f3bf-50ab-bd55-3e9bae53a8d2', '252e1303-764b-5758-a23b-90e7134f102a', null, '2026-12-06', 40, 2, 122, null, null, null, null, null),
+  ('64c1087b-9617-5d27-8631-b28a74ba0f17', 'fed9957c-7070-5087-b11b-c2a3a1bc4743', null, '2026-11-30', 20, 0, 0, null, null, null, null, null),
+  ('64c1087b-9617-5d27-8631-b28a74ba0f17', 'fed9957c-7070-5087-b11b-c2a3a1bc4743', null, '2026-12-01', 20, 0, 0, null, null, null, null, null),
+  ('64c1087b-9617-5d27-8631-b28a74ba0f17', 'fed9957c-7070-5087-b11b-c2a3a1bc4743', null, '2026-12-02', 20, 0, 0, null, null, null, null, null),
+  ('64c1087b-9617-5d27-8631-b28a74ba0f17', 'fed9957c-7070-5087-b11b-c2a3a1bc4743', null, '2026-12-03', 20, 0, 0, null, null, null, null, null),
+  ('64c1087b-9617-5d27-8631-b28a74ba0f17', 'fed9957c-7070-5087-b11b-c2a3a1bc4743', null, '2026-12-04', 20, 0, 0, null, null, null, null, null),
+  ('64c1087b-9617-5d27-8631-b28a74ba0f17', 'fed9957c-7070-5087-b11b-c2a3a1bc4743', null, '2026-12-05', 20, 1, 45, null, null, null, null, null),
+  ('64c1087b-9617-5d27-8631-b28a74ba0f17', 'fed9957c-7070-5087-b11b-c2a3a1bc4743', null, '2026-12-06', 20, 1, 45, null, null, null, null, null);
+
+-- playbook_versions
+insert into public.playbook_versions (id, version, status, rules, note, published_at, created_at) values
+  ('f2e05920-ca82-521b-bcf0-b8f9d308bf30', '1.0', 'gepubliceerd', '{"minDailyBudget":{"default":10,"webshop":30},"loserMultiple":3,"startStructure":{"campaigns":1,"adSets":1,"ads":5,"photos":3,"videos":2},"scaleStep":0.2,"newAdSetEveryWeeks":2,"funnelSplit":{"top":2,"middle":2,"bottom":1}}'::jsonb, 'Eerste versie van het playbook.', '2026-11-01T09:00:00+01:00', '2026-11-01T09:00:00+01:00');
+
+-- audit_runs
+insert into public.audit_runs (id, organization_id, ran_at, playbook_version, summary) values
+  ('839a7353-7637-5973-9696-3d111dc13544', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', '2026-12-07T06:00:00+01:00', '1.0', '{"proposals":5}'::jsonb),
+  ('aa2a6d7d-3184-5776-85d6-d46a0ebea7a8', '0e180a64-ba81-583b-a8f4-7685eaf8807d', '2026-12-07T06:00:00+01:00', '1.0', '{"proposals":3}'::jsonb),
+  ('38f69bef-2c21-5761-853a-783fd7573ef6', '000cec3c-eaf4-5b93-be25-36e43ab61249', '2026-12-07T06:00:00+01:00', '1.0', '{"proposals":0}'::jsonb),
+  ('f213c6d4-09ca-5374-a0f0-22e8f20f1797', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', '2026-12-07T06:00:00+01:00', '1.0', '{"proposals":3}'::jsonb),
+  ('fed8b231-2c1d-5fd8-8237-25a7b53b572c', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', '2026-12-07T06:00:00+01:00', '1.0', '{"proposals":5}'::jsonb),
+  ('b1b021bb-93a2-554f-b9b9-194689b5f7cd', '2375742c-72bd-571b-bb5d-140b0b325ba7', '2026-12-07T06:00:00+01:00', '1.0', '{"proposals":3}'::jsonb),
+  ('2e24e7aa-ed19-5a8e-80b7-37852e5349c7', '2becb956-a2a9-5de5-93fb-04c85931bbc3', '2026-12-07T06:00:00+01:00', '1.0', '{"proposals":0}'::jsonb),
+  ('ba789bf4-257c-5f25-a1ae-32ecf4011779', 'c88e4fe4-7497-5e64-b444-200fa4787481', '2026-12-07T06:00:00+01:00', '1.0', '{"proposals":1}'::jsonb),
+  ('25996c14-ea25-5a5f-88ef-cc37ae3a7401', '5004023d-f3bf-50ab-bd55-3e9bae53a8d2', '2026-12-07T06:00:00+01:00', '1.0', '{"proposals":1}'::jsonb),
+  ('caecc2ec-b5cb-5766-b1f7-09c7abca7440', '64c1087b-9617-5d27-8631-b28a74ba0f17', '2026-12-07T06:00:00+01:00', '1.0', '{"proposals":1}'::jsonb);
+
+-- recommendations
+insert into public.recommendations (id, organization_id, audit_run_id, campaign_id, ad_id, type, severity, sort, status, payload, created_at) values
+  ('3c013f25-e2e2-5f62-8ce1-672d865c2306', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', '839a7353-7637-5973-9696-3d111dc13544', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '2c370d0a-0b02-5aa6-b1da-5da390e5f90a', 'verliezer', 'act', 1, 'open', '{"goal":"verkopen","ad_name":"Sfeerbeeld woonkamer","spend":72,"results":0,"target":23.2,"limit":69.6}'::jsonb, '2026-12-07T06:00:00+01:00'),
+  ('891ce5a7-e944-5c60-98ca-8ac5c0a6ff00', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', '839a7353-7637-5973-9696-3d111dc13544', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '2d46ed9c-8d32-598a-8163-f04f62607d5c', 'extra_buiten_app', 'warn', 2, 'open', '{"ad_name":"Zo gieten we ze","extra":"muziek","date":"2026-12-05"}'::jsonb, '2026-12-07T06:00:00+01:00'),
+  ('d56f0bd1-2dff-5ce2-965d-50c6ede78561', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', '839a7353-7637-5973-9696-3d111dc13544', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '5cdcb412-0443-53c8-bc48-eff3af9d42ab', 'vermoeidheid', 'warn', 5, 'open', '{"ad_name":"Kaars wordt aangestoken","ctr_from":2.1,"ctr_to":1.4,"frequency":2.8}'::jsonb, '2026-12-07T06:00:00+01:00'),
+  ('e58a5803-069e-5635-a6c9-b995f82568a9', '0e180a64-ba81-583b-a8f4-7685eaf8807d', 'aa2a6d7d-3184-5776-85d6-d46a0ebea7a8', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'bf7695f4-894f-5f1b-ba8b-2df5c8073026', 'verliezer', 'act', 1, 'open', '{"goal":"aanvragen","ad_name":"Ons team aan het werk","spend":60,"results":0,"target":20,"limit":60}'::jsonb, '2026-12-07T06:00:00+01:00'),
+  ('e701f3fb-4294-5c9c-9a8b-74ef2ec3783b', '0e180a64-ba81-583b-a8f4-7685eaf8807d', 'aa2a6d7d-3184-5776-85d6-d46a0ebea7a8', '45d67cbd-cc04-5483-a3a5-690060f2cce5', '1eb3261a-0e55-547c-ad67-cb1e2ba93fd1', 'beste_video', 'info', 3, 'open', '{"ad_name":"Voor en na","cpl":12.8,"target":20}'::jsonb, '2026-12-07T06:00:00+01:00'),
+  ('1d7fef7a-a467-549a-bb9e-76407eeec2dd', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'fed8b231-2c1d-5fd8-8237-25a7b53b572c', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '0be6a8b8-8b15-5260-b52c-ddfa64f3018c', 'verliezer', 'act', 1, 'open', '{"goal":"verkopen","ad_name":"Sfeerbeeld woonkamer","spend":72,"results":0,"target":23.2,"limit":69.6}'::jsonb, '2026-12-07T06:00:00+01:00'),
+  ('f9c25d2a-c85b-57af-9790-df1b551a351f', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'fed8b231-2c1d-5fd8-8237-25a7b53b572c', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '792f18b6-7882-54a7-881a-7086a4d12ff8', 'extra_buiten_app', 'warn', 2, 'open', '{"ad_name":"Zo gieten we ze","extra":"muziek","date":"2026-12-05"}'::jsonb, '2026-12-07T06:00:00+01:00'),
+  ('94c1b876-025a-57eb-84e1-e5345b73f267', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'fed8b231-2c1d-5fd8-8237-25a7b53b572c', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '0578d0e4-ff21-5f6a-8314-ebfbcc68b54d', 'vermoeidheid', 'warn', 5, 'open', '{"ad_name":"Kaars wordt aangestoken","ctr_from":2.1,"ctr_to":1.4,"frequency":2.8}'::jsonb, '2026-12-07T06:00:00+01:00'),
+  ('89efeda0-19fb-5c23-a4e3-e13cdb3a624d', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'b1b021bb-93a2-554f-b9b9-194689b5f7cd', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'f763e699-cbee-55eb-a672-bed03839c28c', 'verliezer', 'act', 1, 'open', '{"goal":"aanvragen","ad_name":"Ons team aan het werk","spend":60,"results":0,"target":20,"limit":60}'::jsonb, '2026-12-07T06:00:00+01:00'),
+  ('22aa2b4e-b74f-5dc6-9248-ab83435bafca', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'b1b021bb-93a2-554f-b9b9-194689b5f7cd', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'a159547c-1281-5e06-89d3-5ea0dfea3cdd', 'beste_video', 'info', 3, 'open', '{"ad_name":"Voor en na","cpl":12.8,"target":20}'::jsonb, '2026-12-07T06:00:00+01:00');
+insert into public.recommendations (id, organization_id, audit_run_id, campaign_id, parent_id, type, severity, sort, status, payload, created_at) values
+  ('ae73a85d-23d0-5098-b144-dba9d8766086', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', '839a7353-7637-5973-9696-3d111dc13544', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', '3c013f25-e2e2-5f62-8ce1-672d865c2306', 'schalen_na_verliezer', 'info', 1, 'wacht', '{"roas_without":3.07,"break_even":2.5,"spend_without":208,"revenue":638,"budget_from":40,"budget_to":48,"step":0.2}'::jsonb, '2026-12-07T06:00:00+01:00'),
+  ('1a96445a-468a-53d5-aaa5-04f5d6a0608c', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'fed8b231-2c1d-5fd8-8237-25a7b53b572c', '49c57bee-e707-5132-b97f-9087c1e4c5f9', '1d7fef7a-a467-549a-bb9e-76407eeec2dd', 'schalen_na_verliezer', 'info', 1, 'wacht', '{"roas_without":3.07,"break_even":2.5,"spend_without":208,"revenue":638,"budget_from":40,"budget_to":48,"step":0.2}'::jsonb, '2026-12-07T06:00:00+01:00');
+insert into public.recommendations (id, organization_id, audit_run_id, campaign_id, type, severity, sort, status, payload, created_at) values
+  ('66fccaca-175a-59cd-b64a-51c0b7e4e6e8', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', '839a7353-7637-5973-9696-3d111dc13544', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'video_beter', 'info', 3, 'open', '{"roas_video":3.41,"roas_foto":0.91,"spend_video":153,"revenue_video":522,"spend_foto":127,"revenue_foto":116}'::jsonb, '2026-12-07T06:00:00+01:00'),
+  ('01b1a6c2-e2ea-583b-9b21-03b5d8004ac2', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'fed8b231-2c1d-5fd8-8237-25a7b53b572c', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'video_beter', 'info', 3, 'open', '{"roas_video":3.41,"roas_foto":0.91,"spend_video":153,"revenue_video":522,"spend_foto":127,"revenue_foto":116}'::jsonb, '2026-12-07T06:00:00+01:00');
+insert into public.recommendations (id, organization_id, audit_run_id, type, severity, sort, status, payload, created_at) values
+  ('8061b147-ab54-5fa9-8295-534eded66321', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', '839a7353-7637-5973-9696-3d111dc13544', 'speciaal_moment', 'info', 4, 'open', '{"moment":"kerst","weeks":"2,5"}'::jsonb, '2026-12-07T06:00:00+01:00'),
+  ('301928a1-91f2-56f9-8519-5c736bec6b11', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'fed8b231-2c1d-5fd8-8237-25a7b53b572c', 'speciaal_moment', 'info', 4, 'open', '{"moment":"kerst","weeks":"2,5"}'::jsonb, '2026-12-07T06:00:00+01:00');
+insert into public.recommendations (id, organization_id, audit_run_id, ad_account_id, type, severity, sort, status, payload, created_at) values
+  ('aca0d294-4480-5e7b-9d10-f51fece6f8aa', '0e180a64-ba81-583b-a8f4-7685eaf8807d', 'aa2a6d7d-3184-5776-85d6-d46a0ebea7a8', '48f7a50e-33f4-5b01-9113-2ae3f98e5dc7', 'betaalprobleem', 'act', 2, 'open', '{}'::jsonb, '2026-12-07T06:00:00+01:00'),
+  ('60dab397-a3a2-502e-b79f-7c05247c9e04', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'b1b021bb-93a2-554f-b9b9-194689b5f7cd', '7b093dc9-46f9-5389-9314-b3856cea7f6b', 'betaalprobleem', 'act', 2, 'open', '{}'::jsonb, '2026-12-07T06:00:00+01:00');
+insert into public.recommendations (organization_id, audit_run_id, ad_account_id, status, created_at, id, type, severity, sort, payload) values
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'f213c6d4-09ca-5374-a0f0-22e8f20f1797', '74adb8fe-ebfb-5efd-8c93-ffe2d3f462e1', 'open', '2026-12-07T06:00:00+01:00', '766512fc-bc7a-5f6a-94a4-98c912978f42', 'account_schalen', 'info', 3, '{"account":"Veld & Vuur","roas":3.6,"break_even":2.86,"step":0.2}'::jsonb),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'f213c6d4-09ca-5374-a0f0-22e8f20f1797', '9f569474-6848-5109-99e1-51f2a10c2c3a', 'open', '2026-12-07T06:00:00+01:00', 'c1043152-10e9-53dc-918f-a914c5aa3e0e', 'account_onder_break_even', 'warn', 2, '{"account":"Trapkracht","spend":280,"revenue":549,"sales":9,"roas":1.96,"break_even":2.22,"margin":0.45}'::jsonb),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'f213c6d4-09ca-5374-a0f0-22e8f20f1797', 'a1097839-ccc0-55ef-94e3-10a7b894fed9', 'open', '2026-12-07T06:00:00+01:00', '8b4404e3-7a47-5b6e-817d-a7eee5b591db', 'account_onder_break_even', 'act', 1, '{"account":"Proefshop","spend":140,"revenue":90,"sales":2,"roas":0.64,"break_even":2,"margin":0.5}'::jsonb),
+  ('c88e4fe4-7497-5e64-b444-200fa4787481', 'ba789bf4-257c-5f25-a1ae-32ecf4011779', 'cbec5514-d973-5b27-9f68-108bfecd9b63', 'open', '2026-12-07T06:00:00+01:00', '5ce5528a-b42b-5ee2-9793-ea048a533bfd', 'account_schalen', 'info', 3, '{"account":"Veld & Vuur","roas":3.6,"break_even":2.86,"step":0.2}'::jsonb),
+  ('5004023d-f3bf-50ab-bd55-3e9bae53a8d2', '25996c14-ea25-5a5f-88ef-cc37ae3a7401', 'dc2dba98-fba8-5d4d-ab15-00725da9f43e', 'open', '2026-12-07T06:00:00+01:00', '755453fc-2ebd-53ac-b126-df514d02a0f9', 'account_onder_break_even', 'warn', 2, '{"account":"Trapkracht","spend":280,"revenue":549,"sales":9,"roas":1.96,"break_even":2.22,"margin":0.45}'::jsonb),
+  ('64c1087b-9617-5d27-8631-b28a74ba0f17', 'caecc2ec-b5cb-5766-b1f7-09c7abca7440', 'f7809f32-e222-5275-8c51-f21014a613c3', 'open', '2026-12-07T06:00:00+01:00', 'd589692f-e99b-5fe9-b5a1-d05e097b94c5', 'account_onder_break_even', 'act', 1, '{"account":"Proefshop","spend":140,"revenue":90,"sales":2,"roas":0.64,"break_even":2,"margin":0.5}'::jsonb);
+
+-- log_entries
+insert into public.log_entries (id, organization_id, at, actor, kind, what) values
+  ('e72a557a-6bd9-5174-b0e8-318b16f4b2cd', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', '2026-12-07T06:00:00+01:00', 'adsweet', 'audit', 'Dagelijkse audit klaar, 5 voorstellen.'),
+  ('b04e4659-b846-59ad-a336-be4c407067b9', '0e180a64-ba81-583b-a8f4-7685eaf8807d', '2026-12-07T06:00:00+01:00', 'adsweet', 'audit', 'Dagelijkse audit klaar, 3 voorstellen.'),
+  ('16a6a245-8257-5ed2-a819-f88a1a0b0e3f', '000cec3c-eaf4-5b93-be25-36e43ab61249', '2026-12-07T06:00:00+01:00', 'adsweet', 'audit', 'Dagelijkse audit klaar.'),
+  ('477df346-4d8e-5d60-ae3a-99cee2d195c9', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', '2026-12-07T06:00:00+01:00', 'adsweet', 'audit', 'Dagelijkse audit klaar.'),
+  ('4d8b300f-cbb0-5962-b688-eff609b57497', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', '2026-12-07T06:00:00+01:00', 'adsweet', 'audit', 'Dagelijkse audit klaar, 5 voorstellen.'),
+  ('9faedc6f-b9ea-5541-8f06-3986eafae3bc', '2375742c-72bd-571b-bb5d-140b0b325ba7', '2026-12-07T06:00:00+01:00', 'adsweet', 'audit', 'Dagelijkse audit klaar, 3 voorstellen.'),
+  ('b95c5e6d-7c9d-50d3-b261-476996ce342d', '2becb956-a2a9-5de5-93fb-04c85931bbc3', '2026-12-07T06:00:00+01:00', 'adsweet', 'audit', 'Dagelijkse audit klaar.');
+insert into public.log_entries (id, organization_id, at, actor, kind, campaign_id, what, from_to, undo) values
+  ('e823fda0-70da-55e2-879f-34c0dc88d029', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', '2026-12-05T14:12:00+01:00', 'outside', 'extra', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'Muziek aangezet bij ‘Zo gieten we ze’.', 'Uit → Aan', '{"kind":"extra","ad_id":"2d46ed9c-8d32-598a-8163-f04f62607d5c","extra":"muziek","value":false}'::jsonb),
+  ('79aaa3d2-55b2-55c1-872b-b058dbc07852', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', '2026-12-05T14:12:00+01:00', 'outside', 'extra', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'Muziek aangezet bij ‘Zo gieten we ze’.', 'Uit → Aan', '{"kind":"extra","ad_id":"792f18b6-7882-54a7-881a-7086a4d12ff8","extra":"muziek","value":false}'::jsonb);
+insert into public.log_entries (id, organization_id, at, actor, kind, campaign_id, what, from_to) values
+  ('9e224681-71f7-5ee2-90b0-021b7384cf83', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', '2026-11-30T23:59:00+01:00', 'adsweet', 'campagne', '16ef80f9-d3ae-5132-afa8-d7ffdca83c1d', 'Campagne ‘Black Friday’ gestopt op de einddatum.', 'Actief → Afgelopen'),
+  ('595047c1-dcff-5929-a713-4f371149acce', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', '2026-11-30T23:59:00+01:00', 'adsweet', 'campagne', '0c1d3018-f5bf-528d-916e-9b2d3d86f923', 'Campagne ‘Black Friday’ gestopt op de einddatum.', 'Actief → Afgelopen');
+insert into public.log_entries (id, organization_id, at, actor, actor_name, user_id, kind, campaign_id, what) values
+  ('3f25c33c-a6f0-5f64-8c04-31383a330844', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', '2026-11-26T20:41:00+01:00', 'user', 'Lisa', '501ce77b-52c3-527f-968e-c7d2bcb4244b', 'campagne', '16ef80f9-d3ae-5132-afa8-d7ffdca83c1d', 'Campagne ‘Black Friday’ live gezet, €45 per dag, 27 tot en met 30 november.'),
+  ('6830ef84-582c-5d4c-aec1-0e35fdca3dd8', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', '2026-11-17T10:05:00+01:00', 'user', 'Lisa', '501ce77b-52c3-527f-968e-c7d2bcb4244b', 'campagne', 'f167e51e-1a66-541b-9261-bfcbc7f0ee16', 'Vaste campagne live gezet, €40 per dag, 5 advertenties.'),
+  ('42420247-4776-566d-9d65-a9043bba615e', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', '2026-11-26T20:41:00+01:00', 'user', 'Lisa', null, 'campagne', '0c1d3018-f5bf-528d-916e-9b2d3d86f923', 'Campagne ‘Black Friday’ live gezet, €45 per dag, 27 tot en met 30 november.'),
+  ('efd311fd-0a11-5d40-a8b0-4f29ae1f9736', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', '2026-11-17T10:05:00+01:00', 'user', 'Lisa', null, 'campagne', '49c57bee-e707-5132-b97f-9087c1e4c5f9', 'Vaste campagne live gezet, €40 per dag, 5 advertenties.');
+insert into public.log_entries (id, organization_id, at, time_known, actor, actor_name, user_id, kind, campaign_id, what) values
+  ('1da85404-628e-52b3-a56d-1c4c77ac3fb7', '0e180a64-ba81-583b-a8f4-7685eaf8807d', '2026-11-23T00:00:00+01:00', false, 'user', 'Tom', '2a25612d-15c5-598c-9ebb-3811c5d90cea', 'campagne', '45d67cbd-cc04-5483-a3a5-690060f2cce5', 'Vaste campagne live gezet, €15 per dag, 5 advertenties.'),
+  ('40b01e18-aaf1-59bc-ad54-42a895747e4d', '2375742c-72bd-571b-bb5d-140b0b325ba7', '2026-11-23T00:00:00+01:00', false, 'user', 'Tom', null, 'campagne', 'ac108702-d6db-5427-9934-fba4d4624e7c', 'Vaste campagne live gezet, €15 per dag, 5 advertenties.');
+
+-- notifications
+insert into public.notifications (id, organization_id, type, severity, payload, href, created_at) values
+  ('298b8618-a82f-5fdf-af3e-9d90dd4e2a6e', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'buiten_app', 'warn', '{"ad_name":"Zo gieten we ze","extra":"muziek","date":"2026-12-05"}'::jsonb, '/vandaag', '2026-12-05T14:12:00+01:00'),
+  ('283e4532-f7a3-50d2-8151-885bade76ae4', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'vermoeidheid', 'warn', '{"ctr_from":2.1,"ctr_to":1.4,"frequency":2.8}'::jsonb, '/advertenties', '2026-12-07T06:00:00+01:00'),
+  ('a6381cde-203e-54c8-8374-6f4f88a648ad', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'proef_bijna_om', 'warn', '{"days_left":8,"pay_date":"2026-12-16","amount":136.5}'::jsonb, '/abonnement', '2026-12-07T06:00:00+01:00'),
+  ('1d2162be-1a9d-515b-a445-17f5c43aef2e', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'credits_bijna_op', 'warn', '{"left":18,"total":50,"trial":true}'::jsonb, '/studio', '2026-12-06T06:00:00+01:00'),
+  ('1777492a-d5fc-55a9-90e9-231bb0f6f62e', '0e180a64-ba81-583b-a8f4-7685eaf8807d', 'betaalprobleem', 'act', '{}'::jsonb, '/hulp', '2026-12-07T06:00:00+01:00'),
+  ('46762350-5e57-5bf2-9d69-2c0cc47978d5', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'buiten_app', 'warn', '{"ad_name":"Zo gieten we ze","extra":"muziek","date":"2026-12-05"}'::jsonb, '/vandaag', '2026-12-05T14:12:00+01:00'),
+  ('313a66a7-0fca-5a15-9cc7-f458963670a0', 'c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'vermoeidheid', 'warn', '{"ctr_from":2.1,"ctr_to":1.4,"frequency":2.8}'::jsonb, '/advertenties', '2026-12-07T06:00:00+01:00'),
+  ('6155a656-b8cc-5744-9167-ff7d9c9bd9da', '2375742c-72bd-571b-bb5d-140b0b325ba7', 'betaalprobleem', 'act', '{}'::jsonb, '/hulp', '2026-12-07T06:00:00+01:00');
+
+-- autopilot_settings
+insert into public.autopilot_settings (organization_id, mode, limits) values
+  ('50a8615e-7628-53c6-9bd3-31bf0d640cd3', 'vraag', '{}'::jsonb),
+  ('0e180a64-ba81-583b-a8f4-7685eaf8807d', 'vraag', '{}'::jsonb),
+  ('000cec3c-eaf4-5b93-be25-36e43ab61249', 'vraag', '{}'::jsonb),
+  ('fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 'vraag', '{}'::jsonb),
+  ('2e277cb5-3269-577e-995e-045289da1567', 'vraag', '{}'::jsonb),
+  ('c38ea0c5-1ec8-580a-8194-6d0850c369fe', 'vraag', '{}'::jsonb),
+  ('2375742c-72bd-571b-bb5d-140b0b325ba7', 'vraag', '{}'::jsonb),
+  ('2becb956-a2a9-5de5-93fb-04c85931bbc3', 'vraag', '{}'::jsonb),
+  ('c88e4fe4-7497-5e64-b444-200fa4787481', 'vraag', '{}'::jsonb),
+  ('5004023d-f3bf-50ab-bd55-3e9bae53a8d2', 'vraag', '{}'::jsonb),
+  ('64c1087b-9617-5d27-8631-b28a74ba0f17', 'vraag', '{}'::jsonb);
+
+-- credits_ledger
+insert into public.credits_ledger (id, organization_id, delta, reason, created_at) values
+  ('32dfa5ab-327c-56e0-ad2a-be608acad685', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', 50, 'proefperiode', '2026-11-16T09:12:00+01:00'),
+  ('cea311d7-cfd3-5527-ad16-44d8c2ea48ff', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', -10, 'ai_beeld', '2026-12-02T11:00:00+01:00'),
+  ('30a826bd-4a41-5152-982d-0ba45282e4f6', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', -10, 'ai_beeld', '2026-12-03T11:00:00+01:00'),
+  ('e7057176-e26b-576a-a71d-1cc2d7f3fa8e', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', -10, 'ai_beeld', '2026-12-04T11:00:00+01:00'),
+  ('2521496b-6d07-511b-8671-6217064e711e', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', -1, 'teksten', '2026-12-05T15:00:00+01:00'),
+  ('abbe12c3-eb87-501c-8d7b-cb88ff7b2f1f', '50a8615e-7628-53c6-9bd3-31bf0d640cd3', -1, 'teksten', '2026-12-06T15:00:00+01:00'),
+  ('885ec67f-ac3b-5d31-a803-825752403cf2', '000cec3c-eaf4-5b93-be25-36e43ab61249', 50, 'proefperiode', '2026-12-07T00:00:00+01:00'),
+  ('09b716e3-effc-5455-a0d1-b55b23fb4b0f', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', 600, 'maand', '2026-12-01T00:00:00+01:00'),
+  ('5b68aa72-6f09-5cd2-906c-afe8fbb19322', 'fd5544e6-caf5-541a-be0b-a8ebc6d6e40d', -210, 'ai_gebruik', '2026-12-06T18:00:00+01:00');

@@ -6,11 +6,23 @@ Monorepo voor AdSweet: de app (app.adsweet.ai), het beheer en de mails. De websi
 
 ```bash
 pnpm install
-cp apps/app/.env.example apps/app/.env.local   # vul de sleutels in, zie docs/koppelingen.md
-pnpm supabase start                            # lokale database (Supabase CLI)
-pnpm db:reset                                  # schema + voorbeelddata (Lisa, Tom, Sarah, Bram, Eva)
-pnpm dev                                       # http://localhost:3000
+pnpm dev                                       # http://localhost:3000, in demomodus
 ```
+
+**Demomodus.** Zonder Supabase-sleutels draait de app op een Postgres in het proces (PGlite) met hetzelfde schema,
+dezelfde rechten (RLS) en de voorbeelddata van Lisa, Tom, Sarah, Bram en Eva. Er gaan geen mails uit: na
+"Stuur me een link" staat de link op de pagina "Check je mailbox". Bij elke herstart begint de data opnieuw.
+
+**Met Supabase.**
+
+```bash
+cp apps/app/.env.example apps/app/.env.local   # vul de sleutels in, zie docs/koppelingen.md
+pnpm dlx supabase start                        # lokale Supabase (Docker), leest supabase/config.toml
+pnpm dlx supabase db reset                     # schema (supabase/migrations) + voorbeelddata (packages/db/seed.sql)
+pnpm dev
+```
+
+De voorbeelddata komt uit `packages/db/src/fixtures`. Na een wijziging: `pnpm --filter @adsweet/db gen:seed`.
 
 ## Controleren
 

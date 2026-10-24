@@ -6,8 +6,9 @@ import { setThemePreference, type ThemePreference } from "@adsweet/ui";
 
 const OPTIONS: ThemePreference[] = ["auto", "light", "dark"];
 
-export function ThemeSwitch() {
-  const t = useTranslations("start");
+/** Kiest licht, nacht of volgt het toestel. De keuze blijft bewaard in een cookie. */
+export function ThemeSwitch({ className }: { className?: string }) {
+  const t = useTranslations("common");
   const [pref, setPref] = useState<ThemePreference>("auto");
 
   useEffect(() => {
@@ -18,7 +19,7 @@ export function ThemeSwitch() {
   const label = { auto: t("themeAuto"), light: t("themeLight"), dark: t("themeDark") };
 
   return (
-    <div role="group" aria-label={t("theme")} className="start-switch">
+    <div role="group" aria-label={t("theme")} className={className}>
       {OPTIONS.map((o) => (
         <button
           key={o}
