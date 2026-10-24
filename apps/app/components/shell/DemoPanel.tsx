@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { setThemePreference, type ThemePreference } from "@adsweet/ui";
+import { setThemePreference, useToast, type ThemePreference } from "@adsweet/ui";
 import type { ShellData } from "@/lib/server/shell";
 import { demoLabels, demoPlan, demoReset, demoScenario, demoState } from "@/app/(app)/shell-actions";
 
@@ -15,6 +15,7 @@ export function DemoPanel({ shell }: { shell: ShellData }) {
   const tp = useTranslations("plans");
   const tc = useTranslations("common");
   const router = useRouter();
+  const toast = useToast();
   const [open, setOpen] = useState(false);
   const [pending, start] = useTransition();
   const [theme, setTheme] = useState<ThemePreference>(() =>
@@ -104,7 +105,19 @@ export function DemoPanel({ shell }: { shell: ShellData }) {
           ])}
           <div className="sh-demo__foot">
             <span>{t("date")}</span>
-            <button type="button" className="as-textbtn" style={{ fontSize: 12.5 }} disabled={pending} onClick={() => run(() => demoReset())}>
+            <button
+              type="button"
+              className="as-textbtn"
+              style={{ fontSize: 12.5 }}
+              disabled={pending}
+              onClick={() =>
+                start(async () => {
+                  await demoReset();
+                  router.refresh();
+                  toast.show({ message: t("resetDone") });
+                })
+              }
+            >
               {t("reset")}
             </button>
           </div>

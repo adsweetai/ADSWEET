@@ -1,25 +1,17 @@
 import type { Plan } from "@adsweet/db";
+import { PLAN_ORDER, TRIAL_DAYS } from "@adsweet/playbook";
 
-// Plannen en rechten (docs/regels.md). De server gate't hiermee; de UI volgt.
+// Plannen en rechten (docs/regels.md). De server gate't hiermee; de UI volgt. Prijzen en limieten staan in
+// @adsweet/playbook, zodat Beheer dezelfde gebruikt.
 
-export const PLAN_ORDER: Plan[] = ["starter", "pro", "scale", "agency"];
+export { PLAN_LIMITS, PLAN_ORDER, TRIAL_CREDITS, TRIAL_DAYS } from "@adsweet/playbook";
+
 export const PLAN_NAME: Record<Plan, string> = { starter: "Starter", pro: "Pro", scale: "Scale", agency: "Agency" };
 
 export const hasPlan = (plan: Plan, min: Plan) => PLAN_ORDER.indexOf(plan) >= PLAN_ORDER.indexOf(min);
 
 /** AI (Studio, Dot, Concurrenten, AI-teksten): vanaf Pro. Starter heeft geen AI. */
 export const hasAI = (plan: Plan) => hasPlan(plan, "pro");
-
-export const PLAN_LIMITS: Record<Plan, { price: number; accounts: number; credits: number; users: number | null }> = {
-  starter: { price: 99, accounts: 1, credits: 0, users: 1 },
-  pro: { price: 195, accounts: 1, credits: 300, users: 2 },
-  scale: { price: 299, accounts: 3, credits: 600, users: 5 },
-  agency: { price: 499, accounts: 5, credits: 1500, users: null },
-};
-
-/** Tijdens de proefperiode: hoogstens 50 AI-credits. */
-export const TRIAL_CREDITS = 50;
-export const TRIAL_DAYS = 30;
 
 /** Dag in de proefperiode (dag 1 = startdag) en de dagen die overblijven. */
 export function trialDays(startedAt: string, today: string) {

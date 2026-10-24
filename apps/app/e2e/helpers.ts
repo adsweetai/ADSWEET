@@ -24,5 +24,7 @@ export async function login(page: Page, who: keyof typeof EMAIL, next = "/vandaa
 export async function resetDemo(page: Page) {
   await page.getByRole("button", { name: "Demo", exact: true }).click();
   await page.getByRole("button", { name: "Begin opnieuw met de voorbeelddata" }).click();
+  // Wacht tot de server klaar is: anders kan de reset later binnenkomen dan wat de test daarna doet.
+  await expect(page.getByRole("status").filter({ hasText: "De voorbeelddata staat terug." })).toBeVisible();
   await page.getByRole("button", { name: "Demo", exact: true }).click();
 }

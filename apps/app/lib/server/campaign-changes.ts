@@ -20,6 +20,7 @@ import { hasAI } from "@/lib/plans";
 import { getDb, serviceDb } from "./auth";
 import { assertCanEdit, getContext, type AppContext } from "./context";
 import { writeLog } from "./changes";
+import { currentPlaybook, type PlaybookRules } from "./playbook";
 
 // Wijzigingen rond campagnes en advertenties. Alles gebeurt op de klik van de klant en komt in het logboek.
 // Er gaat nog niets naar Meta: dat komt in fase 13. Een nieuwe campagne staat daarom op "Gepland".
@@ -134,11 +135,15 @@ export interface WizardInput {
 
 export type Deviation = "ads" | "sets" | "budget" | "perSet";
 
-export function deviationsOf(w: Pick<WizardInput, "ads" | "sets" | "budget" | "perSet" | "goal">, isWebshop: boolean): Deviation[] {
-  const minB = isWebshop && w.goal === "verkopen" ? PLAYBOOK.minDailyBudget.webshop : PLAYBOOK.minDailyBudget.default;
+export function deviationsOf(
+  w: Pick<WizardInput, "ads" | "sets" | "budget" | "perSet" | "goal">,
+  isWebshop: boolean,
+  rules: Pick<PlaybookRules, "minDailyBudget" | "startStructure"> = PLAYBOOK,
+): Deviation[] {
+  const minB = isWebshop && w.goal === "verkopen" ? rules.minDailyBudget.webshop : rules.minDailyBudget.default;
   const d: Deviation[] = [];
-  if (w.ads < PLAYBOOK.startStructure.ads) d.push("ads");
-  if (w.sets > PLAYBOOK.startStructure.adSets) d.push("sets");
+  if (w.ads < rules.startStructure.ads) d.push("ads");
+  if (w.sets > rules.startStructure.adSets) d.push("sets");
   if (!(w.budget >= minB)) d.push("budget");
   if (w.perSet) d.push("perSet");
   return d;
@@ -174,7 +179,7 @@ export async function createCampaign(w: WizardInput): Promise<{ ok: true; id: st
   if (!(sets >= 1 && sets <= 5 && n >= 1 && n <= 10)) return { ok: false, error: "structuur" };
   const budget = Math.round(Number(w.budget) * 100) / 100;
   if (!(budget > 0 && budget <= 100_000)) return { ok: false, error: "budget" };
-  const devs = deviationsOf({ ...w, sets, ads: n, budget }, ctx.org.kind === "webshop");
+  const devs = deviationsOf({ ...w, sets, ads: n, budget }, ctx.org.kind === "webshop", await currentPlaybook());
   if (devs.some((d) => !w.accepted.includes(d))) return { ok: false, error: "afwijking" };
 
   const special = w.strategy !== "vast";

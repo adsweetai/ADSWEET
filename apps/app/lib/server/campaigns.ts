@@ -1,13 +1,14 @@
 import "server-only";
 import { getTranslations } from "next-intl/server";
 import { must, type Ad, type AdSet, type Campaign, type Goal, type InsightDaily, type LogEntry, type Organization, type Targeting } from "@adsweet/db";
-import { PLAYBOOK, costPer, loserLimit, roas } from "@adsweet/playbook";
+import { costPer, loserLimit, roas } from "@adsweet/playbook";
 import { formatDayMonth, formatEuro, formatNumber, formatPercent, formatRoas, type Phase, type SeriesColor, type StatusKind } from "@adsweet/ui";
 import { today } from "@/lib/clock";
 import { periodRange, type Period } from "@/lib/period";
 import { getDb } from "./auth";
 import type { AppContext } from "./context";
 import { ADS_ORDER, goalFor, goalKind, statusFor, sumRows, targets, totalsPerAd, type GoalKind, type Totals } from "./metrics";
+import { currentPlaybook, minDailyBudget } from "./playbook";
 
 // Gegevens voor de schermen rond campagnes en advertenties. De wijzigingen zelf staan in campaign-actions.ts.
 
@@ -262,7 +263,7 @@ export async function loadCampaignDetail(ctx: AppContext, id: string, period: Pe
   const winners = items.filter((a) => a.label === "winnaar" && !a.off);
   if (campaign.status === "actief" && campaign.daily_budget && !raised && winners.length && kind !== "none") {
     const from = campaign.daily_budget;
-    const to = Math.round(from * (1 + PLAYBOOK.scaleStep));
+    const to = Math.round(from * (1 + (await currentPlaybook()).scaleStep));
     if (kind === "sales")
       scale = {
         text: t("scaleSales", { from: formatEuro(from), to: formatEuro(to) }),
@@ -581,7 +582,7 @@ export async function loadMakerContext(ctx: AppContext, hasAI: boolean): Promise
   const vast = mine.find((c) => c.kind === "vast" && isLive(c));
   const naming = (ctx.org.naming ?? {}) as { short?: string };
   const short = naming.short ?? ctx.org.name;
-  const minB = ctx.org.kind === "webshop" && kind === "sales" ? PLAYBOOK.minDailyBudget.webshop : PLAYBOOK.minDailyBudget.default;
+  const minB = await minDailyBudget(ctx.org.kind === "webshop" && kind === "sales");
   // Teksten om van te vertrekken: die van je beste lopende advertentie. Vanaf fase 7 schrijft AdSweet ze met AI.
   const source = [...ads].filter((a) => a.status !== "uit").sort((a, b) => (a.label === "winnaar" ? -1 : 0) - (b.label === "winnaar" ? -1 : 0))[0];
   const texts = source?.variants?.primary_text?.length ? source.variants.primary_text : source?.primary_text ? [source.primary_text] : [];

@@ -7,11 +7,14 @@ Monorepo voor AdSweet: de app (app.adsweet.ai), het beheer en de mails. De websi
 ```bash
 pnpm install
 pnpm dev                                       # http://localhost:3000, in demomodus
+pnpm dev:beheer                                # http://localhost:3001, Beheer (log in als team@adsweet.voorbeeld)
 ```
 
 **Demomodus.** Zonder Supabase-sleutels draait de app op een Postgres in het proces (PGlite) met hetzelfde schema,
 dezelfde rechten (RLS) en de voorbeelddata van Lisa, Tom, Sarah, Bram en Eva. Er gaan geen mails uit: na
 "Stuur me een link" staat de link op de pagina "Check je mailbox". Bij elke herstart begint de data opnieuw.
+In de demomodus heeft Beheer zijn eigen voorbeelddatabase: een versie die je daar publiceert, ziet de app pas met
+Supabase, waar beide dezelfde database gebruiken.
 
 **Met Supabase.**
 
@@ -32,7 +35,7 @@ pnpm typecheck     # TypeScript
 pnpm test          # Vitest (rekenregels, onderdelen)
 pnpm build         # productiebuild
 pnpm --filter app exec playwright install chromium   # eenmalig
-pnpm test:e2e      # Playwright-rooktest tegen de productiebuild (poort 3100)
+pnpm test:e2e      # Playwright tegen de productiebuild (app op poort 3100, Beheer op 3101)
 ```
 
 Gebruik `PW_CHANNEL=chrome` (of `msedge`) om de rooktest in een geïnstalleerde browser te draaien.
@@ -42,7 +45,7 @@ Gebruik `PW_CHANNEL=chrome` (of `msedge`) om de rooktest in een geïnstalleerde 
 | Map | Wat |
 |---|---|
 | `apps/app` | Next.js 15 (App Router, TypeScript). De app, inloggen, onboarding, onboardingpaneel, Agency, Dot, rondleidingen. |
-| `apps/beheer` | Next.js 15. Intern beheer voor het AdSweet-team (playbook, versies, klanten, AI-kosten, …). |
+| `apps/beheer` | Next.js 15. Intern beheer, alleen voor `adsweet_admin`: playbook bewerken en publiceren, versies, strategieën, teksten, Academy, klanten, AI-kosten, kortingscodes, partners, calls, systeemstatus. |
 | `packages/ui` | Designsysteem: tokens, letter, knoppen, badges, EuroTegel, actiekaart, Dot, lader. |
 | `packages/db` | Supabase-schema, migraties, seed, gegenereerde types. |
 | `packages/mails` | De 12 mails als gewone HTML-sjablonen. |

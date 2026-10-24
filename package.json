@@ -7,6 +7,7 @@
   },
   "scripts": {
     "dev": "turbo dev --filter=app",
+    "dev:beheer": "turbo dev --filter=beheer",
     "build": "turbo build",
     "lint": "turbo lint",
     "typecheck": "turbo typecheck",
