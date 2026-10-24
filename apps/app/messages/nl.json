@@ -43,8 +43,24 @@
     "fbLater": "Doorgaan met Facebook werkt zodra de koppeling met Meta klaar is. Log voorlopig in met je e-mail."
   },
   "nav": {
+    "klanten": "Klanten",
     "vandaag": "Vandaag",
-    "logout": "Uitloggen"
+    "campagnes": "Campagnes",
+    "advertenties": "Advertenties",
+    "studio": "Studio",
+    "concurrenten": "Concurrenten",
+    "inzichten": "Inzichten",
+    "autopilot": "Autopilot en regels",
+    "academy": "Academy",
+    "hulp": "Hulp",
+    "instellingen": "Instellingen",
+    "meldingen": "Meldingen",
+    "logboek": "Logboek",
+    "nieuw": "Nieuw",
+    "meer": "Meer",
+    "logout": "Uitloggen",
+    "main": "Hoofdmenu",
+    "toToday": "AdSweet, naar Vandaag"
   },
   "today": {
     "greeting": "Goeiemorgen, {name}",
@@ -355,5 +371,199 @@
       ["Dot ademt", "1,6 s, één keer"],
       ["prefers-reduced-motion", "alles meteen in eindtoestand"]
     ]
+  },
+  "shell": {
+    "manage": "Plan beheren",
+    "logout": "Uitloggen",
+    "period": "Periode",
+    "periods": {
+      "gisteren": "Gisteren",
+      "7d": "Laatste 7 dagen",
+      "30d": "Laatste 30 dagen",
+      "start": "Sinds de start",
+      "zelf": "Zelf kiezen"
+    },
+    "notifications": "Meldingen",
+    "seeAll": "Bekijk alles",
+    "newCampaign": "Nieuwe campagne",
+    "pageHelp": "Uitleg bij deze pagina",
+    "trial": "Nog {days, plural, one {# dag} other {# dagen}} gratis. Je eerste betaling is op {date}.",
+    "trialLate": "Nog {days, plural, one {# dag} other {# dagen}} gratis. Je eerste betaling is op {date}.",
+    "trialSuffix": "proefperiode",
+    "searchAccount": "Zoek een account",
+    "allAccounts": "Alle accounts",
+    "allClients": "Alle klanten",
+    "addAccountScale": "Advertentieaccount toevoegen kan vanaf Scale.",
+    "metaSub": "Meta · {sub}",
+    "agencySub": "Agency · {count, plural, one {# klant} other {# klanten}}",
+    "creditsTrial": "Nog {left} van je {total} credits in je proefperiode",
+    "creditsMonth": "Nog {left} van je {total} credits deze maand",
+    "creditsEmpty": "Je credits van deze maand zijn op.",
+    "creditsAria": "Credits",
+    "themeToDark": "Nacht",
+    "themeToLight": "Licht",
+    "inClient": "{agency} · klant: <b>{client}</b>",
+    "backToClients": "Terug naar alle klanten",
+    "banner": {
+      "betaal": "Meta kon je laatste betaling niet afschrijven. Als dat zo blijft, stoppen je advertenties.",
+      "betaalBtn": "Zo los je het op",
+      "koppeling": "Je koppeling met Meta is verlopen. Koppel opnieuw, het duurt een halve minuut.",
+      "koppelingBtn": "Koppel opnieuw",
+      "credits": "Je credits van deze maand zijn op. Ze vullen aan op [datum].",
+      "creditsBtn": "Bekijk Scale"
+    },
+    "gate": {
+      "close": "Sluiten",
+      "plans": "Bekijk de plannen"
+    },
+    "more": "Meer",
+    "emptyPage": "Deze pagina is nog leeg.",
+    "example": "voorbeeld"
+  },
+  "routes": {
+    "vandaag": "Vandaag",
+    "klanten": "Klanten",
+    "meldingen": "Meldingen",
+    "logboek": "Logboek",
+    "campagnes": "Campagnes",
+    "campagne": "Campagnedetail",
+    "campagneNieuw": "Nieuwe campagne",
+    "advertentiesToevoegen": "Nieuwe advertenties toevoegen",
+    "advertentieMaken": "Een advertentie maken",
+    "bulk": "Bulk launch",
+    "advertenties": "Advertenties",
+    "testgrid": "Testgrid",
+    "google": "Google Ads-campagne",
+    "catalogus": "Catalogus-advertenties",
+    "studio": "Studio",
+    "concurrenten": "Concurrenten",
+    "inzichten": "Inzichten",
+    "weekrapport": "Weekrapport",
+    "autopilot": "Autopilot en regels",
+    "academy": "Academy",
+    "les": "Les",
+    "begrippen": "Begrippenlijst",
+    "certificaat": "Certificaat",
+    "hulp": "Hulp",
+    "instellingen": "Instellingen",
+    "abonnement": "Instellingen",
+    "team": "Instellingen",
+    "doorverwijzen": "Instellingen",
+    "partner": "Partnerportaal"
+  },
+  "notifications": {
+    "types": {
+      "betaalprobleem": {
+        "type": "Betaalprobleem bij Meta",
+        "what": "Meta kon je laatste betaling niet afschrijven.",
+        "mean": "Als dat zo blijft, stoppen je advertenties.",
+        "todo": "Kijk de betaalmethode in je advertentieaccount na.",
+        "btn": "Zo los je het op"
+      },
+      "buiten_app": {
+        "type": "Wijziging buiten de app",
+        "what": "Bij ‘{ad}’ werd muziek aangezet in Ads Manager, op {date}.",
+        "mean": "Meta past je advertentie dan zelf aan.",
+        "todo": "Zet het terug uit of laat het zo.",
+        "btn": "Bekijk"
+      },
+      "vermoeidheid": {
+        "type": "Creative-vermoeidheid",
+        "what": "Je beste video wordt minder aangeklikt: CTR van {from} naar {to}.",
+        "mean": "Mensen hebben hem al gemiddeld {freq} keer gezien.",
+        "todo": "Maak een nieuwe video voor een nieuwe ad set.",
+        "btn": "Bekijk"
+      },
+      "proef_bijna_om": {
+        "type": "Proefperiode bijna om",
+        "what": "Nog {days} dagen gratis. Je eerste betaling is op {date}.",
+        "mean": "Daarna betaal je {amount} per maand excl. btw.",
+        "todo": "Niets, tenzij je wil stoppen of van plan wil wisselen.",
+        "btn": "Plan beheren"
+      },
+      "credits_bijna_op": {
+        "type": "Credits bijna op",
+        "what": "Nog {left} van je {total} credits in je proefperiode.",
+        "mean": "Een AI-beeld kost 10 credits.",
+        "todo": "Gebruik ze voor de fase die je mist.",
+        "btn": "Naar Studio"
+      },
+      "kosten_hoger": {
+        "type": "Kosten plots veel hoger",
+        "what": "[advertentie] kostte gisteren [x] keer meer per resultaat dan gemiddeld.",
+        "mean": "Soms is het een slechte dag, soms raakt een advertentie op.",
+        "todo": "Kijk morgen opnieuw. Blijft het zo, dan krijg je een voorstel.",
+        "btn": "Bekijk"
+      },
+      "afgekeurd": {
+        "type": "Advertentie afgekeurd door Meta",
+        "what": "[advertentie] werd afgekeurd: [reden van Meta].",
+        "mean": "Deze advertentie loopt niet.",
+        "todo": "Pas de tekst of het beeld aan en stuur opnieuw in.",
+        "btn": "Pas aan"
+      },
+      "pixel": {
+        "type": "Pixel meet niet meer",
+        "what": "Je pixel meldde sinds [datum] geen verkopen meer.",
+        "mean": "Zonder metingen ziet niemand welke advertentie verkoopt.",
+        "todo": "Kijk na of je pixel nog op je website staat.",
+        "btn": "Zo doe je dat"
+      },
+      "budget_minimum": {
+        "type": "Budget onder het minimum",
+        "what": "Je budget staat op [bedrag] per dag.",
+        "mean": "Meta krijgt dan te weinig resultaten binnen om te leren.",
+        "todo": "Zet het budget op minstens €10 per dag (€30 voor een webshop).",
+        "btn": "Pas aan"
+      },
+      "koppeling_verlopen": {
+        "type": "Koppeling verlopen",
+        "what": "Je koppeling met Meta is verlopen.",
+        "mean": "AdSweet ziet je cijfers niet meer en kan niets klaarzetten.",
+        "todo": "Koppel opnieuw, het duurt een halve minuut.",
+        "btn": "Koppel opnieuw"
+      }
+    },
+    "today": "vandaag {time}"
+  },
+  "demo": {
+    "button": "Demo",
+    "title": "Demo",
+    "note": "hoort niet bij het product",
+    "date": "Demodatum: maandag 7 december 2026",
+    "groups": {
+      "scenario": "Scenario",
+      "plan": "Plan",
+      "staat": "Staat",
+      "theme": "Thema",
+      "lang": "Taal",
+      "labels": "Toon labels"
+    },
+    "scenario": {
+      "lisa": "Lisa · webshop",
+      "tom": "Tom · dakwerken",
+      "sarah": "Sarah · nieuw",
+      "bram": "Bram · 3 webshops",
+      "eva": "Eva · bureau, 6 klanten"
+    },
+    "staat": {
+      "normaal": "Normaal",
+      "proef": "Proefperiode bijna om",
+      "credits": "Credits op",
+      "betaal": "Betaalprobleem bij Meta",
+      "koppeling": "Koppeling verlopen",
+      "testfase": "Testfase"
+    },
+    "labels": {
+      "uit": "Uit",
+      "aan": "Aan"
+    },
+    "reset": "Begin opnieuw met de voorbeelddata"
+  },
+  "gates": {
+    "studio": "Met Pro maakt AdSweet zelf beelden, teksten en videoscripts voor de fase die je mist.",
+    "concurrenten": "Met Pro zie je wat je concurrenten adverteren en krijg je per fase de boodschap die past.",
+    "live": "Met Pro zie je je cijfers live, elke dag, in plaats van één keer per week.",
+    "liveCreatives": "Met Pro zie je al je cijfers uit Meta live, tot op het niveau van je creatives."
   }
 }
