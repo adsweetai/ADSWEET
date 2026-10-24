@@ -1,0 +1,103 @@
+/* Hulp (App.dc.html#hulp) */
+.hp {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1100px;
+}
+.hp-search {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 520px;
+}
+.hp-search span {
+  font-size: 13px;
+  font-weight: 500;
+}
+.hp-search input {
+  height: 48px;
+  border-radius: 12px;
+  font-size: 16px;
+}
+.hp .tour-help {
+  max-width: 820px;
+}
+.hp-faq {
+  max-width: 820px;
+}
+.hp-faq > p {
+  margin: 0;
+}
+.hp-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 12px;
+}
+.hp-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+}
+.hp-card__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.hp-card__head b {
+  font-weight: 500;
+  font-size: 16px;
+}
+.hp-card__head span {
+  font-size: 12.5px;
+  color: var(--ink-muted);
+}
+.hp-card__d {
+  flex: 1;
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+.hp-card__action {
+  display: flex;
+}
+.hp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.hp-btn:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.hp-status {
+  display: flex;
+  flex-direction: column;
+  max-width: 820px;
+}
+.hp-status h2 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.hp-status__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}

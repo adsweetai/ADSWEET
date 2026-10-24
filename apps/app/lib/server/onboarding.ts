@@ -12,6 +12,7 @@ import { mediaUrl, slugify } from "./campaigns";
 import { writeLog } from "./changes";
 import { ORG_COOKIE, assertCanEdit, getContext, type AppContext } from "./context";
 import { demoSiteOf, type Brief } from "./demo-sites";
+import { recordReferral } from "./referral";
 import { readWebsite, type Found } from "./website";
 
 // De onboarding: van een nieuw account naar een eerste campagne in ongeveer 10 minuten (Inloggen.dc.html#onboarding-1…11).
@@ -55,6 +56,8 @@ export async function createOwnOrganization(userId?: string): Promise<string | n
   );
   await svc.from("members").insert({ user_id: user.id, organization_id: org.id, role: "eigenaar" });
   await svc.from("business_profiles").insert({ organization_id: org.id });
+  const who = must(await svc.from("profiles").select("first_name, email").eq("user_id", user.id).maybeSingle());
+  await recordReferral(org.id, who?.first_name || who?.email || name);
   try {
     (await cookies()).set(ORG_COOKIE, org.id, { path: "/", sameSite: "lax", httpOnly: true, maxAge: 31_536_000 });
   } catch {

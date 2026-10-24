@@ -7,6 +7,7 @@ import { routeMetadata } from "@/lib/meta";
 import { hasAI } from "@/lib/plans";
 import { getDb } from "@/lib/server/auth";
 import { getContext } from "@/lib/server/context";
+import { mutedTypes } from "@/lib/server/settings";
 import { notificationText } from "@/lib/server/notifications";
 import "./meldingen.css";
 
@@ -21,7 +22,8 @@ export default async function NotificationsPage({ searchParams }: { searchParams
   const sp = await searchParams;
   const filter: Filter = sp.filter === "act" || sp.filter === "warn" ? sp.filter : "alles";
   const rows = must(await db.from("notifications").select().eq("organization_id", ctx.org.id).order("created_at", { ascending: false }));
-  const visible = rows.filter((n) => (n.type !== "credits_bijna_op" || hasAI(ctx.plan)) && (filter === "alles" || n.severity === filter));
+  const muted = await mutedTypes(ctx);
+  const visible = rows.filter((n) => (n.type !== "credits_bijna_op" || hasAI(ctx.plan)) && !muted.has(n.type) && (filter === "alles" || n.severity === filter));
   const day = today();
   const items = await Promise.all(visible.map(async (n) => ({ n, txt: await notificationText(n, day) })));
 

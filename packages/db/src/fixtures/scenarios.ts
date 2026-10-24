@@ -1408,6 +1408,10 @@ export function buildSeed(): Seed {
   // De voorbeeldgebruikers kennen de app al: hun rondleidingen zijn gezien. Een nieuwe gebruiker krijgt ze de eerste keer.
   for (const key of ["lisa", "tom", "sarah", "bram", "eva", "kompasTeam"] as const)
     for (const tour of ["app", "campagne", "wizard"] as const) seed.user_tours.push({ user_id: userId(key), tour, seen_at: at("2026-11-20", "09:00") });
+  // Academy: wat Lisa en Tom al lazen (App.dc.html#academy: 2 van De basis, 1 van het playbook, 1 van AdSweet gebruiken).
+  for (const key of ["lisa", "tom"] as const)
+    for (const lesson of ["basis-1", "basis-2", "playbook-1", "gebruiken-1"])
+      seed.academy_progress.push({ user_id: userId(key), lesson, done_at: at("2026-11-24", "20:00") });
   // Founding members: −30% zolang ze klant blijven, voor de eerste 50 (docs/regels.md).
   seed.discount_codes.push({ id: seedId("discount:founding"), code: "FOUNDING50", kind: "founding", percent_off: 30, max_uses: 50, uses: 1 });
   return seed;

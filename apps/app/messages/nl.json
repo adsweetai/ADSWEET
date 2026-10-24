@@ -2727,5 +2727,563 @@
         "beheerder": "Wijzigen"
       }
     }
+  },
+  "academy": {
+    "glossaryLink": "Begrippenlijst",
+    "certsLink": "Je certificaten",
+    "tracks": [
+      {
+        "key": "basis",
+        "t": "De basis",
+        "lessons": [
+          "Hoe Meta-advertenties werken",
+          "De leerfase",
+          "Wat je pixel doet en hoe je weet dat hij meet",
+          "Je cijfers: ROAS, kost per verkoop, kost per aanvraag",
+          "Break-even: wanneer verdien je aan een advertentie"
+        ]
+      },
+      {
+        "key": "playbook",
+        "t": "Het AdSweet-playbook",
+        "lessons": [
+          "1 campagne, 1 ad set, 5 advertenties",
+          "Waarom breed adverteren werkt",
+          "Budget op campagneniveau",
+          "Nieuwe advertenties altijd in een nieuwe ad set",
+          "Waarom we de extra's van Meta uitzetten",
+          "Winnaars schalen en verliezers afzetten"
+        ]
+      },
+      {
+        "key": "content",
+        "t": "Content die werkt",
+        "lessons": [
+          "Top, middle en bottom of funnel",
+          "Een sterke eerste seconde",
+          "Video maken met je gsm",
+          "Foto's die opvallen",
+          "Tekst die mensen lezen",
+          "Reviews gebruiken"
+        ]
+      },
+      {
+        "key": "momenten",
+        "t": "Speciale momenten",
+        "lessons": ["Solden", "Black Friday", "Feestdagen", "Een evenement of opening"]
+      },
+      {
+        "key": "gebruiken",
+        "t": "AdSweet gebruiken",
+        "lessons": ["Je eerste week", "Vandaag lezen", "Autopilot en grenzen", "Dot vragen stellen", "Rapporten"]
+      }
+    ],
+    "prog": "{done} van {total} lessen gelezen",
+    "progAria": "Voortgang {track}",
+    "read": "Gelezen",
+    "minutes": "{n} min",
+    "back": "Academy · {n} {track}",
+    "concept": "Concept, PJ keurt goed",
+    "of": "Les {n} van {total} · {min} minuten lezen",
+    "video": "video van 1 minuut · [video PJ]",
+    "videoAria": "Plaats voor een video van 1 minuut",
+    "contentPlaceholder": "[lesinhoud PJ]",
+    "content": {
+      "basis-1": {
+        "lead": "Elke advertentie op Facebook en Instagram zit in drie lagen: de campagne, de ad set en de advertentie.",
+        "paras": [
+          ["De campagne", "is je doel en je budget. Bij AdSweet staat je budget op de campagne, zodat Meta het geld zelf naar wat het best loopt stuurt."],
+          ["De ad set", "is een groep advertenties die naar dezelfde mensen gaat: je regio, je talen en eventueel je leeftijd. Geen interesses."],
+          ["De advertentie", "is wat mensen zien: je beeld of video, je tekst, je kop en een knop."]
+        ],
+        "quiz": {
+          "q": "Waar staat bij AdSweet je budget?",
+          "options": [
+            ["campagne", "Op de campagne"],
+            ["adset", "Op elke ad set"],
+            ["ad", "Op elke advertentie"]
+          ],
+          "right": "campagne",
+          "yes": "Juist. Dan stuurt Meta het geld zelf naar wat het best loopt.",
+          "no": "Niet helemaal. Bij AdSweet staat je budget op de campagne."
+        }
+      }
+    },
+    "inAccountTitle": "In jouw account",
+    "inAccount": "Je hebt {campaigns, plural, one {# campagne} other {# campagnes}}, {sets, plural, one {# ad set} other {# ad sets}} en {ads, plural, one {# advertentie} other {# advertenties}}. Je budget van {budget} per dag staat op de campagne, zoals het playbook het wil.",
+    "inAccountAdset": "Je hebt {campaigns, plural, one {# campagne} other {# campagnes}}, {sets, plural, one {# ad set} other {# ad sets}} en {ads, plural, one {# advertentie} other {# advertenties}}. Je budget staat op de ad sets. Het playbook zet het op de campagne.",
+    "inAccountNone": "Je hebt nog geen campagne. Zodra ze loopt, zie je hier hoe ze opgebouwd is.",
+    "inAccountBtn": "Doe het nu: bekijk je campagne",
+    "inAccountNew": "Maak je eerste campagne",
+    "quizLegend": "Controlevraag",
+    "markRead": "Gelezen, naar de volgende les",
+    "markReadLast": "Gelezen, terug naar de Academy",
+    "next": "Volgende les",
+    "isRead": "Je las deze les.",
+    "glossary": {
+      "search": "Zoek een woord",
+      "searchPh": "bijvoorbeeld leerfase",
+      "yours": "In jouw cijfers: {ex}",
+      "none": "Geen woord gevonden voor ‘{q}’."
+    },
+    "cert": {
+      "eyebrow": "Certificaat · Academy",
+      "title": "{name} rondde traject {n} af: {track}.",
+      "sub": "{count} lessen · {date}",
+      "seal": "Zegel: het app-icoon van AdSweet",
+      "empty": "Nog geen certificaat. Rond een traject van de Academy af en je krijgt er hier een.",
+      "emptyBtn": "Naar de Academy",
+      "print": "Druk af of bewaar als PDF"
+    }
+  },
+  "help": {
+    "search": "Waar kunnen we je mee helpen?",
+    "searchPh": "bijvoorbeeld credits",
+    "faq": [
+      ["Wat zijn credits?", "Daarmee maakt AdSweet beelden, teksten en scripts voor je. Pro heeft er 300 per maand, Scale 600, Agency 1.500."],
+      ["Zet AdSweet zelf advertenties af?", "Nooit. Het zegt wat het ziet, jij klikt."],
+      ["Ik wil een tweede advertentieaccount.", "Dan heb je Scale nodig, met drie accounts."],
+      [
+        "Waarom raakt AdSweet mijn lopende ad sets niet aan?",
+        "Elke wijziging zet een ad set terug in de leerfase. Nieuwe advertenties komen daarom in een nieuwe ad set."
+      ],
+      [
+        "Meta kon mijn betaling niet afschrijven. Wat nu?",
+        "Kijk de betaalmethode in je advertentieaccount bij Meta na. Je advertentiebudget betaal je rechtstreeks aan Meta, niet aan AdSweet."
+      ]
+    ],
+    "noResults": "Niets gevonden voor ‘{q}’. Stel je vraag via Contact.",
+    "contact": "Contact",
+    "support": {
+      "starter": ["E-mail", "We antwoorden binnen [termijn].", "Stuur een mail"],
+      "pro": ["Chat", "Praat met iemand van ons.", "Start een chat"],
+      "scale": ["Chat met voorrang", "Je vraag komt eerst.", "Start een chat"],
+      "agency": ["Slack- of WhatsApp-kanaal", "Een supportkanaal met je accountmanager. Geen koppeling met het product.", "Open het kanaal"]
+    },
+    "supportLater": "{channel} volgt: [supportkanaal PJ].",
+    "manager": {
+      "t": "Je accountmanager",
+      "tag": "Agency",
+      "d": "[accountmanager] volgt je accounts op.",
+      "btn": "Plan een gesprek"
+    },
+    "quarterly": {
+      "t": "Kwartaalcall",
+      "tag": "Pro en Scale",
+      "d": "Elk kwartaal 20 minuten met PJ over je advertenties. Volgende call: [datum].",
+      "dPlanned": "Elk kwartaal 20 minuten met PJ over je advertenties. Volgende call: {date}.",
+      "dLocked": "Elk kwartaal 20 minuten met PJ over je advertenties. Dit zit in Pro.",
+      "btn": "Kies een moment",
+      "btnLocked": "Bekijk de plannen"
+    },
+    "onboardingCall": {
+      "t": "Onboardinggesprek",
+      "tag": "Eerste 50 klanten",
+      "d": "Zullen we samen 20 minuten je campagne overlopen?",
+      "dOther": "Voor de eerste 50 klanten, de founding members.",
+      "btn": "Kies een moment"
+    },
+    "dwy": {
+      "t": "Done With You",
+      "tag": "Fully Booked",
+      "d": "Liever dat iemand het samen met je doet? Fully Booked werkt met je samen in het Done With You-model.",
+      "btn": "Vul het formulier in"
+    },
+    "partner": {
+      "t": "Automatisaties in je bedrijf",
+      "tag": "Partner",
+      "d": "[partner automatisaties]"
+    },
+    "requested": "Aangevraagd",
+    "requestedToast": "Aangevraagd. We mailen je om een moment te kiezen.",
+    "statusTitle": "Status van de koppelingen",
+    "providers": {
+      "meta": "Meta",
+      "google_ads": "Google"
+    },
+    "status": {
+      "ok": "In orde",
+      "expired": "Verlopen",
+      "none": "Niet gekoppeld"
+    }
+  },
+  "settings": {
+    "navAria": "Instellingen",
+    "later": "Later",
+    "subs": {
+      "profiel": "Bedrijfsprofiel",
+      "cijfers": "Cijfers en doelen",
+      "koppelingen": "Koppelingen",
+      "accounts": "Advertentieaccounts",
+      "naamgeving": "Naamgeving en UTM's",
+      "betaler": "Wie betaalt",
+      "meldingen": "Meldingen",
+      "taal": "Taal en regio",
+      "team": "Team en rollen",
+      "abonnement": "Abonnement en facturen",
+      "doorverwijzen": "Doorverwijzen",
+      "privacy": "Privacy en gegevens",
+      "playbook": "Het playbook",
+      "ontwikkelaars": "Ontwikkelaars"
+    },
+    "save": "Bewaar",
+    "saved": "Bewaard.",
+    "readOnly": "Je bent lezer: je kan de instellingen bekijken, maar niet wijzigen.",
+    "optional": "Optioneel",
+    "profile": {
+      "name": "Naam van je zaak",
+      "website": "Website",
+      "sells": "Wat je verkoopt",
+      "tone": "Je toon",
+      "tonePh": "[toon]",
+      "region": "Regio",
+      "diff": "Wat maakt jou anders?",
+      "competitors": "Welke concurrenten ken je?",
+      "competitorsPh": "Optioneel, gebruikt in Concurrenten",
+      "reread": "Lees mijn website opnieuw",
+      "rereadDone": "We lezen je website opnieuw. Je krijgt een melding als er iets veranderd is.",
+      "rereadFail": "We konden je website niet lezen. Kijk het adres na.",
+      "noSite": "Vul eerst je website in.",
+      "errName": "Vul de naam van je zaak in."
+    },
+    "numbers": {
+      "aov": "Gemiddelde orderwaarde (€)",
+      "margin": "Brutomarge (%)",
+      "roas": "Eigen doel-ROAS",
+      "optionalPh": "optioneel",
+      "calcSales": "Bij {m}% marge verdien je je advertentie terug vanaf een ROAS van {be}. Een verkoop mag je hoogstens {max} kosten. Een verliezer gaf {loser} uit zonder verkoop.",
+      "cpl": "Wat mag een aanvraag kosten? (€)",
+      "clv": "Wat een klant je opbrengt (€)",
+      "lmargin": "Marge (%)",
+      "chance": "Slaagkans",
+      "chancePh": "1 op 25",
+      "calcLeads": "Tot {max} per aanvraag verdien je je advertentie terug: {clv} × {m} × {p}. Een verliezer gaf {loser} uit zonder aanvraag.",
+      "calcLeadsTarget": "Je doel is {target} per aanvraag. Een verliezer gaf {loser} uit zonder aanvraag.",
+      "calcNote": "Je drempels passen meteen mee.",
+      "none": "Je doel is {goal}. Daar hoort geen bedrag per resultaat bij: AdSweet rapporteert je bereik en je kosten.",
+      "goals": {
+        "zaak": "mensen naar je zaak",
+        "anders": "iets anders"
+      },
+      "noGoal": "Je hebt nog geen doel. Kies het in de onboarding.",
+      "savedToast": "Bewaard. Je drempels passen meteen mee.",
+      "errSales": "Vul een orderwaarde en een marge tussen 1 en 99% in.",
+      "errLeads": "Vul in wat een aanvraag mag kosten, of wat een klant je opbrengt met je marge en je slaagkans."
+    },
+    "connections": {
+      "providers": {
+        "meta": "Meta",
+        "google_ads": "Google Ads",
+        "shopify": "Shopify",
+        "google_analytics": "Google Analytics",
+        "google_drive": "Google Drive",
+        "dropbox": "Dropbox",
+        "canva": "Canva",
+        "figma": "Figma",
+        "slack": "Slack"
+      },
+      "metaSub": "{biz} · advertentieaccount, pagina, Instagram en pixel · gekoppeld op {date}",
+      "metaSubNone": "Niet gekoppeld. Zonder Meta ziet AdSweet je cijfers niet.",
+      "notConnected": "Niet gekoppeld",
+      "connectedOn": "Gekoppeld op {date}",
+      "slackSub": "Voor geplande rapporten",
+      "capi": "Server-side meting (Conversions API Gateway)",
+      "later": "Later",
+      "reconnect": "Opnieuw koppelen",
+      "disconnect": "Loskoppelen",
+      "connect": "Koppel",
+      "ok": "In orde",
+      "expired": "Verlopen",
+      "off": "Losgekoppeld",
+      "connectLater": "De koppeling met {name} volgt later.",
+      "disconnectConfirm": "Meta loskoppelen? AdSweet ziet je cijfers dan niet meer en kan niets klaarzetten. Je advertenties blijven gewoon lopen.",
+      "disconnectYes": "Koppel los",
+      "cancel": "Annuleer",
+      "disconnected": "Meta is losgekoppeld. Je advertenties lopen gewoon verder.",
+      "reconnected": "Meta is opnieuw gekoppeld."
+    },
+    "accounts": {
+      "sub": "{currency} · {status}",
+      "subSales": "{currency} · marge {m} · orderwaarde {aov}",
+      "status": {
+        "actief": "Actief",
+        "betaalprobleem": "Betaalprobleem",
+        "koppeling_verlopen": "Koppeling verlopen",
+        "uitgeschakeld": "Uitgeschakeld"
+      },
+      "switch": "Wissel",
+      "current": "Je werkt nu in dit account",
+      "switched": "Je werkt nu in {name}.",
+      "addTitle": "Advertentieaccount toevoegen",
+      "addFull": "Je gebruikt {used} van je {max} accounts. Meer accounts kan in Agency.",
+      "addFree": "Je gebruikt {used} van je {max} accounts. Je kan er nog toevoegen.",
+      "addLocked": "Een tweede advertentieaccount is Scale, met drie accounts. Losse extra accounts bestaan niet.",
+      "addAgency": "De accounts van je klanten voeg je toe in Klanten.",
+      "addBtn": "Voeg toe",
+      "addLater": "Je kiest het account in het venster van Meta. [koppeling met Meta, fase 13]",
+      "seeScale": "Bekijk Scale",
+      "toClients": "Naar Klanten",
+      "none": "Nog geen advertentieaccount gekoppeld."
+    },
+    "naming": {
+      "campaign": "Campagne",
+      "adSet": "Ad set",
+      "ad": "Advertentie",
+      "utm": "UTM",
+      "example": "Live voorbeeld",
+      "tokens": "Stukken die je kan gebruiken",
+      "help": "Nieuwe campagnes en ad sets krijgen deze namen. Bestaande namen bij Meta blijven zoals ze zijn.",
+      "errTemplate": "Vul voor elke naam iets in.",
+      "sample": {
+        "ad": "Kaars wordt aangestoken",
+        "reason": "start"
+      }
+    },
+    "payer": {
+      "payer": "Wie betaalt",
+      "beneficiary": "Wie heeft er baat bij",
+      "help": "De EU vraagt dit bij elke advertentie. Meestal is het twee keer je zaak.",
+      "savedToast": "Bewaard. Dit vraagt de EU bij elke advertentie.",
+      "err": "Vul allebei in."
+    },
+    "notifications": {
+      "on": "In de app en per mail",
+      "off": "Uit",
+      "note": "Er is geen WhatsApp. Je ziet alles in de app en in je mailbox.",
+      "savedOn": "{type}: weer aan.",
+      "savedOff": "{type}: uit. Je krijgt hier geen melding of mail meer over."
+    },
+    "language": {
+      "language": "Taal",
+      "names": {
+        "nl": "Nederlands",
+        "fr": "Français",
+        "en": "English"
+      },
+      "later": "Komt later",
+      "timezone": "Tijdzone",
+      "currency": "Munteenheid",
+      "euro": "Euro",
+      "tzSaved": "Bewaard. Tijden staan nu in {tz}.",
+      "currencyNote": "Uit je advertentieaccount bij Meta"
+    },
+    "privacy": {
+      "download": "Je gegevens downloaden",
+      "downloadSub": "Alles wat AdSweet over je zaak bewaart, als bestand",
+      "downloadBtn": "Download",
+      "dpa": "Verwerkersovereenkomst",
+      "dpaSub": "Ondertekend bij de start",
+      "view": "Bekijk",
+      "meta": "Rechten van Meta",
+      "metaSub": "Advertentieaccount beheren, pagina lezen, pixel lezen",
+      "metaNone": "Niet gekoppeld",
+      "metaScopes": "ads_management · ads_read · pages_show_list · pages_read_engagement · instagram_basic · business_management",
+      "google": "Rechten van Google",
+      "googleSub": "Niet gekoppeld",
+      "delete": "Verwijder mijn account",
+      "deleteSub": "We verwijderen je account en je gegevens binnen [termijn]",
+      "deleteBtn": "Verwijder",
+      "deleteConfirm": "Je account en alle gegevens van {org} verwijderen? Je advertenties bij Meta blijven bestaan in je eigen advertentieaccount.",
+      "deleteYes": "Verwijder mijn account",
+      "cancel": "Annuleer",
+      "deleteRequested": "Aangevraagd op {date}. We verwijderen je account en je gegevens binnen [termijn].",
+      "deleteUndo": "Toch niet verwijderen",
+      "deleteToast": "We verwijderen je account en je gegevens binnen [termijn].",
+      "deleteUndone": "Je account blijft bestaan.",
+      "ownerOnly": "Alleen de eigenaar kan het account verwijderen."
+    },
+    "playbook": {
+      "rules": {
+        "campaign": "{n, plural, one {# campagne} other {# campagnes}} met het doel dat bij je zaak past",
+        "cbo": "Budget altijd op campagneniveau",
+        "structure": "{sets, plural, one {# ad set} other {# ad sets}} met {ads} advertenties: {photos} foto's en {videos} video's",
+        "broad": "Breed adverteren: alleen regio, landen, talen en leeftijd",
+        "newSet": "Nieuwe advertenties altijd in een nieuwe ad set",
+        "extras": "De extra's van Meta bij elke launch uit",
+        "min": "Minimum {min} per dag, {web} voor een webshop",
+        "loser": "Verliezer bij {x} keer je doel zonder resultaat",
+        "scale": "Winnaars schalen via het campagnebudget: [schaalstappen PJ]"
+      },
+      "note": "Alleen lezen. Zo werkt AdSweet · versie {version} · {date}.",
+      "noteNoDate": "Alleen lezen. Zo werkt AdSweet · versie {version} · [datum publicatie]."
+    },
+    "developers": {
+      "api": "API-sleutels",
+      "mcp": "Koppeling met Claude of ChatGPT via MCP",
+      "later": "Later"
+    }
+  },
+  "subscription": {
+    "demoAria": "Demo: staat van het abonnement",
+    "states": {
+      "proef": "Proefperiode",
+      "actief": "Actief",
+      "mislukt": "Betaling mislukt",
+      "opgezegd": "Opgezegd",
+      "verlopen": "Verlopen"
+    },
+    "facts": {
+      "plan": "Plan",
+      "planV": "{plan} · {period}",
+      "price": "Prijs",
+      "priceV": "{price} per maand",
+      "priceSub": "excl. btw",
+      "priceSubFounding": "excl. btw · founding member, 30% korting",
+      "priceSubYear": "excl. btw · jaarlijks, 2 maanden gratis: {year} per jaar",
+      "status": "Status",
+      "trialDay": "Dag {day} van 30",
+      "runsUntil": "Loopt tot {date}",
+      "failedSub": "Kijk je betaalmethode na",
+      "next": "Volgende betaling",
+      "none": "Geen",
+      "nextSub": "{price} + {vat} btw = {total}",
+      "credits": "Credits",
+      "creditsV": "{left} van {total}",
+      "creditsNone": "Geen in Starter",
+      "users": "Gebruikers",
+      "usersV": "{n} van {max}",
+      "unlimited": "onbeperkt",
+      "scheduled": "Vanaf {date}: {what}",
+      "scheduledNext": "Bij je volgende betaling: {what}"
+    },
+    "periods": {
+      "maandelijks": "maandelijks",
+      "jaarlijks": "jaarlijks"
+    },
+    "change": "Wissel van plan",
+    "yearly": "Overschakelen naar jaarlijks: 2 maanden gratis",
+    "yearlyDone": "Vanaf je volgende betaling betaal je jaarlijks.",
+    "monthly": "Terug naar maandelijks",
+    "monthlyDone": "Vanaf je volgende betaling betaal je weer maandelijks.",
+    "undoScheduled": "Toch niet",
+    "billing": "Betaalmethode en facturatiegegevens",
+    "billingTitle": "Facturatiegegevens",
+    "billingFields": {
+      "name": "Naam op de factuur",
+      "vat": "Btw-nummer",
+      "address": "Adres",
+      "email": "E-mail voor facturen"
+    },
+    "billingNote": "Je betaalmethode, een kaart of een domiciliëring, beheer je op de beveiligde pagina van de betaalpartner. [betaalpartner, fase 13]",
+    "billingSaved": "Bewaard. Je volgende factuur staat op deze gegevens.",
+    "billingErrEmail": "Vul een geldig e-mailadres in.",
+    "plansWhat": {
+      "starter": "1 account, wekelijks rapport",
+      "pro": "1 account, 300 credits",
+      "scale": "3 accounts, 600 credits",
+      "agency": "5 tot 50+ accounts"
+    },
+    "current": "Je plan",
+    "from": "vanaf {price}",
+    "compareAria": "Kies een plan",
+    "choose": "Kies een plan om het nieuwe bedrag te zien.",
+    "newAmount": "Nieuw bedrag: {price} per maand excl. btw.",
+    "newAmountFounding": "Nieuw bedrag: {price} per maand excl. btw, met je founding-korting.",
+    "upNow": "Je upgrade gaat meteen in.",
+    "downLater": "Je downgrade gaat in bij je volgende betaling.",
+    "agencyTalk": "Agency regelen we samen, met een staffel voor je aantal klanten. [contact Agency PJ]",
+    "confirm": "Wissel naar {plan}",
+    "changedUp": "Je zit nu op {plan}.",
+    "changedDown": "Vanaf {date} zit je op {plan}.",
+    "tooMany": "Je gebruikt {n} advertentieaccounts. {plan} heeft er {max}.",
+    "tooManyUsers": "Je hebt {n} gebruikers. {plan} heeft er {max}.",
+    "invoices": "Facturen",
+    "noInvoices": "Nog geen facturen.",
+    "noInvoicesTrial": "Nog geen facturen. Je eerste factuur komt op {date}.",
+    "vat": "{v} btw",
+    "invoiceStatus": {
+      "open": "Open",
+      "betaald": "Betaald",
+      "mislukt": "Mislukt"
+    },
+    "pdf": "PDF",
+    "pdfAria": "Factuur {number} als PDF",
+    "cancelTitle": "Opzeggen",
+    "cancelStart": "Ik wil opzeggen",
+    "cancelLegend": "Waarom stop je? (optioneel)",
+    "reasons": ["Te duur", "Ik adverteer niet meer", "Ik ga naar een bureau", "Iets anders"],
+    "cancelText": "Je abonnement loopt tot het einde van je periode, {date}. Daarna kan je nog 30 dagen je gegevens downloaden. Je advertenties bij Meta blijven bestaan in je eigen advertentieaccount.",
+    "cancelFounding": "Als je opzegt, verlies je je founding-korting van 30%.",
+    "cancelConfirm": "Zeg mijn abonnement op",
+    "stay": "Ik blijf",
+    "cancelDone": "Je abonnement is opgezegd. Het loopt tot {date}.",
+    "cancelLog": "Abonnement opgezegd",
+    "cancelLogSub": "loopt tot {date}",
+    "cancelled": "Je zegde op. Je abonnement loopt tot {date}.",
+    "resume": "Ik wil toch blijven",
+    "resumed": "Fijn dat je blijft. Je abonnement loopt gewoon door.",
+    "resumeLog": "Opzegging ingetrokken",
+    "planLog": "Plan gewijzigd",
+    "expired": "Je abonnement is verlopen. Kies een plan om verder te gaan.",
+    "agencyClient": "Het abonnement van {client} loopt via {agency}.",
+    "ownerOnly": "Alleen de eigenaar beheert het abonnement en de facturen.",
+    "nextUnknown": "[datum]",
+    "periodEndUnknown": "[einde periode]",
+    "changedDownNext": "Bij je volgende betaling zit je op {plan}."
+  },
+  "team": {
+    "limit": "{n} van {max} gebruikers in {plan}.",
+    "unlimited": "onbeperkt",
+    "you": "jij",
+    "invited": "Uitnodiging verstuurd",
+    "inviteLabel": "Nodig iemand uit",
+    "invitePh": "naam@jouwzaak.be",
+    "role": "Rol",
+    "send": "Stuur uitnodiging",
+    "sent": "Uitnodiging verstuurd naar {email}.",
+    "revoke": "Trek in",
+    "revokeAria": "Trek de uitnodiging voor {email} in",
+    "revoked": "De uitnodiging is ingetrokken.",
+    "errors": {
+      "email": "Vul een geldig e-mailadres in.",
+      "full": "Je plan is vol. Kies een groter plan om iemand uit te nodigen.",
+      "exists": "Die persoon is al lid of heeft al een uitnodiging.",
+      "rights": "Alleen een eigenaar of beheerder kan iemand uitnodigen."
+    },
+    "nextPlan": {
+      "starter": "Pro",
+      "pro": "Scale",
+      "scale": "Agency"
+    },
+    "fullText": {
+      "starter": "Met Pro werk je met twee aan je advertenties.",
+      "pro": "Met Scale werk je met vijf, over drie accounts.",
+      "scale": "Met Agency heb je onbeperkt gebruikers en rechten per account."
+    },
+    "roles": [
+      ["Eigenaar", "Alles, ook het abonnement."],
+      ["Beheerder", "Alles behalve het abonnement."],
+      ["Lezer", "Alleen bekijken."],
+      ["Per account", "In Agency: rechten per advertentieaccount."]
+    ],
+    "log": "Teamlid uitgenodigd",
+    "logSub": "{email} · {role}"
+  },
+  "referral": {
+    "intro": "Ken je iemand die AdSweet kan gebruiken? Jullie krijgen allebei een maand gratis.",
+    "linkAria": "Je persoonlijke link",
+    "copy": "Kopieer",
+    "copied": "De link is gekopieerd.",
+    "none": "Nog niemand meldde zich aan via je link.",
+    "foot": "Wie zich aanmeldt, zie je hier met de datum waarop je gratis maand ingaat.",
+    "signedUp": "Aangemeld op {date}",
+    "freeFrom": "Gratis maand vanaf {date}",
+    "freePending": "Je gratis maand gaat in zodra deze klant betaalt",
+    "someone": "Nieuwe klant"
+  },
+  "partner": {
+    "linkAria": "Je partnerlink",
+    "copy": "Kopieer",
+    "copied": "De link is gekopieerd.",
+    "kpis": [
+      ["Aanmeldingen", "[aantal]"],
+      ["Betalende klanten", "[aantal]"],
+      ["Commissie deze maand", "[bedrag]"],
+      ["Uitbetaald", "[bedrag]"]
+    ],
+    "exampleLabel": "Voorbeeld",
+    "example": "Een klant op Pro betaalt {price} per maand. Jij krijgt 30%: {month} per maand, of {year} over 12 maanden.",
+    "payouts": "Uitbetalingen",
+    "payoutsNone": "[uitbetalingen per maand]"
   }
 }
