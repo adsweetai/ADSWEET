@@ -7,8 +7,11 @@ import { metaChoicesAction, metaConnectAction, metaPixelsAction } from "@/app/me
 import type { MetaAccountOption, MetaPageOption, MetaPixelOption } from "@/lib/server/meta/assets";
 import "./meta-picker.css";
 
-/** Kies het advertentieaccount, de pagina en de pixel uit wat de Meta-sleutel mag zien, en koppel. */
-export function MetaPicker({ onConnected }: { onConnected: () => void }) {
+/**
+ * Kies het advertentieaccount, de pagina en de pixel uit wat de Meta-sleutel mag zien, en koppel. Met fbHref een
+ * link om met een (ander) Facebook-account te koppelen.
+ */
+export function MetaPicker({ onConnected, fbHref }: { onConnected: () => void; fbHref?: string | null }) {
   const t = useTranslations("metaPicker");
   const [state, setState] = useState<"loading" | "ready" | "meta" | "expired">("loading");
   const [accounts, setAccounts] = useState<MetaAccountOption[]>([]);
@@ -46,23 +49,26 @@ export function MetaPicker({ onConnected }: { onConnected: () => void }) {
     };
   }, [sel.accountId]);
 
+  const other = fbHref ? (
+    <a className="as-link mp-other" href={fbHref}>
+      {t("otherFb")}
+    </a>
+  ) : null;
   if (state === "loading") return <p className="mp-note">{t("loading")}</p>;
-  if (state !== "ready")
+  if (state !== "ready" || !accounts.length)
     return (
-      <p role="alert" className="mp-alert">
-        {t(state === "expired" ? "expired" : "error")}
-      </p>
-    );
-  if (!accounts.length)
-    return (
-      <p role="alert" className="mp-alert">
-        {t("noAccounts")}
-      </p>
+      <div className="mp">
+        <p role="alert" className="mp-alert">
+          {t(state === "expired" ? "expired" : state === "ready" ? "noAccounts" : "error")}
+        </p>
+        {other}
+      </div>
     );
 
   return (
     <div className="mp">
       <p className="mp-note">{t("intro")}</p>
+      {other}
       <div className="mp-grid">
         <Select
           label={t("account")}

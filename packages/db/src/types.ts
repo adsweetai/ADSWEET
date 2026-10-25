@@ -206,6 +206,8 @@ export interface Connection {
   pixel_name: string | null;
   pixel_ok: boolean | null;
   details: Json;
+  /** Met wiens Meta-sleutel ("Doorgaan met Facebook") de cijfers opgehaald worden; leeg: de systeemgebruiker. */
+  meta_token_user: Uuid | null;
   created_at: IsoDateTime;
 }
 

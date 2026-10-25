@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Button, Icon, Input, Select, StatusBadge, Tag, useToast, type IconName } from "@adsweet/ui";
 import { MetaWindow, type MetaOutcome } from "@/components/auth/MetaWindow";
@@ -21,10 +21,14 @@ export function StepConnect() {
   const tm = useTranslations("metaWindow");
   const tp = useTranslations("metaPicker");
   const router = useRouter();
+  const path = usePathname();
+  // Terug uit het venster van Meta: ?meta=perm (geen toegang gegeven) of ?meta=fout.
+  const back = useSearchParams().get("meta");
   const nav = useStepNav();
   const toast = useToast();
   const [open, setOpen] = useState(false);
-  const [error, setError] = useState<MetaOutcome | null>(null);
+  const [error, setError] = useState<MetaOutcome | null>(back === "perm" ? "perm" : null);
+  const fbHref = vm.metaConnect ? `/auth/meta?next=${encodeURIComponent(path)}` : null;
   const [more, setMore] = useState(false);
   const [payer, setPayer] = useState(vm.payer);
   const [beneficiary, setBeneficiary] = useState(vm.beneficiary);
@@ -70,14 +74,19 @@ export function StepConnect() {
           </div>
         </div>
       ) : null}
+      {!vm.demo && !linked && back === "fout" ? (
+        <p role="alert" className="ob-alert">
+          {tp("fbFailed")}
+        </p>
+      ) : null}
       {!vm.demo && !linked ? (
         vm.metaLive ? (
-          <MetaPicker onConnected={() => router.refresh()} />
-        ) : (
+          <MetaPicker onConnected={() => router.refresh()} fbHref={fbHref} />
+        ) : !vm.metaConnect ? (
           <p role="alert" className="ob-alert">
             {tp("notConfigured")}
           </p>
-        )
+        ) : null
       ) : null}
       <div className="ob-conns">
         {rows.map((r) => (
@@ -168,10 +177,10 @@ export function StepConnect() {
         prev={nav.prev}
         pending={nav.pending}
         label={linked ? t("next") : t("connectFb")}
-        disabled={!linked && !vm.demo}
+        disabled={!linked && !vm.demo && !fbHref}
         onNext={() => (linked ? nav.next(() => payerAction(payer, beneficiary)) : setOpen(true))}
       />
-      {open ? <MetaWindow demo={vm.demo} existingOption onOutcome={onOutcome} onClose={() => setOpen(false)} realHref={null} /> : null}
+      {open ? <MetaWindow demo={vm.demo} existingOption onOutcome={onOutcome} onClose={() => setOpen(false)} realHref={fbHref} /> : null}
     </>
   );
 }

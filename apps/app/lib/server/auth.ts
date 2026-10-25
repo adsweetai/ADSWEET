@@ -6,6 +6,8 @@ import { pgliteExecutor, supabaseExecutor } from "@adsweet/db/server";
 import { env, isDemo } from "@/lib/env";
 import { demoDatabase, signDemoToken, verifyDemoToken } from "./demo";
 import { sendMail } from "./mail";
+import { META_SCOPES, loginConfigId } from "./meta/oauth";
+import { saveUserMetaToken } from "./meta/tokens";
 import { supabaseForRequest, supabaseService } from "./supabase";
 
 export const DEMO_SESSION_COOKIE = "as-demo-sessie";
@@ -47,7 +49,7 @@ export function serviceDb(): Db {
   return createDb(supabaseExecutor(supabaseService()));
 }
 
-const safeNext = (next: string | null | undefined) => (next && next.startsWith("/") && !next.startsWith("//") ? next : "/vandaag");
+export const safeNext = (next: string | null | undefined, fallback = "/vandaag") => (next && next.startsWith("/") && !next.startsWith("//") ? next : fallback);
 
 /**
  * Stuurt een link om in te loggen. Een nieuw adres krijgt meteen een account.
@@ -151,7 +153,16 @@ export async function completeLogin(params: URLSearchParams): Promise<{ ok: bool
   }
   const code = params.get("code");
   if (!code) return { ok: false, next };
-  const { error } = await sb.auth.exchangeCodeForSession(code);
+  const { data, error } = await sb.auth.exchangeCodeForSession(code);
+  // Ingelogd met Facebook: de sleutel van Meta bewaren, dan haalt AdSweet de cijfers met dat account op.
+  const fb = data?.session?.provider_token;
+  if (!error && fb && data.user) {
+    try {
+      await saveUserMetaToken(data.user.id, fb);
+    } catch (e) {
+      console.warn((e as Error).message);
+    }
+  }
   return { ok: !error, next };
 }
 
@@ -186,13 +197,21 @@ export async function createDemoUser(email: string, firstName: string, provider:
   return res.rows[0].id;
 }
 
-/** Supabase: de url om met Facebook in te loggen (Supabase Auth, provider facebook). */
+/**
+ * Supabase: de url om met Facebook in te loggen (Supabase Auth, provider facebook). We vragen meteen de rechten voor
+ * de advertentieaccounts (of de configuratie van Facebook Login for Business), zodat dat account de cijfers levert.
+ */
 export async function facebookSignInUrl(next: string): Promise<string | null> {
   if (isDemo) return null;
   const sb = await supabaseForRequest();
+  const config = loginConfigId();
   const { data, error } = await sb.auth.signInWithOAuth({
     provider: "facebook",
-    options: { redirectTo: `${env.appUrl}/auth/callback?next=${encodeURIComponent(safeNext(next))}`, scopes: "email,public_profile" },
+    options: {
+      redirectTo: `${env.appUrl}/auth/callback?next=${encodeURIComponent(safeNext(next))}`,
+      scopes: META_SCOPES.join(" "),
+      ...(config ? { queryParams: { config_id: config } } : {}),
+    },
   });
   return error ? null : data.url;
 }

@@ -127,7 +127,8 @@ export function StepPlan({ prices }: { prices: Prices }) {
         prev={nav.prev}
         pending={nav.pending || pending}
         label={vm.billing.paid ? t("next") : t("pay")}
-        onNext={() => (vm.billing.paid ? nav.next() : setPaying(true))}
+        // Zonder betaalpartner start de proefperiode meteen; in de demo toont het venster wat de betaalpagina doet.
+        onNext={() => (vm.billing.paid ? nav.next() : vm.freeTrial && !vm.demo ? pay() : setPaying(true))}
       />
       {paying ? <PaymentWindow demo={vm.demo} pending={pending} onBack={pay} onClose={() => setPaying(false)} /> : null}
     </>

@@ -3315,9 +3315,9 @@
     "intro": "Kies het advertentieaccount, de pagina en de pixel van deze zaak. AdSweet leest alleen; er verandert niets bij Meta.",
     "loading": "We halen je accounts op bij Meta…",
     "error": "Meta antwoordde niet. Probeer het zo opnieuw.",
-    "expired": "De sleutel voor Meta werkt niet meer. Maak een nieuwe aan bij de systeemgebruiker en zet ze in Vercel.",
-    "noAccounts": "De sleutel ziet geen advertentieaccounts. Geef de systeemgebruiker toegang tot de accounts in je Meta-bedrijfsinstellingen.",
-    "notConfigured": "De koppeling met Meta is nog niet ingesteld: META_SYSTEM_TOKEN ontbreekt in Vercel.",
+    "expired": "De sleutel voor Meta werkt niet meer. Koppel opnieuw met Facebook.",
+    "noAccounts": "Dit Facebook-account ziet geen advertentieaccounts. Koppel met een account dat toegang heeft, of geef toegang in je Meta-bedrijfsinstellingen.",
+    "notConfigured": "De koppeling met Meta is nog niet ingesteld: META_APP_ID en META_APP_SECRET ontbreken in Vercel.",
     "account": "Advertentieaccount",
     "page": "Facebook-pagina",
     "noPage": "Geen pagina",
@@ -3334,11 +3334,14 @@
     "connecting": "Bezig met koppelen en de cijfers ophalen…",
     "done": "Gekoppeld. {campaigns} campagnes en {ads} advertenties gevonden, de cijfers van {days} dagen opgehaald.",
     "doneNoSync": "Gekoppeld, maar de cijfers ophalen lukte niet: {error}",
-    "errAccount": "Kies een advertentieaccount dat de sleutel mag zien.",
+    "errAccount": "Kies een advertentieaccount dat je met dit Facebook-account mag zien.",
     "syncNow": "Haal de cijfers nu op",
     "syncing": "Bezig met ophalen…",
     "synced": "Opgehaald: {campaigns} campagnes, {ads} advertenties en de cijfers van {days} dagen.",
     "syncFailed": "Ophalen mislukt: {error}",
-    "choose": "Kies een ander account"
+    "choose": "Kies een ander account",
+    "otherFb": "Met een ander Facebook-account koppelen",
+    "fbFailed": "Koppelen met Facebook lukte niet. Probeer het opnieuw.",
+    "fbDenied": "Zonder toegang tot je advertentieaccount kunnen we niets voor je klaarzetten."
   }
 }

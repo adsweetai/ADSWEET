@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { timingSafeEqual } from "node:crypto";
+import { isDemo } from "@/lib/env";
 import { runDailyMails } from "@/lib/server/mail-jobs";
-import { metaLive } from "@/lib/server/meta/connect";
 import { syncAllMeta } from "@/lib/server/meta/sync";
 
 export const maxDuration = 60;
@@ -14,8 +14,9 @@ export async function GET(req: NextRequest) {
   const expected = `Bearer ${secret}`;
   const ok = !!secret && given.length === expected.length && timingSafeEqual(Buffer.from(given), Buffer.from(expected));
   if (!ok) return new NextResponse(null, { status: 401 });
-  // Eerst de cijfers van de laatste 3 dagen uit Meta (late conversies tellen nog mee), dan de mails.
-  const meta = metaLive() ? await syncAllMeta(3) : null;
+  // Eerst de cijfers van de laatste 3 dagen uit Meta (late conversies tellen nog mee), dan de mails. Elke koppeling
+  // gebruikt de sleutel van wie koppelde, of die van de systeemgebruiker.
+  const meta = isDemo ? null : await syncAllMeta(3);
   const mails = await runDailyMails({ weekly: req.nextUrl.searchParams.get("week") === "1" ? true : undefined });
   return NextResponse.json({ meta, mails });
 }

@@ -20,3 +20,7 @@
   color: var(--act);
   font-size: 14px;
 }
+.mp-other {
+  align-self: flex-start;
+  font-size: 14px;
+}

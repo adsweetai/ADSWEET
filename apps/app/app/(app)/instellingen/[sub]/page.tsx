@@ -33,7 +33,9 @@ export default async function SettingsPage({ params }: { params: Promise<{ sub: 
       body = <NumbersForm vm={vm.numbers} canEdit={ctx.canEdit} />;
       break;
     case "koppelingen":
-      body = <ConnectionsList rows={vm.connections} biz={vm.biz} canEdit={ctx.canEdit} metaLive={vm.metaLive} lastSync={vm.lastSync} />;
+      body = (
+        <ConnectionsList rows={vm.connections} biz={vm.biz} canEdit={ctx.canEdit} metaLive={vm.metaLive} metaConnect={vm.metaConnect} lastSync={vm.lastSync} />
+      );
       break;
     case "accounts":
       body = <AccountsList vm={vm.accounts} />;

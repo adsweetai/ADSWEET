@@ -6,14 +6,30 @@ import { isDemo } from "@/lib/env";
 import { serviceDb } from "../auth";
 import { assertCanEdit, getContext } from "../context";
 import { listMetaAccounts, listMetaPages, listMetaPixels, type MetaAccountOption, type MetaPageOption, type MetaPixelOption } from "./assets";
-import { metaConfigured } from "./graph";
+import { metaConfigured, withMetaToken } from "./graph";
+import { oauthReady } from "./oauth";
 import { syncMetaAccount, type SyncResult } from "./sync";
+import { userMetaToken } from "./tokens";
 
 // Een organisatie aan een advertentieaccount, pagina en pixel uit Meta hangen (onboarding stap 6, Instellingen ›
-// Koppelingen, een nieuwe klant van een bureau). Daarna halen we meteen de laatste 30 dagen op.
+// Koppelingen, een nieuwe klant van een bureau). Daarna halen we meteen de laatste 30 dagen op. We kijken met de
+// sleutel van wie met Facebook koppelde; zonder die sleutel met die van de systeemgebruiker.
 
-/** Echte koppeling mogelijk: geen demo en een sleutel ingesteld. */
-export const metaLive = () => !isDemo && metaConfigured();
+export interface MetaStatus {
+  /** Er is een sleutel om accounts te kiezen: je eigen Facebook-koppeling of die van de systeemgebruiker. */
+  live: boolean;
+  /** "Doorgaan met Facebook" kan: de Meta-app is ingesteld. */
+  connect: boolean;
+}
+
+export async function metaStatus(userId: string): Promise<MetaStatus> {
+  if (isDemo) return { live: false, connect: false };
+  const own = !!(await userMetaToken(userId));
+  return { live: own || metaConfigured(), connect: oauthReady() };
+}
+
+/** Waar "Doorgaan met Facebook" voor de koppeling begint. */
+export const metaConnectHref = (next: string) => `/auth/meta?next=${encodeURIComponent(next)}`;
 
 export interface MetaChoices {
   accounts: MetaAccountOption[];
@@ -23,14 +39,16 @@ export interface MetaChoices {
 export async function metaChoices(): Promise<MetaChoices> {
   const ctx = await getContext();
   assertCanEdit(ctx);
-  const [accounts, pages] = await Promise.all([listMetaAccounts(), listMetaPages()]);
-  return { accounts, pages };
+  return withMetaToken(await userMetaToken(ctx.user.id), async () => {
+    const [accounts, pages] = await Promise.all([listMetaAccounts(), listMetaPages()]);
+    return { accounts, pages };
+  });
 }
 
 export async function metaPixels(accountId: string): Promise<MetaPixelOption[]> {
   const ctx = await getContext();
   assertCanEdit(ctx);
-  return listMetaPixels(accountId);
+  return withMetaToken(await userMetaToken(ctx.user.id), () => listMetaPixels(accountId));
 }
 
 export type ConnectResult = { ok: true; sync: SyncResult | null; syncError?: string } | { ok: false; error: "account" | "meta" };
@@ -40,10 +58,11 @@ const EXISTING_KEY = "bestaande_campagnes";
 export async function connectMeta(sel: { accountId: string; pageId: string | null; pixelId: string | null }): Promise<ConnectResult> {
   const ctx = await getContext();
   assertCanEdit(ctx);
+  const token = await userMetaToken(ctx.user.id);
   let accounts: MetaAccountOption[];
   let pages: MetaPageOption[];
   try {
-    [accounts, pages] = await Promise.all([listMetaAccounts(), listMetaPages()]);
+    [accounts, pages] = await withMetaToken(token, () => Promise.all([listMetaAccounts(), listMetaPages()]));
   } catch {
     return { ok: false, error: "meta" };
   }
@@ -51,7 +70,7 @@ export async function connectMeta(sel: { accountId: string; pageId: string | nul
   const account = accounts.find((a) => a.id === sel.accountId);
   if (!account) return { ok: false, error: "account" };
   const page = pages.find((p) => p.id === sel.pageId) ?? null;
-  const pixel = sel.pixelId ? ((await listMetaPixels(account.id)).find((p) => p.id === sel.pixelId) ?? null) : null;
+  const pixel = sel.pixelId ? ((await withMetaToken(token, () => listMetaPixels(account.id))).find((p) => p.id === sel.pixelId) ?? null) : null;
 
   const svc = serviceDb();
   const org = ctx.org;
@@ -90,6 +109,8 @@ export async function connectMeta(sel: { accountId: string; pageId: string | nul
     pixel_id: pixel?.id ?? null,
     pixel_name: pixel?.name ?? null,
     pixel_ok: pixel?.ok ?? false,
+    // De cijfers komen voortaan met de sleutel van wie koppelde (ook 's nachts).
+    meta_token_user: token ? ctx.user.id : null,
   };
   let sync: SyncResult | null = null;
   let syncError: string | undefined;

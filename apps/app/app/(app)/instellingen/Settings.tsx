@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState, useTransition, type ReactNode } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { breakEvenRoas, leadMax, maxCostPerSale } from "@adsweet/playbook";
 import { Button, Input, StatusBadge, Switch, TextButton, formatEuro, formatPercent, useToast } from "@adsweet/ui";
@@ -212,20 +212,25 @@ export function ConnectionsList({
   biz,
   canEdit,
   metaLive,
+  metaConnect,
   lastSync,
 }: {
   rows: ConnectionRowVM[];
   biz: string;
   canEdit: boolean;
   metaLive: boolean;
+  metaConnect: boolean;
   lastSync: string | null;
 }) {
   const t = useTranslations("settings.connections");
   const tp = useTranslations("metaPicker");
   const toast = useToast();
   const router = useRouter();
+  // Terug uit het venster van Meta: ?meta=perm (geen toegang gegeven) of ?meta=fout.
+  const back = useSearchParams().get("meta");
+  const fbHref = metaConnect ? "/auth/meta?next=/instellingen/koppelingen" : null;
   const [confirm, setConfirm] = useState(false);
-  const [picking, setPicking] = useState(false);
+  const [picking, setPicking] = useState(back === "ok" && metaLive);
   const [pending, start] = useTransition();
   const later = (name: string) => toast.show({ message: t("connectLater", { name }) });
   return (
@@ -310,8 +315,14 @@ export function ConnectionsList({
         })}
         <Row icon="link" title={t("capi")} sub={t("later")} />
       </Rows>
+      {back === "perm" || back === "fout" ? (
+        <p role="alert" className="mp-alert">
+          {tp(back === "perm" ? "fbDenied" : "fbFailed")}
+        </p>
+      ) : null}
       {picking ? (
         <MetaPicker
+          fbHref={fbHref}
           onConnected={() => {
             setPicking(false);
             router.refresh();
