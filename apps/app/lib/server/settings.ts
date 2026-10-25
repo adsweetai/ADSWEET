@@ -14,7 +14,8 @@ import { writeLog } from "./changes";
 import { assertCanEdit, getContext, type AppContext } from "./context";
 import { goalFor } from "./metrics";
 import { chanceToNumber, goalTypeKind, parseNum, readAndSaveWebsite } from "./onboarding";
-import { metaLive } from "./meta/connect";
+import { metaStatus } from "./meta/connect";
+import { oauthReady } from "./meta/oauth";
 import { currentPlaybook } from "./playbook";
 
 // Instellingen (App.dc.html#instellingen-…). Alles wat je hier wijzigt, staat in Supabase: het bedrijfsprofiel,
@@ -111,7 +112,7 @@ export interface PlaybookVM {
 export type SettingsVM =
   | { sub: "profiel"; profile: ProfileVM }
   | { sub: "cijfers"; numbers: NumbersVM }
-  | { sub: "koppelingen"; connections: ConnectionRowVM[]; biz: string; metaLive: boolean; lastSync: string | null }
+  | { sub: "koppelingen"; connections: ConnectionRowVM[]; biz: string; metaLive: boolean; metaConnect: boolean; lastSync: string | null }
   | { sub: "accounts"; accounts: AccountsVM }
   | { sub: "naamgeving"; naming: NamingVM }
   | { sub: "betaler"; payer: { payer: string; beneficiary: string } }
@@ -166,10 +167,12 @@ export async function loadSettings(ctx: AppContext, sub: Exclude<SettingsPage, "
     case "koppelingen": {
       const conns = must(await db.from("connections").select().eq("organization_id", org.id));
       const lastSync = (conns.find((c) => c.provider === "meta")?.details as { last_sync?: string } | null)?.last_sync ?? null;
+      const meta = await metaStatus(ctx.user.id);
       return {
         sub,
         biz: ctx.account?.name ?? org.name,
-        metaLive: metaLive(),
+        metaLive: meta.live,
+        metaConnect: meta.connect,
         lastSync: lastSync ? formatDateTime(lastSync) : null,
         connections: PROVIDERS.map((provider) => {
           const c = conns.filter((x) => x.provider === provider).sort((a, b) => (b.connected_at ?? "").localeCompare(a.connected_at ?? ""))[0];
@@ -456,7 +459,8 @@ export async function disconnectMeta() {
 /** Opnieuw koppelen. In de demo meteen in orde; anders via het venster van Meta (Supabase Auth, tokens in fase 13). */
 export async function reconnectMeta(): Promise<{ ok: true } | { ok: false; href: string }> {
   const { ctx, db } = await editable();
-  if (!isDemo) return { ok: false, href: "/auth/facebook?next=/instellingen/koppelingen" };
+  // Online: "Doorgaan met Facebook" voor de koppeling (of, zonder Meta-app, inloggen met Facebook).
+  if (!isDemo) return { ok: false, href: oauthReady() ? "/auth/meta?next=/instellingen/koppelingen" : "/auth/facebook?next=/instellingen/koppelingen" };
   const t = await getTranslations("settings.connections");
   const has = must(await db.from("connections").select("id").eq("organization_id", ctx.org.id).eq("provider", "meta"));
   if (has.length) await db.from("connections").update({ status: "gekoppeld", connected_at: nowIso() }).eq("organization_id", ctx.org.id).eq("provider", "meta");

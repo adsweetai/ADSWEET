@@ -1,14 +1,24 @@
 import "server-only";
+import { AsyncLocalStorage } from "node:async_hooks";
 import { createHmac } from "node:crypto";
 
-// De Graph API van Meta, alleen op de server. In de interne testfase met één sleutel van een systeemgebruiker
-// (META_SYSTEM_TOKEN) uit de bestaande Meta-app; later per klant met hun eigen koppeling via "Doorgaan met Facebook".
+// De Graph API van Meta, alleen op de server. Met de sleutel van wie koppelde via "Doorgaan met Facebook"
+// (withMetaToken), anders met die van de systeemgebruiker (META_SYSTEM_TOKEN) uit de Meta-app.
 
-const VERSION = () => process.env.META_API_VERSION || "v24.0";
-const BASE = "https://graph.facebook.com";
+export const VERSION = () => process.env.META_API_VERSION || "v24.0";
+export const BASE = "https://graph.facebook.com";
 
-export const metaToken = () => process.env.META_SYSTEM_TOKEN ?? "";
-export const metaConfigured = () => metaToken().length > 20;
+const current = new AsyncLocalStorage<string>();
+
+/** Voert fn uit met deze sleutel. Zonder sleutel geldt die van de systeemgebruiker. */
+export function withMetaToken<T>(token: string | null | undefined, fn: () => Promise<T>): Promise<T> {
+  return token ? current.run(token, fn) : fn();
+}
+
+export const systemToken = () => process.env.META_SYSTEM_TOKEN ?? "";
+/** Is er een sleutel van een systeemgebruiker ingesteld? */
+export const metaConfigured = () => systemToken().length > 20;
+export const metaToken = () => current.getStore() ?? systemToken();
 
 export class MetaError extends Error {
   constructor(
@@ -43,7 +53,7 @@ function url(path: string, params: Params): string {
   return u.toString();
 }
 
-async function read<T>(res: Response): Promise<T> {
+export async function read<T>(res: Response): Promise<T> {
   const body = (await res.json().catch(() => ({}))) as { error?: { message?: string; code?: number; error_subcode?: number } };
   if (!res.ok || body.error) {
     const e = body.error ?? {};
@@ -53,7 +63,7 @@ async function read<T>(res: Response): Promise<T> {
 }
 
 export async function graphGet<T>(path: string, params: Params = {}): Promise<T> {
-  if (!metaConfigured()) throw new MetaError("META_SYSTEM_TOKEN ontbreekt.", 401);
+  if (metaToken().length < 20) throw new MetaError("Geen Meta-sleutel: koppel met Facebook of stel META_SYSTEM_TOKEN in.", 401);
   return read<T>(await fetch(url(path, params), { cache: "no-store" }));
 }
 

@@ -12,11 +12,11 @@ import { mediaUrl, slugify } from "./campaigns";
 import { writeLog } from "./changes";
 import { ORG_COOKIE, assertCanEdit, getContext, type AppContext } from "./context";
 import { demoSiteOf, type Brief } from "./demo-sites";
-import { metaLive } from "./meta/connect";
+import { metaStatus } from "./meta/connect";
 import { sendMail } from "./mail";
 import { minDailyBudget } from "./playbook";
 import { recordReferral } from "./referral";
-import { testfaseOn } from "./testfase";
+import { paymentsLive } from "./testfase";
 import { readWebsite, type Found } from "./website";
 
 // De onboarding: van een nieuw account naar een eerste campagne in ongeveer 10 minuten (Inloggen.dc.html#onboarding-1…11).
@@ -130,8 +130,12 @@ export interface OnboardingVM {
   trialEnd: string;
   hasAI: boolean;
   demo: boolean;
-  /** Echte koppeling met Meta (geen demo, sleutel ingesteld). */
+  /** Echte koppeling met Meta: er is een sleutel om accounts te kiezen (je Facebook-koppeling of de systeemgebruiker). */
   metaLive: boolean;
+  /** "Doorgaan met Facebook" voor de koppeling kan (Meta-app ingesteld). */
+  metaConnect: boolean;
+  /** De proefperiode start zonder betaling: in de demo, en zolang er geen betaalpartner is. */
+  freeTrial: boolean;
 }
 
 const pct = (n: number | null | undefined) => (n ? `${Math.round(n * 100)}%` : "");
@@ -158,6 +162,7 @@ export const parseNum = (s: string) =>
 export async function loadOnboarding(ctx: AppContext, step: number): Promise<OnboardingVM> {
   const t = await getTranslations("onboarding");
   const db = await getDb();
+  const meta = await metaStatus(ctx.user.id);
   const [bp, goals, conns, accounts, media, campaigns] = await Promise.all([
     db.from("business_profiles").select().eq("organization_id", ctx.org.id).maybeSingle().then(must),
     db.from("goals").select().eq("organization_id", ctx.org.id).then(must),
@@ -275,7 +280,9 @@ export async function loadOnboarding(ctx: AppContext, step: number): Promise<Onb
     trialEnd: formatDayMonth(ctx.org.trial_ends_at ?? addDays(day, TRIAL_DAYS)),
     hasAI: hasAI(ctx.plan),
     demo: isDemo,
-    metaLive: metaLive(),
+    metaLive: meta.live,
+    metaConnect: meta.connect,
+    freeTrial: isDemo || !paymentsLive(),
   };
 }
 
@@ -694,8 +701,8 @@ export async function checkCode(code: string) {
 }
 
 /**
- * Demo: de betaling is geslaagd. De proefperiode loopt 30 dagen, met hoogstens 50 AI-credits. De echte betaalpagina
- * (Mollie of Stripe) volgt in fase 13; tot dan kan dit alleen in de demomodus.
+ * De proefperiode start: 30 dagen, met hoogstens 50 AI-credits. In de demo na "betaling geslaagd"; zolang er geen
+ * betaalpartner is (Mollie of Stripe, fase 13) ook online, zonder betaling.
  */
 export async function startTrialDemo(input: {
   plan: "starter" | "pro" | "scale";
@@ -704,8 +711,8 @@ export async function startTrialDemo(input: {
   billing: { name: string; vat: string; address: string; email: string };
 }) {
   const { ctx } = await own();
-  // Zonder betaalpartner (fase 13) kan je de proefperiode alleen in de demo of in de interne testfase starten.
-  if (!isDemo && !(await testfaseOn())) return { ok: false as const };
+  // Met een betaalpartner start de proefperiode pas na de betaalpagina (fase 13), niet hier.
+  if (!isDemo && paymentsLive()) return { ok: false as const };
   if (!["starter", "pro", "scale"].includes(input.plan)) return { ok: false as const };
   const code = input.code ? await checkCode(input.code) : null;
   const svc = serviceDb();

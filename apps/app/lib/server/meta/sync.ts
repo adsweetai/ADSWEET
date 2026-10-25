@@ -5,8 +5,9 @@ import { addDays, nowIso, today } from "@/lib/clock";
 import { serviceDb } from "../auth";
 import { goalFor, goalKind, sumRows, totalsPerAd } from "../metrics";
 import { metaAccountInfo } from "./assets";
-import { graphAll } from "./graph";
+import { graphAll, withMetaToken } from "./graph";
 import { accountStatus, adStatus, campaignGoal, campaignStatus, fromMinor, insightNumbers, metaDate, type MetaInsightRow } from "./map";
+import { userMetaToken } from "./tokens";
 
 // Haalt de campagnes, ad sets, advertenties en de cijfers per dag van een advertentieaccount op uit Meta. AdSweet
 // wijzigt hier niets bij Meta: dit is alleen lezen. Campagnes die niet uit AdSweet komen, krijgen "buiten AdSweet".
@@ -33,6 +34,21 @@ export interface SyncResult {
 
 /** Synchroniseert één advertentieaccount (onze id). `days`: hoeveel dagen cijfers, tot en met gisteren. */
 export async function syncMetaAccount(orgId: string, adAccountId: string, days = 30): Promise<SyncResult> {
+  // Met de sleutel van wie de koppeling maakte ("Doorgaan met Facebook"); anders die van de systeemgebruiker.
+  const conn = must(
+    await serviceDb()
+      .from("connections")
+      .select("meta_token_user")
+      .eq("organization_id", orgId)
+      .eq("provider", "meta")
+      .order("connected_at", { ascending: false })
+      .limit(1)
+      .maybeSingle(),
+  );
+  return withMetaToken(await userMetaToken(conn?.meta_token_user), () => syncWith(orgId, adAccountId, days));
+}
+
+async function syncWith(orgId: string, adAccountId: string, days: number): Promise<SyncResult> {
   const svc = serviceDb();
   const acc = must(await svc.from("ad_accounts").select().eq("id", adAccountId).eq("organization_id", orgId).single());
   const act = acc.meta_ad_account_id;
