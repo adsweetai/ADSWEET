@@ -5,6 +5,7 @@ import { createDb, type Db } from "@adsweet/db";
 import { pgliteExecutor, supabaseExecutor } from "@adsweet/db/server";
 import { env, isDemo } from "@/lib/env";
 import { demoDatabase, signDemoToken, verifyDemoToken } from "./demo";
+import { sendMail } from "./mail";
 import { supabaseForRequest, supabaseService } from "./supabase";
 
 export const DEMO_SESSION_COOKIE = "as-demo-sessie";
@@ -49,8 +50,8 @@ export function serviceDb(): Db {
 const safeNext = (next: string | null | undefined) => (next && next.startsWith("/") && !next.startsWith("//") ? next : "/vandaag");
 
 /**
- * Stuurt een link om in te loggen. Bestaat het adres niet, dan zeggen we dat niet (geen lek van accounts).
- * In de demomodus gaat er geen mail uit: de link komt op de pagina "Check je mailbox".
+ * Stuurt een link om in te loggen. Een nieuw adres krijgt meteen een account.
+ * In de demomodus gaat er geen mail uit: de link komt op de pagina "Check je mailbox" (alleen voor de voorbeeldaccounts).
  */
 export async function sendLoginLink(email: string, next?: string): Promise<{ ok: true } | { ok: false; error: "ongeldig" | "fout" }> {
   const clean = email.trim().toLowerCase();
@@ -79,18 +80,49 @@ export async function sendLoginLink(email: string, next?: string): Promise<{ ok:
     return { ok: true };
   }
 
+  return (await mailLoginLink(clean, target)) ? { ok: true } : { ok: false, error: "fout" };
+}
+
+const g = globalThis as unknown as { __adsweetLinkSent?: Map<string, number> };
+
+/**
+ * Supabase: maakt het account aan als het adres nieuw is (wie zijn adres opgeeft, mag binnen) en stuurt de link. De
+ * link maken we zelf en hij gaat via Resend, zonder de limieten van de mailer van Supabase. Zonder RESEND_API_KEY
+ * versturen we via Supabase. Hoogstens één link per minuut per adres.
+ */
+async function mailLoginLink(email: string, next: string): Promise<boolean> {
+  const sent = (g.__adsweetLinkSent ??= new Map());
+  const last = sent.get(email);
+  if (last && Date.now() - last < 60_000) return true;
+
+  const admin = supabaseService().auth.admin;
+  const created = await admin.createUser({ email, email_confirm: true });
+  if (created.error && created.error.code !== "email_exists") {
+    console.warn(`Account niet aangemaakt: ${created.error.status ?? ""} ${created.error.code ?? ""} ${created.error.message}`.trim());
+    return false;
+  }
+  if (process.env.RESEND_API_KEY) {
+    const { data, error } = await admin.generateLink({ type: "magiclink", email });
+    if (error) console.warn(`Inloglink niet gemaakt: ${error.status ?? ""} ${error.code ?? ""} ${error.message}`.trim());
+    else {
+      const url = `${env.appUrl}/auth/callback?token_hash=${encodeURIComponent(data.properties.hashed_token)}&next=${encodeURIComponent(next)}`;
+      // Na een gemaakte link stuurt Supabase een minuut lang zelf geen link: weigert Resend, dan is dat een fout.
+      if (!(await sendMail("login", email, { url }))) return false;
+      sent.set(email, Date.now());
+      return true;
+    }
+  }
   const sb = await supabaseForRequest();
   const { error } = await sb.auth.signInWithOtp({
-    email: clean,
-    options: {
-      shouldCreateUser: false,
-      emailRedirectTo: `${env.appUrl}/auth/callback?next=${encodeURIComponent(target)}`,
-    },
+    email,
+    options: { shouldCreateUser: false, emailRedirectTo: `${env.appUrl}/auth/callback?next=${encodeURIComponent(next)}` },
   });
-  // "Signups not allowed" bij een onbekend adres tonen we niet aan de bezoeker, maar wel in het logboek (zonder adres).
-  if (error) console.warn(`Inloglink niet verstuurd: ${error.status ?? ""} ${error.code ?? ""} ${error.message}`.trim());
-  if (error && !/signups? not allowed|not found/i.test(error.message)) return { ok: false, error: "fout" };
-  return { ok: true };
+  if (error) {
+    console.warn(`Inloglink niet verstuurd: ${error.status ?? ""} ${error.code ?? ""} ${error.message}`.trim());
+    return false;
+  }
+  sent.set(email, Date.now());
+  return true;
 }
 
 /** Rondt het inloggen af vanuit de link in de mail. Geeft het pad terug om naartoe te gaan. */
@@ -110,9 +142,15 @@ export async function completeLogin(params: URLSearchParams): Promise<{ ok: bool
     store.delete(DEMO_MAIL_COOKIE);
     return { ok: true, next };
   }
+  const sb = await supabaseForRequest();
+  // Onze eigen link (via Resend) draagt token_hash; die van de mailer van Supabase een code.
+  const tokenHash = params.get("token_hash");
+  if (tokenHash) {
+    const { error } = await sb.auth.verifyOtp({ token_hash: tokenHash, type: "magiclink" });
+    return { ok: !error, next };
+  }
   const code = params.get("code");
   if (!code) return { ok: false, next };
-  const sb = await supabaseForRequest();
   const { error } = await sb.auth.exchangeCodeForSession(code);
   return { ok: !error, next };
 }
@@ -159,10 +197,7 @@ export async function facebookSignInUrl(next: string): Promise<string | null> {
   return error ? null : data.url;
 }
 
-/**
- * Een uitgenodigd teamlid krijgt een link per mail. Met Supabase maakt de link het account aan als het nog niet
- * bestaat; in de demo maken we het hier aan.
- */
+/** Een uitgenodigd teamlid krijgt een link per mail. Bestaat het account nog niet, dan maken we het aan. */
 export async function sendInviteLink(email: string, next: string): Promise<boolean> {
   const clean = email.trim().toLowerCase();
   if (isDemo) {
@@ -170,12 +205,7 @@ export async function sendInviteLink(email: string, next: string): Promise<boole
     await createDemoUser(clean, first.slice(0, 1).toUpperCase() + first.slice(1), "email");
     return (await sendLoginLink(clean, next)).ok;
   }
-  const sb = await supabaseForRequest();
-  const { error } = await sb.auth.signInWithOtp({
-    email: clean,
-    options: { shouldCreateUser: true, emailRedirectTo: `${env.appUrl}/auth/callback?next=${encodeURIComponent(safeNext(next))}` },
-  });
-  return !error;
+  return mailLoginLink(clean, safeNext(next));
 }
 
 export async function signOut(): Promise<void> {
