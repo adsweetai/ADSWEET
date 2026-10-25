@@ -2764,6 +2764,29 @@
         "lezer": "Kijken",
         "beheerder": "Wijzigen"
       }
+    },
+    "import": {
+      "button": "Uit Meta toevoegen",
+      "title": "Klanten uit Meta toevoegen",
+      "intro": "Kies de advertentieaccounts die je met je Meta-sleutel ziet. Elk account wordt een klant met een eigen werkruimte in je Agency-plan, met dat account gekoppeld. AdSweet leest alleen; er verandert niets bij Meta.",
+      "loading": "We halen je advertentieaccounts op bij Meta…",
+      "free": "Nog {n} plaatsen.",
+      "all": "Alles selecteren ({n})",
+      "taken": "al klant",
+      "none": "Je sleutel ziet geen advertentieaccounts die nog geen klant zijn.",
+      "tooMany": "Je hebt nog {n} plaatsen. Kies er minder.",
+      "submit": "Voeg {n} toe",
+      "syncing": "Cijfers ophalen: {i} van {n} · {name}",
+      "done": "{n} klanten toegevoegd, met de cijfers van de laatste 30 dagen.",
+      "doneSome": "{n} klanten toegevoegd. Bij {failed} lukte het ophalen van de cijfers niet; probeer het in die werkruimte via Instellingen › Koppelingen.",
+      "log": "{n} klanten toegevoegd uit Meta",
+      "close": "Sluiten",
+      "cancel": "Annuleer",
+      "errors": {
+        "meta": "Meta antwoordde niet. Probeer het zo opnieuw.",
+        "slots": "Zoveel plaatsen heb je niet meer.",
+        "none": "Kies minstens één account dat nog geen klant is."
+      }
     }
   },
   "academy": {

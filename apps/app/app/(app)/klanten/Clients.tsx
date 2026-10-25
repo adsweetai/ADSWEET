@@ -8,17 +8,19 @@ import type { OrgKind } from "@adsweet/db";
 import { Avatar, Button, Icon, IconButton, Input, Select, useToast, type StatusKind } from "@adsweet/ui";
 import { Status } from "@/components/ui";
 import type { AgencyVM } from "@/lib/server/agency";
+import type { ImportChoice } from "@/lib/server/meta/import";
 import { selectOrg } from "../shell-actions";
-import { addClientAction } from "./actions";
+import { addClientAction, importChoicesAction, importClientsAction, syncClientAction } from "./actions";
 
 type Filter = "alle" | StatusKind;
 
 /** Klantenoverzicht van een bureau (App.dc.html#klanten). */
-export function Clients({ vm, canEdit }: { vm: AgencyVM; canEdit: boolean }) {
+export function Clients({ vm, canEdit, metaImport = false }: { vm: AgencyVM; canEdit: boolean; metaImport?: boolean }) {
   const t = useTranslations("agency");
   const router = useRouter();
   const [filter, setFilter] = useState<Filter>("alle");
   const [adding, setAdding] = useState(false);
+  const [importing, setImporting] = useState(false);
   const [pending, start] = useTransition();
   const open = (id: string) =>
     start(async () => {
@@ -54,6 +56,11 @@ export function Clients({ vm, canEdit }: { vm: AgencyVM; canEdit: boolean }) {
             {canEdit ? (
               <Button arrow={false} icon="plus" size="small" onClick={() => setAdding(true)} disabled={vm.slots.used >= vm.slots.total}>
                 {t("add")}
+              </Button>
+            ) : null}
+            {metaImport ? (
+              <Button arrow={false} variant="secondary" size="small" onClick={() => setImporting(true)} disabled={vm.slots.used >= vm.slots.total}>
+                {t("import.button")}
               </Button>
             ) : null}
             <span className="as-small as-muted">{t("slots", { used: vm.slots.used, total: vm.slots.total })}</span>
@@ -159,6 +166,139 @@ export function Clients({ vm, canEdit }: { vm: AgencyVM; canEdit: boolean }) {
       </section>
 
       {adding ? <AddClient vm={vm} onClose={() => setAdding(false)} /> : null}
+      {importing ? <ImportClients onClose={() => setImporting(false)} /> : null}
+    </div>
+  );
+}
+
+/** Klanten uit Meta: vink de advertentieaccounts aan die je sleutel ziet; elk wordt een klant met zijn cijfers. */
+function ImportClients({ onClose }: { onClose: () => void }) {
+  const t = useTranslations("agency.import");
+  const tp = useTranslations("metaPicker");
+  const router = useRouter();
+  const toast = useToast();
+  const [state, setState] = useState<"loading" | "ready" | "error">("loading");
+  const [accounts, setAccounts] = useState<ImportChoice[]>([]);
+  const [free, setFree] = useState(0);
+  const [chosen, setChosen] = useState<Set<string>>(new Set());
+  const [progress, setProgress] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [pending, start] = useTransition();
+  const box = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    box.current?.focus();
+    let live = true;
+    importChoicesAction().then((res) => {
+      if (!live) return;
+      if (!res.ok) return setState("error");
+      setAccounts(res.accounts);
+      setFree(res.free);
+      setState("ready");
+    });
+    return () => {
+      live = false;
+    };
+  }, []);
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && !pending && onClose();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose, pending]);
+  const open = accounts.filter((a) => !a.taken);
+  const all = open.length > 0 && open.every((a) => chosen.has(a.id));
+  const toggle = (id: string) =>
+    setChosen((c) => {
+      const n = new Set(c);
+      if (n.has(id)) n.delete(id);
+      else n.add(id);
+      return n;
+    });
+  const submit = () =>
+    start(async () => {
+      setError(null);
+      const res = await importClientsAction([...chosen]);
+      if (!res.ok) return setError(t(`errors.${res.error}`));
+      // Per klant de cijfers ophalen, een na een.
+      let failed = 0;
+      for (const [i, c] of res.created.entries()) {
+        setProgress(t("syncing", { i: i + 1, n: res.created.length, name: c.name }));
+        const r = await syncClientAction(c.id);
+        if (!r.ok) failed++;
+      }
+      setProgress(null);
+      onClose();
+      router.refresh();
+      toast.show({ message: failed ? t("doneSome", { n: res.created.length, failed }) : t("done", { n: res.created.length }) });
+    });
+  return (
+    <div className="kl-scrim" onClick={pending ? undefined : onClose}>
+      <div
+        ref={box}
+        tabIndex={-1}
+        role="dialog"
+        aria-modal="true"
+        aria-label={t("title")}
+        aria-busy={pending}
+        className="kl-modal"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="kl-modal__head">
+          <span className="ob-stack">
+            <b>{t("title")}</b>
+            {state === "ready" ? <span className="as-small as-muted">{t("free", { n: free })}</span> : null}
+          </span>
+          <IconButton icon="x" label={t("close")} onClick={onClose} disabled={pending} />
+        </div>
+        <p className="as-small as-muted">{t("intro")}</p>
+        {state === "loading" ? <p className="as-small">{t("loading")}</p> : null}
+        {state === "error" ? (
+          <p role="alert" className="am-alert">
+            {t("errors.meta")}
+          </p>
+        ) : null}
+        {state === "ready" && !open.length ? <p className="as-small as-muted">{t("none")}</p> : null}
+        {state === "ready" && open.length ? (
+          <>
+            <label className="kl-check">
+              <input type="checkbox" checked={all} disabled={pending} onChange={() => setChosen(all ? new Set() : new Set(open.map((a) => a.id)))} />
+              <b>{t("all", { n: open.length })}</b>
+            </label>
+            <ul className="kl-import">
+              {accounts.map((a) => (
+                <li key={a.id}>
+                  <label className="kl-check">
+                    <input type="checkbox" disabled={a.taken || pending} checked={a.taken || chosen.has(a.id)} onChange={() => toggle(a.id)} />
+                    <span className="kl-check__name">{a.name}</span>
+                    <span className="as-small as-muted">
+                      {a.id.replace("act_", "")} · {a.currency}
+                      {a.taken ? ` · ${t("taken")}` : a.status !== "actief" ? ` · ${tp(`status.${a.status}`)}` : ""}
+                    </span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : null}
+        {progress ? (
+          <p role="status" className="as-small">
+            {progress}
+          </p>
+        ) : null}
+        {error ? (
+          <p role="alert" className="am-alert">
+            {error}
+          </p>
+        ) : null}
+        {chosen.size > free ? <p className="as-small as-muted">{t("tooMany", { n: free })}</p> : null}
+        <div className="cp-actions">
+          <Button arrow={false} disabled={pending || !chosen.size || chosen.size > free} onClick={submit}>
+            {t("submit", { n: chosen.size })}
+          </Button>
+          <Button variant="secondary" onClick={onClose} disabled={pending}>
+            {t("cancel")}
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

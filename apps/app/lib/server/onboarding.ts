@@ -25,8 +25,12 @@ import { readWebsite, type Found } from "./website";
 export const STEP_COUNT = 11;
 const EXISTING_KEY = "bestaande_campagnes";
 
-/** Stap 7 (je bestaande advertenties) bestaat alleen als het advertentieaccount al campagnes heeft. */
-export const stepsFor = (existing: boolean) => Array.from({ length: STEP_COUNT }, (_, i) => i + 1).filter((n) => n !== 7 || existing);
+/**
+ * Stap 7 (je bestaande advertenties) bestaat alleen als het advertentieaccount al campagnes heeft. Stap 10 (je plan)
+ * valt weg voor een klant van een bureau: die zit in het Agency-plan van het bureau.
+ */
+export const stepsFor = (existing: boolean, agencyClient = false) =>
+  Array.from({ length: STEP_COUNT }, (_, i) => i + 1).filter((n) => (n !== 7 || existing) && (n !== 10 || !agencyClient));
 
 // ---------------------------------------------------------------------------
 // Begin: de organisatie van een nieuwe klant
@@ -212,7 +216,7 @@ export async function loadOnboarding(ctx: AppContext, step: number): Promise<Onb
   const briefs = demo?.briefs ?? (t.raw("briefs") as Brief[]);
   return {
     step,
-    steps: stepsFor(existing),
+    steps: stepsFor(existing, !!ctx.org.agency_parent_id),
     reached,
     firstName: ctx.profile.first_name ?? "",
     orgName: ctx.org.name,
@@ -711,8 +715,10 @@ export async function startTrialDemo(input: {
   billing: { name: string; vat: string; address: string; email: string };
 }) {
   const { ctx } = await own();
-  // Met een betaalpartner start de proefperiode pas na de betaalpagina (fase 13), niet hier.
+  // Met een betaalpartner start de proefperiode pas na de betaalpagina (fase 13), niet hier. Een klant van een bureau
+  // zit in het Agency-plan van het bureau en kiest zelf geen plan.
   if (!isDemo && paymentsLive()) return { ok: false as const };
+  if (ctx.org.agency_parent_id) return { ok: false as const };
   if (!["starter", "pro", "scale"].includes(input.plan)) return { ok: false as const };
   const code = input.code ? await checkCode(input.code) : null;
   const svc = serviceDb();

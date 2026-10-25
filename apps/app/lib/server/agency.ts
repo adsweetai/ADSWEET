@@ -16,8 +16,8 @@ import { goalFor, goalKind, statusFor, sumRows, targets } from "./metrics";
 // Agency (App.dc.html#klanten): het overzicht van al je klanten, een klant toevoegen en de rechten per klant.
 // Alle cijfers komen uit de data van de klanten, over de laatste 7 dagen.
 
-/** Accounts in de staffel van het bureau: [staffel PJ], in het prototype 10. */
-export const AGENCY_SLOTS = 10;
+/** Accounts in de staffel van het bureau: [staffel PJ], in het prototype 10. Online in te stellen met AGENCY_SLOTS. */
+export const AGENCY_SLOTS = Number(process.env.AGENCY_SLOTS) || 10;
 
 export interface ClientRow {
   id: string;
@@ -45,7 +45,13 @@ export interface AgencyVM {
   owners: { id: string; name: string }[];
 }
 
-const KIND_COLOR: Record<OrgKind, SeriesColor> = { webshop: "roos", dienstverlener: "staal", lokaal: "tarwe", zelfstandige: "lavendel", bureau: "lavendel" };
+export const KIND_COLOR: Record<OrgKind, SeriesColor> = {
+  webshop: "roos",
+  dienstverlener: "staal",
+  lokaal: "tarwe",
+  zelfstandige: "lavendel",
+  bureau: "lavendel",
+};
 
 export async function loadAgency(ctx: AppContext): Promise<AgencyVM | null> {
   if (!ctx.agency) return null;
