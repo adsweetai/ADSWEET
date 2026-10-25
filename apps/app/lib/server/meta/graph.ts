@@ -15,7 +15,8 @@ export function withMetaToken<T>(token: string | null | undefined, fn: () => Pro
   return token ? current.run(token, fn) : fn();
 }
 
-export const systemToken = () => process.env.META_SYSTEM_TOKEN ?? "";
+/** De sleutel van de systeemgebruiker. META_TOKEN is dezelfde, onder de naam die agency-hub gebruikt. */
+export const systemToken = () => process.env.META_SYSTEM_TOKEN || process.env.META_TOKEN || "";
 /** Is er een sleutel van een systeemgebruiker ingesteld? */
 export const metaConfigured = () => systemToken().length > 20;
 export const metaToken = () => current.getStore() ?? systemToken();
