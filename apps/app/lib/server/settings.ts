@@ -2,7 +2,7 @@ import "server-only";
 import { getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
 import { must, type Connection, type Goal, type Json } from "@adsweet/db";
-import { formatDashDate, formatDayMonth, formatEuro, formatLongDate, formatMonthCode, formatPercent } from "@adsweet/ui";
+import { formatDashDate, formatDateTime, formatDayMonth, formatEuro, formatLongDate, formatMonthCode, formatPercent } from "@adsweet/ui";
 import { nowIso } from "@/lib/clock";
 import { isDemo } from "@/lib/env";
 import { DEFAULT_NAMING, namingOf, type Naming } from "@/lib/naming";
@@ -14,6 +14,7 @@ import { writeLog } from "./changes";
 import { assertCanEdit, getContext, type AppContext } from "./context";
 import { goalFor } from "./metrics";
 import { chanceToNumber, goalTypeKind, parseNum, readAndSaveWebsite } from "./onboarding";
+import { metaLive } from "./meta/connect";
 import { currentPlaybook } from "./playbook";
 
 // Instellingen (App.dc.html#instellingen-…). Alles wat je hier wijzigt, staat in Supabase: het bedrijfsprofiel,
@@ -110,7 +111,7 @@ export interface PlaybookVM {
 export type SettingsVM =
   | { sub: "profiel"; profile: ProfileVM }
   | { sub: "cijfers"; numbers: NumbersVM }
-  | { sub: "koppelingen"; connections: ConnectionRowVM[]; biz: string }
+  | { sub: "koppelingen"; connections: ConnectionRowVM[]; biz: string; metaLive: boolean; lastSync: string | null }
   | { sub: "accounts"; accounts: AccountsVM }
   | { sub: "naamgeving"; naming: NamingVM }
   | { sub: "betaler"; payer: { payer: string; beneficiary: string } }
@@ -164,9 +165,12 @@ export async function loadSettings(ctx: AppContext, sub: Exclude<SettingsPage, "
     }
     case "koppelingen": {
       const conns = must(await db.from("connections").select().eq("organization_id", org.id));
+      const lastSync = (conns.find((c) => c.provider === "meta")?.details as { last_sync?: string } | null)?.last_sync ?? null;
       return {
         sub,
         biz: ctx.account?.name ?? org.name,
+        metaLive: metaLive(),
+        lastSync: lastSync ? formatDateTime(lastSync) : null,
         connections: PROVIDERS.map((provider) => {
           const c = conns.filter((x) => x.provider === provider).sort((a, b) => (b.connected_at ?? "").localeCompare(a.connected_at ?? ""))[0];
           let status = c?.status ?? null;

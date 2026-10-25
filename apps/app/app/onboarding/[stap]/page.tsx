@@ -6,6 +6,9 @@ import { loadOnboarding, planPrices } from "@/lib/server/onboarding";
 import { Onboarding } from "../Onboarding";
 import "../onboarding.css";
 
+// Koppelen met Meta haalt meteen 30 dagen cijfers op.
+export const maxDuration = 60;
+
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("onboarding");
   return { title: t("metaTitle") };

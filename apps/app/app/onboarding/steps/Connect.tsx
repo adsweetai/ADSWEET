@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Button, Icon, Input, Select, StatusBadge, Tag, useToast, type IconName } from "@adsweet/ui";
 import { MetaWindow, type MetaOutcome } from "@/components/auth/MetaWindow";
+import { MetaPicker } from "@/components/meta/MetaPicker";
 import { ExampleTag, Proposal } from "@/components/ui";
 import { metaAction, payerAction } from "../actions";
 import { StepFooter, useStepNav, useVM } from "../shared";
@@ -17,6 +19,8 @@ export function StepConnect() {
   const vm = useVM();
   const t = useTranslations("onboarding");
   const tm = useTranslations("metaWindow");
+  const tp = useTranslations("metaPicker");
+  const router = useRouter();
   const nav = useStepNav();
   const toast = useToast();
   const [open, setOpen] = useState(false);
@@ -65,6 +69,15 @@ export function StepConnect() {
             </div>
           </div>
         </div>
+      ) : null}
+      {!vm.demo && !linked ? (
+        vm.metaLive ? (
+          <MetaPicker onConnected={() => router.refresh()} />
+        ) : (
+          <p role="alert" className="ob-alert">
+            {tp("notConfigured")}
+          </p>
+        )
       ) : null}
       <div className="ob-conns">
         {rows.map((r) => (
@@ -155,6 +168,7 @@ export function StepConnect() {
         prev={nav.prev}
         pending={nav.pending}
         label={linked ? t("next") : t("connectFb")}
+        disabled={!linked && !vm.demo}
         onNext={() => (linked ? nav.next(() => payerAction(payer, beneficiary)) : setOpen(true))}
       />
       {open ? <MetaWindow demo={vm.demo} existingOption onOutcome={onOutcome} onClose={() => setOpen(false)} realHref={null} /> : null}
