@@ -87,8 +87,8 @@ const g = globalThis as unknown as { __adsweetLinkSent?: Map<string, number> };
 
 /**
  * Supabase: maakt het account aan als het adres nieuw is (wie zijn adres opgeeft, mag binnen) en stuurt de link. De
- * link maken we zelf en hij gaat via Resend, zonder de limieten van de mailer van Supabase. Zonder RESEND_API_KEY, of
- * als Resend weigert, versturen we via Supabase. Hoogstens één link per minuut per adres.
+ * link maken we zelf en hij gaat via Resend, zonder de limieten van de mailer van Supabase. Zonder RESEND_API_KEY
+ * versturen we via Supabase. Hoogstens één link per minuut per adres.
  */
 async function mailLoginLink(email: string, next: string): Promise<boolean> {
   const sent = (g.__adsweetLinkSent ??= new Map());
@@ -106,10 +106,10 @@ async function mailLoginLink(email: string, next: string): Promise<boolean> {
     if (error) console.warn(`Inloglink niet gemaakt: ${error.status ?? ""} ${error.code ?? ""} ${error.message}`.trim());
     else {
       const url = `${env.appUrl}/auth/callback?token_hash=${encodeURIComponent(data.properties.hashed_token)}&next=${encodeURIComponent(next)}`;
-      if (await sendMail("login", email, { url })) {
-        sent.set(email, Date.now());
-        return true;
-      }
+      // Na een gemaakte link stuurt Supabase een minuut lang zelf geen link: weigert Resend, dan is dat een fout.
+      if (!(await sendMail("login", email, { url }))) return false;
+      sent.set(email, Date.now());
+      return true;
     }
   }
   const sb = await supabaseForRequest();

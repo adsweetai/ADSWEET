@@ -57,13 +57,11 @@ describe("Inloglink", () => {
     expect(m.sendMail).toHaveBeenCalledTimes(1);
   });
 
-  it("weigert Resend de mail, dan gaat hij via Supabase", async () => {
+  it("weigert Resend de mail (bv. een domein dat niet bevestigd is), dan een foutmelding", async () => {
     m.sendMail.mockResolvedValue(null);
-    expect(await sendLoginLink("eva@voorbeeld.be")).toEqual({ ok: true });
-    expect(m.signInWithOtp).toHaveBeenCalledWith({
-      email: "eva@voorbeeld.be",
-      options: { shouldCreateUser: false, emailRedirectTo: "https://adsweet.test/auth/callback?next=%2Fvandaag" },
-    });
+    expect(await sendLoginLink("eva@voorbeeld.be")).toEqual({ ok: false, error: "fout" });
+    // Supabase zou na de gemaakte link toch "wacht een minuut" antwoorden.
+    expect(m.signInWithOtp).not.toHaveBeenCalled();
   });
 
   it("zonder sleutel van Resend stuurt Supabase de link", async () => {
@@ -71,7 +69,10 @@ describe("Inloglink", () => {
     expect(await sendLoginLink("bram@voorbeeld.be")).toEqual({ ok: true });
     expect(m.createUser).toHaveBeenCalled();
     expect(m.generateLink).not.toHaveBeenCalled();
-    expect(m.signInWithOtp).toHaveBeenCalled();
+    expect(m.signInWithOtp).toHaveBeenCalledWith({
+      email: "bram@voorbeeld.be",
+      options: { shouldCreateUser: false, emailRedirectTo: "https://adsweet.test/auth/callback?next=%2Fvandaag" },
+    });
   });
 
   it("lukt het aanmaken niet, dan een foutmelding en geen mail", async () => {
