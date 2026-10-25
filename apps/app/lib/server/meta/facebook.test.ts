@@ -94,6 +94,12 @@ describe("Doorgaan met Facebook", () => {
     expect(await withMetaToken(null, async () => metaToken())).toBe("systeemsleutel-van-de-systeemgebruiker");
     expect(metaToken()).toBe("systeemsleutel-van-de-systeemgebruiker");
 
+    // De sleutel van de systeemgebruiker mag ook META_TOKEN heten (zoals in agency-hub).
+    delete process.env.META_SYSTEM_TOKEN;
+    process.env.META_TOKEN = "sleutel-onder-de-naam-van-agency-hub";
+    expect(metaToken()).toBe("sleutel-onder-de-naam-van-agency-hub");
+    delete process.env.META_TOKEN;
+
     m.rpc.mockResolvedValue({ data: null, error: { message: "kapot" } });
     vi.spyOn(console, "warn").mockImplementation(() => {});
     expect(await userMetaToken("user-1")).toBeNull();
