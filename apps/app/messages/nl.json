@@ -181,7 +181,13 @@
       "budget": "Laat je budget de eerste week met rust. Elke grote wijziging start de leerfase opnieuw.",
       "rapport": "Bij een campagne zonder verkoopdoel zijn er geen winnaars of verliezers. Kijk vooral of je bereik groeit.",
       "upload": "Heb je een video? Gebruik hem. Het playbook start met 2 video's op 5 advertenties."
-    }
+    },
+    "summaryOnboarding": "Welkom bij AdSweet. Vul je onboarding in, dan zie je hier elke ochtend hoe je advertenties het doen.",
+    "onboardingTitle": "Vertel AdSweet over je zaak",
+    "onboardingText": "Je website, je doelen en je advertentieaccount, in een paar korte stappen. Daarna gaat alles open.",
+    "onboardingMember": "De eigenaar van dit account vult de onboarding in. Daarna gaat alles open.",
+    "onboardingGo": "Start de onboarding",
+    "onboardingGoOn": "Ga verder"
   },
   "plans": {
     "starter": "Starter",
@@ -531,7 +537,16 @@
     },
     "more": "Meer",
     "emptyPage": "Deze pagina is nog leeg.",
-    "example": "voorbeeld"
+    "example": "voorbeeld",
+    "onboardingLock": {
+      "tip": "Je moet eerst de onboarding invullen.",
+      "chip": "Onboarding",
+      "title": "Vul eerst je onboarding in.",
+      "text": "Dan kent AdSweet je zaak, je doelen en je advertentieaccount, en gaat alles open.",
+      "textMember": "De eigenaar van dit account vult de onboarding in. Daarna gaat alles open.",
+      "go": "Start de onboarding",
+      "close": "Sluiten"
+    }
   },
   "routes": {
     "vandaag": "Vandaag",
@@ -1689,7 +1704,21 @@
     "sent": "Je campagne is verstuurd. Meta keurt je advertenties eerst goed, daarna gaan ze lopen.",
     "learning": "De eerste dagen zit je campagne in de leerfase. Resultaten schommelen dan, dat is normaal. Morgenochtend om 06:00 staat je eerste overzicht klaar.",
     "first50": "Je bent een van onze eerste 50 klanten. Zullen we samen 20 minuten je campagne overlopen?",
-    "pick": "Kies een moment"
+    "pick": "Kies een moment",
+    "backToApp": "Terug naar AdSweet",
+    "say": [
+      "Hoi, ik ben Dot. In een paar korte stappen leer ik je zaak kennen. Daarna gaat alles in AdSweet open.",
+      "Geef me je website, dan lees ik je zaak voor je. Jij kijkt het alleen na.",
+      "Klopt dit? Hoe beter ik je zaak ken, hoe beter je advertenties worden.",
+      "Wat moet je advertentie opleveren? Daarop beoordeel ik elke advertentie.",
+      "Nog even rekenen, dan weet ik wanneer een advertentie je geld oplevert.",
+      "Koppel je advertentieaccount. Ik lees alleen; er verandert niets bij Meta.",
+      "Je had al advertenties. Ik keek ze na; dit valt me op.",
+      "Zo pak ik het aan, volgens het playbook.",
+      "Je eerste campagne staat klaar. Jij zet er je beelden in.",
+      "Kies je plan. Je begint met een proefperiode.",
+      "Klaar. Vanaf morgen zie je op Vandaag elke ochtend hoe het loopt."
+    ]
   },
   "tuning": {
     "metaTitle": "Stem AdSweet af op je zaak",
@@ -2410,7 +2439,13 @@
     "startCampaign": "Een campagne lezen",
     "startWizard": "Een campagne maken",
     "reset": "Toon alle uitleg opnieuw bij je volgende bezoek",
-    "resetDone": "Bij je volgende bezoek zie je de uitleg opnieuw."
+    "resetDone": "Bij je volgende bezoek zie je de uitleg opnieuw.",
+    "onboardingStep": {
+      "t": "Nog één ding: je onboarding.",
+      "d": "Vertel me over je zaak: je website, je doelen en je advertentieaccount. Dan zet ik alles voor je klaar en gaat alles open.",
+      "member": "De eigenaar van dit account vult de onboarding in. Daarna gaat alles open.",
+      "go": "Start de onboarding"
+    }
   },
   "glossary": {
     "terms": [

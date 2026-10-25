@@ -8,7 +8,7 @@ import { isDemo } from "@/lib/env";
 import { periodRange, type Period } from "@/lib/period";
 import { hasAI, PLAN_NAME } from "@/lib/plans";
 import { getDb } from "./auth";
-import type { AppContext } from "./context";
+import { needsOnboarding, onboardingHref, type AppContext } from "./context";
 import { ADS_ORDER, goalFor, goalKind, insightRows, statusFor, sumRows, targets, totalsForCampaigns, totalsPerAd, type GoalKind, type Totals } from "./metrics";
 
 export type Variant = "normaal" | "dag1" | "rapport" | "leeg";
@@ -58,6 +58,8 @@ export interface TodayVM {
   summary: string;
   status: { kind: "act" | "warn" | "info"; text: string }[];
   tuning: boolean;
+  /** Nog geen onboarding: de kaart om ze in te vullen (href voor de eigenaar), en de rest staat op slot. */
+  onboarding: { href: string | null; started: boolean } | null;
   sweet: string | null;
   accounts: null | {
     rows: { id: string; name: string; spend: string; sales: string; revenue: string; roas: string; be: string; status: StatusKind; active: boolean }[];
@@ -147,6 +149,8 @@ export async function buildToday(ctx: AppContext, period: Period, forcedVariant?
     if (card) cards.push(card);
   }
   const shownCards = variant === "normaal" ? cards : [];
+
+  const onboarding = needsOnboarding(ctx) ? { href: onboardingHref(ctx), started: (org.onboarding_step ?? 1) > 1 } : null;
 
   // ---------- Samenvatting en status ----------
   let summary: string;
@@ -315,9 +319,11 @@ export async function buildToday(ctx: AppContext, period: Period, forcedVariant?
     forced: !!forcedVariant,
     showVariants: ctx.demo.enabled,
     greeting: t("greeting", { name }),
-    summary,
-    status: variant === "normaal" ? status : [],
-    tuning: org.tuning_step < 8 && !ctx.inClient,
+    summary: onboarding ? t("summaryOnboarding") : summary,
+    status: variant === "normaal" && !onboarding ? status : [],
+    // Afstemmen komt na de onboarding.
+    tuning: org.tuning_step < 8 && !ctx.inClient && !onboarding,
+    onboarding,
     sweet,
     accounts,
     tile,

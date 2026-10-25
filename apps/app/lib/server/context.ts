@@ -80,3 +80,19 @@ export function assertCanEdit(ctx: AppContext) {
 export function assertPlan(ctx: AppContext, min: Plan) {
   if (!hasPlan(ctx.plan, min)) throw new Error(`Dit zit in ${min}.`);
 }
+
+/**
+ * Nog geen onboarding: de schermen die je gegevens nodig hebben (campagnes, advertenties, Studio, ...) staan op slot
+ * tot de onboarding af is. Een klant van een bureau doorloopt zijn eigen onboarding niet.
+ */
+export const needsOnboarding = (ctx: AppContext) => !ctx.org.onboarding_done && !ctx.inClient;
+
+/** Waar de onboarding verder gaat. Alleen de eigenaar vult ze in. */
+export const onboardingHref = (ctx: AppContext) => (ctx.role === "eigenaar" ? `/onboarding/${ctx.org.onboarding_step || 1}` : null);
+
+/** Gate op de server voor de schermen op slot: zonder onboarding terug naar Vandaag. */
+export async function requireOnboarded(): Promise<AppContext> {
+  const ctx = await getContext();
+  if (needsOnboarding(ctx)) redirect("/vandaag");
+  return ctx;
+}

@@ -515,7 +515,8 @@
   border-radius: 20px 20px 0 0;
   box-shadow: var(--shadow-float);
 }
-.sh-more a {
+.sh-more a,
+.sh-more .sh-locked {
   display: flex;
   align-items: center;
   gap: 14px;
@@ -525,7 +526,8 @@
   font-size: 16px;
   font-weight: 500;
 }
-.sh-more a .as-icon {
+.sh-more a .as-icon,
+.sh-more .sh-locked .as-icon {
   color: var(--ink-muted);
 }
 @media (min-width: 1024px) {
@@ -689,5 +691,56 @@
   .sh-period {
     max-width: 38vw;
     padding: 0 8px;
+  }
+}
+
+/* Op slot tot de onboarding af is: slotje, uitleg bij aanwijzen of focus */
+.sh-locked {
+  position: relative;
+  font: inherit;
+  cursor: pointer;
+}
+.sh-navitem.sh-locked,
+.sh-more .sh-locked,
+.sh-tab.sh-locked {
+  width: 100%;
+  border: 0;
+  background: none;
+  text-align: left;
+  color: var(--ink-muted);
+}
+.sh-tip {
+  position: absolute;
+  z-index: 40;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--surface);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: left;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--t-fast) var(--ease);
+}
+.sh-tip--below {
+  top: calc(100% + 4px);
+  left: 8px;
+  right: 8px;
+}
+.sh-tip--end {
+  top: calc(100% + 8px);
+  right: 0;
+  width: max-content;
+  max-width: 260px;
+}
+.sh-locked:hover .sh-tip,
+.sh-locked:focus-visible .sh-tip {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sh-tip {
+    transition: none;
   }
 }

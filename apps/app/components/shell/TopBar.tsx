@@ -9,6 +9,7 @@ import { PERIODS, type Period } from "@/lib/period";
 import type { RouteInfo } from "@/lib/routes";
 import type { ShellData } from "@/lib/server/shell";
 import { setPeriod } from "@/app/(app)/shell-actions";
+import { Locked, useOnboardingLock } from "./OnboardingLock";
 import { usePopover } from "./usePopover";
 
 function Bell({ shell }: { shell: ShellData }) {
@@ -47,6 +48,7 @@ export function TopBar({ shell, route, period, helpHref = "/hulp" }: { shell: Sh
   const t = useTranslations("shell");
   const tr = useTranslations("routes");
   const router = useRouter();
+  const lock = useOnboardingLock();
   const [, start] = useTransition();
   return (
     <header className="sh-top">
@@ -85,10 +87,17 @@ export function TopBar({ shell, route, period, helpHref = "/hulp" }: { shell: Sh
         <Icon name="help" size={18} />
       </a>
       <Bell shell={shell} />
-      <Link data-tour="new" href="/campagnes/nieuw" className="as-btn as-btn--primary sh-newbtn" style={{ gap: 8 }}>
-        <Icon name="plus" size={16} />
-        {t("newCampaign")}
-      </Link>
+      {lock.locked ? (
+        <Locked data-tour="new" className="as-btn as-btn--primary sh-newbtn" tip="end">
+          <Icon name="lock" size={16} />
+          {t("newCampaign")}
+        </Locked>
+      ) : (
+        <Link data-tour="new" href="/campagnes/nieuw" className="as-btn as-btn--primary sh-newbtn" style={{ gap: 8 }}>
+          <Icon name="plus" size={16} />
+          {t("newCampaign")}
+        </Link>
+      )}
     </header>
   );
 }
