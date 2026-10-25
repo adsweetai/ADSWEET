@@ -65,8 +65,13 @@ export async function loadSubscription(ctx: AppContext): Promise<SubscriptionVM>
   const state = o.subscription_status;
   const period = o.billing_period;
   const sched = (o.scheduled_change ?? null) as Scheduled | null;
+  // Een klant van een bureau (ook wie rechtstreeks in die werkruimte zit) betaalt via het Agency-plan van het bureau.
+  const parent =
+    o.agency_parent_id && !ctx.agency
+      ? (must(await serviceDb().from("organizations").select("name").eq("id", o.agency_parent_id).maybeSingle())?.name ?? null)
+      : null;
   const base = {
-    agency: ctx.agency?.name ?? null,
+    agency: ctx.agency?.name ?? parent,
     orgName: o.name,
     plan,
     state,
@@ -86,7 +91,7 @@ export async function loadSubscription(ctx: AppContext): Promise<SubscriptionVM>
     periodEnd,
     billing: { name: "", vat: "", address: "", email: "" },
   };
-  if (ctx.inClient) return { ...base, ...empty, mode: "client" };
+  if (ctx.inClient || o.agency_parent_id) return { ...base, ...empty, mode: "client" };
   if (ctx.role !== "eigenaar") return { ...base, ...empty, mode: "notOwner" };
 
   const [members, invites, invoices, credits] = await Promise.all([
@@ -170,7 +175,7 @@ export async function loadSubscription(ctx: AppContext): Promise<SubscriptionVM>
 
 async function owner() {
   const ctx = await getContext();
-  if (ctx.role !== "eigenaar" || ctx.inClient) throw new Error("Alleen de eigenaar beheert het abonnement.");
+  if (ctx.role !== "eigenaar" || ctx.inClient || ctx.org.agency_parent_id) throw new Error("Alleen de eigenaar beheert het abonnement.");
   return { ctx, db: serviceDb() };
 }
 
