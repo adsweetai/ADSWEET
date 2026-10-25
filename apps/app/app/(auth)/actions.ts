@@ -11,7 +11,7 @@ import { createOwnOrganization } from "@/lib/server/onboarding";
 type Outcome = "ok" | "ok_bestaand" | "perm" | "noacc" | "expired";
 
 /**
- * Demo: wat Meta teruggeeft na "Doorgaan met Facebook". Account maken begint de onboarding als nieuwe klant (de
+ * Demo: wat Meta teruggeeft na "Doorgaan met Facebook". Account maken opent Vandaag als nieuwe klant (de
  * voornaam komt uit Facebook: in de demo Sarah). Inloggen opent de app als Lisa.
  */
 export async function demoFacebookAction(context: "signup" | "login", outcome: Outcome) {
@@ -21,7 +21,7 @@ export async function demoFacebookAction(context: "signup" | "login", outcome: O
     const uid = await createDemoUser(`nieuw-${randomBytes(3).toString("hex")}@nieuw.voorbeeld`, "Sarah", "facebook");
     await startDemoSession(uid);
     await createOwnOrganization(uid);
-    redirect("/onboarding/1");
+    redirect("/vandaag");
   }
   const lisa = must(await serviceDb().from("profiles").select("user_id").eq("email", "lisa@ateliernoor.voorbeeld").single());
   await startDemoSession(lisa.user_id);

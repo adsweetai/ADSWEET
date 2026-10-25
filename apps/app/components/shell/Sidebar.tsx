@@ -8,6 +8,7 @@ import { Avatar, Icon, Logo, Meter, setThemePreference, useTheme } from "@adswee
 import type { ShellData } from "@/lib/server/shell";
 import { NAV_BOTTOM, type NavItem } from "@/lib/routes";
 import { selectAccount, selectOrg } from "@/app/(app)/shell-actions";
+import { Locked } from "./OnboardingLock";
 import { usePopover } from "./usePopover";
 
 export function AccountPicker({ shell }: { shell: ShellData }) {
@@ -62,7 +63,27 @@ export function AccountPicker({ shell }: { shell: ShellData }) {
   );
 }
 
-export function NavLink({ item, label, active, locked }: { item: NavItem; label: string; active: boolean; locked?: boolean }) {
+export function NavLink({
+  item,
+  label,
+  active,
+  locked,
+  onboarding,
+}: {
+  item: NavItem;
+  label: string;
+  active: boolean;
+  locked?: boolean;
+  onboarding?: boolean;
+}) {
+  if (onboarding)
+    return (
+      <Locked className="sh-navitem">
+        <Icon name={item.icon} size={18} />
+        <span className="sh-navitem__label">{label}</span>
+        <Icon name="lock" size={13} />
+      </Locked>
+    );
   return (
     <Link href={item.href} className="sh-navitem" aria-current={active ? "page" : undefined}>
       <Icon name={item.icon} size={18} />
@@ -121,7 +142,7 @@ function UserMenu({ shell }: { shell: ShellData }) {
   );
 }
 
-export function Sidebar({ shell, nav, active }: { shell: ShellData; nav: { item: NavItem; locked: boolean }[]; active: string }) {
+export function Sidebar({ shell, nav, active }: { shell: ShellData; nav: { item: NavItem; locked: boolean; onboarding: boolean }[]; active: string }) {
   const t = useTranslations("nav");
   return (
     <aside data-tour="nav" aria-label={t("main")} className="sh-side">
@@ -130,8 +151,8 @@ export function Sidebar({ shell, nav, active }: { shell: ShellData; nav: { item:
       </Link>
       <AccountPicker shell={shell} />
       <nav className="sh-nav">
-        {nav.map(({ item, locked }) => (
-          <NavLink key={item.id} item={item} label={t(item.id)} active={active === item.id} locked={locked} />
+        {nav.map(({ item, locked, onboarding }) => (
+          <NavLink key={item.id} item={item} label={t(item.id)} active={active === item.id} locked={locked} onboarding={onboarding} />
         ))}
       </nav>
       <div className="sh-sidefoot">

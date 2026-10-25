@@ -237,7 +237,8 @@ test.describe("fase 10 · Academy, Hulp, Instellingen, Abonnement, Team en Doorv
     await page.getByRole("checkbox").check();
     await page.getByRole("button", { name: "Doorgaan met Facebook" }).click();
     await page.getByRole("button", { name: "Toegang gegeven", exact: true }).click();
-    await expect(page).toHaveURL(/\/onboarding\/1$/);
+    // Een nieuw account komt eerst op Vandaag (de onboarding volgt daar).
+    await expect(page).toHaveURL(/\/vandaag$/);
 
     await page.context().clearCookies();
     await login(page, "lisa", "/doorverwijzen");

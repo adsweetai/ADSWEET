@@ -118,6 +118,27 @@ export function VandaagView({ vm }: { vm: TodayVM }) {
         ) : null}
       </header>
 
+      {vm.onboarding ? (
+        <div data-tour="onboarding" data-theme="light" className="vd-tuning">
+          <span className="vd-tuning__left">
+            <span aria-hidden="true" className="vd-dots vd-dots--sm">
+              {DOTS.slice(0, 3).map((d) => (
+                <span key={d} className={`as-dot--${d}`} />
+              ))}
+            </span>
+            <span className="vd-tuning__text">
+              <b>{t("onboardingTitle")}</b>
+              <span>{vm.onboarding.href ? t("onboardingText") : t("onboardingMember")}</span>
+            </span>
+          </span>
+          {vm.onboarding.href ? (
+            <Link href={vm.onboarding.href} className="vd-tuning__go">
+              {vm.onboarding.started ? t("onboardingGoOn") : t("onboardingGo")}
+            </Link>
+          ) : null}
+        </div>
+      ) : null}
+
       {vm.tuning ? (
         <Link href="/afstemmen/1" data-theme="light" className="vd-tuning">
           <span className="vd-tuning__left">

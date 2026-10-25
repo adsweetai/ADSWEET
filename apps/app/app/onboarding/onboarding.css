@@ -18,6 +18,11 @@
   background: var(--ground);
   border-bottom: 1px solid var(--line);
 }
+.ob-headright {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
 .ob-saved {
   display: none;
   font-size: 13.5px;
@@ -677,4 +682,19 @@
 .ob-more {
   display: flex;
   flex-direction: column;
+}
+
+/* Dot legt bij elke stap kort uit (zoals in het afstemmen) */
+.ob-dot {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.ob-say {
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  font-size: 15px;
 }

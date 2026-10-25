@@ -5,7 +5,7 @@ import { formatDayMonth, formatRoas, type SeriesColor } from "@adsweet/ui";
 import { today } from "@/lib/clock";
 import { hasAI, hasPlan, PLAN_LIMITS, PLAN_NAME, TRIAL_CREDITS, TRIAL_WARN_FROM_DAY, trialDays } from "@/lib/plans";
 import { getDb } from "./auth";
-import type { AppContext } from "./context";
+import { needsOnboarding, onboardingHref, type AppContext } from "./context";
 import { glossaryExamples } from "./glossary";
 import { notificationText } from "./notifications";
 import { seenTours, type TourName } from "./tours";
@@ -37,6 +37,8 @@ export interface ShellData {
   dot: { balloon: string | null } | null;
   toursSeen: TourName[];
   glossary: Record<string, string>;
+  /** Nog geen onboarding: wat je gegevens nodig heeft, staat op slot. href: waar de eigenaar ze invult. */
+  onboarding: { locked: boolean; href: string | null };
 }
 
 const DEMO_SCENARIOS: Record<string, string> = {
@@ -156,6 +158,7 @@ export async function loadShell(ctx: AppContext): Promise<ShellData> {
     dot,
     toursSeen,
     glossary,
+    onboarding: { locked: needsOnboarding(ctx), href: onboardingHref(ctx) },
   };
 }
 

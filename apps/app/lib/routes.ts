@@ -90,6 +90,9 @@ export const NAV_MAIN: NavItem[] = [
   { id: "autopilot", href: "/autopilot", icon: "sliders" },
   { id: "academy", href: "/academy", icon: "book" },
 ];
+/** Op slot tot de onboarding af is: deze schermen hebben je zaak, je doelen of je advertentieaccount nodig. */
+export const NEEDS_ONBOARDING = new Set(["campagnes", "advertenties", "studio", "concurrenten", "inzichten", "autopilot", "nieuw"]);
+
 export const NAV_CLIENTS: NavItem = { id: "klanten", href: "/klanten", icon: "users" };
 export const NAV_EXTRA_MOBILE: NavItem[] = [
   { id: "meldingen", href: "/meldingen", icon: "bell" },

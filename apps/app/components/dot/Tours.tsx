@@ -12,6 +12,8 @@ interface StepDef {
   sel?: string;
   t: string;
   d: string;
+  /** Laatste stap zonder onboarding: de knop opent de onboarding. */
+  cta?: boolean;
 }
 interface Active {
   name: TourName;
@@ -36,9 +38,10 @@ const visible = (el: Element | null) => {
 
 /**
  * Rondleidingen met een spotlight en uitleg per stap (rondleiding.js). De eerste keer start de rondleiding vanzelf;
- * opnieuw kan via Hulp (?rondleiding=app). Gezien wordt bewaard in user_tours.
+ * opnieuw kan via Hulp (?rondleiding=app). Gezien wordt bewaard in user_tours. Zonder onboarding eindigt de
+ * rondleiding van de app bij de onboarding.
  */
-export function Tours({ seen, hasAI }: { seen: TourName[]; hasAI: boolean }) {
+export function Tours({ seen, hasAI, onboarding }: { seen: TourName[]; hasAI: boolean; onboarding: { locked: boolean; href: string | null } }) {
   const t = useTranslations("tours");
   const pathname = usePathname();
   const sp = useSearchParams();
@@ -55,12 +58,19 @@ export function Tours({ seen, hasAI }: { seen: TourName[]; hasAI: boolean }) {
         // Starter heeft geen Dot: de eerste stap stelt dan de app voor, niet Dot.
         !hasAI && name === "app" && i === 0 ? { t: t("starterIntro.t"), d: t("starterIntro.d") } : s,
       );
+      if (name === "app" && onboarding.locked)
+        defs.push({
+          sel: '[data-tour="onboarding"]',
+          t: t("onboardingStep.t"),
+          d: onboarding.href ? t("onboardingStep.d") : t("onboardingStep.member"),
+          cta: !!onboarding.href,
+        });
       const steps = defs.map((s) => ({ ...s, el: s.sel ? ([...document.querySelectorAll(s.sel)].find(visible) ?? null) : null })).filter((s) => !s.sel || s.el);
       if (!steps.length) return;
       prevFocus.current = document.activeElement;
       setActive({ name, steps, i: 0 });
     },
-    [t, hasAI],
+    [t, hasAI, onboarding],
   );
 
   const end = useCallback(() => {
@@ -183,9 +193,23 @@ export function Tours({ seen, hasAI }: { seen: TourName[]; hasAI: boolean }) {
                 {t("prev")}
               </button>
             ) : null}
-            <button type="button" data-next className="as-btn as-btn--primary" onClick={() => (last ? end() : setActive({ ...active, i: active.i + 1 }))}>
-              {last ? t("done") : t("next")}
-            </button>
+            {last && step.cta && onboarding.href ? (
+              <button
+                type="button"
+                data-next
+                className="as-btn as-btn--primary"
+                onClick={() => {
+                  end();
+                  router.push(onboarding.href!);
+                }}
+              >
+                {t("onboardingStep.go")}
+              </button>
+            ) : (
+              <button type="button" data-next className="as-btn as-btn--primary" onClick={() => (last ? end() : setActive({ ...active, i: active.i + 1 }))}>
+                {last ? t("done") : t("next")}
+              </button>
+            )}
           </span>
         </div>
       </div>

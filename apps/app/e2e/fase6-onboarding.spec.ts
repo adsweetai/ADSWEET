@@ -12,6 +12,13 @@ test.describe("fase 6 · inloggen, onboarding en het onboardingpaneel", () => {
     await expect(page.getByRole("dialog", { name: "Meta opent nu een venster." })).toBeVisible();
     await page.getByRole("button", { name: "Toegang gegeven", exact: true }).click();
 
+    // Eerst in de app: Vandaag, met de rondleiding van Dot. De laatste stap is de onboarding.
+    await expect(page).toHaveURL(/\/vandaag$/);
+    await expect(page.getByRole("dialog", { name: "Hoi, ik ben Dot." })).toBeVisible();
+    const last = page.getByRole("dialog", { name: "Nog één ding: je onboarding." });
+    for (let i = 0; i < 20 && !(await last.isVisible()); i++) await page.getByRole("button", { name: "Volgende" }).click();
+    await last.getByRole("button", { name: "Start de onboarding" }).click();
+
     // 1 · Welkom
     await expect(page).toHaveURL(/\/onboarding\/1$/);
     await expect(page.getByRole("heading", { name: "Welkom, Sarah." })).toBeVisible();
@@ -77,6 +84,39 @@ test.describe("fase 6 · inloggen, onboarding en het onboardingpaneel", () => {
 
     await page.goto("/campagnes");
     await expect(page.locator("tbody tr").filter({ hasText: "Salon Mila · Vast · Aanvragen · dec26" })).toContainText("Gepland");
+  });
+
+  test("zonder onboarding staat wat je gegevens nodig heeft op slot, met uitleg", async ({ page }) => {
+    await page.goto("/account-maken");
+    await page.getByRole("checkbox").check();
+    await page.getByRole("button", { name: "Doorgaan met Facebook" }).click();
+    await page.getByRole("button", { name: "Toegang gegeven", exact: true }).click();
+    await expect(page).toHaveURL(/\/vandaag$/);
+    await page.getByRole("button", { name: "Sla over" }).click();
+
+    await expect(page.getByText("Welkom bij AdSweet. Vul je onboarding in")).toBeVisible();
+    const campaigns = page.getByRole("complementary").getByRole("button", { name: "Campagnes" });
+    await expect(campaigns).toHaveAttribute("aria-disabled", "true");
+    await expect(campaigns).toHaveAccessibleDescription("Je moet eerst de onboarding invullen.");
+    await campaigns.hover();
+    await expect(campaigns.getByRole("tooltip", { includeHidden: true })).toHaveCSS("opacity", "1");
+    await expect(page.getByRole("button", { name: "Nieuwe campagne" })).toHaveAttribute("aria-disabled", "true");
+
+    // aria-disabled: Playwright wacht anders op "ingeschakeld"; de knop opent het paneel met uitleg.
+    await campaigns.click({ force: true });
+    const gate = page.getByRole("dialog", { name: "Vul eerst je onboarding in." });
+    await expect(gate).toBeVisible();
+    await gate.getByRole("button", { name: "Sluiten" }).click();
+
+    // Ook op de server: rechtstreeks naar een scherm op slot brengt je terug naar Vandaag.
+    await page.goto("/campagnes/nieuw");
+    await expect(page).toHaveURL(/\/vandaag$/);
+
+    await page.getByRole("link", { name: "Start de onboarding" }).click();
+    await expect(page).toHaveURL(/\/onboarding\/1$/);
+    await expect(page.getByText("Hoi, ik ben Dot. In een paar korte stappen leer ik je zaak kennen.")).toBeVisible();
+    await page.getByRole("link", { name: "Terug naar AdSweet" }).click();
+    await expect(page).toHaveURL(/\/vandaag$/);
   });
 
   test("Meta zonder toestemming toont de fout en Opnieuw proberen", async ({ page }) => {
