@@ -8,7 +8,7 @@ import { periodRange, type Period } from "@/lib/period";
 import { getDb } from "./auth";
 import { inAccount, isLive } from "./campaigns";
 import type { AppContext } from "./context";
-import { goalFor, goalKind, sumRows, targets, totalsPerAd } from "./metrics";
+import { goalFor, goalKind, mainCampaign, sumRows, targets, totalsPerAd } from "./metrics";
 
 // Inzichten (App.dc.html#inzichten): alle cijfers uit Meta, berekend uit insights_daily. Wat Meta (nog) niet
 // doorgaf, blijft "[uit Meta]". Vanaf fase 13 vult de nachtelijke synchronisatie alles aan.
@@ -79,8 +79,8 @@ export async function loadInsights(ctx: AppContext, period: Period): Promise<Ins
   ]);
   const mine = campaigns.filter((c) => inAccount(ctx, c));
   const ids = new Set(mine.map((c) => c.id));
-  const main = mine.find((c) => c.kind === "vast" && isLive(c)) ?? mine.find(isLive) ?? null;
   const goal = goalFor(goals, ctx.account?.id);
+  const main = mainCampaign(mine.filter(isLive), goal);
   const kind = goalKind(goal, main);
   const tg = targets(goal);
   const day = today();

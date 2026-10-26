@@ -2786,7 +2786,8 @@
         "meta": "Meta antwoordde niet. Probeer het zo opnieuw.",
         "slots": "Zoveel plaatsen heb je niet meer.",
         "none": "Kies minstens één account dat nog geen klant is."
-      }
+      },
+      "kind": "Soort zaak voor deze klanten"
     }
   },
   "academy": {
@@ -3005,7 +3006,15 @@
       "rereadDone": "We lezen je website opnieuw. Je krijgt een melding als er iets veranderd is.",
       "rereadFail": "We konden je website niet lezen. Kijk het adres na.",
       "noSite": "Vul eerst je website in.",
-      "errName": "Vul de naam van je zaak in."
+      "errName": "Vul de naam van je zaak in.",
+      "kind": "Soort zaak",
+      "kinds": {
+        "webshop": "Webshop",
+        "dienstverlener": "Dienstverlener",
+        "lokaal": "Lokale zaak",
+        "zelfstandige": "Zelfstandige",
+        "bureau": "Bureau"
+      }
     },
     "numbers": {
       "aov": "Gemiddelde orderwaarde (€)",
@@ -3026,10 +3035,18 @@
         "zaak": "mensen naar je zaak",
         "anders": "iets anders"
       },
-      "noGoal": "Je hebt nog geen doel. Kies het in de onboarding.",
+      "noGoal": "Je hebt nog geen doel. Kies wat je advertenties moeten opleveren; daarna vul je hier de bedragen in.",
       "savedToast": "Bewaard. Je drempels passen meteen mee.",
       "errSales": "Vul een orderwaarde en een marge tussen 1 en 99% in.",
-      "errLeads": "Vul in wat een aanvraag mag kosten, of wat een klant je opbrengt met je marge en je slaagkans."
+      "errLeads": "Vul in wat een aanvraag mag kosten, of wat een klant je opbrengt met je marge en je slaagkans.",
+      "pickLabel": "Je doel",
+      "pick": {
+        "verkopen": "Verkopen",
+        "aanvragen": "Aanvragen",
+        "zaak": "Mensen naar je zaak",
+        "anders": "Iets anders"
+      },
+      "pickSave": "Bewaar mijn doel"
     },
     "connections": {
       "providers": {

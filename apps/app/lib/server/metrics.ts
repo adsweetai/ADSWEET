@@ -1,5 +1,5 @@
 import "server-only";
-import { must, type Ad, type Campaign, type Db, type Goal, type InsightDaily } from "@adsweet/db";
+import { must, type Ad, type Campaign, type Db, type Goal, type InsightDaily, type OrgKind } from "@adsweet/db";
 import { breakEvenRoas, costPer, leadsStatus, maxCostPerSale, roas, salesStatus, type Status } from "@adsweet/playbook";
 
 export interface Totals {
@@ -44,6 +44,25 @@ export async function insightRows(db: Db, orgId: string, range?: { from: string;
 /** Het doel dat geldt voor een advertentieaccount (of de organisatie). */
 export function goalFor(goals: Goal[], adAccountId: string | null | undefined): Goal | null {
   return goals.find((g) => g.ad_account_id === adAccountId) ?? goals.find((g) => !g.ad_account_id) ?? goals[0] ?? null;
+}
+
+/**
+ * De campagne waarop het dashboard zijn cijfers afstemt, uit de campagnes die lopen. Bij een doel verkopen of aanvragen
+ * eerst een campagne met dat doel (een account met ook een campagne voor volgers toont dan toch verkopen), dan de
+ * vaste, dan de eerste.
+ */
+export function mainCampaign(live: Campaign[], goal: Goal | null): Campaign | null {
+  const want = goal?.type === "verkopen" ? "verkopen" : goal?.type === "aanvragen" || goal?.type === "zaak" ? "aanvragen" : null;
+  const byGoal = want ? (live.find((c) => c.kind === "vast" && c.goal === want) ?? live.find((c) => c.goal === want)) : undefined;
+  return byGoal ?? live.find((c) => c.kind === "vast") ?? live[0] ?? null;
+}
+
+/** Het doel dat bij een soort zaak hoort, als er nog geen doel is: een webshop verkoopt, een dienstverlener wil aanvragen. */
+export function goalTypeForKind(kind: OrgKind): Goal["type"] | null {
+  if (kind === "webshop") return "verkopen";
+  if (kind === "dienstverlener") return "aanvragen";
+  if (kind === "lokaal") return "zaak";
+  return null;
 }
 
 export type GoalKind = "sales" | "leads" | "none";

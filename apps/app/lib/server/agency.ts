@@ -11,7 +11,7 @@ import { isLive } from "./campaigns";
 import { writeLog } from "./changes";
 import { assertCanEdit, getContext, type AppContext } from "./context";
 import { sendMail } from "./mail";
-import { goalFor, goalKind, statusFor, sumRows, targets } from "./metrics";
+import { goalFor, goalKind, mainCampaign, statusFor, sumRows, targets } from "./metrics";
 
 // Agency (App.dc.html#klanten): het overzicht van al je klanten, een klant toevoegen en de rechten per klant.
 // Alle cijfers komen uit de data van de klanten, over de laatste 7 dagen.
@@ -87,11 +87,9 @@ export async function loadAgency(ctx: AppContext): Promise<AgencyVM | null> {
   const spendOf = new Map<string, number>();
   const out: ClientRow[] = clients.map((c) => {
     const camps = campaigns.filter((x) => x.organization_id === c.id);
-    const main = camps.find((x) => x.kind === "vast" && isLive(x)) ?? camps.find(isLive) ?? null;
-    const goal = goalFor(
-      goals.filter((g) => g.organization_id === c.id),
-      main?.ad_account_id,
-    );
+    const own = goals.filter((g) => g.organization_id === c.id);
+    const main = mainCampaign(camps.filter(isLive), goalFor(own, null));
+    const goal = goalFor(own, main?.ad_account_id);
     const kind = goalKind(goal, main);
     const tg = targets(goal);
     const s = sumRows(rows.filter((r) => r.organization_id === c.id && (!main || r.campaign_id === main.id)));

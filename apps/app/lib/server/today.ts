@@ -9,7 +9,20 @@ import { periodRange, type Period } from "@/lib/period";
 import { hasAI, PLAN_NAME } from "@/lib/plans";
 import { getDb } from "./auth";
 import { needsOnboarding, onboardingHref, type AppContext } from "./context";
-import { ADS_ORDER, goalFor, goalKind, insightRows, statusFor, sumRows, targets, totalsForCampaigns, totalsPerAd, type GoalKind, type Totals } from "./metrics";
+import {
+  ADS_ORDER,
+  goalFor,
+  goalKind,
+  insightRows,
+  mainCampaign,
+  statusFor,
+  sumRows,
+  targets,
+  totalsForCampaigns,
+  totalsPerAd,
+  type GoalKind,
+  type Totals,
+} from "./metrics";
 
 export type Variant = "normaal" | "dag1" | "rapport" | "leeg";
 
@@ -109,7 +122,7 @@ export async function buildToday(ctx: AppContext, period: Period, forcedVariant?
   // De campagne die nu loopt in dit account (de vaste, anders de nieuwste die actief is).
   const accCampaigns = campaigns.filter((c) => !account || c.ad_account_id === account.id || !c.ad_account_id);
   const live = accCampaigns.filter((c) => ["actief", "leerfase"].includes(c.status));
-  const main: Campaign | null = live.find((c) => c.kind === "vast") ?? live[0] ?? null;
+  const main: Campaign | null = mainCampaign(live, goal);
   const kind: GoalKind = goalKind(goal, main);
 
   const range = periodRange(period, day, main?.start_date ?? null);

@@ -5,7 +5,7 @@ import { useState, useTransition, type ReactNode } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { breakEvenRoas, leadMax, maxCostPerSale } from "@adsweet/playbook";
-import { Button, Input, StatusBadge, Switch, TextButton, formatEuro, formatPercent, useToast } from "@adsweet/ui";
+import { Button, Input, Select, StatusBadge, Switch, TextButton, formatEuro, formatPercent, useToast } from "@adsweet/ui";
 import { NAMING_TOKENS, fillTemplate, fillUtm, type Naming } from "@/lib/naming";
 import type { AccountsVM, ConnectionRowVM, NamingVM, NumbersVM, PrivacyVM, ProfileVM } from "@/lib/server/settings";
 import { MetaPicker } from "@/components/meta/MetaPicker";
@@ -13,6 +13,7 @@ import { metaSyncAction } from "@/app/meta-actions";
 import { selectAccount } from "../shell-actions";
 import {
   disconnectMetaAction,
+  goalTypeAction,
   reconnectMetaAction,
   requestDeletionAction,
   rereadAction,
@@ -90,6 +91,16 @@ export function ProfileForm({ vm, canEdit }: { vm: ProfileVM; canEdit: boolean }
       <ReadOnly canEdit={canEdit} />
       <div className="st-grid">
         {field("name")}
+        <Select
+          label={t("profile.kind")}
+          value={f.kind}
+          disabled={!canEdit}
+          options={(f.kind === "bureau" ? ["bureau"] : ["webshop", "dienstverlener", "lokaal", "zelfstandige"]).map((k) => ({
+            value: k,
+            label: t(`profile.kinds.${k}`),
+          }))}
+          onChange={F("kind")}
+        />
         {field("website", { ph: "jouwzaak.be" })}
         {field("sells", { span: true })}
         {field("tone", { ph: t("profile.tonePh") })}
@@ -128,6 +139,44 @@ export function ProfileForm({ vm, canEdit }: { vm: ProfileVM; canEdit: boolean }
 // Cijfers en doelen
 // ---------------------------------------------------------------------------
 
+/** Nog geen doel: kies wat je advertenties moeten opleveren. Daarna vul je hier de bedragen in. */
+function GoalPick({ canEdit }: { canEdit: boolean }) {
+  const t = useTranslations("settings.numbers");
+  const router = useRouter();
+  const [type, setType] = useState<"verkopen" | "aanvragen" | "zaak" | "anders">("verkopen");
+  const [pending, start] = useTransition();
+  return (
+    <div className="st-form">
+      <p className="st-note">{t("noGoal")}</p>
+      {canEdit ? (
+        <>
+          <div role="radiogroup" aria-label={t("pickLabel")} className="as-pills">
+            {(["verkopen", "aanvragen", "zaak", "anders"] as const).map((g) => (
+              <button key={g} type="button" role="radio" aria-checked={type === g} className="as-pill" onClick={() => setType(g)}>
+                {t(`pick.${g}`)}
+              </button>
+            ))}
+          </div>
+          <div className="st-actions">
+            <Button
+              arrow={false}
+              disabled={pending}
+              onClick={() =>
+                start(async () => {
+                  await goalTypeAction(type);
+                  router.refresh();
+                })
+              }
+            >
+              {t("pickSave")}
+            </Button>
+          </div>
+        </>
+      ) : null}
+    </div>
+  );
+}
+
 export function NumbersForm({ vm, canEdit }: { vm: NumbersVM; canEdit: boolean }) {
   const t = useTranslations("settings.numbers");
   const ts = useTranslations("settings");
@@ -136,7 +185,7 @@ export function NumbersForm({ vm, canEdit }: { vm: NumbersVM; canEdit: boolean }
   const [f, setF] = useState(vm);
   const [error, setError] = useState("");
   const [pending, start] = useTransition();
-  if (vm.kind === "nogoal") return <p className="st-note">{t("noGoal")}</p>;
+  if (vm.kind === "nogoal") return <GoalPick canEdit={canEdit} />;
   if (vm.kind === "none") return <p className="st-note">{t("none", { goal: t(`goals.${vm.goalType === "zaak" ? "zaak" : "anders"}`) })}</p>;
   const F = (k: keyof NumbersVM) => (e: { target: { value: string } }) => setF((x) => ({ ...x, [k]: e.target.value }));
   const loser = vm.loserMultiple;

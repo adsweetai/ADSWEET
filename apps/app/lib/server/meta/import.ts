@@ -1,10 +1,11 @@
 import "server-only";
 import { getTranslations } from "next-intl/server";
-import { must } from "@adsweet/db";
+import { must, type OrgKind } from "@adsweet/db";
 import { nowIso } from "@/lib/clock";
 import { AGENCY_SLOTS, KIND_COLOR } from "../agency";
 import { getDb, serviceDb } from "../auth";
 import { writeLog } from "../changes";
+import { goalTypeForKind } from "../metrics";
 import { assertCanEdit, getContext, type AppContext } from "../context";
 import { listMetaAccounts, type MetaAccountOption } from "./assets";
 import { withMetaToken } from "./graph";
@@ -59,6 +60,7 @@ export async function addClientsFromMeta(
   accounts: MetaAccountOption[],
   chosen: string[],
   tokenUser: string | null,
+  kind: OrgKind = "zelfstandige",
 ): Promise<ImportResult> {
   const state = await agencyState(agencyId);
   const wanted = accounts.filter((a) => chosen.includes(a.id) && !state.linked.has(a.id));
@@ -73,12 +75,12 @@ export async function addClientsFromMeta(
         .from("organizations")
         .insert({
           name,
-          kind: "zelfstandige",
+          kind,
           plan: "agency",
           subscription_status: "actief",
           agency_parent_id: agencyId,
           agency_owner_user_id: userId,
-          color: KIND_COLOR.zelfstandige,
+          color: KIND_COLOR[kind],
           onboarding_step: 1,
           onboarding_done: true,
           tuning_step: 1,
@@ -88,6 +90,9 @@ export async function addClientsFromMeta(
         .single(),
     );
     await svc.from("business_profiles").insert({ organization_id: org.id });
+    // Het doel dat bij de soort zaak hoort (een webshop: verkopen), zodat Vandaag meteen de juiste cijfers toont.
+    const type = goalTypeForKind(kind);
+    if (type) await svc.from("goals").insert({ organization_id: org.id, type });
     const acc = must(
       await svc
         .from("ad_accounts")
@@ -119,7 +124,7 @@ export async function addClientsFromMeta(
   return { ok: true, created };
 }
 
-export async function importClients(chosen: string[]): Promise<ImportResult> {
+export async function importClients(chosen: string[], kind: OrgKind): Promise<ImportResult> {
   const ctx = await agencyContext();
   const token = await userMetaToken(ctx.user.id);
   let accounts: MetaAccountOption[];
@@ -128,7 +133,8 @@ export async function importClients(chosen: string[]): Promise<ImportResult> {
   } catch {
     return { ok: false, error: "meta" };
   }
-  const res = await addClientsFromMeta(ctx.agency.id, ctx.user.id, accounts, chosen, token ? ctx.user.id : null);
+  const k: OrgKind = ["webshop", "dienstverlener", "lokaal", "zelfstandige"].includes(kind) ? kind : "zelfstandige";
+  const res = await addClientsFromMeta(ctx.agency.id, ctx.user.id, accounts, chosen, token ? ctx.user.id : null, k);
   if (res.ok) {
     const t = await getTranslations("agency");
     await writeLog(await getDb(), { ...ctx, org: ctx.agency }, { kind: "wijziging", what: t("import.log", { n: res.created.length }) });

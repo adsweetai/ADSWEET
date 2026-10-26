@@ -26,8 +26,8 @@ export async function importChoicesAction() {
   }
 }
 
-export async function importClientsAction(accountIds: string[]) {
-  const res = await importClients(accountIds);
+export async function importClientsAction(accountIds: string[], kind: OrgKind) {
+  const res = await importClients(accountIds, kind);
   revalidatePath("/", "layout");
   return res;
 }
