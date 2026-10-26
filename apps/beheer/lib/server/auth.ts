@@ -6,15 +6,18 @@ import { createDb, must, type Db } from "@adsweet/db";
 import { pgliteExecutor, supabaseExecutor } from "@adsweet/db/server";
 import { env, isDemo } from "@/lib/env";
 import { demoDatabase, signDemoToken, verifyDemoToken } from "./demo";
+import { sendMail } from "./mail";
 import { supabaseForRequest, supabaseService } from "./supabase";
 
-// Inloggen in Beheer: dezelfde link per mail als in de app. In de demomodus een eigen cookie, zodat Beheer en de
-// app op localhost elkaars sessie niet overschrijven.
+// Inloggen in Beheer: een link per mail, zoals in de app. Alleen een AdSweet-beheerder krijgt er een; de link maken we
+// zelf en hij gaat via Resend rechtstreeks naar Beheer. In de demomodus een eigen cookie, zodat Beheer en de app op
+// localhost elkaars sessie niet overschrijven.
 
 export const SESSION_COOKIE = "as-beheer-sessie";
 export const MAIL_COOKIE = "as-beheer-mail";
 const LINK_MINUTES = 15;
 const SESSION_HOURS = 12;
+const g = globalThis as unknown as { __beheerLinkSent?: Map<string, number> };
 
 export interface SessionUser {
   id: string;
@@ -73,13 +76,35 @@ export async function sendLoginLink(email: string): Promise<{ ok: boolean }> {
     } else store.delete(MAIL_COOKIE);
     return { ok: true };
   }
-  const { error } = await (
-    await supabaseForRequest()
-  ).auth.signInWithOtp({
-    email: clean,
-    options: { shouldCreateUser: false, emailRedirectTo: `${env.beheerUrl}/auth/callback` },
-  });
-  return { ok: !error || /signups? not allowed|not found/i.test(error.message) };
+  // Een adres zonder beheerdersrechten krijgt niets, maar dat zeggen we niet. Hoogstens één link per minuut per adres.
+  const svc = serviceDb();
+  const profile = must(await svc.from("profiles").select("user_id").eq("email", clean).maybeSingle());
+  const admin = profile ? must(await svc.from("adsweet_admins").select("user_id").eq("user_id", profile.user_id).maybeSingle()) : null;
+  if (!admin) return { ok: true };
+  const sent = (g.__beheerLinkSent ??= new Map());
+  const last = sent.get(clean);
+  if (last && Date.now() - last < 60_000) return { ok: true };
+  if (!process.env.RESEND_API_KEY) {
+    // Zonder Resend: de mailer van Supabase (de link moet dan bij Supabase › Redirect URLs staan).
+    const { error } = await (
+      await supabaseForRequest()
+    ).auth.signInWithOtp({
+      email: clean,
+      options: { shouldCreateUser: false, emailRedirectTo: `${env.beheerUrl}/auth/callback` },
+    });
+    if (error) console.warn(`Inloglink voor Beheer niet verstuurd: ${error.status ?? ""} ${error.code ?? ""} ${error.message}`.trim());
+    else sent.set(clean, Date.now());
+    return { ok: !error };
+  }
+  const { data, error } = await supabaseService().auth.admin.generateLink({ type: "magiclink", email: clean });
+  if (error) {
+    console.warn(`Inloglink voor Beheer niet gemaakt: ${error.status ?? ""} ${error.code ?? ""} ${error.message}`.trim());
+    return { ok: false };
+  }
+  const url = `${env.beheerUrl}/auth/callback?token_hash=${encodeURIComponent(data.properties.hashed_token)}`;
+  if (!(await sendMail("login", clean, { url }))) return { ok: false };
+  sent.set(clean, Date.now());
+  return { ok: true };
 }
 
 export async function completeLogin(params: URLSearchParams): Promise<{ ok: boolean; next: string }> {
@@ -98,9 +123,16 @@ export async function completeLogin(params: URLSearchParams): Promise<{ ok: bool
     store.delete(MAIL_COOKIE);
     return { ok: true, next };
   }
+  const sb = await supabaseForRequest();
+  // Onze eigen link (via Resend) draagt token_hash; die van de mailer van Supabase een code.
+  const tokenHash = params.get("token_hash");
+  if (tokenHash) {
+    const { error } = await sb.auth.verifyOtp({ token_hash: tokenHash, type: "magiclink" });
+    return { ok: !error, next };
+  }
   const code = params.get("code");
   if (!code) return { ok: false, next };
-  const { error } = await (await supabaseForRequest()).auth.exchangeCodeForSession(code);
+  const { error } = await sb.auth.exchangeCodeForSession(code);
   return { ok: !error, next };
 }
 
