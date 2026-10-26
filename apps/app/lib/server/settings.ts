@@ -1,7 +1,7 @@
 import "server-only";
 import { getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
-import { must, type Connection, type Goal, type Json } from "@adsweet/db";
+import { must, type Connection, type Goal, type Json, type OrgKind } from "@adsweet/db";
 import { formatDashDate, formatDateTime, formatDayMonth, formatEuro, formatLongDate, formatMonthCode, formatPercent } from "@adsweet/ui";
 import { nowIso } from "@/lib/clock";
 import { isDemo } from "@/lib/env";
@@ -12,7 +12,7 @@ import { getDb, serviceDb } from "./auth";
 import { inAccount, isLive } from "./campaigns";
 import { writeLog } from "./changes";
 import { assertCanEdit, getContext, type AppContext } from "./context";
-import { goalFor } from "./metrics";
+import { goalFor, goalTypeForKind } from "./metrics";
 import { chanceToNumber, goalTypeKind, parseNum, readAndSaveWebsite } from "./onboarding";
 import { metaStatus } from "./meta/connect";
 import { oauthReady } from "./meta/oauth";
@@ -42,6 +42,8 @@ export const TIMEZONES = ["Europe/Brussels", "Europe/Amsterdam", "Europe/Luxembo
 
 export interface ProfileVM {
   name: string;
+  /** Soort zaak (webshop, dienstverlener, lokaal, zelfstandige). */
+  kind: string;
   website: string;
   sells: string;
   tone: string;
@@ -135,6 +137,7 @@ export async function loadSettings(ctx: AppContext, sub: Exclude<SettingsPage, "
         sub,
         profile: {
           name: org.name,
+          kind: org.kind,
           website: bp?.website ?? "",
           sells: bp?.sells ?? "",
           tone: (bp?.tone ?? []).join(", "),
@@ -349,6 +352,27 @@ export async function saveBusinessProfile(input: ProfileVM): Promise<{ ok: boole
     const naming = { ...((ctx.org.naming ?? {}) as Record<string, Json>), short: name.split(/[,|·]/)[0].trim() };
     await db.from("organizations").update({ name, naming }).eq("id", ctx.org.id);
   }
+  // Soort zaak. Zonder doel krijg je het doel dat erbij hoort (een webshop: verkopen), zodat Vandaag de juiste cijfers toont.
+  const kind = input.kind as OrgKind;
+  if (KINDS.includes(kind) && kind !== ctx.org.kind) {
+    await db.from("organizations").update({ kind }).eq("id", ctx.org.id);
+    const type = goalTypeForKind(kind);
+    const goals = must(await db.from("goals").select("id").eq("organization_id", ctx.org.id));
+    if (type && !goals.length) await db.from("goals").insert({ organization_id: ctx.org.id, type });
+  }
+  revalidatePath("/", "layout");
+  return { ok: true };
+}
+
+const KINDS: OrgKind[] = ["webshop", "dienstverlener", "lokaal", "zelfstandige"];
+
+/** Je cijfers zonder doel: kies wat je advertenties moeten opleveren. Daarna vul je de bedragen in. */
+export async function setGoalType(type: Goal["type"]): Promise<{ ok: boolean }> {
+  const { ctx, db } = await editable();
+  if (!["verkopen", "aanvragen", "zaak", "anders"].includes(type)) return { ok: false };
+  const goal = goalFor(must(await db.from("goals").select().eq("organization_id", ctx.org.id)), ctx.account?.id);
+  if (goal) await db.from("goals").update({ type, updated_at: nowIso() }).eq("id", goal.id);
+  else await db.from("goals").insert({ organization_id: ctx.org.id, type });
   revalidatePath("/", "layout");
   return { ok: true };
 }

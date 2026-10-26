@@ -10,7 +10,7 @@ import { inAccount, isLive } from "./campaigns";
 import { writeLog } from "./changes";
 import { assertCanEdit, assertPlan, getContext, type AppContext } from "./context";
 import { creditsFor } from "./credits";
-import { ADS_ORDER, goalFor, goalKind, sumRows, targets, totalsPerAd } from "./metrics";
+import { ADS_ORDER, goalFor, goalKind, mainCampaign, sumRows, targets, totalsPerAd } from "./metrics";
 
 // Dot, de assistent (vanaf Pro). Eerst met vaste antwoorden, maar wel uit je eigen cijfers: Dot rekent zoals Vandaag.
 // Claude komt erbij in fase 13. Dot doet nooit iets zonder jouw klik en zet nooit zelf een advertentie af.
@@ -36,8 +36,8 @@ async function data(ctx: AppContext) {
     db.from("insights_daily").select().eq("organization_id", ctx.org.id).then(must),
   ]);
   const mine = campaigns.filter((c) => inAccount(ctx, c));
-  const main = mine.find((c) => c.kind === "vast" && isLive(c)) ?? mine.find(isLive) ?? null;
   const goal = goalFor(goals, ctx.account?.id);
+  const main = mainCampaign(mine.filter(isLive), goal);
   const kind = goalKind(goal, main);
   const day = today();
   const range = periodRange("7d", day);

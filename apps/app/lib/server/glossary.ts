@@ -8,7 +8,7 @@ import { periodRange } from "@/lib/period";
 import { getDb } from "./auth";
 import { inAccount, isLive } from "./campaigns";
 import type { AppContext } from "./context";
-import { goalFor, goalKind, sumRows, totalsPerAd } from "./metrics";
+import { goalFor, goalKind, mainCampaign, sumRows, totalsPerAd } from "./metrics";
 
 // Uitleg bij vakwoorden: de definitie staat in nl.json, het voorbeeld rekenen we uit met je eigen cijfers.
 
@@ -23,8 +23,8 @@ export async function glossaryExamples(ctx: AppContext): Promise<Record<string, 
     db.from("ad_sets").select("id, campaign_id").eq("organization_id", ctx.org.id).then(must),
   ]);
   const mine = campaigns.filter((c) => inAccount(ctx, c));
-  const main = mine.find((c) => c.kind === "vast" && isLive(c)) ?? mine.find(isLive) ?? null;
   const goal = goalFor(goals, ctx.account?.id);
+  const main = mainCampaign(mine.filter(isLive), goal);
   const kind = goalKind(goal, main);
   const ex: Record<string, string> = {};
   const m = Number(goal?.margin ?? 0);

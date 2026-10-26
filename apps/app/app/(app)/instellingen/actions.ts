@@ -1,5 +1,6 @@
 "use server";
 
+import type { Goal } from "@adsweet/db";
 import type { Naming } from "@/lib/naming";
 import {
   disconnectMeta,
@@ -11,6 +12,7 @@ import {
   saveNumbers,
   savePayer,
   saveTimezone,
+  setGoalType,
   setNotification,
   type ProfileVM,
 } from "@/lib/server/settings";
@@ -21,6 +23,10 @@ export async function saveProfileAction(input: ProfileVM) {
 
 export async function rereadAction() {
   return rereadWebsite();
+}
+
+export async function goalTypeAction(type: Goal["type"]) {
+  return setGoalType(type);
 }
 
 export async function saveNumbersAction(input: { aov: string; margin: string; roas: string; cpl: string; clv: string; lmargin: string; chance: string }) {

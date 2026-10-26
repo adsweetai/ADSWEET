@@ -21,11 +21,13 @@ describe("Klanten uit Meta", () => {
     await db.from("ad_accounts").update({ meta_ad_account_id: taken }).eq("id", first.id);
 
     const accounts = [account(taken, "Al een klant"), account("act_9001", "Juweelzaak Nova"), account("act_9002", "Fietsen Ruben")];
-    const res = await addClientsFromMeta(AGENCY, eva, accounts, ["act_9001", "act_9002", taken, "act_niet_zichtbaar"], eva);
+    const res = await addClientsFromMeta(AGENCY, eva, accounts, ["act_9001", "act_9002", taken, "act_niet_zichtbaar"], eva, "webshop");
     expect(res).toMatchObject({ ok: true, created: [{ name: "Juweelzaak Nova" }, { name: "Fietsen Ruben" }] });
 
     const nova = must(await db.from("organizations").select().eq("name", "Juweelzaak Nova").single());
-    expect(nova).toMatchObject({ plan: "agency", subscription_status: "actief", agency_parent_id: AGENCY, onboarding_done: true });
+    expect(nova).toMatchObject({ plan: "agency", subscription_status: "actief", agency_parent_id: AGENCY, onboarding_done: true, kind: "webshop" });
+    // Een webshop krijgt meteen het doel verkopen, zodat Vandaag verkopen, omzet en ROAS toont.
+    expect(must(await db.from("goals").select("type").eq("organization_id", nova.id).single())).toEqual({ type: "verkopen" });
     const acc = must(await db.from("ad_accounts").select().eq("organization_id", nova.id).single());
     expect(acc).toMatchObject({ meta_ad_account_id: "act_9001", currency: "EUR", status: "actief", channel: "meta" });
     const conn = must(await db.from("connections").select().eq("organization_id", nova.id).single());

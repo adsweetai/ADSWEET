@@ -181,6 +181,8 @@ function ImportClients({ onClose }: { onClose: () => void }) {
   const [accounts, setAccounts] = useState<ImportChoice[]>([]);
   const [free, setFree] = useState(0);
   const [chosen, setChosen] = useState<Set<string>>(new Set());
+  const [kind, setKind] = useState<OrgKind>("webshop");
+  const tk = useTranslations("agency");
   const [progress, setProgress] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [pending, start] = useTransition();
@@ -216,7 +218,7 @@ function ImportClients({ onClose }: { onClose: () => void }) {
   const submit = () =>
     start(async () => {
       setError(null);
-      const res = await importClientsAction([...chosen]);
+      const res = await importClientsAction([...chosen], kind);
       if (!res.ok) return setError(t(`errors.${res.error}`));
       // Per klant de cijfers ophalen, een na een.
       let failed = 0;
@@ -259,6 +261,13 @@ function ImportClients({ onClose }: { onClose: () => void }) {
         {state === "ready" && !open.length ? <p className="as-small as-muted">{t("none")}</p> : null}
         {state === "ready" && open.length ? (
           <>
+            <Select
+              label={t("kind")}
+              value={kind}
+              disabled={pending}
+              options={(["webshop", "dienstverlener", "lokaal", "zelfstandige"] as OrgKind[]).map((k) => ({ value: k, label: tk(`kinds.${k}`) }))}
+              onChange={(e) => setKind(e.target.value as OrgKind)}
+            />
             <label className="kl-check">
               <input type="checkbox" checked={all} disabled={pending} onChange={() => setChosen(all ? new Set() : new Set(open.map((a) => a.id)))} />
               <b>{t("all", { n: open.length })}</b>
